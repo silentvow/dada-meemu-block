@@ -1,4 +1,7 @@
+import { Container, Sprite, Stage, Text } from '@pixi/react'
 import Link from 'next/link'
+import { BlurFilter } from 'pixi.js'
+import { useMemo } from 'react'
 
 import {
   Avatar,
@@ -7,6 +10,8 @@ import {
 } from '@/components/ui/avatar'
 
 function Home () {
+  const blurFilter = useMemo(() => new BlurFilter(4), [])
+
   return (
     <div className='hidden flex-col md:flex'>
       <div className='border-b'>
@@ -48,7 +53,18 @@ function Home () {
         </div>
       </div>
       <div className='flex-1 space-y-4 p-8 pt-6'>
-        123
+        <Stage width={1280} height={720}>
+          <Sprite
+            image='https://pixijs.io/pixi-react/img/bunny.png'
+            x={400}
+            y={270}
+            anchor={{ x: 0.5, y: 0.5 }}
+          />
+
+          <Container x={400} y={330}>
+            <Text text='Hello World' anchor={{ x: 0.5, y: 0.5 }} filters={[blurFilter]} />
+          </Container>
+        </Stage>
       </div>
     </div>
   )
