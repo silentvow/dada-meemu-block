@@ -20,39 +20,23 @@ function Home () {
             className='flex items-center space-x-4 lg:space-x-6'
           >
             <Link
-              href='/examples/dashboard'
-              className='text-sm font-medium transition-colors hover:text-primary'
+              href='#'
+              className='text-md font-medium transition-colors hover:text-primary'
             >
-              Overview
-            </Link>
-            <Link
-              href='/examples/dashboard'
-              className='text-sm font-medium text-muted-foreground transition-colors hover:text-primary'
-            >
-              Customers
-            </Link>
-            <Link
-              href='/examples/dashboard'
-              className='text-sm font-medium text-muted-foreground transition-colors hover:text-primary'
-            >
-              Products
-            </Link>
-            <Link
-              href='/examples/dashboard'
-              className='text-sm font-medium text-muted-foreground transition-colors hover:text-primary'
-            >
-              Settings
+              DaDa MeeMu Block
             </Link>
           </nav>
           <div className='ml-auto flex items-center space-x-4'>
-            <Avatar className='h-8 w-8'>
-              <AvatarImage src='/avatars/01.png' alt='@shadcn' />
-              <AvatarFallback>SC</AvatarFallback>
-            </Avatar>
+            <Link href='#'>
+              <Avatar className='h-8 w-8'>
+                <AvatarImage src='https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png' alt='github' />
+                <AvatarFallback>SC</AvatarFallback>
+              </Avatar>
+            </Link>
           </div>
         </div>
       </div>
-      <div className='flex-1 space-y-4 p-8 pt-6'>
+      <div className='flex-1 p-8 flex justify-center'>
         <Stage width={1280} height={720}>
           <Sprite
             image='https://pixijs.io/pixi-react/img/bunny.png'
