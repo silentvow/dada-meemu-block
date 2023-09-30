@@ -17,6 +17,7 @@ export const PADDLE_UNIT_WIDTH = 64
 export const PADDLE_MIN_WIDTH = 64
 export const PADDLE_MAX_WIDTH = 384
 export const PADDLE_HEIGHT = 32
+export const BALL_IMAGE_RADIUS = 32
 export const BALL_DEFAULT_RADIUS = 16
 export const BALL_MIN_RADIUS = 8
 export const BALL_MAX_RADIUS = 32

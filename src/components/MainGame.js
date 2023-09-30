@@ -1,4 +1,4 @@
-import { BALL_DEFAULT_RADIUS, BLOCK_HEIGHT, BLOCK_WIDTH, ITEM_HEIGHT, ITEM_WIDTH, SCREEN_HEIGHT, SCREEN_WIDTH, TOP_BORDER_HEIGHT } from '@/constants/game'
+import { BALL_IMAGE_RADIUS, BLOCK_HEIGHT, BLOCK_WIDTH, ITEM_HEIGHT, ITEM_WIDTH, SCREEN_HEIGHT, SCREEN_WIDTH, TOP_BORDER_HEIGHT } from '@/constants/game'
 import { useGame } from '@/game'
 import { Container, Sprite, useTick, withPixiApp } from '@pixi/react'
 import { useEffect } from 'react'
@@ -33,10 +33,12 @@ function MainGame ({ app }) {
         return (
           <Sprite
             key={ball.id}
-            x={ball.x - ball.radius}
-            y={ball.y - ball.radius}
-            scale={{ x: ball.radius / BALL_DEFAULT_RADIUS, y: ball.radius / BALL_DEFAULT_RADIUS }}
-            image={`https://placehold.co/${BALL_DEFAULT_RADIUS * 2}x${BALL_DEFAULT_RADIUS * 2}/blue/fff`}
+            x={ball.x}
+            y={ball.y}
+            scale={{ x: ball.radius / BALL_IMAGE_RADIUS, y: ball.radius / BALL_IMAGE_RADIUS }}
+            angle={ball.angle}
+            anchor={[0.5, 0.5]}
+            image='/img/meemu.png'
           />
         )
       })}

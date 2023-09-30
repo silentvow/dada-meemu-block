@@ -139,6 +139,8 @@ export const useGame = create(
         set(state => {
           state.balls[i].x += state.balls[i].vx
           state.balls[i].y += state.balls[i].vy
+          state.balls[i].angle += 1
+          if (state.balls[i].angle > 360) state.balls[i].angle = 0
         })
       }
 
