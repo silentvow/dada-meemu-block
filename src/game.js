@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { create } from 'zustand'
 import { immer } from 'zustand/middleware/immer'
 
-import { BALL_DEFAULT_RADIUS, BLOCK_HEIGHT, BLOCK_WIDTH, GAME_STATE, PADDLE_DEFAULT_WIDTH, PADDLE_HEIGHT, SCREEN_HEIGHT, SCREEN_WIDTH } from './constants/game'
+import { ACCELERATION, BALL_DEFAULT_RADIUS, BLOCK_HEIGHT, BLOCK_WIDTH, DEFAULT_SPEED, GAME_STATE, MAX_SPEED, PADDLE_DEFAULT_WIDTH, PADDLE_HEIGHT, SCREEN_HEIGHT, SCREEN_WIDTH } from './constants/game'
 import { STAGE_MAPS } from './constants/stages'
 
 export const useGame = create(
@@ -12,6 +12,7 @@ export const useGame = create(
     balls: [],
     blocks: [],
     paddle: { x: 0, y: 0 },
+    stage: 0,
 
     reset: () => {
       set(state => {
@@ -23,6 +24,7 @@ export const useGame = create(
 
     enterStage: (stage) => {
       set(state => {
+        state.stage = stage
         state.state = GAME_STATE.READY
 
         /* setup blocks */
@@ -61,9 +63,20 @@ export const useGame = create(
             vy: 0,
             radius: BALL_DEFAULT_RADIUS,
             lived: true,
+            angle: 0,
           },
         ]
       })
+    },
+
+    enterEndPage: () => {},
+
+    enterNextStage: () => {
+      if (get().stage + 1 >= STAGE_MAPS.length) {
+        get().enterEndPage()
+        return
+      }
+      get().enterStage(get().stage + 1)
     },
 
     updatePaddle: () => {
@@ -94,6 +107,32 @@ export const useGame = create(
     updateBlocks: () => {
     },
 
+    updateStage: () => {
+      if (get().blocks.every(block => !isFinite(block.hp))) {
+        get().clearStage()
+        return
+      }
+      if (get().balls.length === 0) {
+        get().gameOver()
+        return
+      }
+      set(state => {
+        state.balls = state.balls.filter(ball => ball.lived)
+      })
+    },
+
+    clearStage: () => {
+      set(state => {
+        state.state = GAME_STATE.STAGE_CLEAR
+      })
+    },
+
+    gameOver: () => {
+      set(state => {
+        state.state = GAME_STATE.GAME_OVER
+      })
+    },
+
     detectCollision: () => {
       get().detectBallPaddleCollision()
       get().detectAllBallWallCollision()
@@ -110,10 +149,10 @@ export const useGame = create(
         if (ball.y - ball.radius > paddle.y) continue
         if (ball.vy < 0) continue
 
-        /* 根據碰撞的位置計算反彈角度 */
+        /* 根據碰撞的位置計算反彈角度，加速 */
         const hitX = ball.x - paddle.x
-        const hitPercent = ((hitX / paddle.width) - 0.5) * 0.9 + 0.5 /* 0.05 ~ +0.95 */
-        const velocity = Math.sqrt(ball.vx * ball.vx + ball.vy * ball.vy)
+        const hitPercent = ((hitX / paddle.width) - 0.5) * 0.8 + 0.5 /* 0.1 ~ 0.9 */
+        const velocity = Math.min(MAX_SPEED, Math.sqrt(ball.vx * ball.vx + ball.vy * ball.vy) * ACCELERATION)
         const angle = Math.PI - hitPercent * Math.PI
         const vx = Math.cos(angle) * velocity
         const vy = -Math.sin(angle) * velocity
@@ -134,17 +173,17 @@ export const useGame = create(
       const ball = get().balls[i]
       if (ball.x - ball.radius < 0) {
         set(state => {
-          state.balls[i].vx = -state.balls[i].vx
+          state.balls[i].vx = Math.abs(state.balls[i].vx)
         })
       }
       if (ball.x + ball.radius > SCREEN_WIDTH) {
         set(state => {
-          state.balls[i].vx = -state.balls[i].vx
+          state.balls[i].vx = -Math.abs(state.balls[i].vx)
         })
       }
       if (ball.y - ball.radius < 0) {
         set(state => {
-          state.balls[i].vy = -state.balls[i].vy
+          state.balls[i].vy = Math.abs(state.balls[i].vy)
         })
       }
 
@@ -239,6 +278,7 @@ export const useGame = create(
           get().updatePaddle()
           get().updateBalls()
           get().detectCollision()
+          get().updateStage()
           break
         case GAME_STATE.GAME_OVER:
           break
@@ -265,8 +305,8 @@ export const useGame = create(
       if (get().state === GAME_STATE.READY) {
         set(state => {
           state.state = GAME_STATE.PLAYING
-          state.balls[0].vx = 4
-          state.balls[0].vy = -4
+          state.balls[0].vx = DEFAULT_SPEED * Math.cos(Math.PI / 3)
+          state.balls[0].vy = -DEFAULT_SPEED * Math.sin(Math.PI / 3)
         })
       }
       if (get().state === GAME_STATE.PLAYING) {
