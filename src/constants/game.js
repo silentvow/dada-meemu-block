@@ -1,0 +1,6 @@
+export const GAME_STATE = {
+  READY: 'READY',
+  PLAYING: 'PLAYING',
+  GAME_OVER: 'GAME_OVER',
+  STAGE_CLEAR: 'STAGE_CLEAR',
+}

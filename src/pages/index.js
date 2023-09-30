@@ -1,16 +1,35 @@
-import { Container, Sprite, Stage, Text } from '@pixi/react'
+import { Container, Stage, Text } from '@pixi/react'
 import Link from 'next/link'
-import { BlurFilter } from 'pixi.js'
-import { useMemo } from 'react'
+import { TextStyle } from 'pixi.js'
 
+import MainGame from '@/components/MainGame'
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
 } from '@/components/ui/avatar'
+import { useState } from 'react'
+
+const menuStyle = new TextStyle({
+  align: 'left',
+  fontFamily: '"Source Sans Pro", Helvetica, sans-serif',
+  fontSize: 50,
+  fontWeight: '400',
+  fill: ['#ffffff', '#000000'], // gradient
+  stroke: '#01d27e',
+  strokeThickness: 5,
+  letterSpacing: 12,
+  // dropShadow: true,
+  // dropShadowColor: '#ccced2',
+  // dropShadowBlur: 4,
+  // dropShadowAngle: Math.PI / 6,
+  // dropShadowDistance: 6,
+  // wordWrap: true,
+  // wordWrapWidth: 440,
+})
 
 function Home () {
-  const blurFilter = useMemo(() => new BlurFilter(4), [])
+  const [inGame, setInGame] = useState(false)
 
   return (
     <div className='hidden flex-col md:flex'>
@@ -30,25 +49,29 @@ function Home () {
             <Link href='#'>
               <Avatar className='h-8 w-8'>
                 <AvatarImage src='https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png' alt='github' />
-                <AvatarFallback>SC</AvatarFallback>
+                <AvatarFallback>GH</AvatarFallback>
               </Avatar>
             </Link>
           </div>
         </div>
       </div>
       <div className='flex-1 p-8 flex justify-center'>
-        <Stage width={1280} height={720}>
-          <Sprite
-            image='https://pixijs.io/pixi-react/img/bunny.png'
-            x={400}
-            y={270}
-            anchor={{ x: 0.5, y: 0.5 }}
-          />
+        <div className='border-2 border-black'>
+          <Stage
+            width={1280}
+            height={960}
+            options={{ backgroundColor: 0xeef1f5 }}
+          >
+            {inGame && <MainGame />}
 
-          <Container x={400} y={330}>
-            <Text text='Hello World' anchor={{ x: 0.5, y: 0.5 }} filters={[blurFilter]} />
-          </Container>
-        </Stage>
+            {!inGame && (
+              <Container x={400} y={330}>
+                <Text text='Start Game' style={menuStyle} eventMode='static' onclick={e => setInGame(true)} />
+                <Text y={100} text='Rankings' style={menuStyle} eventMode='static' />
+              </Container>
+            )}
+          </Stage>
+        </div>
       </div>
     </div>
   )
