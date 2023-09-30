@@ -193,7 +193,7 @@ export const useGame = create(
 
         /* 根據碰撞的位置計算反彈角度，加速 */
         const hitX = ball.x - paddle.x
-        const hitPercent = ((hitX / paddle.width) - 0.5) * 0.8 + 0.5 /* 0.1 ~ 0.9 */
+        const hitPercent = ((hitX / paddle.width) - 0.5) * 0.7 + 0.5 /* 0.15 ~ 0.85 */
         const velocity = Math.min(MAX_SPEED, Math.sqrt(ball.vx * ball.vx + ball.vy * ball.vy) * ACCELERATION)
         const angle = Math.PI - hitPercent * Math.PI
         const vx = Math.cos(angle) * velocity
