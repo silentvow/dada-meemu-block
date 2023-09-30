@@ -1,14 +1,16 @@
+import shuffle from 'array-shuffle'
 import { v4 as uuidv4 } from 'uuid'
 import { create } from 'zustand'
 import { immer } from 'zustand/middleware/immer'
 
-import { ACCELERATION, BALL_DEFAULT_RADIUS, BLOCK_HEIGHT, BLOCK_WIDTH, DEFAULT_SPEED, GAME_STATE, MAX_SPEED, PADDLE_DEFAULT_WIDTH, PADDLE_HEIGHT, SCREEN_HEIGHT, SCREEN_WIDTH } from './constants/game'
+import { ACCELERATION, BALL_DEFAULT_RADIUS, BALL_MAX_RADIUS, BALL_MIN_RADIUS, BLOCK_HEIGHT, BLOCK_WIDTH, BUFF_ITEMS, DEBUFF_ITEMS, DEFAULT_SPEED, GAME_STATE, ITEM, ITEM_DROP_SPEED, ITEM_HEIGHT, ITEM_WIDTH, MAX_SPEED, PADDLE_DEFAULT_WIDTH, PADDLE_HEIGHT, PADDLE_MAX_WIDTH, PADDLE_MIN_WIDTH, PADDLE_UNIT_WIDTH, SCREEN_HEIGHT, SCREEN_WIDTH, SPEED_MULTIPLIER, TOP_BORDER_HEIGHT } from './constants/game'
 import { STAGE_MAPS } from './constants/stages'
 
 export const useGame = create(
   immer((set, get) => ({
     money: 0,
     life: 3,
+    items: [],
     balls: [],
     blocks: [],
     paddle: { x: 0, y: 0 },
@@ -26,6 +28,7 @@ export const useGame = create(
       set(state => {
         state.stage = stage
         state.state = GAME_STATE.READY
+        state.items = []
 
         /* setup blocks */
         state.blocks = []
@@ -38,10 +41,36 @@ export const useGame = create(
             state.blocks.push({
               id: uuidv4(),
               x: x * BLOCK_WIDTH,
-              y: y * BLOCK_HEIGHT + 16,
+              y: y * BLOCK_HEIGHT + TOP_BORDER_HEIGHT,
               hp: 1,
             })
           }
+        }
+        const items = []
+        for (let i = 0; i < state.blocks.length * 0.1; ++i) {
+          items.push(BUFF_ITEMS[Math.floor(Math.random() * BUFF_ITEMS.length)])
+        }
+        for (let i = 0; i < state.blocks.length * 0.1; ++i) {
+          items.push(DEBUFF_ITEMS[Math.floor(Math.random() * DEBUFF_ITEMS.length)])
+        }
+        for (let i = 0; i < state.blocks.length * 0.05; ++i) {
+          items.push(ITEM.MONEY_2000)
+        }
+        for (let i = 0; i < state.blocks.length * 0.1; ++i) {
+          items.push(ITEM.MONEY_1000)
+        }
+        for (let i = 0; i < state.blocks.length * 0.15; ++i) {
+          items.push(ITEM.MONEY_500)
+        }
+        for (let i = 0; i < state.blocks.length * 0.2; ++i) {
+          items.push(ITEM.MONEY_200)
+        }
+        for (let i = items.length; i < state.blocks.length; ++i) {
+          items.push(ITEM.MONEY_100)
+        }
+        const shuffledItems = shuffle(items)
+        for (let i = 0; i < state.blocks.length; ++i) {
+          state.blocks[i].item = shuffledItems[i]
         }
 
         /* setup paddle */
@@ -79,6 +108,16 @@ export const useGame = create(
       get().enterStage(get().stage + 1)
     },
 
+    updateItems: () => {
+      get().items.forEach(item => { if (item.catch) get().catchItem(item) })
+      set(state => {
+        for (let i = 0; i < state.items.length; ++i) {
+          state.items[i].y += ITEM_DROP_SPEED
+        }
+        state.items = state.items.filter(item => item.y < SCREEN_HEIGHT).filter(item => !item.catch)
+      })
+    },
+
     updatePaddle: () => {
     },
 
@@ -102,6 +141,10 @@ export const useGame = create(
           state.balls[i].y += state.balls[i].vy
         })
       }
+
+      set(state => {
+        state.balls = state.balls.filter(ball => ball.lived)
+      })
     },
 
     updateBlocks: () => {
@@ -114,11 +157,7 @@ export const useGame = create(
       }
       if (get().balls.length === 0) {
         get().gameOver()
-        return
       }
-      set(state => {
-        state.balls = state.balls.filter(ball => ball.lived)
-      })
     },
 
     clearStage: () => {
@@ -137,6 +176,7 @@ export const useGame = create(
       get().detectBallPaddleCollision()
       get().detectAllBallWallCollision()
       get().detectAllBallBlockCollision()
+      get().detectAllItemPaddleCollision()
     },
 
     detectBallPaddleCollision: () => {
@@ -187,10 +227,9 @@ export const useGame = create(
         })
       }
 
-      /* TODO: dead ball */
-      if (ball.y + ball.radius > SCREEN_HEIGHT) {
+      if (ball.y > SCREEN_HEIGHT) {
         set(state => {
-          state.balls[i].vy = -state.balls[i].vy
+          state.balls[i].lived = false
         })
       }
     },
@@ -256,26 +295,128 @@ export const useGame = create(
       return false
     },
 
-    removeDeadBalls: () => {
-      set(state => {
-        state.balls = state.balls.filter(ball => ball.lived)
-      })
+    detectAllItemPaddleCollision: () => {
+      for (let i = 0; i < get().items.length; ++i) {
+        if (get().detectItemPaddleCollision(get().items[i])) {
+          set(state => {
+            state.items[i].catch = true
+          })
+        }
+      }
+    },
+
+    detectItemPaddleCollision: (item) => {
+      const paddle = get().paddle
+      if (item.x + ITEM_WIDTH < paddle.x) return false
+      if (item.x > paddle.x + paddle.width) return false
+      if (item.y + ITEM_HEIGHT < paddle.y) return false
+      if (item.y > paddle.y) return false
+      return true
     },
 
     removeDeadBlocks: () => {
+      get().blocks.forEach(block => {
+        if (block.hp === 0) {
+          get().dropItem(block.item, block.x + BLOCK_WIDTH / 2, block.y + BLOCK_HEIGHT)
+        }
+      })
       set(state => {
         state.blocks = state.blocks.filter(block => block.hp > 0)
       })
     },
 
+    dropItem: (item, x, y) => {
+      set(state => { state.items.push({ id: uuidv4(), item, x: x - ITEM_WIDTH / 2, y: y - ITEM_HEIGHT / 2, catch: false }) })
+    },
+
+    catchItem: (item) => {
+      switch (item.item) {
+        case ITEM.BULLET:
+          set(state => {
+            state.paddle.bullet += 20
+          })
+          break
+        case ITEM.PADDLE_PLUS:
+          set(state => {
+            state.paddle.width = Math.max(PADDLE_MAX_WIDTH, state.paddle.width + PADDLE_UNIT_WIDTH)
+          })
+          break
+        case ITEM.PADDLE_MINUS:
+          set(state => {
+            state.paddle.width = Math.max(PADDLE_MIN_WIDTH, state.paddle.width - PADDLE_UNIT_WIDTH)
+          })
+          break
+        case ITEM.BALL_DOUBLE: {
+          const newBalls = get().balls.map(ball => ({ ...ball, id: uuidv4(), vx: -ball.vx }))
+          set(state => {
+            state.balls = state.balls.concat(newBalls)
+          })
+        } break
+        case ITEM.BALL_RED:
+          set(state => {
+            state.balls = state.balls.map(ball => ({ ...ball, red: true }))
+          })
+          break
+        case ITEM.BALL_BLUE:
+          set(state => {
+            state.balls = state.balls.map(ball => ({ ...ball, red: false }))
+          })
+          break
+        case ITEM.BALL_LARGE:
+          set(state => {
+            state.balls = state.balls.map(ball => ({ ...ball, radius: Math.min(BALL_MAX_RADIUS, ball.radius * 2) }))
+          })
+          break
+        case ITEM.BALL_SMALL:
+          set(state => {
+            state.balls = state.balls.map(ball => ({ ...ball, radius: Math.max(BALL_MIN_RADIUS, ball.radius / 2) }))
+          })
+          break
+        case ITEM.SPEED_PLUS:
+          set(state => {
+            state.balls = state.balls.map(ball => ({ ...ball, vx: ball.vx * SPEED_MULTIPLIER, vy: ball.vy * SPEED_MULTIPLIER }))
+          })
+          break
+        case ITEM.SPEED_MINUS:
+          set(state => {
+            state.balls = state.balls.map(ball => ({ ...ball, vx: ball.vx / SPEED_MULTIPLIER, vy: ball.vy / SPEED_MULTIPLIER }))
+          })
+          break
+        case ITEM.MONEY_100:
+          set(state => {
+            state.money += 100
+          })
+          break
+        case ITEM.MONEY_200:
+          set(state => {
+            state.money += 200
+          })
+          break
+        case ITEM.MONEY_500:
+          set(state => {
+            state.money += 500
+          })
+          break
+        case ITEM.MONEY_1000:
+          set(state => {
+            state.money += 1000
+          })
+          break
+        case ITEM.MONEY_2000:
+          set(state => {
+            state.money += 2000
+          })
+          break
+      }
+    },
+
     mainLoop: () => {
       switch (get().state) {
         case GAME_STATE.READY:
-          get().updatePaddle()
           get().updateBalls()
           break
         case GAME_STATE.PLAYING:
-          get().updatePaddle()
+          get().updateItems()
           get().updateBalls()
           get().detectCollision()
           get().updateStage()
@@ -310,7 +451,13 @@ export const useGame = create(
         })
       }
       if (get().state === GAME_STATE.PLAYING) {
-        console.log('click')
+        if (get().bullet > 0) {
+          console.log('click')
+          set(state => {
+            state.bullet -= 1
+            state.bullets.push({ id: uuidv4(), x: state.paddle.x + state.paddle.width / 2, y: state.paddle.y })
+          })
+        }
       }
     },
   })),
