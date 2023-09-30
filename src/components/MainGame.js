@@ -17,8 +17,6 @@ function MainGame ({ app }) {
     reset()
   }, [reset])
 
-  console.log({ blocks, balls, paddle })
-
   return (
     <Container width={SCREEN_WIDTH} height={SCREEN_HEIGHT} eventMode='dynamic' onmousemove={onMouseMove} onclick={onClick} hitArea={hitArea}>
       {blocks.map(block => {

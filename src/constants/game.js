@@ -9,6 +9,6 @@ export const SCREEN_WIDTH = 1280
 export const SCREEN_HEIGHT = 960
 export const BLOCK_WIDTH = 64
 export const BLOCK_HEIGHT = 32
-export const PADDLE_DEFAULT_WIDTH = 128
+export const PADDLE_DEFAULT_WIDTH = 256
 export const PADDLE_HEIGHT = 32
 export const BALL_DEFAULT_RADIUS = 16

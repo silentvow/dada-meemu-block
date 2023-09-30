@@ -60,6 +60,7 @@ export const useGame = create(
             vx: 0,
             vy: 0,
             radius: BALL_DEFAULT_RADIUS,
+            lived: true,
           },
         ]
       })
@@ -94,8 +95,33 @@ export const useGame = create(
     },
 
     detectCollision: () => {
+      get().detectBallPaddleCollision()
       get().detectAllBallWallCollision()
       get().detectAllBallBlockCollision()
+    },
+
+    detectBallPaddleCollision: () => {
+      for (let i = 0; i < get().balls.length; ++i) {
+        const ball = get().balls[i]
+        const paddle = get().paddle
+        if (ball.x + ball.radius < paddle.x) continue
+        if (ball.x - ball.radius > paddle.x + paddle.width) continue
+        if (ball.y + ball.radius < paddle.y) continue
+        if (ball.y - ball.radius > paddle.y) continue
+        if (ball.vy < 0) continue
+
+        /* 根據碰撞的位置計算反彈角度 */
+        const hitX = ball.x - paddle.x
+        const hitPercent = ((hitX / paddle.width) - 0.5) * 0.9 + 0.5 /* 0.05 ~ +0.95 */
+        const velocity = Math.sqrt(ball.vx * ball.vx + ball.vy * ball.vy)
+        const angle = Math.PI - hitPercent * Math.PI
+        const vx = Math.cos(angle) * velocity
+        const vy = -Math.sin(angle) * velocity
+        set(state => {
+          state.balls[i].vx = vx
+          state.balls[i].vy = vy
+        })
+      }
     },
 
     detectAllBallWallCollision: () => {
@@ -121,6 +147,8 @@ export const useGame = create(
           state.balls[i].vy = -state.balls[i].vy
         })
       }
+
+      /* TODO: dead ball */
       if (ball.y + ball.radius > SCREEN_HEIGHT) {
         set(state => {
           state.balls[i].vy = -state.balls[i].vy
@@ -187,6 +215,12 @@ export const useGame = create(
       if (ball.y < block.y && ball.vy > 0) return true
       if (ball.y > block.y + BLOCK_HEIGHT && ball.vy < 0) return true
       return false
+    },
+
+    removeDeadBalls: () => {
+      set(state => {
+        state.balls = state.balls.filter(ball => ball.lived)
+      })
     },
 
     removeDeadBlocks: () => {
