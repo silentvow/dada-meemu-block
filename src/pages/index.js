@@ -60,7 +60,7 @@ function Home () {
           <Stage
             width={1280}
             height={960}
-            options={{ backgroundColor: 0xeef1f5 }}
+            options={{ backgroundColor: 0xdff6f5 }}
           >
             {inGame && <MainGame />}
 

@@ -28,7 +28,14 @@ export const MAX_SPEED = 20
 export const ITEM_DROP_SPEED = 3
 export const BULLET_SPEED = 5
 
-/* ratio: buff 10%, debuff 10%, $100 30%, $200 20%, $500 15%, $1000 10%, $2000 5% */
+export const DROP_RATIO_BUFF = 0.1
+export const DROP_RATIO_DEBUFF = 0.1
+export const DROP_RATIO_MONEY_XS = 0.3
+export const DROP_RATIO_MONEY_SM = 0.2
+export const DROP_RATIO_MONEY_MD = 0.15
+export const DROP_RATIO_MONEY_LG = 0.1
+export const DROP_RATIO_MONEY_XL = 0.05
+
 export const ITEM = {
   BULLET: 'BULLET',
   PADDLE_PLUS: 'PADDLE_PLUS',
@@ -40,11 +47,11 @@ export const ITEM = {
   BALL_SMALL: 'BALL_SMALL',
   SPEED_PLUS: 'SPEED_PLUS',
   SPEED_MINUS: 'SPEED_MINUS',
-  MONEY_100: 'MONEY_100',
-  MONEY_200: 'MONEY_200',
-  MONEY_500: 'MONEY_500',
-  MONEY_1000: 'MONEY_1000',
-  MONEY_2000: 'MONEY_2000',
+  MONEY_XS: 'MONEY_XS',
+  MONEY_SM: 'MONEY_SM',
+  MONEY_MD: 'MONEY_MD',
+  MONEY_LG: 'MONEY_LG',
+  MONEY_XL: 'MONEY_XL',
 }
 
 export const BUFF_ITEMS = [
@@ -62,3 +69,11 @@ export const DEBUFF_ITEMS = [
   ITEM.BALL_BLUE,
   ITEM.SPEED_PLUS,
 ]
+
+export const MONEY_VALUES = {
+  [ITEM.MONEY_XS]: 1000,
+  [ITEM.MONEY_SM]: 4000,
+  [ITEM.MONEY_MD]: 10000,
+  [ITEM.MONEY_LG]: 40000,
+  [ITEM.MONEY_XL]: 200000,
+}

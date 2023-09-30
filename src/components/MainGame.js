@@ -1,4 +1,4 @@
-import { BALL_IMAGE_RADIUS, ITEM, ITEM_HEIGHT, ITEM_WIDTH, SCREEN_HEIGHT, SCREEN_WIDTH, TOP_BORDER_HEIGHT } from '@/constants/game'
+import { BALL_IMAGE_RADIUS, ITEM, ITEM_HEIGHT, ITEM_WIDTH, PADDLE_DEFAULT_WIDTH, SCREEN_HEIGHT, SCREEN_WIDTH, TOP_BORDER_HEIGHT } from '@/constants/game'
 import { useGame } from '@/game'
 import { Container, Sprite, Text, useTick, withPixiApp } from '@pixi/react'
 import { useEffect } from 'react'
@@ -9,25 +9,30 @@ const hitArea = {
 
 function imgUrl (item) {
   return {
+    [ITEM.BULLET]: '/img/chili-sauce.png',
+    [ITEM.PADDLE_PLUS]: '/img/chicken.png',
+    [ITEM.PADDLE_MINUS]: '/img/chicken-eye.png',
+    [ITEM.BALL_LARGE]: '/img/magnifier.png',
+    [ITEM.BALL_SMALL]: '/img/small-light.png',
     [ITEM.BALL_RED]: '/img/reddrop.png',
     [ITEM.BALL_BLUE]: '/img/bluedrop.png',
-    [ITEM.MONEY_100]: '/img/money100.png',
-    [ITEM.MONEY_200]: '/img/money200.png',
-    [ITEM.MONEY_500]: '/img/money500.png',
-    [ITEM.MONEY_1000]: '/img/money1000.png',
-    [ITEM.MONEY_2000]: '/img/money2000.png',
+    [ITEM.MONEY_XS]: '/img/money100.png',
+    [ITEM.MONEY_SM]: '/img/money200.png',
+    [ITEM.MONEY_MD]: '/img/money500.png',
+    [ITEM.MONEY_LG]: '/img/money1000.png',
+    [ITEM.MONEY_XL]: '/img/money2000.png',
   }[item] || `https://placehold.co/${ITEM_WIDTH}x${ITEM_HEIGHT}/red/fff?text=${item}`
 }
 
 function MainGame ({ app }) {
-  const { reset, money, blocks, balls, items, paddle, mainLoop, onMouseMove, onClick } = useGame(state => state)
-  useTick((delta, ticker) => {
-    mainLoop()
-  })
-
+  const { reset, displayMoney, blocks, balls, items, paddle, mainLoop, onMouseMove, onClick } = useGame(state => state)
   useEffect(() => {
     reset()
   }, [reset])
+
+  useTick((delta, ticker) => {
+    mainLoop()
+  })
 
   return (
     <Container width={SCREEN_WIDTH} height={SCREEN_HEIGHT} y={TOP_BORDER_HEIGHT} eventMode='static' onmousemove={onMouseMove} onclick={onClick} hitArea={hitArea}>
@@ -54,8 +59,8 @@ function MainGame ({ app }) {
           />
         )
       })}
-      <Sprite x={paddle.x} y={paddle.y} image='/img/paddle.png' />
-      <Text x={4} y={SCREEN_HEIGHT - 36} text={`$ ${money}`} style={{ fill: '#000', fontSize: 36 }} />
+      <Sprite x={paddle.x} y={paddle.y} scale={{ x: paddle.width / PADDLE_DEFAULT_WIDTH, y: 1 }} image='/img/paddle.png' />
+      <Text x={4} y={SCREEN_HEIGHT - 36} text={`$ ${displayMoney}`} style={{ fill: '#000', fontSize: 36, fontFamily: '"Pixelify Sans", cursive' }} />
     </Container>
   )
 }

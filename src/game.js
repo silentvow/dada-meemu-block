@@ -3,12 +3,13 @@ import { v4 as uuidv4 } from 'uuid'
 import { create } from 'zustand'
 import { immer } from 'zustand/middleware/immer'
 
-import { ACCELERATION, BALL_DEFAULT_RADIUS, BALL_MAX_RADIUS, BALL_MIN_RADIUS, BLOCK_HEIGHT, BLOCK_WIDTH, BUFF_ITEMS, DEBUFF_ITEMS, DEFAULT_SPEED, GAME_STATE, ITEM, ITEM_DROP_SPEED, ITEM_HEIGHT, ITEM_WIDTH, MAX_SPEED, PADDLE_DEFAULT_WIDTH, PADDLE_HEIGHT, PADDLE_MAX_WIDTH, PADDLE_MIN_WIDTH, PADDLE_UNIT_WIDTH, SCREEN_HEIGHT, SCREEN_WIDTH, SPEED_MULTIPLIER, TOP_BORDER_HEIGHT } from './constants/game'
+import { ACCELERATION, BALL_DEFAULT_RADIUS, BALL_MAX_RADIUS, BALL_MIN_RADIUS, BLOCK_HEIGHT, BLOCK_WIDTH, BUFF_ITEMS, DEBUFF_ITEMS, DEFAULT_SPEED, DROP_RATIO_BUFF, DROP_RATIO_DEBUFF, DROP_RATIO_MONEY_LG, DROP_RATIO_MONEY_MD, DROP_RATIO_MONEY_SM, DROP_RATIO_MONEY_XL, DROP_RATIO_MONEY_XS, GAME_STATE, ITEM, ITEM_DROP_SPEED, ITEM_HEIGHT, ITEM_WIDTH, MAX_SPEED, MONEY_VALUES, PADDLE_DEFAULT_WIDTH, PADDLE_HEIGHT, PADDLE_MAX_WIDTH, PADDLE_MIN_WIDTH, PADDLE_UNIT_WIDTH, SCREEN_HEIGHT, SCREEN_WIDTH, SPEED_MULTIPLIER, TOP_BORDER_HEIGHT } from './constants/game'
 import { STAGE_MAPS } from './constants/stages'
 
 export const useGame = create(
   immer((set, get) => ({
     money: 0,
+    displayMoney: 0,
     life: 3,
     items: [],
     balls: [],
@@ -19,6 +20,7 @@ export const useGame = create(
     reset: () => {
       set(state => {
         state.money = 0
+        state.displayMoney = 0
         state.life = 3
       })
       get().enterStage(0)
@@ -47,26 +49,29 @@ export const useGame = create(
           }
         }
         const items = []
-        for (let i = 0; i < state.blocks.length * 0.1; ++i) {
+        for (let i = 0; i < state.blocks.length * DROP_RATIO_BUFF; ++i) {
           items.push(BUFF_ITEMS[Math.floor(Math.random() * BUFF_ITEMS.length)])
         }
-        for (let i = 0; i < state.blocks.length * 0.1; ++i) {
+        for (let i = 0; i < state.blocks.length * DROP_RATIO_DEBUFF; ++i) {
           items.push(DEBUFF_ITEMS[Math.floor(Math.random() * DEBUFF_ITEMS.length)])
         }
-        for (let i = 0; i < state.blocks.length * 0.05; ++i) {
-          items.push(ITEM.MONEY_2000)
+        for (let i = 0; i < state.blocks.length * DROP_RATIO_MONEY_XL; ++i) {
+          items.push(ITEM.MONEY_XL)
         }
-        for (let i = 0; i < state.blocks.length * 0.1; ++i) {
-          items.push(ITEM.MONEY_1000)
+        for (let i = 0; i < state.blocks.length * DROP_RATIO_MONEY_LG; ++i) {
+          items.push(ITEM.MONEY_LG)
         }
-        for (let i = 0; i < state.blocks.length * 0.15; ++i) {
-          items.push(ITEM.MONEY_500)
+        for (let i = 0; i < state.blocks.length * DROP_RATIO_MONEY_MD; ++i) {
+          items.push(ITEM.MONEY_MD)
         }
-        for (let i = 0; i < state.blocks.length * 0.2; ++i) {
-          items.push(ITEM.MONEY_200)
+        for (let i = 0; i < state.blocks.length * DROP_RATIO_MONEY_SM; ++i) {
+          items.push(ITEM.MONEY_SM)
+        }
+        for (let i = 0; i < state.blocks.length * DROP_RATIO_MONEY_XS; ++i) {
+          items.push(ITEM.MONEY_XS)
         }
         for (let i = items.length; i < state.blocks.length; ++i) {
-          items.push(ITEM.MONEY_100)
+          items.push(null)
         }
         const shuffledItems = shuffle(items)
         for (let i = 0; i < state.blocks.length; ++i) {
@@ -106,6 +111,16 @@ export const useGame = create(
         return
       }
       get().enterStage(get().stage + 1)
+    },
+
+    updateMoney: () => {
+      const { money, displayMoney } = get()
+      if (displayMoney < money) {
+        set(state => {
+          state.displayMoney += Math.max(1, Math.floor((state.money - state.displayMoney) * 0.03))
+          state.displayMoney = Math.min(state.displayMoney, state.money)
+        })
+      }
     },
 
     updateItems: () => {
@@ -318,7 +333,7 @@ export const useGame = create(
 
     removeDeadBlocks: () => {
       get().blocks.forEach(block => {
-        if (block.hp === 0) {
+        if (block.hp === 0 && !!block.item) {
           get().dropItem(block.item, block.x + BLOCK_WIDTH / 2, block.y + BLOCK_HEIGHT)
         }
       })
@@ -384,29 +399,13 @@ export const useGame = create(
             state.balls = state.balls.map(ball => ({ ...ball, vx: ball.vx / SPEED_MULTIPLIER, vy: ball.vy / SPEED_MULTIPLIER }))
           })
           break
-        case ITEM.MONEY_100:
+        case ITEM.MONEY_XS:
+        case ITEM.MONEY_SM:
+        case ITEM.MONEY_MD:
+        case ITEM.MONEY_LG:
+        case ITEM.MONEY_XL:
           set(state => {
-            state.money += 100
-          })
-          break
-        case ITEM.MONEY_200:
-          set(state => {
-            state.money += 200
-          })
-          break
-        case ITEM.MONEY_500:
-          set(state => {
-            state.money += 500
-          })
-          break
-        case ITEM.MONEY_1000:
-          set(state => {
-            state.money += 1000
-          })
-          break
-        case ITEM.MONEY_2000:
-          set(state => {
-            state.money += 2000
+            state.money += MONEY_VALUES[item.item]
           })
           break
       }
@@ -418,14 +417,17 @@ export const useGame = create(
           get().updateBalls()
           break
         case GAME_STATE.PLAYING:
+          get().updateMoney()
           get().updateItems()
           get().updateBalls()
           get().detectCollision()
           get().updateStage()
           break
         case GAME_STATE.GAME_OVER:
+          set(state => { state.displayMoney = state.money })
           break
         case GAME_STATE.STAGE_CLEAR:
+          set(state => { state.displayMoney = state.money })
           break
       }
     },
