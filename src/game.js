@@ -94,33 +94,105 @@ export const useGame = create(
     },
 
     detectCollision: () => {
-      get().detectBallWallCollision()
+      get().detectAllBallWallCollision()
+      get().detectAllBallBlockCollision()
     },
 
-    detectBallWallCollision: () => {
+    detectAllBallWallCollision: () => {
       for (let i = 0; i < get().balls.length; ++i) {
-        const ball = get().balls[i]
-        if (ball.x - ball.radius < 0) {
+        get().detectBallWallCollision(i)
+      }
+    },
+
+    detectBallWallCollision: (i) => {
+      const ball = get().balls[i]
+      if (ball.x - ball.radius < 0) {
+        set(state => {
+          state.balls[i].vx = -state.balls[i].vx
+        })
+      }
+      if (ball.x + ball.radius > SCREEN_WIDTH) {
+        set(state => {
+          state.balls[i].vx = -state.balls[i].vx
+        })
+      }
+      if (ball.y - ball.radius < 0) {
+        set(state => {
+          state.balls[i].vy = -state.balls[i].vy
+        })
+      }
+      if (ball.y + ball.radius > SCREEN_HEIGHT) {
+        set(state => {
+          state.balls[i].vy = -state.balls[i].vy
+        })
+      }
+    },
+
+    detectAllBallBlockCollision: () => {
+      for (let i = 0; i < get().balls.length; ++i) {
+        let isCollidedX = false
+        let isCollidedY = false
+        for (let j = 0; j < get().blocks.length; ++j) {
+          let isBlockHit = false
+          if (get().detectBallBlockCollisionX(i, j)) {
+            isBlockHit = true
+            isCollidedX = true
+          }
+          if (get().detectBallBlockCollisionY(i, j)) {
+            isBlockHit = true
+            isCollidedY = true
+          }
+
+          if (isBlockHit) {
+            set(state => {
+              state.blocks[j].hp -= 1
+            })
+          }
+        }
+
+        if (isCollidedX) {
           set(state => {
             state.balls[i].vx = -state.balls[i].vx
           })
         }
-        if (ball.x + ball.radius > SCREEN_WIDTH) {
-          set(state => {
-            state.balls[i].vx = -state.balls[i].vx
-          })
-        }
-        if (ball.y - ball.radius < 0) {
-          set(state => {
-            state.balls[i].vy = -state.balls[i].vy
-          })
-        }
-        if (ball.y + ball.radius > SCREEN_HEIGHT) {
+        if (isCollidedY) {
           set(state => {
             state.balls[i].vy = -state.balls[i].vy
           })
         }
       }
+
+      get().removeDeadBlocks()
+    },
+
+    detectBallBlockCollisionX: (ballIdx, blockIdx) => {
+      const ball = get().balls[ballIdx]
+      const block = get().blocks[blockIdx]
+      if (ball.x + ball.radius < block.x) return false
+      if (ball.x - ball.radius > block.x + BLOCK_WIDTH) return false
+      if (ball.y + ball.radius < block.y) return false
+      if (ball.y - ball.radius > block.y + BLOCK_HEIGHT) return false
+      if (ball.x < block.x && ball.vx > 0) return true
+      if (ball.x > block.x + BLOCK_WIDTH && ball.vx < 0) return true
+      return false
+    },
+
+    detectBallBlockCollisionY: (ballIdx, blockIdx) => {
+      const ball = get().balls[ballIdx]
+      const block = get().blocks[blockIdx]
+      if (ball.x + ball.radius < block.x) return false
+      if (ball.x - ball.radius > block.x + BLOCK_WIDTH) return false
+      if (ball.y + ball.radius < block.y) return false
+      if (ball.y - ball.radius > block.y + BLOCK_HEIGHT) return false
+      if (ball.y < block.y && ball.vy > 0) return true
+      if (ball.y > block.y + BLOCK_HEIGHT && ball.vy < 0) return true
+      return false
+    },
+
+    removeDeadBlocks: () => {
+      set(state => {
+        state.blocks = state.blocks.filter(block => block.hp > 0)
+      })
     },
 
     mainLoop: () => {
