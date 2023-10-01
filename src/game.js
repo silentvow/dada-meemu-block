@@ -3,18 +3,19 @@ import { v4 as uuidv4 } from 'uuid'
 import { create } from 'zustand'
 import { immer } from 'zustand/middleware/immer'
 
-import { ACCELERATION, BALL_DEFAULT_RADIUS, BALL_MAX_RADIUS, BALL_MIN_RADIUS, BLOCK_HEIGHT, BLOCK_WIDTH, BUFF_ITEMS, DEBUFF_ITEMS, DEFAULT_SPEED, DROP_RATIO_BUFF, DROP_RATIO_DEBUFF, DROP_RATIO_MONEY_LG, DROP_RATIO_MONEY_MD, DROP_RATIO_MONEY_SM, DROP_RATIO_MONEY_XL, DROP_RATIO_MONEY_XS, GAME_STATE, ITEM, ITEM_DROP_SPEED_FROM, ITEM_DROP_SPEED_TO, ITEM_HEIGHT, ITEM_WIDTH, MAX_SPEED, MONEY_VALUES, PADDLE_DEFAULT_WIDTH, PADDLE_HEIGHT, PADDLE_MAX_WIDTH, PADDLE_MIN_WIDTH, PADDLE_UNIT_WIDTH, SCREEN_HEIGHT, SCREEN_WIDTH, SPEED_MULTIPLIER, TOP_BORDER_HEIGHT } from './constants/game'
+import { ACCELERATION, BALL_DEFAULT_RADIUS, BALL_MAX_RADIUS, BALL_MIN_RADIUS, BLOCK_HEIGHT, BLOCK_WIDTH, BUFF_ITEMS, BULLET_DEFAULT_COUNT, BULLET_HEIGHT, BULLET_MAX_COUNT, BULLET_OFFSET, BULLET_RELOAD_COUNT, BULLET_SPEED, BULLET_WIDTH, DEBUFF_ITEMS, DEFAULT_SPEED, DROP_RATIO_BUFF, DROP_RATIO_DEBUFF, DROP_RATIO_MONEY_LG, DROP_RATIO_MONEY_MD, DROP_RATIO_MONEY_SM, DROP_RATIO_MONEY_XL, DROP_RATIO_MONEY_XS, GAME_STATE, ITEM, ITEM_DROP_SPEED_FROM, ITEM_DROP_SPEED_TO, ITEM_HEIGHT, ITEM_WIDTH, MAX_SPEED, MIN_SPEED, MONEY_VALUES, PADDLE_DEFAULT_WIDTH, PADDLE_DEFAULT_X, PADDLE_DEFAULT_Y, PADDLE_HEIGHT, PADDLE_MAX_WIDTH, PADDLE_MIN_WIDTH, PADDLE_UNIT_WIDTH, SCREEN_HEIGHT, SCREEN_WIDTH, SPEED_MULTIPLIER, TOP_BORDER_HEIGHT } from './constants/game'
 import { STAGE_MAPS } from './constants/stages'
 
 export const useGame = create(
   immer((set, get) => ({
     money: 0,
     displayMoney: 0,
-    life: 3,
+    life: 0,
     items: [],
     balls: [],
     blocks: [],
-    paddle: { x: 0, y: 0 },
+    bullets: [],
+    paddle: { x: 0, y: 0, width: 0, height: 0, bullet: 0 },
     stage: 0,
 
     reset: () => {
@@ -31,6 +32,7 @@ export const useGame = create(
         state.stage = stage
         state.state = GAME_STATE.READY
         state.items = []
+        state.bullets = []
 
         /* setup blocks */
         state.blocks = []
@@ -80,11 +82,11 @@ export const useGame = create(
 
         /* setup paddle */
         state.paddle = {
-          x: 600,
-          y: 900,
+          x: PADDLE_DEFAULT_X,
+          y: PADDLE_DEFAULT_Y,
           width: PADDLE_DEFAULT_WIDTH,
           height: PADDLE_HEIGHT,
-          bullet: 0,
+          bullet: BULLET_DEFAULT_COUNT,
         }
 
         /* setup ball */
@@ -121,6 +123,15 @@ export const useGame = create(
           state.displayMoney = Math.min(state.displayMoney, state.money)
         })
       }
+    },
+
+    updateBullets: () => {
+      set(state => {
+        for (let i = 0; i < state.bullets.length; ++i) {
+          state.bullets[i].y -= BULLET_SPEED
+        }
+        state.bullets = state.bullets.filter(bullet => bullet.y > 0).filter(bullet => !bullet.hit)
+      })
     },
 
     updateItems: () => {
@@ -192,14 +203,41 @@ export const useGame = create(
     detectCollision: () => {
       get().detectBallPaddleCollision()
       get().detectAllBallWallCollision()
+      get().detectAllBulletBlockCollision()
       get().detectAllBallBlockCollision()
       get().detectAllItemPaddleCollision()
     },
 
+    detectAllBulletBlockCollision: () => {
+      const { blocks, bullets, detectBulletBlockCollision } = get()
+      for (let i = 0; i < bullets.length; ++i) {
+        if (bullets[i].hit) continue
+        for (let j = 0; j < blocks.length; ++j) {
+          if (blocks[j].hp <= 0) continue
+          if (detectBulletBlockCollision(i, j)) {
+            set(state => {
+              state.bullets[i].hit = true
+              state.blocks[j].hp -= 1
+            })
+          }
+        }
+      }
+    },
+
+    detectBulletBlockCollision: (bulletIdx, blockIdx) => {
+      const bullet = get().bullets[bulletIdx]
+      const block = get().blocks[blockIdx]
+      if (bullet.x + BULLET_WIDTH < block.x) return false
+      if (bullet.x > block.x + BLOCK_WIDTH) return false
+      if (bullet.y + BULLET_HEIGHT < block.y) return false
+      if (bullet.y > block.y + BLOCK_HEIGHT) return false
+      return true
+    },
+
     detectBallPaddleCollision: () => {
-      for (let i = 0; i < get().balls.length; ++i) {
-        const ball = get().balls[i]
-        const paddle = get().paddle
+      const { balls, paddle } = get()
+      for (let i = 0; i < balls.length; ++i) {
+        const ball = balls[i]
         if (ball.x + ball.radius < paddle.x) continue
         if (ball.x - ball.radius > paddle.x + paddle.width) continue
         if (ball.y + ball.radius < paddle.y) continue
@@ -252,16 +290,18 @@ export const useGame = create(
     },
 
     detectAllBallBlockCollision: () => {
-      for (let i = 0; i < get().balls.length; ++i) {
+      const { balls, blocks, detectBallBlockCollisionX, detectBallBlockCollisionY } = get()
+      for (let i = 0; i < balls.length; ++i) {
         let isCollidedX = false
         let isCollidedY = false
-        for (let j = 0; j < get().blocks.length; ++j) {
+        for (let j = 0; j < blocks.length; ++j) {
+          if (blocks[j].hp <= 0) continue
           let isBlockHit = false
-          if (get().detectBallBlockCollisionX(i, j)) {
+          if (detectBallBlockCollisionX(i, j)) {
             isBlockHit = true
             isCollidedX = true
           }
-          if (get().detectBallBlockCollisionY(i, j)) {
+          if (detectBallBlockCollisionY(i, j)) {
             isBlockHit = true
             isCollidedY = true
           }
@@ -359,7 +399,7 @@ export const useGame = create(
       switch (item.item) {
         case ITEM.BULLET:
           set(state => {
-            state.paddle.bullet += 20
+            state.paddle.bullet = Math.min(BULLET_MAX_COUNT, state.paddle.bullet + BULLET_RELOAD_COUNT)
           })
           break
         case ITEM.PADDLE_PLUS:
@@ -400,12 +440,20 @@ export const useGame = create(
           break
         case ITEM.SPEED_PLUS:
           set(state => {
-            state.balls = state.balls.map(ball => ({ ...ball, vx: ball.vx * SPEED_MULTIPLIER, vy: ball.vy * SPEED_MULTIPLIER }))
+            state.balls = state.balls.map(ball => {
+              const prevSpeed = Math.sqrt(ball.vx * ball.vx + ball.vy * ball.vy)
+              const nextSpeed = Math.min(MAX_SPEED, prevSpeed * SPEED_MULTIPLIER)
+              return ({ ...ball, vx: ball.vx * nextSpeed / prevSpeed, vy: ball.vy * nextSpeed / prevSpeed })
+            })
           })
           break
         case ITEM.SPEED_MINUS:
           set(state => {
-            state.balls = state.balls.map(ball => ({ ...ball, vx: ball.vx / SPEED_MULTIPLIER, vy: ball.vy / SPEED_MULTIPLIER }))
+            state.balls = state.balls.map(ball => {
+              const prevSpeed = Math.sqrt(ball.vx * ball.vx + ball.vy * ball.vy)
+              const nextSpeed = Math.max(MIN_SPEED, prevSpeed / SPEED_MULTIPLIER)
+              return ({ ...ball, vx: ball.vx * nextSpeed / prevSpeed, vy: ball.vy * nextSpeed / prevSpeed })
+            })
           })
           break
         case ITEM.MONEY_XS:
@@ -427,6 +475,7 @@ export const useGame = create(
           break
         case GAME_STATE.PLAYING:
           get().updateMoney()
+          get().updateBullets()
           get().updateItems()
           get().updateBalls()
           get().detectCollision()
@@ -462,16 +511,34 @@ export const useGame = create(
           state.balls[0].vx = DEFAULT_SPEED * Math.cos(Math.PI / 3)
           state.balls[0].vy = -DEFAULT_SPEED * Math.sin(Math.PI / 3)
         })
+        return
       }
+
       if (get().state === GAME_STATE.PLAYING) {
-        if (get().bullet > 0) {
-          console.log('click')
+        if (get().paddle.bullet > 0) {
           set(state => {
-            state.bullet -= 1
-            state.bullets.push({ id: uuidv4(), x: state.paddle.x + state.paddle.width / 2, y: state.paddle.y })
+            state.paddle.bullet -= 1
+            state.bullets.push({
+              id: uuidv4(),
+              x: state.paddle.x + state.paddle.width - BULLET_WIDTH - BULLET_OFFSET,
+              y: state.paddle.y - BULLET_HEIGHT,
+              hit: false,
+            })
           })
         }
+        return
       }
+
+      if (get().state === GAME_STATE.STAGE_CLEAR) {
+        get().enterNextStage()
+        return
+      }
+
+      if (get().state === GAME_STATE.GAME_OVER) {
+        return
+      }
+
+      console.log('unknown state')
     },
   })),
 )

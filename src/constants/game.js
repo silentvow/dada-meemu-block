@@ -12,6 +12,8 @@ export const BLOCK_WIDTH = 64
 export const BLOCK_HEIGHT = 32
 export const ITEM_WIDTH = 48
 export const ITEM_HEIGHT = 48
+export const PADDLE_DEFAULT_X = 600
+export const PADDLE_DEFAULT_Y = 900
 export const PADDLE_DEFAULT_WIDTH = 192
 export const PADDLE_UNIT_WIDTH = 64
 export const PADDLE_MIN_WIDTH = 64
@@ -26,10 +28,19 @@ export const BALL_MAX_RADIUS = 32
 export const ACCELERATION = 1.01
 export const DEFAULT_SPEED = 5
 export const SPEED_MULTIPLIER = 1.5
+export const MIN_SPEED = 3
 export const MAX_SPEED = 20
 export const ITEM_DROP_SPEED_FROM = 3
 export const ITEM_DROP_SPEED_TO = 5
 export const BULLET_SPEED = 5
+export const BULLET_WIDTH = 30
+export const BULLET_HEIGHT = 40
+export const BULLET_OFFSET = 32
+export const BULLET_IMG_WIDTH = 48
+export const BULLET_IMG_HEIGHT = 64
+export const BULLET_DEFAULT_COUNT = 5
+export const BULLET_MAX_COUNT = 99
+export const BULLET_RELOAD_COUNT = 10
 
 export const DROP_RATIO_BUFF = 0.1
 export const DROP_RATIO_DEBUFF = 0.1
@@ -40,7 +51,7 @@ export const DROP_RATIO_MONEY_LG = 0.1
 export const DROP_RATIO_MONEY_XL = 0.05
 
 export const ITEM = {
-  BULLET: 'BULLET',
+  BULLET: 'BULLET_ITEM',
   PADDLE_PLUS: 'PADDLE_PLUS',
   PADDLE_MINUS: 'PADDLE_MINUS',
   BALL_DOUBLE: 'BALL_DOUBLE',
@@ -62,6 +73,7 @@ export const IMG_URLS = {
   BALL: '/img/ball.png',
   RED_BALL: '/img/red-ball.png',
   PADDLE: '/img/paddle.png',
+  BULLET: '/img/fire-ball.png',
   [ITEM.BULLET]: '/img/chili-sauce.png',
   [ITEM.PADDLE_PLUS]: '/img/chicken.png',
   [ITEM.PADDLE_MINUS]: '/img/chicken-eye.png',
