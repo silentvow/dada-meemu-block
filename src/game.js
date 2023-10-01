@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { create } from 'zustand'
 import { immer } from 'zustand/middleware/immer'
 
-import { ACCELERATION, BALL_DEFAULT_RADIUS, BALL_MAX_RADIUS, BALL_MIN_RADIUS, BLOCK_HEIGHT, BLOCK_WIDTH, BUFF_ITEMS, DEBUFF_ITEMS, DEFAULT_SPEED, DROP_RATIO_BUFF, DROP_RATIO_DEBUFF, DROP_RATIO_MONEY_LG, DROP_RATIO_MONEY_MD, DROP_RATIO_MONEY_SM, DROP_RATIO_MONEY_XL, DROP_RATIO_MONEY_XS, GAME_STATE, ITEM, ITEM_DROP_SPEED, ITEM_HEIGHT, ITEM_WIDTH, MAX_SPEED, MONEY_VALUES, PADDLE_DEFAULT_WIDTH, PADDLE_HEIGHT, PADDLE_MAX_WIDTH, PADDLE_MIN_WIDTH, PADDLE_UNIT_WIDTH, SCREEN_HEIGHT, SCREEN_WIDTH, SPEED_MULTIPLIER, TOP_BORDER_HEIGHT } from './constants/game'
+import { ACCELERATION, BALL_DEFAULT_RADIUS, BALL_MAX_RADIUS, BALL_MIN_RADIUS, BLOCK_HEIGHT, BLOCK_WIDTH, BUFF_ITEMS, DEBUFF_ITEMS, DEFAULT_SPEED, DROP_RATIO_BUFF, DROP_RATIO_DEBUFF, DROP_RATIO_MONEY_LG, DROP_RATIO_MONEY_MD, DROP_RATIO_MONEY_SM, DROP_RATIO_MONEY_XL, DROP_RATIO_MONEY_XS, GAME_STATE, ITEM, ITEM_DROP_SPEED_FROM, ITEM_DROP_SPEED_TO, ITEM_HEIGHT, ITEM_WIDTH, MAX_SPEED, MONEY_VALUES, PADDLE_DEFAULT_WIDTH, PADDLE_HEIGHT, PADDLE_MAX_WIDTH, PADDLE_MIN_WIDTH, PADDLE_UNIT_WIDTH, SCREEN_HEIGHT, SCREEN_WIDTH, SPEED_MULTIPLIER, TOP_BORDER_HEIGHT } from './constants/game'
 import { STAGE_MAPS } from './constants/stages'
 
 export const useGame = create(
@@ -127,7 +127,7 @@ export const useGame = create(
       get().items.forEach(item => { if (item.catch) get().catchItem(item) })
       set(state => {
         for (let i = 0; i < state.items.length; ++i) {
-          state.items[i].y += ITEM_DROP_SPEED
+          state.items[i].y += state.items[i].vy
         }
         state.items = state.items.filter(item => item.y < SCREEN_HEIGHT).filter(item => !item.catch)
       })
@@ -343,7 +343,16 @@ export const useGame = create(
     },
 
     dropItem: (item, x, y) => {
-      set(state => { state.items.push({ id: uuidv4(), item, x: x - ITEM_WIDTH / 2, y: y - ITEM_HEIGHT / 2, catch: false }) })
+      set(state => {
+        state.items.push({
+          id: uuidv4(),
+          item,
+          x: x - ITEM_WIDTH / 2,
+          y: y - ITEM_HEIGHT / 2,
+          vy: Math.random() * (ITEM_DROP_SPEED_TO - ITEM_DROP_SPEED_FROM) + ITEM_DROP_SPEED_FROM,
+          catch: false,
+        })
+      })
     },
 
     catchItem: (item) => {
