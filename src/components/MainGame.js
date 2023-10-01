@@ -8,9 +8,11 @@ const hitArea = {
 }
 
 const footerStyle = {
-  fill: '#000',
+  fill: '#fff',
   fontSize: 36,
-  fontFamily: '"Pixelify Sans", cursive',
+  fontFamily: '"Wellfleet", serif',
+  stroke: '#000',
+  strokeThickness: 4,
 }
 
 function imgUrl (item) {
@@ -63,16 +65,16 @@ function MainGame ({ app }) {
           />
         )
       })}
-      <Text x={4} y={SCREEN_HEIGHT - 36} text={`$ ${displayMoney}`} style={footerStyle} />
+      <Text x={4} y={SCREEN_HEIGHT - 46} text={`$ ${displayMoney}`} style={footerStyle} />
       <Sprite
         x={SCREEN_WIDTH - 102}
-        y={SCREEN_HEIGHT - 36}
+        y={SCREEN_HEIGHT - 40}
         scale={{ x: BULLET_WIDTH / BULLET_IMG_WIDTH, y: BULLET_HEIGHT / BULLET_IMG_HEIGHT }}
         image={IMG_URLS.BULLET}
       />
       <Text
         x={SCREEN_WIDTH - 68}
-        y={SCREEN_HEIGHT - 36}
+        y={SCREEN_HEIGHT - 46}
         text={`x${paddle.bullet.toString().padStart(2, '0')}`}
         style={footerStyle}
       />
