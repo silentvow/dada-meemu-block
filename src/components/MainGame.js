@@ -33,7 +33,7 @@ function MainGame ({ app }) {
     <Container width={SCREEN_WIDTH} height={SCREEN_HEIGHT} y={TOP_BORDER_HEIGHT} eventMode='static' onmousemove={onMouseMove} onclick={onClick} hitArea={hitArea}>
       {blocks.map(block => {
         return (
-          <Sprite key={block.id} x={block.x} y={block.y} image='/img/box.png' />
+          <Sprite key={block.id} x={block.x} y={block.y} image={imgUrl(block.type)} />
         )
       })}
       {items.map(item => {

@@ -50,6 +50,23 @@ export const DROP_RATIO_MONEY_MD = 0.15
 export const DROP_RATIO_MONEY_LG = 0.1
 export const DROP_RATIO_MONEY_XL = 0.05
 
+export const BLOCK = {
+  NORMAL_1: 'NORMAL_1',
+  NORMAL_2: 'NORMAL_2',
+  NORMAL_2_1: 'NORMAL_2_1',
+  NORMAL_3: 'NORMAL_3',
+  NORMAL_3_1: 'NORMAL_3_1',
+  NORMAL_3_2: 'NORMAL_3_2',
+  STONE: 'STONE',
+}
+
+export const BLOCK_HP = {
+  [BLOCK.NORMAL_1]: 1,
+  [BLOCK.NORMAL_2]: 2,
+  [BLOCK.NORMAL_3]: 3,
+  [BLOCK.STONE]: Infinity,
+}
+
 export const ITEM = {
   BULLET: 'BULLET_ITEM',
   PADDLE_PLUS: 'PADDLE_PLUS',
@@ -74,6 +91,13 @@ export const IMG_URLS = {
   RED_BALL: '/img/red-ball.png',
   PADDLE: '/img/paddle.png',
   BULLET: '/img/fire-ball.png',
+  [BLOCK.NORMAL_1]: '/img/box1.png',
+  [BLOCK.NORMAL_2]: '/img/box2.png',
+  [BLOCK.NORMAL_2_1]: '/img/box2-1.png',
+  [BLOCK.NORMAL_3]: '/img/box3.png',
+  [BLOCK.NORMAL_3_1]: '/img/box3-1.png',
+  [BLOCK.NORMAL_3_2]: '/img/box3-2.png',
+  [BLOCK.STONE]: '/img/stone.png',
   [ITEM.BULLET]: '/img/chili-sauce.png',
   [ITEM.PADDLE_PLUS]: '/img/chicken.png',
   [ITEM.PADDLE_MINUS]: '/img/chicken-eye.png',

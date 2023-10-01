@@ -3,8 +3,8 @@ import { v4 as uuidv4 } from 'uuid'
 import { create } from 'zustand'
 import { immer } from 'zustand/middleware/immer'
 
-import { ACCELERATION, BALL_DEFAULT_RADIUS, BALL_MAX_RADIUS, BALL_MIN_RADIUS, BLOCK_HEIGHT, BLOCK_WIDTH, BUFF_ITEMS, BULLET_DEFAULT_COUNT, BULLET_HEIGHT, BULLET_MAX_COUNT, BULLET_OFFSET, BULLET_RELOAD_COUNT, BULLET_SPEED, BULLET_WIDTH, DEBUFF_ITEMS, DEFAULT_SPEED, DROP_RATIO_BUFF, DROP_RATIO_DEBUFF, DROP_RATIO_MONEY_LG, DROP_RATIO_MONEY_MD, DROP_RATIO_MONEY_SM, DROP_RATIO_MONEY_XL, DROP_RATIO_MONEY_XS, GAME_STATE, ITEM, ITEM_DROP_SPEED_FROM, ITEM_DROP_SPEED_TO, ITEM_HEIGHT, ITEM_WIDTH, MAX_SPEED, MIN_SPEED, MONEY_VALUES, PADDLE_DEFAULT_WIDTH, PADDLE_DEFAULT_X, PADDLE_DEFAULT_Y, PADDLE_HEIGHT, PADDLE_MAX_WIDTH, PADDLE_MIN_WIDTH, PADDLE_UNIT_WIDTH, SCREEN_HEIGHT, SCREEN_WIDTH, SPEED_MULTIPLIER, TOP_BORDER_HEIGHT } from './constants/game'
-import { STAGE_MAPS } from './constants/stages'
+import { ACCELERATION, BALL_DEFAULT_RADIUS, BALL_MAX_RADIUS, BALL_MIN_RADIUS, BLOCK, BLOCK_HEIGHT, BLOCK_HP, BLOCK_WIDTH, BUFF_ITEMS, BULLET_DEFAULT_COUNT, BULLET_HEIGHT, BULLET_MAX_COUNT, BULLET_OFFSET, BULLET_RELOAD_COUNT, BULLET_SPEED, BULLET_WIDTH, DEBUFF_ITEMS, DEFAULT_SPEED, DROP_RATIO_BUFF, DROP_RATIO_DEBUFF, DROP_RATIO_MONEY_LG, DROP_RATIO_MONEY_MD, DROP_RATIO_MONEY_SM, DROP_RATIO_MONEY_XL, DROP_RATIO_MONEY_XS, GAME_STATE, ITEM, ITEM_DROP_SPEED_FROM, ITEM_DROP_SPEED_TO, ITEM_HEIGHT, ITEM_WIDTH, MAX_SPEED, MIN_SPEED, MONEY_VALUES, PADDLE_DEFAULT_WIDTH, PADDLE_DEFAULT_X, PADDLE_DEFAULT_Y, PADDLE_HEIGHT, PADDLE_MAX_WIDTH, PADDLE_MIN_WIDTH, PADDLE_UNIT_WIDTH, SCREEN_HEIGHT, SCREEN_WIDTH, SPEED_MULTIPLIER, TOP_BORDER_HEIGHT } from './constants/game'
+import { BLOCK_CHAR_MAP, STAGE_MAPS } from './constants/stages'
 
 export const useGame = create(
   immer((set, get) => ({
@@ -42,11 +42,13 @@ export const useGame = create(
           for (let x = 0; x < line.length; x++) {
             const block = line[x]
             if (block === '.') continue
+            const type = BLOCK_CHAR_MAP[block]
             state.blocks.push({
               id: uuidv4(),
               x: x * BLOCK_WIDTH,
               y: y * BLOCK_HEIGHT + TOP_BORDER_HEIGHT,
-              hp: 1,
+              hp: BLOCK_HP[type],
+              type,
             })
           }
         }
@@ -217,8 +219,8 @@ export const useGame = create(
           if (detectBulletBlockCollision(i, j)) {
             set(state => {
               state.bullets[i].hit = true
-              state.blocks[j].hp -= 1
             })
+            get().damageBlock(j, 1)
           }
         }
       }
@@ -307,9 +309,7 @@ export const useGame = create(
           }
 
           if (isBlockHit) {
-            set(state => {
-              state.blocks[j].hp -= 1
-            })
+            get().damageBlock(j, balls[i].red ? 3 : 1)
           }
         }
 
@@ -371,9 +371,24 @@ export const useGame = create(
       return true
     },
 
+    damageBlock: (blockIdx, damage) => {
+      set(state => {
+        const block = state.blocks[blockIdx]
+        block.hp -= damage
+        if (block.type === BLOCK.NORMAL_2 && block.hp < 2) {
+          block.type = BLOCK.NORMAL_2_1
+        } else if (block.type === BLOCK.NORMAL_3 && block.hp < 3) {
+          block.type = BLOCK.NORMAL_3_1
+        } else if (block.type === BLOCK.NORMAL_3_1 && block.hp < 2) {
+          block.type = BLOCK.NORMAL_3_2
+        }
+        state.blocks[blockIdx] = block
+      })
+    },
+
     removeDeadBlocks: () => {
       get().blocks.forEach(block => {
-        if (block.hp === 0 && !!block.item) {
+        if (block.hp <= 0 && !!block.item) {
           get().dropItem(block.item, block.x + BLOCK_WIDTH / 2, block.y + BLOCK_HEIGHT)
         }
       })
