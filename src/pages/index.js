@@ -8,7 +8,7 @@ import {
   AvatarFallback,
   AvatarImage,
 } from '@/components/ui/avatar'
-import { SCREEN_HEIGHT, SCREEN_WIDTH, TOP_BORDER_HEIGHT } from '@/constants/game'
+import { IMG_URLS, SCREEN_HEIGHT, SCREEN_WIDTH, TOP_BORDER_HEIGHT } from '@/constants/game'
 import { useState } from 'react'
 
 const menuStyle = new TextStyle({
@@ -63,7 +63,7 @@ function Home () {
             height={960}
             options={{ backgroundColor: 0xdff6f5 }}
           >
-            <TilingSprite x={0} y={0} width={SCREEN_WIDTH} height={SCREEN_HEIGHT + TOP_BORDER_HEIGHT} image='/img/bg.png' />
+            <TilingSprite x={0} y={0} width={SCREEN_WIDTH} height={SCREEN_HEIGHT + TOP_BORDER_HEIGHT} image={IMG_URLS.BACKGROUND} />
             {inGame && <MainGame />}
 
             {!inGame && (

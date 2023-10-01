@@ -58,6 +58,10 @@ export const ITEM = {
 }
 
 export const IMG_URLS = {
+  BACKGROUND: '/img/bg.png',
+  BALL: '/img/ball.png',
+  RED_BALL: '/img/red-ball.png',
+  PADDLE: '/img/paddle.png',
   [ITEM.BULLET]: '/img/chili-sauce.png',
   [ITEM.PADDLE_PLUS]: '/img/chicken.png',
   [ITEM.PADDLE_MINUS]: '/img/chicken-eye.png',
@@ -71,8 +75,8 @@ export const IMG_URLS = {
   [ITEM.MONEY_XS]: '/img/coin-bronze.png',
   [ITEM.MONEY_SM]: '/img/coin-silver.png',
   [ITEM.MONEY_MD]: '/img/coin-gold.png',
-  [ITEM.MONEY_LG]: '/img/money1000.png',
-  [ITEM.MONEY_XL]: '/img/money2000.png',
+  [ITEM.MONEY_LG]: '/img/dollar1.png',
+  [ITEM.MONEY_XL]: '/img/dollar6.png',
 }
 
 export const BUFF_ITEMS = [

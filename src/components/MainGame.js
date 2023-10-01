@@ -42,11 +42,11 @@ function MainGame ({ app }) {
             scale={{ x: ball.radius / BALL_IMAGE_RADIUS, y: ball.radius / BALL_IMAGE_RADIUS }}
             angle={ball.angle}
             anchor={[0.5, 0.5]}
-            image={ball.red ? '/img/red-meemu.png' : '/img/meemu.png'}
+            image={ball.red ? IMG_URLS.RED_BALL : IMG_URLS.BALL}
           />
         )
       })}
-      <Sprite x={paddle.x} y={paddle.y} scale={{ x: paddle.width / PADDLE_IMG_WIDTH, y: PADDLE_HEIGHT / PADDLE_IMG_HEIGHT }} image='/img/paddle.png' />
+      <Sprite x={paddle.x} y={paddle.y} scale={{ x: paddle.width / PADDLE_IMG_WIDTH, y: PADDLE_HEIGHT / PADDLE_IMG_HEIGHT }} image={IMG_URLS.PADDLE} />
       <Text x={4} y={SCREEN_HEIGHT - 36} text={`$ ${displayMoney}`} style={{ fill: '#000', fontSize: 36, fontFamily: '"Pixelify Sans", cursive' }} />
     </Container>
   )
