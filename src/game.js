@@ -344,21 +344,47 @@ export const useGame = create(
       }
     },
 
+    timeToBallBlockCollisionX: (ballIdx, blockIdx) => {
+      const ball = get().balls[ballIdx]
+      const block = get().blocks[blockIdx]
+      if (ball.vx === 0) return Infinity
+      if (ball.vx > 0) {
+        return (block.x - ball.radius - ball.x) / ball.vx
+      } else {
+        return (ball.x - ball.radius - block.x - BLOCK_WIDTH) / ball.vx
+      }
+    },
+
+    timeToBallBlockCollisionY: (ballIdx, blockIdx) => {
+      const ball = get().balls[ballIdx]
+      const block = get().blocks[blockIdx]
+      if (ball.vy === 0) return Infinity
+      if (ball.vy > 0) {
+        return (block.y - ball.radius - ball.y) / ball.vy
+      } else {
+        return (ball.y - ball.radius - block.y - BLOCK_HEIGHT) / ball.vy
+      }
+    },
+
     detectAllBallBlockCollision: () => {
       const { balls, blocks, detectBallBlockCollisionX, detectBallBlockCollisionY } = get()
       for (let i = 0; i < balls.length; ++i) {
         let isCollidedX = false
         let isCollidedY = false
+        let timeToX = Infinity
+        let timeToY = Infinity
         for (let j = 0; j < blocks.length; ++j) {
           if (blocks[j].hp <= 0) continue
           let isBlockHit = false
           if (detectBallBlockCollisionX(i, j)) {
             isBlockHit = true
             isCollidedX = true
+            timeToX = Math.min(timeToX, get().timeToBallBlockCollisionX(i, j))
           }
           if (detectBallBlockCollisionY(i, j)) {
             isBlockHit = true
             isCollidedY = true
+            timeToY = Math.min(timeToY, get().timeToBallBlockCollisionY(i, j))
           }
 
           if (isBlockHit) {
@@ -366,12 +392,12 @@ export const useGame = create(
           }
         }
 
-        if (isCollidedX) {
+        if (isCollidedX && timeToX <= timeToY) {
           set(state => {
             state.balls[i].vx = -state.balls[i].vx
           })
         }
-        if (isCollidedY) {
+        if (isCollidedY && timeToY <= timeToX) {
           set(state => {
             state.balls[i].vy = -state.balls[i].vy
           })
