@@ -68,7 +68,7 @@ export const BLOCK_HP = {
 }
 
 export const ITEM = {
-  BULLET: 'BULLET_ITEM',
+  BULLET_PACK: 'BULLET_PACK',
   PADDLE_PLUS: 'PADDLE_PLUS',
   PADDLE_MINUS: 'PADDLE_MINUS',
   BALL_DOUBLE: 'BALL_DOUBLE',
@@ -78,6 +78,7 @@ export const ITEM = {
   BALL_SMALL: 'BALL_SMALL',
   SPEED_PLUS: 'SPEED_PLUS',
   SPEED_MINUS: 'SPEED_MINUS',
+  UNKNOWN: 'UNKNOWN',
   MONEY_XS: 'MONEY_XS',
   MONEY_SM: 'MONEY_SM',
   MONEY_MD: 'MONEY_MD',
@@ -98,16 +99,17 @@ export const IMG_URLS = {
   [BLOCK.NORMAL_3_1]: '/img/box3-1.png',
   [BLOCK.NORMAL_3_2]: '/img/box3-2.png',
   [BLOCK.STONE]: '/img/stone.png',
-  [ITEM.BULLET]: '/img/chili-sauce.png',
-  [ITEM.PADDLE_PLUS]: '/img/time-fly.png',
-  [ITEM.PADDLE_MINUS]: '/img/time-reverse.png',
+  [ITEM.BULLET_PACK]: '/img/chili-sauce.png',
+  [ITEM.PADDLE_PLUS]: '/img/longer.png',
+  [ITEM.PADDLE_MINUS]: '/img/shorter.png',
   [ITEM.BALL_DOUBLE]: '/img/double.png',
   [ITEM.BALL_RED]: '/img/blood-drop.png',
   [ITEM.BALL_BLUE]: '/img/water-drop.png',
-  [ITEM.BALL_LARGE]: '/img/expand.png',
-  [ITEM.BALL_SMALL]: '/img/narrow.png',
-  [ITEM.SPEED_PLUS]: '/img/rabbit.png',
-  [ITEM.SPEED_MINUS]: '/img/turtle.png',
+  [ITEM.BALL_LARGE]: '/img/zoom-in.png',
+  [ITEM.BALL_SMALL]: '/img/zoom-out.png',
+  [ITEM.SPEED_PLUS]: '/img/fast.png',
+  [ITEM.SPEED_MINUS]: '/img/slow.png',
+  [ITEM.UNKNOWN]: '/img/black-box.png',
   [ITEM.MONEY_XS]: '/img/coin-bronze.png',
   [ITEM.MONEY_SM]: '/img/coin-silver.png',
   [ITEM.MONEY_MD]: '/img/coin-gold.png',
@@ -116,7 +118,7 @@ export const IMG_URLS = {
 }
 
 export const BUFF_ITEMS = [
-  ITEM.BULLET,
+  ITEM.BULLET_PACK,
   ITEM.PADDLE_PLUS,
   ITEM.BALL_DOUBLE,
   ITEM.BALL_RED,

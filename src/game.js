@@ -53,11 +53,13 @@ export const useGame = create(
           }
         }
         const items = []
+        const buffItems = BUFF_ITEMS.concat([ITEM.UNKNOWN])
+        const debuffItems = DEBUFF_ITEMS.concat([ITEM.UNKNOWN])
         for (let i = 0; i < state.blocks.length * DROP_RATIO_BUFF; ++i) {
-          items.push(BUFF_ITEMS[Math.floor(Math.random() * BUFF_ITEMS.length)])
+          items.push(buffItems[Math.floor(Math.random() * buffItems.length)])
         }
         for (let i = 0; i < state.blocks.length * DROP_RATIO_DEBUFF; ++i) {
-          items.push(DEBUFF_ITEMS[Math.floor(Math.random() * DEBUFF_ITEMS.length)])
+          items.push(debuffItems[Math.floor(Math.random() * debuffItems.length)])
         }
         for (let i = 0; i < state.blocks.length * DROP_RATIO_MONEY_XL; ++i) {
           items.push(ITEM.MONEY_XL)
@@ -389,7 +391,9 @@ export const useGame = create(
     removeDeadBlocks: () => {
       get().blocks.forEach(block => {
         if (block.hp <= 0 && !!block.item) {
-          get().dropItem(block.item, block.x + BLOCK_WIDTH / 2, block.y + BLOCK_HEIGHT)
+          const x1 = block.x
+          const x2 = block.x + BLOCK_WIDTH
+          get().dropItem(block.item, Math.random() * (x2 - x1) + x1, block.y + BLOCK_HEIGHT)
         }
       })
       set(state => {
@@ -412,7 +416,12 @@ export const useGame = create(
 
     catchItem: (item) => {
       switch (item.item) {
-        case ITEM.BULLET:
+        case ITEM.UNKNOWN: {
+          const allItems = [...BUFF_ITEMS, ...DEBUFF_ITEMS]
+          get().catchItem(allItems[Math.floor(Math.random() * allItems.length)])
+          break
+        }
+        case ITEM.BULLET_PACK:
           set(state => {
             state.paddle.bullet = Math.min(BULLET_MAX_COUNT, state.paddle.bullet + BULLET_RELOAD_COUNT)
           })
