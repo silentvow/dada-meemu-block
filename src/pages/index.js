@@ -1,7 +1,8 @@
-import { Container, Sprite, Stage, Text, TilingSprite, withFilters } from '@pixi/react'
+import { Container, Sprite, Stage, Text, withFilters } from '@pixi/react'
 import Link from 'next/link'
 import { TextStyle, filters } from 'pixi.js'
 
+import Background from '@/components/Background'
 import MainGame from '@/components/MainGame'
 import {
   Avatar,
@@ -82,7 +83,7 @@ function Home () {
                 return matrix
               }}
             >
-              <TilingSprite x={0} y={0} width={SCREEN_WIDTH} height={SCREEN_HEIGHT + TOP_BORDER_HEIGHT} image={IMG_URLS.BACKGROUND} />
+              <Background />
               {state !== GAME_STATE.MENU && <MainGame />}
 
               {state === GAME_STATE.MENU && (

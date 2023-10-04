@@ -89,7 +89,11 @@ export const ITEM = {
 
 export const IMG_URLS = {
   COVER: 'https://placehold.co/1920x1080',
-  BACKGROUND: '/img/bg.png',
+  BACKGROUND_1: '/img/bg-texture-1.png',
+  BACKGROUND_2: '/img/bg-texture-2.png',
+  BACKGROUND_3: '/img/bg-texture-3.png',
+  BACKGROUND_4: '/img/bg-texture-4.png',
+  BACKGROUND_5: '/img/bg-texture-5.png',
   BALL: '/img/ball.png',
   RED_BALL: '/img/red-ball.png',
   PADDLE: '/img/paddle.png',

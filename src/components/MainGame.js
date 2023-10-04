@@ -113,16 +113,16 @@ function MainGame ({ app }) {
         )
       })}
       {state === GAME_STATE.READY && <Text x={640} y={600} anchor={[0.5, 1]} text={`STAGE ${stage + 1}\nREADY`} style={titleStyle} />}
-      <Text x={4} y={SCREEN_HEIGHT - 46} text={`$ ${displayMoney}`} style={footerStyle} />
+      <Text x={4} y={0} text={`$ ${displayMoney}`} style={footerStyle} />
       <Sprite
-        x={SCREEN_WIDTH - 102}
-        y={SCREEN_HEIGHT - 40}
+        x={SCREEN_WIDTH - 104}
+        y={4}
         scale={{ x: BULLET_WIDTH / BULLET_IMG_WIDTH, y: BULLET_HEIGHT / BULLET_IMG_HEIGHT }}
         image={IMG_URLS.BULLET}
       />
       <Text
-        x={SCREEN_WIDTH - 68}
-        y={SCREEN_HEIGHT - 46}
+        x={SCREEN_WIDTH - 70}
+        y={0}
         text={`x${paddle.bullet.toString().padStart(2, '0')}`}
         style={footerStyle}
       />
