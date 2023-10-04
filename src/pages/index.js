@@ -43,7 +43,7 @@ function Home () {
               href='#'
               className='text-md font-medium transition-colors hover:text-primary'
             >
-              DaDa MeeMu Block
+              DaDa &amp; MeeMu&rsquo;s Treasure Hunt
             </Link>
           </nav>
           <div className='ml-auto flex items-center space-x-4'>
