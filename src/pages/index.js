@@ -77,7 +77,7 @@ function Home () {
               matrix={{ enabled: true }}
               apply={({ matrix }) => {
                 matrix.reset()
-                if (state === GAME_STATE.GAME_OVER) {
+                if ([GAME_STATE.STAGE_FAILED, GAME_STATE.GAME_OVER].includes(state)) {
                   matrix.desaturate()
                 }
                 return matrix

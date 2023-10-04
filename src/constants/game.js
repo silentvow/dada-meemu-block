@@ -4,8 +4,11 @@ export const GAME_STATE = {
   PLAYING: 'PLAYING',
   GAME_OVER: 'GAME_OVER',
   STAGE_CLEAR: 'STAGE_CLEAR',
+  STAGE_FAILED: 'STAGE_FAILED',
 }
 
+export const DEFAULT_LIVES = 3
+export const MAX_LIVES = 9
 export const TOP_BORDER_HEIGHT = 0
 export const SCREEN_WIDTH = 1280
 export const SCREEN_HEIGHT = 960 - TOP_BORDER_HEIGHT
@@ -98,6 +101,7 @@ export const IMG_URLS = {
   RED_BALL: '/img/red-ball.png',
   PADDLE: '/img/paddle.png',
   BULLET: '/img/fire-ball.png',
+  HEART: '/img/heart.png',
   [BLOCK.NORMAL_1]: '/img/box1.png',
   [BLOCK.NORMAL_2]: '/img/box2.png',
   [BLOCK.NORMAL_2_1]: '/img/box2-1.png',

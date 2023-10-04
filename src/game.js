@@ -20,6 +20,7 @@ import {
   BULLET_SPEED,
   BULLET_WIDTH,
   DEBUFF_ITEMS,
+  DEFAULT_LIVES,
   DEFAULT_SPEED,
   DROP_RATIO_BUFF,
   DROP_RATIO_DEBUFF,
@@ -34,6 +35,7 @@ import {
   ITEM_DROP_SPEED_TO,
   ITEM_HEIGHT,
   ITEM_WIDTH,
+  MAX_LIVES,
   MAX_SPEED,
   MIN_SPEED,
   MONEY_VALUES,
@@ -68,7 +70,7 @@ export const useGame = create(
       set(state => {
         state.money = 0
         state.displayMoney = 0
-        state.life = 3
+        state.life = DEFAULT_LIVES
       })
       get().enterStage(0)
     },
@@ -78,14 +80,8 @@ export const useGame = create(
       set(state => { state.state = GAME_STATE.READY })
     },
 
-    enterStage: (stage) => {
+    setupBlocks: (stage) => {
       set(state => {
-        state.stage = stage
-        state.state = GAME_STATE.READY
-        state.items = []
-        state.bullets = []
-
-        /* setup blocks */
         state.blocks = []
         const stageMap = STAGE_MAPS[stage]
         for (let y = 0; y < stageMap.length; y++) {
@@ -103,6 +99,7 @@ export const useGame = create(
             })
           }
         }
+
         const items = []
         const buffItems = BUFF_ITEMS.concat([ITEM.UNKNOWN])
         const debuffItems = DEBUFF_ITEMS.concat([ITEM.UNKNOWN])
@@ -134,6 +131,15 @@ export const useGame = create(
         for (let i = 0; i < state.blocks.length; ++i) {
           state.blocks[i].item = shuffledItems[i]
         }
+      })
+    },
+
+    setupStage: (stage) => {
+      set(state => {
+        state.stage = stage
+        state.state = GAME_STATE.READY
+        state.items = []
+        state.bullets = []
 
         /* setup paddle */
         state.paddle = {
@@ -160,6 +166,11 @@ export const useGame = create(
       })
     },
 
+    enterStage: (stage) => {
+      get().setupStage(stage)
+      get().setupBlocks(stage)
+    },
+
     enterEndPage: () => {},
 
     enterNextStage: () => {
@@ -167,6 +178,7 @@ export const useGame = create(
         get().enterEndPage()
         return
       }
+      set(state => { state.life = Math.min(MAX_LIVES, state.life + 1) })
       get().enterStage(get().stage + 1)
     },
 
@@ -239,7 +251,7 @@ export const useGame = create(
         return
       }
       if (get().balls.length === 0) {
-        get().gameOver()
+        get().failStage()
       }
     },
 
@@ -247,6 +259,16 @@ export const useGame = create(
       set(state => {
         state.state = GAME_STATE.STAGE_CLEAR
       })
+    },
+
+    failStage: () => {
+      set(state => {
+        state.state = GAME_STATE.STAGE_FAILED
+        state.life -= 1
+      })
+      if (get().life === 0) {
+        get().gameOver()
+      }
     },
 
     gameOver: () => {
@@ -586,6 +608,7 @@ export const useGame = create(
           set(state => { state.displayMoney = state.money })
           break
         case GAME_STATE.STAGE_CLEAR:
+        case GAME_STATE.STAGE_FAILED:
           set(state => { state.displayMoney = state.money })
           break
       }
@@ -632,6 +655,11 @@ export const useGame = create(
 
       if (get().state === GAME_STATE.STAGE_CLEAR) {
         get().enterNextStage()
+        return
+      }
+
+      if (get().state === GAME_STATE.STAGE_FAILED) {
+        get().setupStage(get().stage)
         return
       }
 

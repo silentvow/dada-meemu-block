@@ -49,6 +49,7 @@ function imgUrl (item) {
 function MainGame ({ app }) {
   const {
     reset,
+    life,
     stage,
     state,
     displayMoney,
@@ -115,6 +116,7 @@ function MainGame ({ app }) {
         )
       })}
       {state === GAME_STATE.READY && <Text x={640} y={500} anchor={[0.5, 1]} text={`STAGE ${stage + 1}\nREADY`} style={titleStyle} />}
+      {state === GAME_STATE.GAME_OVER && <Text x={640} y={500} anchor={[0.5, 1]} text='GAME OVER' style={titleStyle} />}
       <Text x={4} y={0} text={`$${displayMoney}`} style={footerStyle} />
       <Sprite
         x={SCREEN_WIDTH - 110}
@@ -126,6 +128,18 @@ function MainGame ({ app }) {
         x={SCREEN_WIDTH - 76}
         y={0}
         text={`x${paddle.bullet.toString().padStart(2, '0')}`}
+        style={footerStyle}
+      />
+      <Sprite
+        x={SCREEN_WIDTH - 196}
+        y={12}
+        scale={{ x: 30 / 48, y: 24.375 / 39 }}
+        image={IMG_URLS.HEART}
+      />
+      <Text
+        x={SCREEN_WIDTH - 162}
+        y={0}
+        text={`x${life}`}
         style={footerStyle}
       />
       <Sprite
