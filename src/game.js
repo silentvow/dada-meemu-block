@@ -202,7 +202,7 @@ export const useGame = create(
     },
 
     updateItems: () => {
-      get().items.forEach(item => { if (item.catch) get().catchItem(item) })
+      get().items.forEach(item => { if (item.catch) get().catchItem(item.item) })
       set(state => {
         for (let i = 0; i < state.items.length; ++i) {
           state.items[i].y += state.items[i].vy
@@ -514,7 +514,7 @@ export const useGame = create(
     },
 
     catchItem: (item) => {
-      switch (item.item) {
+      switch (item) {
         case ITEM.UNKNOWN: {
           const allItems = [...BUFF_ITEMS, ...DEBUFF_ITEMS]
           get().catchItem(allItems[Math.floor(Math.random() * allItems.length)])
@@ -585,8 +585,11 @@ export const useGame = create(
         case ITEM.MONEY_LG:
         case ITEM.MONEY_XL:
           set(state => {
-            state.money += MONEY_VALUES[item.item]
+            state.money += MONEY_VALUES[item]
           })
+          break
+        default:
+          console.log('unknown item', item)
           break
       }
     },
