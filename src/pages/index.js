@@ -1,4 +1,4 @@
-import { Container, Stage, Text, TilingSprite, withFilters } from '@pixi/react'
+import { Container, Sprite, Stage, Text, TilingSprite, withFilters } from '@pixi/react'
 import Link from 'next/link'
 import { TextStyle, filters } from 'pixi.js'
 
@@ -69,8 +69,8 @@ function Home () {
       <div className='flex-1 p-8 flex justify-center'>
         <div className='border-2 border-black select-none'>
           <Stage
-            width={1280}
-            height={960}
+            width={SCREEN_WIDTH}
+            height={SCREEN_HEIGHT + TOP_BORDER_HEIGHT}
           >
             <FilterContainer
               matrix={{ enabled: true }}
@@ -86,9 +86,12 @@ function Home () {
               {state !== GAME_STATE.MENU && <MainGame />}
 
               {state === GAME_STATE.MENU && (
-                <Container x={500} y={530}>
-                  <Text text='Start' style={menuStyle} eventMode='static' onclick={enterGame} />
-                </Container>
+                <>
+                  <Sprite x={40} y={20} width={1200} height={675} scale={{ x: 0.625, y: 0.625 }} image={IMG_URLS.COVER} />
+                  <Container x={500} y={530}>
+                    <Text text='Start' style={menuStyle} eventMode='static' onclick={enterGame} />
+                  </Container>
+                </>
               )}
             </FilterContainer>
           </Stage>
