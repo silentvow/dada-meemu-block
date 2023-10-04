@@ -1,4 +1,5 @@
 export const GAME_STATE = {
+  MENU: 'MENU',
   READY: 'READY',
   PLAYING: 'PLAYING',
   GAME_OVER: 'GAME_OVER',

@@ -1,6 +1,6 @@
-import { Container, Stage, Text, TilingSprite } from '@pixi/react'
+import { Container, Stage, Text, TilingSprite, withFilters } from '@pixi/react'
 import Link from 'next/link'
-import { TextStyle } from 'pixi.js'
+import { TextStyle, filters } from 'pixi.js'
 
 import MainGame from '@/components/MainGame'
 import {
@@ -8,8 +8,12 @@ import {
   AvatarFallback,
   AvatarImage,
 } from '@/components/ui/avatar'
-import { IMG_URLS, SCREEN_HEIGHT, SCREEN_WIDTH, TOP_BORDER_HEIGHT } from '@/constants/game'
-import { useState } from 'react'
+import { GAME_STATE, IMG_URLS, SCREEN_HEIGHT, SCREEN_WIDTH, TOP_BORDER_HEIGHT } from '@/constants/game'
+import { useGame } from '@/game'
+
+const FilterContainer = withFilters(Container, {
+  matrix: filters.ColorMatrixFilter,
+})
 
 const menuStyle = new TextStyle({
   align: 'left',
@@ -30,7 +34,13 @@ const menuStyle = new TextStyle({
 })
 
 function Home () {
-  const [inGame, setInGame] = useState(false)
+  const {
+    state,
+    enterGame,
+  } = useGame(state => ({
+    state: state.state,
+    enterGame: state.enterGame,
+  }))
 
   return (
     <div className='hidden flex-col md:flex'>
@@ -57,20 +67,30 @@ function Home () {
         </div>
       </div>
       <div className='flex-1 p-8 flex justify-center'>
-        <div className='border-2 border-black'>
+        <div className='border-2 border-black select-none'>
           <Stage
             width={1280}
             height={960}
-            options={{ backgroundColor: 0xdff6f5 }}
           >
-            <TilingSprite x={0} y={0} width={SCREEN_WIDTH} height={SCREEN_HEIGHT + TOP_BORDER_HEIGHT} image={IMG_URLS.BACKGROUND} />
-            {inGame && <MainGame />}
+            <FilterContainer
+              matrix={{ enabled: true }}
+              apply={({ matrix }) => {
+                matrix.reset()
+                if (state === GAME_STATE.GAME_OVER) {
+                  matrix.desaturate()
+                }
+                return matrix
+              }}
+            >
+              <TilingSprite x={0} y={0} width={SCREEN_WIDTH} height={SCREEN_HEIGHT + TOP_BORDER_HEIGHT} image={IMG_URLS.BACKGROUND} />
+              {state !== GAME_STATE.MENU && <MainGame />}
 
-            {!inGame && (
-              <Container x={500} y={530}>
-                <Text text='Start' style={menuStyle} eventMode='static' onclick={e => setInGame(true)} />
-              </Container>
-            )}
+              {state === GAME_STATE.MENU && (
+                <Container x={500} y={530}>
+                  <Text text='Start' style={menuStyle} eventMode='static' onclick={enterGame} />
+                </Container>
+              )}
+            </FilterContainer>
           </Stage>
         </div>
       </div>

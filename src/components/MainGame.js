@@ -1,10 +1,35 @@
-import { BALL_IMAGE_RADIUS, BULLET_HEIGHT, BULLET_IMG_HEIGHT, BULLET_IMG_WIDTH, BULLET_WIDTH, IMG_URLS, ITEM_HEIGHT, ITEM_WIDTH, PADDLE_HEIGHT, PADDLE_IMG_HEIGHT, PADDLE_IMG_WIDTH, SCREEN_HEIGHT, SCREEN_WIDTH, TOP_BORDER_HEIGHT } from '@/constants/game'
+import {
+  BALL_IMAGE_RADIUS,
+  BULLET_HEIGHT,
+  BULLET_IMG_HEIGHT,
+  BULLET_IMG_WIDTH,
+  BULLET_WIDTH,
+  GAME_STATE,
+  IMG_URLS,
+  ITEM_HEIGHT,
+  ITEM_WIDTH,
+  PADDLE_HEIGHT,
+  PADDLE_IMG_HEIGHT,
+  PADDLE_IMG_WIDTH,
+  SCREEN_HEIGHT,
+  SCREEN_WIDTH,
+  TOP_BORDER_HEIGHT,
+} from '@/constants/game'
 import { useGame } from '@/game'
 import { Container, Sprite, Text, useTick, withPixiApp } from '@pixi/react'
 import { useEffect } from 'react'
 
 const hitArea = {
   contains: () => true,
+}
+
+const titleStyle = {
+  fill: '#fff',
+  fontSize: 64,
+  fontFamily: '"Wellfleet", serif',
+  stroke: '#000',
+  strokeThickness: 4,
+  align: 'center',
 }
 
 const footerStyle = {
@@ -20,7 +45,20 @@ function imgUrl (item) {
 }
 
 function MainGame ({ app }) {
-  const { reset, displayMoney, blocks, balls, bullets, items, paddle, mainLoop, onMouseMove, onClick } = useGame(state => state)
+  const {
+    reset,
+    stage,
+    state,
+    displayMoney,
+    blocks,
+    balls,
+    bullets,
+    items,
+    paddle,
+    mainLoop,
+    onMouseMove,
+    onClick,
+  } = useGame(state => state)
   useEffect(() => {
     reset()
   }, [reset])
@@ -30,7 +68,16 @@ function MainGame ({ app }) {
   })
 
   return (
-    <Container width={SCREEN_WIDTH} height={SCREEN_HEIGHT} y={TOP_BORDER_HEIGHT} eventMode='static' onmousemove={onMouseMove} onclick={onClick} hitArea={hitArea}>
+    <Container
+      x={0}
+      y={TOP_BORDER_HEIGHT}
+      width={SCREEN_WIDTH}
+      height={SCREEN_HEIGHT}
+      eventMode='static'
+      onmousemove={onMouseMove}
+      onclick={onClick}
+      hitArea={hitArea}
+    >
       {blocks.map(block => {
         return (
           <Sprite key={block.id} x={block.x} y={block.y} image={imgUrl(block.type)} />
@@ -65,6 +112,7 @@ function MainGame ({ app }) {
           />
         )
       })}
+      {state === GAME_STATE.READY && <Text x={640} y={600} anchor={[0.5, 1]} text={`STAGE ${stage + 1}\nREADY`} style={titleStyle} />}
       <Text x={4} y={SCREEN_HEIGHT - 46} text={`$ ${displayMoney}`} style={footerStyle} />
       <Sprite
         x={SCREEN_WIDTH - 102}

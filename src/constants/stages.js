@@ -101,7 +101,7 @@ const STAGE_2_MAP = [
 
 /* 20x20 */
 export const STAGE_MAPS = [
-  EDITING_MAP, // FIEME: remove this
+  EDITING_MAP, // FIXME: remove this
   STAGE_1_MAP,
   STAGE_2_MAP,
 ]
