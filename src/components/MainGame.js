@@ -3,6 +3,7 @@ import {
   BULLET_HEIGHT,
   BULLET_IMG_HEIGHT,
   BULLET_IMG_WIDTH,
+  BULLET_OFFSET,
   BULLET_WIDTH,
   GAME_STATE,
   IMG_URLS,
@@ -16,7 +17,7 @@ import {
   TOP_BORDER_HEIGHT,
 } from '@/constants/game'
 import { useGame } from '@/game'
-import { Container, Sprite, Text, useTick, withPixiApp } from '@pixi/react'
+import { Container, Graphics, Sprite, Text, useTick, withPixiApp } from '@pixi/react'
 import { useEffect } from 'react'
 
 const hitArea = {
@@ -44,6 +45,17 @@ const footerStyle = {
 
 function imgUrl (item) {
   return IMG_URLS[item] || `https://placehold.co/${ITEM_WIDTH}x${ITEM_HEIGHT}/red/fff?text=${item}`
+}
+
+function drawMouth (g, paddle) {
+  g.clear()
+  g.beginFill(0xffffff)
+  g.moveTo(paddle.x + paddle.width - BULLET_WIDTH * 0.75 - BULLET_OFFSET, paddle.y)
+  g.lineTo(paddle.x + paddle.width - BULLET_WIDTH * 0.25 - BULLET_OFFSET, paddle.y)
+  g.lineTo(paddle.x + paddle.width - BULLET_WIDTH * 0.5 - BULLET_OFFSET, paddle.y - 8)
+  g.lineTo(paddle.x + paddle.width - BULLET_WIDTH * 0.75 - BULLET_OFFSET, paddle.y)
+  g.closePath()
+  g.endFill()
 }
 
 function MainGame ({ app }) {
@@ -116,8 +128,10 @@ function MainGame ({ app }) {
         )
       })}
       {state === GAME_STATE.READY && <Text x={640} y={500} anchor={[0.5, 1]} text={`STAGE ${stage + 1}\nREADY`} style={titleStyle} />}
+      {state === GAME_STATE.STAGE_CLEAR && <Text x={640} y={500} anchor={[0.5, 1]} text={'STAGE\nCLEAR'} style={titleStyle} />}
       {state === GAME_STATE.GAME_OVER && <Text x={640} y={500} anchor={[0.5, 1]} text='GAME OVER' style={titleStyle} />}
       <Text x={4} y={0} text={`$${displayMoney}`} style={footerStyle} />
+      <Graphics draw={g => drawMouth(g, paddle)} />
       <Sprite
         x={SCREEN_WIDTH - 110}
         y={4}

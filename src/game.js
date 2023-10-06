@@ -8,6 +8,7 @@ import {
   BALL_DEFAULT_RADIUS,
   BALL_MAX_RADIUS,
   BALL_MIN_RADIUS,
+  BALL_UNIT_RADIUS,
   BLOCK, BLOCK_HEIGHT,
   BLOCK_HP,
   BLOCK_WIDTH,
@@ -151,11 +152,15 @@ export const useGame = create(
         }
 
         /* setup ball */
+        const ballX = state.paddle.x + state.paddle.width / 2
+        const ballY = state.paddle.y - BALL_DEFAULT_RADIUS * 2
         state.balls = [
           {
             id: uuidv4(),
-            x: state.paddle.x + state.paddle.width / 2,
-            y: state.paddle.y - BALL_DEFAULT_RADIUS * 2,
+            px: ballX,
+            py: ballY,
+            x: ballX,
+            y: ballY,
             vx: 0,
             vy: 0,
             radius: BALL_DEFAULT_RADIUS,
@@ -218,7 +223,9 @@ export const useGame = create(
       if (get().state === GAME_STATE.READY) {
         set(state => {
           for (let i = 0; i < state.balls.length; ++i) {
+            state.balls[i].px = state.balls[i].x
             state.balls[i].x = state.paddle.x + state.paddle.width / 2
+            state.balls[i].py = state.balls[i].y
             state.balls[i].y = state.paddle.y - state.balls[0].radius
           }
         })
@@ -230,7 +237,9 @@ export const useGame = create(
 
       for (let i = 0; i < get().balls.length; ++i) {
         set(state => {
+          state.balls[i].px = state.balls[i].x
           state.balls[i].x += state.balls[i].vx
+          state.balls[i].py = state.balls[i].y
           state.balls[i].y += state.balls[i].vy
           state.balls[i].angle += 1
           if (state.balls[i].angle > 360) state.balls[i].angle = 0
@@ -371,9 +380,9 @@ export const useGame = create(
       const block = get().blocks[blockIdx]
       if (ball.vx === 0) return Infinity
       if (ball.vx > 0) {
-        return Math.abs((block.x - ball.radius - ball.x) / ball.vx)
+        return Math.abs((block.x - ball.radius - ball.px) / ball.vx)
       } else {
-        return Math.abs((ball.x - ball.radius - block.x - BLOCK_WIDTH) / ball.vx)
+        return Math.abs((ball.px - ball.radius - block.x - BLOCK_WIDTH) / ball.vx)
       }
     },
 
@@ -382,9 +391,9 @@ export const useGame = create(
       const block = get().blocks[blockIdx]
       if (ball.vy === 0) return Infinity
       if (ball.vy > 0) {
-        return Math.abs((block.y - ball.radius - ball.y) / ball.vy)
+        return Math.abs((block.y - ball.radius - ball.py) / ball.vy)
       } else {
-        return Math.abs((ball.y - ball.radius - block.y - BLOCK_HEIGHT) / ball.vy)
+        return Math.abs((ball.py - ball.radius - block.y - BLOCK_HEIGHT) / ball.vy)
       }
     },
 
@@ -553,12 +562,12 @@ export const useGame = create(
           break
         case ITEM.BALL_LARGE:
           set(state => {
-            state.balls = state.balls.map(ball => ({ ...ball, radius: Math.min(BALL_MAX_RADIUS, ball.radius * 2) }))
+            state.balls = state.balls.map(ball => ({ ...ball, radius: Math.min(BALL_MAX_RADIUS, ball.radius + BALL_UNIT_RADIUS) }))
           })
           break
         case ITEM.BALL_SMALL:
           set(state => {
-            state.balls = state.balls.map(ball => ({ ...ball, radius: Math.max(BALL_MIN_RADIUS, ball.radius / 2) }))
+            state.balls = state.balls.map(ball => ({ ...ball, radius: Math.max(BALL_MIN_RADIUS, ball.radius - BALL_UNIT_RADIUS) }))
           })
           break
         case ITEM.SPEED_PLUS:
@@ -620,11 +629,12 @@ export const useGame = create(
     onMouseMove: (event) => {
       if ([GAME_STATE.READY, GAME_STATE.PLAYING].includes(get().state)) {
         set(state => {
-          state.paddle.x = Math.min(Math.max(0, event.globalX - state.paddle.width / 2), SCREEN_WIDTH - state.paddle.width)
+          state.paddle.x = Math.min(Math.max(-state.paddle.width / 2, event.globalX - state.paddle.width / 2), SCREEN_WIDTH - state.paddle.width / 2)
         })
 
         if (get().state === GAME_STATE.READY) {
           set(state => {
+            state.balls[0].px = state.balls[0].x
             state.balls[0].x = state.paddle.x + state.paddle.width / 2
           })
         }
