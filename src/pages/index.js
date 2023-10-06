@@ -1,6 +1,6 @@
 import { Container, Sprite, Stage, Text, withFilters } from '@pixi/react'
 import Link from 'next/link'
-import { TextStyle, filters } from 'pixi.js'
+import { Assets, TextStyle, filters } from 'pixi.js'
 
 import Background from '@/components/Background'
 import MainGame from '@/components/MainGame'
@@ -11,6 +11,10 @@ import {
 } from '@/components/ui/avatar'
 import { GAME_STATE, IMG_URLS, SCREEN_HEIGHT, SCREEN_WIDTH, TOP_BORDER_HEIGHT } from '@/constants/game'
 import { useGame } from '@/game'
+import { useEffect, useState } from 'react'
+// import WebFont from 'webfontloader'
+
+Object.entries(IMG_URLS).forEach(([key, url]) => Assets.add(key, url))
 
 const FilterContainer = withFilters(Container, {
   matrix: filters.ColorMatrixFilter,
@@ -35,6 +39,8 @@ const menuStyle = new TextStyle({
 })
 
 function Home () {
+  const [fontsLoaded, setFontsLoaded] = useState(false)
+  const [assetsLoaded, setAssetsLoaded] = useState(false)
   const {
     state,
     enterGame,
@@ -42,6 +48,21 @@ function Home () {
     state: state.state,
     enterGame: state.enterGame,
   }))
+
+  useEffect(() => {
+    Assets.load(Object.keys(IMG_URLS)).then(() => {
+      setAssetsLoaded(true)
+    })
+    const WebFont = require('webfontloader')
+    WebFont.load({
+      google: {
+        families: ['Sono'],
+      },
+      active: e => {
+        setFontsLoaded(true)
+      },
+    })
+  }, [])
 
   return (
     <div className='hidden flex-col md:flex'>
@@ -69,33 +90,38 @@ function Home () {
       </div>
       <div className='flex-1 p-8 flex justify-center'>
         <div className='border-2 border-black select-none'>
-          <Stage
-            width={SCREEN_WIDTH}
-            height={SCREEN_HEIGHT + TOP_BORDER_HEIGHT}
-          >
-            <FilterContainer
-              matrix={{ enabled: true }}
-              apply={({ matrix }) => {
-                matrix.reset()
-                if ([GAME_STATE.STAGE_FAILED, GAME_STATE.GAME_OVER].includes(state)) {
-                  matrix.desaturate()
-                }
-                return matrix
-              }}
-            >
-              <Background />
-              {state !== GAME_STATE.MENU && <MainGame />}
+          {assetsLoaded && fontsLoaded
+            ? (
+              <Stage
+                width={SCREEN_WIDTH}
+                height={SCREEN_HEIGHT + TOP_BORDER_HEIGHT}
+              >
+                <FilterContainer
+                  matrix={{ enabled: true }}
+                  apply={({ matrix }) => {
+                    matrix.reset()
+                    if ([GAME_STATE.STAGE_FAILED, GAME_STATE.GAME_OVER].includes(state)) {
+                      matrix.desaturate()
+                    }
+                    return matrix
+                  }}
+                >
+                  <Background />
+                  {state !== GAME_STATE.MENU && <MainGame />}
 
-              {state === GAME_STATE.MENU && (
-                <>
-                  <Sprite x={40} y={20} width={1200} height={675} scale={{ x: 0.625, y: 0.625 }} image={IMG_URLS.COVER} />
-                  <Container x={500} y={530}>
-                    <Text text='Start' style={menuStyle} eventMode='static' onclick={enterGame} />
-                  </Container>
-                </>
+                  {state === GAME_STATE.MENU && (
+                    <>
+                      <Sprite x={40} y={20} width={1200} height={675} scale={{ x: 0.625, y: 0.625 }} image={IMG_URLS.COVER} />
+                      <Container x={500} y={530}>
+                        <Text text='Start' style={menuStyle} eventMode='static' onclick={enterGame} />
+                      </Container>
+                    </>
+                  )}
+                </FilterContainer>
+              </Stage>)
+            : (
+              <div>Loading...</div>
               )}
-            </FilterContainer>
-          </Stage>
         </div>
       </div>
     </div>
