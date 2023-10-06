@@ -371,9 +371,9 @@ export const useGame = create(
       const block = get().blocks[blockIdx]
       if (ball.vx === 0) return Infinity
       if (ball.vx > 0) {
-        return (block.x - ball.radius - ball.x) / ball.vx
+        return Math.abs((block.x - ball.radius - ball.x) / ball.vx)
       } else {
-        return (ball.x - ball.radius - block.x - BLOCK_WIDTH) / ball.vx
+        return Math.abs((ball.x - ball.radius - block.x - BLOCK_WIDTH) / ball.vx)
       }
     },
 
@@ -382,9 +382,9 @@ export const useGame = create(
       const block = get().blocks[blockIdx]
       if (ball.vy === 0) return Infinity
       if (ball.vy > 0) {
-        return (block.y - ball.radius - ball.y) / ball.vy
+        return Math.abs((block.y - ball.radius - ball.y) / ball.vy)
       } else {
-        return (ball.y - ball.radius - block.y - BLOCK_HEIGHT) / ball.vy
+        return Math.abs((ball.y - ball.radius - block.y - BLOCK_HEIGHT) / ball.vy)
       }
     },
 
@@ -416,12 +416,12 @@ export const useGame = create(
 
         if (isCollidedX && timeToX <= timeToY) {
           set(state => {
-            state.balls[i].vx = -state.balls[i].vx
+            state.balls[i].vx = -state.balls[i].vx // + (Math.random() - 0.5) * 0.02
           })
         }
         if (isCollidedY && timeToY <= timeToX) {
           set(state => {
-            state.balls[i].vy = -state.balls[i].vy
+            state.balls[i].vy = -state.balls[i].vy // + (Math.random() - 0.5) * 0.02
           })
         }
       }
