@@ -5,7 +5,7 @@ export default function App ({ Component, pageProps }) {
   return (
     <>
       <Head>
-        <title>妲妲咪咪探大吉</title>
+        <title>灰妲x咪姆x發大財</title>
       </Head>
       <Component {...pageProps} />
     </>

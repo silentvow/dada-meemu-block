@@ -1,8 +1,9 @@
-import { Container, Sprite, Stage, Text, withFilters } from '@pixi/react'
+import { Container, Stage, withFilters } from '@pixi/react'
 import Link from 'next/link'
-import { Assets, TextStyle, filters } from 'pixi.js'
+import { Assets, filters } from 'pixi.js'
 
 import Background from '@/components/Background'
+import GameMenu from '@/components/GameMenu'
 import MainGame from '@/components/MainGame'
 import {
   Avatar,
@@ -10,9 +11,9 @@ import {
   AvatarImage,
 } from '@/components/ui/avatar'
 import { GAME_STATE, IMG_URLS, SCREEN_HEIGHT, SCREEN_WIDTH, TOP_BORDER_HEIGHT } from '@/constants/game'
+import { FONT_TEST_STRING } from '@/constants/text'
 import { useGame } from '@/game'
 import { useEffect, useState } from 'react'
-// import WebFont from 'webfontloader'
 
 Object.entries(IMG_URLS).forEach(([key, url]) => Assets.add(key, url))
 
@@ -20,33 +21,13 @@ const FilterContainer = withFilters(Container, {
   matrix: filters.ColorMatrixFilter,
 })
 
-const menuStyle = new TextStyle({
-  align: 'left',
-  fontFamily: '"Source Sans Pro", Helvetica, sans-serif',
-  fontSize: 50,
-  fontWeight: '400',
-  fill: ['#ffffff', '#000000'], // gradient
-  // stroke: '#01d27e',
-  strokeThickness: 5,
-  letterSpacing: 12,
-  // dropShadow: true,
-  // dropShadowColor: '#ccced2',
-  // dropShadowBlur: 4,
-  // dropShadowAngle: Math.PI / 6,
-  // dropShadowDistance: 6,
-  // wordWrap: true,
-  // wordWrapWidth: 440,
-})
-
 function Home () {
   const [fontsLoaded, setFontsLoaded] = useState(false)
   const [assetsLoaded, setAssetsLoaded] = useState(false)
   const {
     state,
-    enterGame,
   } = useGame(state => ({
     state: state.state,
-    enterGame: state.enterGame,
   }))
 
   useEffect(() => {
@@ -55,8 +36,13 @@ function Home () {
     })
     const WebFont = require('webfontloader')
     WebFont.load({
+      custom: {
+        families: ['Xiaolai Mono SC'],
+        urls: ['https://cdn.jsdelivr.net/npm/cn-fontsource-xiaolai-mono-sc-regular/font.css'],
+        testStrings: { 'Xiaolai Mono SC': FONT_TEST_STRING },
+      },
       google: {
-        families: ['Sono'],
+        families: ['Sono', 'Noto Sans TC'],
       },
       active: e => {
         setFontsLoaded(true)
@@ -109,18 +95,13 @@ function Home () {
                   <Background />
                   {state !== GAME_STATE.MENU && <MainGame />}
 
-                  {state === GAME_STATE.MENU && (
-                    <>
-                      <Sprite x={40} y={20} width={1200} height={675} scale={{ x: 0.625, y: 0.625 }} image={IMG_URLS.COVER} />
-                      <Container x={500} y={530}>
-                        <Text text='Start' style={menuStyle} eventMode='static' onclick={enterGame} />
-                      </Container>
-                    </>
-                  )}
+                  {state === GAME_STATE.MENU && <GameMenu />}
                 </FilterContainer>
               </Stage>)
             : (
-              <div>Loading...</div>
+              <div className='w-[1280px] h-[960px] text-6xl flex justify-center items-center'>
+                Loading...
+              </div>
               )}
         </div>
       </div>

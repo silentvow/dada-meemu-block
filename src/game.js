@@ -30,6 +30,7 @@ import {
   DROP_RATIO_MONEY_SM,
   DROP_RATIO_MONEY_XL,
   DROP_RATIO_MONEY_XS,
+  GAME_MODE,
   GAME_STATE,
   ITEM,
   ITEM_DROP_SPEED_FROM,
@@ -57,6 +58,7 @@ import { BLOCK_CHAR_MAP, STAGE_MAPS } from './constants/stages'
 export const useGame = create(
   immer((set, get) => ({
     state: GAME_STATE.MENU,
+    mode: GAME_MODE.STORY,
     money: 0,
     displayMoney: 0,
     life: 0,
@@ -626,7 +628,7 @@ export const useGame = create(
       }
     },
 
-    onMouseMove: (event) => {
+    onGameMouseMove: (event) => {
       if ([GAME_STATE.READY, GAME_STATE.PLAYING].includes(get().state)) {
         set(state => {
           state.paddle.x = Math.min(Math.max(-state.paddle.width / 2, event.globalX - state.paddle.width / 2), SCREEN_WIDTH - state.paddle.width / 2)
@@ -641,7 +643,7 @@ export const useGame = create(
       }
     },
 
-    onClick: () => {
+    onGameClick: () => {
       if (get().state === GAME_STATE.READY) {
         set(state => {
           state.state = GAME_STATE.PLAYING

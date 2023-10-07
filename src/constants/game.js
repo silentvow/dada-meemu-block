@@ -7,6 +7,15 @@ export const GAME_STATE = {
   STAGE_FAILED: 'STAGE_FAILED',
 }
 
+export const GAME_MODE = {
+  STORY: 'STORY',
+  EXTRA_STORY: 'EXTRA_STORY',
+  CHALLENGE_REALDA: 'CHALLENGE_REALDA',
+  CHALLENGE_BOING: 'CHALLENGE_BOING',
+  CHALLENGE_DADA: 'CHALLENGE_DADA',
+  CHALLENGE_YODA: 'CHALLENGE_YODA',
+}
+
 export const DEFAULT_LIVES = 3
 export const MAX_LIVES = 9
 export const TOP_BORDER_HEIGHT = 0
@@ -98,6 +107,7 @@ export const IMG_URLS = {
   BACKGROUND_3: '/img/bg-texture-3.png',
   BACKGROUND_4: '/img/bg-texture-4.png',
   BACKGROUND_5: '/img/bg-texture-5.png',
+  MENU_BUTTON: '/img/button.png',
   BALL: '/img/ball.png',
   RED_BALL: '/img/red-ball.png',
   PADDLE: '/img/paddle.png',

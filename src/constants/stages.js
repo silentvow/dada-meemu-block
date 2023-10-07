@@ -418,6 +418,15 @@ export const STAGE_MAPS = [
   STAGE_15_MAP,
 ]
 
+// FIXME: remove this
 STAGE_MAPS.forEach((map, i) => {
   console.log(map.join('').split('').reduce((acc, cur) => { return isNaN(parseInt(cur)) ? acc : acc + parseInt(cur) }, 0))
 })
+
+export const STORY_STAGE_MAPS = [
+  STAGE_1_MAP,
+  STAGE_2_MAP,
+  STAGE_3_MAP,
+  STAGE_4_MAP,
+  STAGE_5_MAP,
+]

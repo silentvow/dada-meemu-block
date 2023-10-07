@@ -71,15 +71,16 @@ function MainGame ({ app }) {
     items,
     paddle,
     mainLoop,
-    onMouseMove,
-    onClick,
+    onGameMouseMove,
+    onGameClick,
   } = useGame(state => state)
   useEffect(() => {
     reset()
   }, [reset])
 
   useTick((delta, ticker) => {
-    mainLoop()
+    console.log({ delta, ticker })
+    mainLoop(delta)
   })
 
   return (
@@ -89,8 +90,8 @@ function MainGame ({ app }) {
       width={SCREEN_WIDTH}
       height={SCREEN_HEIGHT}
       eventMode='static'
-      onmousemove={onMouseMove}
-      onclick={onClick}
+      onmousemove={onGameMouseMove}
+      onclick={onGameClick}
       hitArea={hitArea}
     >
       {blocks.map(block => {
