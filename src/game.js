@@ -64,6 +64,7 @@ import {
   TOP_BORDER_HEIGHT,
 } from './constants/game'
 import { BLOCK_CHAR_MAP, FULL_STAGE_MAPS, STORY_STAGE_MAPS } from './constants/stages'
+import { STORY_CHAPTER_1 } from './constants/story'
 
 export const useGame = create(
   immer((set, get) => ({
@@ -80,6 +81,8 @@ export const useGame = create(
     stage: 0,
     stageMaps: [],
     knownItems: [],
+    chapter: [],
+    sceneIndex: 0,
 
     reset: () => {
       set(state => {
@@ -93,7 +96,6 @@ export const useGame = create(
           state.stageMaps = FULL_STAGE_MAPS
         }
       })
-      get().enterStage(0)
     },
 
     enterMainMenu: () => {
@@ -101,9 +103,12 @@ export const useGame = create(
     },
 
     enterStoryMode: () => {
+      get().reset()
       set(state => {
         state.mode = GAME_MODE.STORY
         state.state = GAME_STATE.STORY
+        state.chapter = STORY_CHAPTER_1
+        state.sceneIndex = 0
       })
     },
 
@@ -132,6 +137,7 @@ export const useGame = create(
 
     enterGame: () => {
       get().reset()
+      get().enterStage(0)
       set(state => { state.state = GAME_STATE.READY })
     },
 
@@ -668,6 +674,15 @@ export const useGame = create(
         default:
           console.warn('unknown item', item)
           break
+      }
+    },
+
+    gotoNextScene: () => {
+      const { chapter, sceneIndex, stage, enterStage } = get()
+      if (sceneIndex + 1 >= chapter.length) {
+        enterStage(stage)
+      } else {
+        set(state => { state.sceneIndex += 1 })
       }
     },
 

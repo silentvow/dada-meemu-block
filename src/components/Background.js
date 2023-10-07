@@ -1,4 +1,5 @@
-import { IMG_URLS, SCREEN_HEIGHT, SCREEN_WIDTH } from '@/constants/game'
+import { SCREEN_HEIGHT, SCREEN_WIDTH } from '@/constants/game'
+import { IMG_URLS } from '@/constants/image'
 import { TilingSprite } from '@pixi/react'
 
 const LINE_HEIGHT = 64

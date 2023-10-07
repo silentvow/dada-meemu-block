@@ -7,12 +7,14 @@ import GameMenu from '@/components/GameMenu'
 import MainGame from '@/components/MainGame'
 import Readme from '@/components/Readme'
 import Scoreboard from '@/components/Scoreboard'
+import Storyboard from '@/components/Storyboard'
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
 } from '@/components/ui/avatar'
-import { GAME_STATE, IMG_URLS, SCREEN_HEIGHT, SCREEN_WIDTH, TOP_BORDER_HEIGHT } from '@/constants/game'
+import { GAME_STATE, SCREEN_HEIGHT, SCREEN_WIDTH, TOP_BORDER_HEIGHT } from '@/constants/game'
+import { IMG_URLS } from '@/constants/image'
 import { FONT_TEST_STRING } from '@/constants/text'
 import { useGame } from '@/game'
 import { useEffect, useState } from 'react'
@@ -100,6 +102,7 @@ function Home () {
                   {state === GAME_STATE.MAIN_MENU && <GameMenu />}
                   {state === GAME_STATE.README && <Readme />}
                   {state === GAME_STATE.SCOREBOARD && <Scoreboard />}
+                  {state === GAME_STATE.STORY && <Storyboard />}
                 </FilterContainer>
               </Stage>)
             : (

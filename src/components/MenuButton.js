@@ -1,4 +1,4 @@
-import { IMG_URLS } from '@/constants/game'
+import { IMG_URLS } from '@/constants/image'
 import { Container, Sprite, Text, withFilters } from '@pixi/react'
 import { ColorMatrixFilter, TextStyle } from 'pixi.js'
 
