@@ -1,10 +1,12 @@
 import { Container, Stage, withFilters } from '@pixi/react'
 import Link from 'next/link'
-import { Assets, filters } from 'pixi.js'
+import { Assets, ColorMatrixFilter } from 'pixi.js'
 
 import Background from '@/components/Background'
 import GameMenu from '@/components/GameMenu'
 import MainGame from '@/components/MainGame'
+import Readme from '@/components/Readme'
+import Scoreboard from '@/components/Scoreboard'
 import {
   Avatar,
   AvatarFallback,
@@ -18,7 +20,7 @@ import { useEffect, useState } from 'react'
 Object.entries(IMG_URLS).forEach(([key, url]) => Assets.add(key, url))
 
 const FilterContainer = withFilters(Container, {
-  matrix: filters.ColorMatrixFilter,
+  matrix: ColorMatrixFilter,
 })
 
 function Home () {
@@ -93,13 +95,15 @@ function Home () {
                   }}
                 >
                   <Background />
-                  {state !== GAME_STATE.MENU && <MainGame />}
+                  {[GAME_STATE.READY, GAME_STATE.PLAYING, GAME_STATE.STAGE_CLEAR, GAME_STATE.STAGE_FAILED, GAME_STATE.GAME_OVER].includes(state) && <MainGame />}
 
-                  {state === GAME_STATE.MENU && <GameMenu />}
+                  {state === GAME_STATE.MAIN_MENU && <GameMenu />}
+                  {state === GAME_STATE.README && <Readme />}
+                  {state === GAME_STATE.SCOREBOARD && <Scoreboard />}
                 </FilterContainer>
               </Stage>)
             : (
-              <div className='w-[1280px] h-[960px] text-6xl flex justify-center items-center'>
+              <div className='w-[1280px] h-[960px] text-[#423934] font-comic text-[96px] flex justify-center items-center bg-[url("/img/bg1.png")]'>
                 Loading...
               </div>
               )}

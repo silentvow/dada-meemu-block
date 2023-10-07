@@ -1,6 +1,6 @@
 import { IMG_URLS } from '@/constants/game'
-import { Container, Sprite, Text } from '@pixi/react'
-import { TextStyle } from 'pixi.js'
+import { Container, Sprite, Text, withFilters } from '@pixi/react'
+import { ColorMatrixFilter, TextStyle } from 'pixi.js'
 
 const menuStyle = new TextStyle({
   align: 'left',
@@ -11,12 +11,25 @@ const menuStyle = new TextStyle({
   lineHeight: 80,
 })
 
-function MenuButton ({ x, y, text, tooltip, onClick }) {
+const FilterContainer = withFilters(Container, {
+  matrix: ColorMatrixFilter,
+})
+
+function MenuButton ({ x, y, text, disabled, onClick }) {
   return (
-    <Container x={x} y={y}>
-      <Sprite x={0} y={0} width={320} height={80} scale={{ x: 320 / 380, y: 80 / 95 }} image={IMG_URLS.MENU_BUTTON} eventMode='static' onclick={onClick} />
-      <Text x={45} y={0} text={text} style={menuStyle} eventMode='static' onclick={onClick} />
-    </Container>
+    <FilterContainer
+      x={x}
+      y={y}
+      matrix={{ enabled: true }}
+      apply={({ matrix }) => {
+        matrix.reset()
+        if (disabled) { matrix.desaturate() }
+        return matrix
+      }}
+    >
+      <Sprite x={0} y={0} width={320} height={80} scale={{ x: 320 / 380, y: 80 / 95 }} image={IMG_URLS.MENU_BUTTON} eventMode='static' onclick={disabled ? null : onClick} />
+      <Text x={45} y={0} text={text} style={menuStyle} eventMode='static' onclick={disabled ? null : onClick} />
+    </FilterContainer>
   )
 }
 

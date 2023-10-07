@@ -53,11 +53,11 @@ import {
   SPEED_MULTIPLIER,
   TOP_BORDER_HEIGHT,
 } from './constants/game'
-import { BLOCK_CHAR_MAP, STAGE_MAPS } from './constants/stages'
+import { BLOCK_CHAR_MAP, FULL_STAGE_MAPS, STORY_STAGE_MAPS } from './constants/stages'
 
 export const useGame = create(
   immer((set, get) => ({
-    state: GAME_STATE.MENU,
+    state: GAME_STATE.MAIN_MENU,
     mode: GAME_MODE.STORY,
     money: 0,
     displayMoney: 0,
@@ -68,14 +68,55 @@ export const useGame = create(
     bullets: [],
     paddle: { x: 0, y: 0, width: 0, height: 0, bullet: 0 },
     stage: 0,
+    stageMaps: [],
 
     reset: () => {
       set(state => {
         state.money = 0
         state.displayMoney = 0
         state.life = DEFAULT_LIVES
+
+        if (state.mode === GAME_MODE.STORY) {
+          state.stageMaps = STORY_STAGE_MAPS
+        } else {
+          state.stageMaps = FULL_STAGE_MAPS
+        }
       })
       get().enterStage(0)
+    },
+
+    enterMainMenu: () => {
+      set(state => { state.state = GAME_STATE.MAIN_MENU })
+    },
+
+    enterStoryMode: () => {
+      set(state => {
+        state.mode = GAME_MODE.STORY
+        state.state = GAME_STATE.STORY
+      })
+    },
+
+    enterDadaChallengeMode: () => {
+      set(state => { state.mode = GAME_MODE.CHALLENGE_DADA })
+      get().enterGame()
+    },
+
+    enterYodaChallengeMode: () => {
+      set(state => { state.mode = GAME_MODE.CHALLENGE_YODA })
+      get().enterGame()
+    },
+
+    enterRealChallengeMode: () => {
+      set(state => { state.mode = GAME_MODE.CHALLENGE_REAL })
+      get().enterGame()
+    },
+
+    enterReadme: () => {
+      set(state => { state.state = GAME_STATE.README })
+    },
+
+    enterScoreboard: () => {
+      set(state => { state.state = GAME_STATE.SCOREBOARD })
     },
 
     enterGame: () => {
@@ -86,7 +127,7 @@ export const useGame = create(
     setupBlocks: (stage) => {
       set(state => {
         state.blocks = []
-        const stageMap = STAGE_MAPS[stage]
+        const stageMap = state.stageMaps[stage]
         for (let y = 0; y < stageMap.length; y++) {
           const line = stageMap[y]
           for (let x = 0; x < line.length; x++) {
@@ -181,12 +222,13 @@ export const useGame = create(
     enterEndPage: () => {},
 
     enterNextStage: () => {
-      if (get().stage + 1 >= STAGE_MAPS.length) {
-        get().enterEndPage()
+      const { stage, stageMaps, enterStage, enterEndPage } = get()
+      if (stage + 1 >= stageMaps.length) {
+        enterEndPage()
         return
       }
       set(state => { state.life = Math.min(MAX_LIVES, state.life + 1) })
-      get().enterStage(get().stage + 1)
+      enterStage(stage + 1)
     },
 
     updateMoney: () => {
@@ -273,11 +315,10 @@ export const useGame = create(
     },
 
     failStage: () => {
-      set(state => {
-        state.state = GAME_STATE.STAGE_FAILED
-        state.life -= 1
-      })
-      if (get().life === 0) {
+      set(state => { state.state = GAME_STATE.STAGE_FAILED })
+      if (get().life > 0) {
+        set(state => { state.life -= 1 })
+      } else {
         get().gameOver()
       }
     },
@@ -679,7 +720,7 @@ export const useGame = create(
       }
 
       if (get().state === GAME_STATE.GAME_OVER) {
-        set(state => { state.state = GAME_STATE.MENU })
+        set(state => { state.state = GAME_STATE.MAIN_MENU })
         return
       }
 
