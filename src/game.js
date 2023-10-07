@@ -23,6 +23,7 @@ import {
   DEBUFF_ITEMS,
   DEFAULT_LIVES,
   DEFAULT_SPEED,
+  DELTA_UNIT,
   DROP_RATIO_BUFF,
   DROP_RATIO_DEBUFF,
   DROP_RATIO_MONEY_LG,
@@ -241,20 +242,20 @@ export const useGame = create(
       }
     },
 
-    updateBullets: () => {
+    updateBullets: (delta) => {
       set(state => {
         for (let i = 0; i < state.bullets.length; ++i) {
-          state.bullets[i].y -= BULLET_SPEED
+          state.bullets[i].y -= BULLET_SPEED * delta / DELTA_UNIT
         }
         state.bullets = state.bullets.filter(bullet => bullet.y > 0).filter(bullet => !bullet.hit)
       })
     },
 
-    updateItems: () => {
+    updateItems: (delta) => {
       get().items.forEach(item => { if (item.catch) get().catchItem(item.item) })
       set(state => {
         for (let i = 0; i < state.items.length; ++i) {
-          state.items[i].y += state.items[i].vy
+          state.items[i].y += state.items[i].vy * delta / DELTA_UNIT
         }
         state.items = state.items.filter(item => item.y < SCREEN_HEIGHT).filter(item => !item.catch)
       })
@@ -263,7 +264,7 @@ export const useGame = create(
     updatePaddle: () => {
     },
 
-    updateBalls: () => {
+    updateBalls: (delta) => {
       if (get().state === GAME_STATE.READY) {
         set(state => {
           for (let i = 0; i < state.balls.length; ++i) {
@@ -282,9 +283,9 @@ export const useGame = create(
       for (let i = 0; i < get().balls.length; ++i) {
         set(state => {
           state.balls[i].px = state.balls[i].x
-          state.balls[i].x += state.balls[i].vx
+          state.balls[i].x += state.balls[i].vx * delta / DELTA_UNIT
           state.balls[i].py = state.balls[i].y
-          state.balls[i].y += state.balls[i].vy
+          state.balls[i].y += state.balls[i].vy * delta / DELTA_UNIT
           state.balls[i].angle += 1
           if (state.balls[i].angle > 360) state.balls[i].angle = 0
         })
@@ -579,7 +580,7 @@ export const useGame = create(
           break
         case ITEM.PADDLE_PLUS:
           set(state => {
-            state.paddle.width = Math.max(PADDLE_MAX_WIDTH, state.paddle.width + PADDLE_UNIT_WIDTH)
+            state.paddle.width = Math.min(PADDLE_MAX_WIDTH, state.paddle.width + PADDLE_UNIT_WIDTH)
           })
           break
         case ITEM.PADDLE_MINUS:
@@ -641,21 +642,21 @@ export const useGame = create(
           })
           break
         default:
-          console.log('unknown item', item)
+          console.warn('unknown item', item)
           break
       }
     },
 
-    mainLoop: () => {
+    mainLoop: (delta) => {
       switch (get().state) {
         case GAME_STATE.READY:
-          get().updateBalls()
+          get().updateBalls(delta)
           break
         case GAME_STATE.PLAYING:
           get().updateMoney()
-          get().updateBullets()
-          get().updateItems()
-          get().updateBalls()
+          get().updateBullets(delta)
+          get().updateItems(delta)
+          get().updateBalls(delta)
           get().detectCollision()
           get().updateStage()
           break
@@ -724,7 +725,7 @@ export const useGame = create(
         return
       }
 
-      console.log('unknown state')
+      console.warn('unknown state')
     },
   })),
 )

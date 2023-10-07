@@ -79,7 +79,6 @@ function MainGame ({ app }) {
   }, [reset])
 
   useTick((delta, ticker) => {
-    console.log({ delta, ticker })
     mainLoop(delta)
   })
 

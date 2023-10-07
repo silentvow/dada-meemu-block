@@ -57,6 +57,7 @@ export const BULLET_IMG_HEIGHT = 64
 export const BULLET_DEFAULT_COUNT = 5
 export const BULLET_MAX_COUNT = 99
 export const BULLET_RELOAD_COUNT = 10
+export const DELTA_UNIT = 0.42
 
 export const DROP_RATIO_BUFF = 0.1
 export const DROP_RATIO_DEBUFF = 0.1
