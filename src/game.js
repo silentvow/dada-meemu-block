@@ -5,6 +5,8 @@ import { immer } from 'zustand/middleware/immer'
 
 import {
   ACCELERATION,
+  BALL_ATK,
+  BALL_COLOR,
   BALL_DEFAULT_RADIUS,
   BALL_MAX_RADIUS,
   BALL_MIN_RADIUS,
@@ -13,6 +15,7 @@ import {
   BLOCK_HP,
   BLOCK_WIDTH,
   BUFF_ITEMS,
+  BULLET_ATK,
   BULLET_DEFAULT_COUNT,
   BULLET_HEIGHT,
   BULLET_MAX_COUNT,
@@ -49,6 +52,12 @@ import {
   PADDLE_MAX_WIDTH,
   PADDLE_MIN_WIDTH,
   PADDLE_UNIT_WIDTH,
+  PADDLE_YODA_DEFAULT_WIDTH,
+  PADDLE_YODA_MAX_WIDTH,
+  PADDLE_YODA_MIN_WIDTH,
+  REAL_BUFF_ITEMS,
+  REAL_DEBUFF_ITEMS,
+  REAL_DEFAULT_SPEED,
   SCREEN_HEIGHT,
   SCREEN_WIDTH,
   SPEED_MULTIPLIER,
@@ -70,6 +79,7 @@ export const useGame = create(
     paddle: { x: 0, y: 0, width: 0, height: 0, bullet: 0 },
     stage: 0,
     stageMaps: [],
+    knownItems: [],
 
     reset: () => {
       set(state => {
@@ -146,8 +156,14 @@ export const useGame = create(
         }
 
         const items = []
-        const buffItems = BUFF_ITEMS.concat([ITEM.UNKNOWN])
-        const debuffItems = DEBUFF_ITEMS.concat([ITEM.UNKNOWN])
+        let buffItems = BUFF_ITEMS.concat([ITEM.UNKNOWN])
+        let debuffItems = DEBUFF_ITEMS.concat([ITEM.UNKNOWN])
+        if (state.mode === GAME_MODE.CHALLENGE_REAL) {
+          buffItems = REAL_BUFF_ITEMS.concat([ITEM.UNKNOWN])
+          debuffItems = REAL_DEBUFF_ITEMS.concat([ITEM.UNKNOWN])
+        }
+        state.knownItems = [...buffItems, ...debuffItems].filter(item => item !== ITEM.UNKNOWN)
+
         for (let i = 0; i < state.blocks.length * DROP_RATIO_BUFF; ++i) {
           items.push(buffItems[Math.floor(Math.random() * buffItems.length)])
         }
@@ -190,9 +206,9 @@ export const useGame = create(
         state.paddle = {
           x: PADDLE_DEFAULT_X,
           y: PADDLE_DEFAULT_Y,
-          width: PADDLE_DEFAULT_WIDTH,
+          width: state.mode === GAME_MODE.CHALLENGE_YODA ? PADDLE_YODA_DEFAULT_WIDTH : PADDLE_DEFAULT_WIDTH,
           height: PADDLE_HEIGHT,
-          bullet: BULLET_DEFAULT_COUNT,
+          bullet: state.mode === GAME_MODE.CHALLENGE_REAL ? 0 : BULLET_DEFAULT_COUNT,
         }
 
         /* setup ball */
@@ -207,6 +223,7 @@ export const useGame = create(
             y: ballY,
             vx: 0,
             vy: 0,
+            color: BALL_COLOR.BLUE,
             radius: BALL_DEFAULT_RADIUS,
             lived: true,
             angle: 0,
@@ -348,7 +365,7 @@ export const useGame = create(
             set(state => {
               state.bullets[i].hit = true
             })
-            get().damageBlock(j, 1)
+            get().damageBlock(j, BULLET_ATK)
           }
         }
       }
@@ -463,7 +480,7 @@ export const useGame = create(
           }
 
           if (isBlockHit) {
-            get().damageBlock(j, balls[i].red ? 3 : 1)
+            get().damageBlock(j, BALL_ATK[balls[i].color])
           }
         }
 
@@ -529,11 +546,11 @@ export const useGame = create(
       set(state => {
         const block = state.blocks[blockIdx]
         block.hp -= damage
-        if (block.type === BLOCK.NORMAL_2 && block.hp < 2) {
+        if (block.type === BLOCK.NORMAL_2 && block.hp < BLOCK_HP[BLOCK.NORMAL_2] - BALL_ATK[BALL_COLOR.BLACK]) {
           block.type = BLOCK.NORMAL_2_1
-        } else if (block.type === BLOCK.NORMAL_3 && block.hp < 3) {
+        } else if (block.type === BLOCK.NORMAL_3 && block.hp < BLOCK_HP[BLOCK.NORMAL_3] - BALL_ATK[BALL_COLOR.BLACK]) {
           block.type = BLOCK.NORMAL_3_1
-        } else if (block.type === BLOCK.NORMAL_3_1 && block.hp < 2) {
+        } else if (block.type === BLOCK.NORMAL_3_1 && block.hp < BLOCK_HP[BLOCK.NORMAL_2] - BALL_ATK[BALL_COLOR.BLACK]) {
           block.type = BLOCK.NORMAL_3_2
         }
         state.blocks[blockIdx] = block
@@ -567,10 +584,10 @@ export const useGame = create(
     },
 
     catchItem: (item) => {
+      const { catchItem, knownItems } = get()
       switch (item) {
         case ITEM.UNKNOWN: {
-          const allItems = [...BUFF_ITEMS, ...DEBUFF_ITEMS]
-          get().catchItem(allItems[Math.floor(Math.random() * allItems.length)])
+          catchItem(knownItems[Math.floor(Math.random() * knownItems.length)])
           break
         }
         case ITEM.BULLET_PACK:
@@ -580,12 +597,14 @@ export const useGame = create(
           break
         case ITEM.PADDLE_PLUS:
           set(state => {
-            state.paddle.width = Math.min(PADDLE_MAX_WIDTH, state.paddle.width + PADDLE_UNIT_WIDTH)
+            const maxWidth = state.mode === GAME_MODE.CHALLENGE_YODA ? PADDLE_YODA_MAX_WIDTH : PADDLE_MAX_WIDTH
+            state.paddle.width = Math.min(maxWidth, state.paddle.width + PADDLE_UNIT_WIDTH)
           })
           break
         case ITEM.PADDLE_MINUS:
           set(state => {
-            state.paddle.width = Math.max(PADDLE_MIN_WIDTH, state.paddle.width - PADDLE_UNIT_WIDTH)
+            const minWidth = state.mode === GAME_MODE.CHALLENGE_YODA ? PADDLE_YODA_MIN_WIDTH : PADDLE_MIN_WIDTH
+            state.paddle.width = Math.max(minWidth, state.paddle.width - PADDLE_UNIT_WIDTH)
           })
           break
         case ITEM.BALL_DOUBLE: {
@@ -596,12 +615,17 @@ export const useGame = create(
         } break
         case ITEM.BALL_RED:
           set(state => {
-            state.balls = state.balls.map(ball => ({ ...ball, red: true }))
+            state.balls = state.balls.map(ball => ({ ...ball, color: BALL_COLOR.RED }))
           })
           break
         case ITEM.BALL_BLUE:
           set(state => {
-            state.balls = state.balls.map(ball => ({ ...ball, red: false }))
+            state.balls = state.balls.map(ball => ({ ...ball, color: BALL_COLOR.BLUE }))
+          })
+          break
+        case ITEM.BALL_BLACK:
+          set(state => {
+            state.balls = state.balls.map(ball => ({ ...ball, color: BALL_COLOR.BLACK }))
           })
           break
         case ITEM.BALL_LARGE:
@@ -688,9 +712,10 @@ export const useGame = create(
     onGameClick: () => {
       if (get().state === GAME_STATE.READY) {
         set(state => {
+          const speed = state.mode === GAME_MODE.CHALLENGE_REAL ? REAL_DEFAULT_SPEED : DEFAULT_SPEED
           state.state = GAME_STATE.PLAYING
-          state.balls[0].vx = DEFAULT_SPEED * Math.cos(Math.PI / 3)
-          state.balls[0].vy = -DEFAULT_SPEED * Math.sin(Math.PI / 3)
+          state.balls[0].vx = speed * Math.cos(Math.PI / 3)
+          state.balls[0].vy = -speed * Math.sin(Math.PI / 3)
         })
         return
       }

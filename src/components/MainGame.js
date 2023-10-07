@@ -27,7 +27,6 @@ const hitArea = {
 const titleStyle = {
   fill: '#fff',
   fontSize: 84,
-  // fontFamily: '"Wellfleet", serif',
   fontFamily: '"Sono", sans-serif',
   stroke: '#000',
   strokeThickness: 8,
@@ -37,7 +36,6 @@ const titleStyle = {
 const footerStyle = {
   fill: '#fff',
   fontSize: 36,
-  // fontFamily: '"Wellfleet", serif',
   fontFamily: '"Sono", sans-serif',
   stroke: '#000',
   strokeThickness: 4,
@@ -123,7 +121,7 @@ function MainGame ({ app }) {
             scale={{ x: ball.radius / BALL_IMAGE_RADIUS, y: ball.radius / BALL_IMAGE_RADIUS }}
             angle={ball.angle}
             anchor={[0.5, 0.5]}
-            image={ball.red ? IMG_URLS.RED_BALL : IMG_URLS.BALL}
+            image={IMG_URLS[ball.color]}
           />
         )
       })}

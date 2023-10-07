@@ -29,10 +29,13 @@ export const ITEM_WIDTH = 48
 export const ITEM_HEIGHT = 48
 export const PADDLE_DEFAULT_X = 600
 export const PADDLE_DEFAULT_Y = 900
-export const PADDLE_DEFAULT_WIDTH = 192
+export const PADDLE_DEFAULT_WIDTH = 192 // 64 + 64 + 64
 export const PADDLE_UNIT_WIDTH = 64
 export const PADDLE_MIN_WIDTH = 64
 export const PADDLE_MAX_WIDTH = 384
+export const PADDLE_YODA_DEFAULT_WIDTH = 128
+export const PADDLE_YODA_MIN_WIDTH = 64
+export const PADDLE_YODA_MAX_WIDTH = 128
 export const PADDLE_HEIGHT = 32
 export const PADDLE_IMG_WIDTH = 256
 export const PADDLE_IMG_HEIGHT = 73
@@ -43,11 +46,13 @@ export const BALL_MAX_RADIUS = 56
 export const BALL_UNIT_RADIUS = 16
 export const ACCELERATION = 1.01
 export const DEFAULT_SPEED = 5
+export const REAL_DEFAULT_SPEED = 7.5
 export const SPEED_MULTIPLIER = 1.5
 export const MIN_SPEED = 3
 export const MAX_SPEED = 20
 export const ITEM_DROP_SPEED_FROM = 2
 export const ITEM_DROP_SPEED_TO = 4
+export const BULLET_ATK = 2
 export const BULLET_SPEED = 5
 export const BULLET_WIDTH = 30
 export const BULLET_HEIGHT = 40
@@ -78,29 +83,42 @@ export const BLOCK = {
 }
 
 export const BLOCK_HP = {
-  [BLOCK.NORMAL_1]: 1,
-  [BLOCK.NORMAL_2]: 2,
-  [BLOCK.NORMAL_3]: 3,
+  [BLOCK.NORMAL_1]: 2,
+  [BLOCK.NORMAL_2]: 4,
+  [BLOCK.NORMAL_3]: 6,
   [BLOCK.STONE]: Infinity,
 }
 
+export const BALL_COLOR = {
+  BLUE: 'BALL_COLOR_BLUE',
+  RED: 'BALL_COLOR_RED',
+  BLACK: 'BALL_COLOR_BLACK',
+}
+
+export const BALL_ATK = {
+  [BALL_COLOR.BLUE]: 2,
+  [BALL_COLOR.RED]: 6,
+  [BALL_COLOR.BLACK]: 1,
+}
+
 export const ITEM = {
-  BULLET_PACK: 'BULLET_PACK',
-  PADDLE_PLUS: 'PADDLE_PLUS',
-  PADDLE_MINUS: 'PADDLE_MINUS',
-  BALL_DOUBLE: 'BALL_DOUBLE',
-  BALL_RED: 'BALL_RED',
-  BALL_BLUE: 'BALL_BLUE',
-  BALL_LARGE: 'BALL_LARGE',
-  BALL_SMALL: 'BALL_SMALL',
-  SPEED_PLUS: 'SPEED_PLUS',
-  SPEED_MINUS: 'SPEED_MINUS',
-  UNKNOWN: 'UNKNOWN',
-  MONEY_XS: 'MONEY_XS',
-  MONEY_SM: 'MONEY_SM',
-  MONEY_MD: 'MONEY_MD',
-  MONEY_LG: 'MONEY_LG',
-  MONEY_XL: 'MONEY_XL',
+  BULLET_PACK: 'ITEM_BULLET_PACK',
+  PADDLE_PLUS: 'ITEM_PADDLE_PLUS',
+  PADDLE_MINUS: 'ITEM_PADDLE_MINUS',
+  BALL_DOUBLE: 'ITEM_BALL_DOUBLE',
+  BALL_RED: 'ITEM_BALL_RED',
+  BALL_BLUE: 'ITEM_BALL_BLUE',
+  BALL_BLACK: 'ITEM_BALL_BLACK',
+  BALL_LARGE: 'ITEM_BALL_LARGE',
+  BALL_SMALL: 'ITEM_BALL_SMALL',
+  SPEED_PLUS: 'ITEM_SPEED_PLUS',
+  SPEED_MINUS: 'ITEM_SPEED_MINUS',
+  UNKNOWN: 'ITEM_UNKNOWN',
+  MONEY_XS: 'ITEM_MONEY_XS',
+  MONEY_SM: 'ITEM_MONEY_SM',
+  MONEY_MD: 'ITEM_MONEY_MD',
+  MONEY_LG: 'ITEM_MONEY_LG',
+  MONEY_XL: 'ITEM_MONEY_XL',
 }
 
 export const IMG_URLS = {
@@ -111,11 +129,12 @@ export const IMG_URLS = {
   BACKGROUND_4: '/img/bg-texture-4.png',
   BACKGROUND_5: '/img/bg-texture-5.png',
   MENU_BUTTON: '/img/button.png',
-  BALL: '/img/ball.png',
-  RED_BALL: '/img/red-ball.png',
   PADDLE: '/img/paddle.png',
   BULLET: '/img/fire-ball.png',
   HEART: '/img/heart.png',
+  [BALL_COLOR.BLUE]: '/img/ball.png',
+  [BALL_COLOR.RED]: '/img/red-ball.png',
+  [BALL_COLOR.BLACK]: '/img/black-ball.png',
   [BLOCK.NORMAL_1]: '/img/box1.png',
   [BLOCK.NORMAL_2]: '/img/box2.png',
   [BLOCK.NORMAL_2_1]: '/img/box2-1.png',
@@ -129,6 +148,7 @@ export const IMG_URLS = {
   [ITEM.BALL_DOUBLE]: '/img/double.png',
   [ITEM.BALL_RED]: '/img/blood-drop.png',
   [ITEM.BALL_BLUE]: '/img/water-drop.png',
+  [ITEM.BALL_BLACK]: '/img/ink-drop.png',
   [ITEM.BALL_LARGE]: '/img/zoom-in.png',
   [ITEM.BALL_SMALL]: '/img/zoom-out.png',
   [ITEM.SPEED_PLUS]: '/img/fast.png',
@@ -154,8 +174,13 @@ export const DEBUFF_ITEMS = [
   ITEM.PADDLE_MINUS,
   ITEM.BALL_SMALL,
   ITEM.BALL_BLUE,
+  ITEM.BALL_BLACK,
   ITEM.SPEED_PLUS,
 ]
+
+export const REAL_BUFF_ITEMS = BUFF_ITEMS.filter(item => ![ITEM.BULLET_PACK, ITEM.PADDLE_PLUS].includes(item))
+
+export const REAL_DEBUFF_ITEMS = DEBUFF_ITEMS.filter(item => item !== ITEM.PADDLE_MINUS)
 
 export const MONEY_VALUES = {
   [ITEM.MONEY_XS]: 1000,
