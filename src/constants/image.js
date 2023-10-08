@@ -1,5 +1,10 @@
 import { BALL_COLOR, BLOCK, ITEM } from './game'
 
+export const IMG_KEY = {
+  OFFICE: 'OFFICE',
+  WALL: 'WALL',
+}
+
 export const IMG_URLS = {
   COVER: 'https://placehold.co/1920x1080',
   BACKGROUND_1: '/img/bg-texture-1.png',
@@ -38,4 +43,11 @@ export const IMG_URLS = {
   [ITEM.MONEY_MD]: '/img/coin-gold.png',
   [ITEM.MONEY_LG]: '/img/dollar1.png',
   [ITEM.MONEY_XL]: '/img/dollar6.png',
+  [IMG_KEY.OFFICE]: '/img/bg-doujou.jpg',
+  [IMG_KEY.WALL]: '/img/bg-wall.jpg',
+}
+
+export const SPRITE = {
+  [IMG_KEY.OFFICE]: { x: 0, y: 0, width: 1200, height: 675, scale: { x: 1200 / 1920, y: 675 / 1080 }, image: IMG_URLS[IMG_KEY.OFFICE] },
+  [IMG_KEY.WALL]: { x: 0, y: 0, width: 1200, height: 675, scale: { x: 1200 / 1920, y: 675 / 1080 }, image: IMG_URLS[IMG_KEY.WALL] },
 }
