@@ -708,8 +708,9 @@ export const useGame = create(
     },
 
     submitScoreAndCloseModal: (name) => {
-      console.log('submit', { score: get().money, name })
-      get().closeSubmitModal()
+      const { id, money, closeSubmitModal } = get()
+      console.log('submit', { id, name, score: money })
+      closeSubmitModal()
     },
 
     openSubmitModal: () => {
