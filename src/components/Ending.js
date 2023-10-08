@@ -62,11 +62,11 @@ function getResultOf ({ mode, money }) {
 }
 
 function Ending () {
-  const { mode, money, submitScore, enterMainMenu } = useGame(state => ({
+  const { mode, money, enterMainMenu, openSubmitModal } = useGame(state => ({
     mode: state.mode,
     money: state.money,
-    submitScore: state.submitScore,
     enterMainMenu: state.enterMainMenu,
+    openSubmitModal: state.openSubmitModal,
   }))
   const [mask, setMask] = useState(null)
   const refMask = useRef(null)
@@ -87,7 +87,7 @@ function Ending () {
         style={textStyle}
       />
       <Container x={760} y={695}>
-        <MenuButton x={0} y={30} text='提交紀錄' onClick={submitScore} />
+        <MenuButton x={0} y={30} text='提交紀錄' onClick={openSubmitModal} />
         <MenuButton x={0} y={140} text='返回首頁' onClick={enterMainMenu} />
       </Container>
       <Graphics ref={refMask} preventRedraw draw={drawMask} />

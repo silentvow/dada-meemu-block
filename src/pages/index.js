@@ -9,6 +9,7 @@ import MainGame from '@/components/MainGame'
 import Readme from '@/components/Readme'
 import Scoreboard from '@/components/Scoreboard'
 import Storyboard from '@/components/Storyboard'
+import SubmitDialog from '@/components/SubmitDialog'
 import {
   Avatar,
   AvatarFallback,
@@ -31,8 +32,14 @@ function Home () {
   const [assetsLoaded, setAssetsLoaded] = useState(false)
   const {
     state,
+    showSubmitModal,
+    closeSubmitModal,
+    submitScoreAndCloseModal,
   } = useGame(state => ({
     state: state.state,
+    showSubmitModal: state.showSubmitModal,
+    closeSubmitModal: state.closeSubmitModal,
+    submitScoreAndCloseModal: state.submitScoreAndCloseModal,
   }))
 
   useEffect(() => {
@@ -112,6 +119,7 @@ function Home () {
                 Loading...
               </div>
               )}
+          <SubmitDialog open={showSubmitModal} onSubmit={submitScoreAndCloseModal} onClose={closeSubmitModal} />
         </div>
       </div>
     </div>

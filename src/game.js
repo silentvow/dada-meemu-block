@@ -84,6 +84,7 @@ export const useGame = create(
     knownItems: [],
     chapter: [],
     sceneIndex: 0,
+    showSubmitModal: false,
 
     reset: () => {
       set(state => {
@@ -706,7 +707,17 @@ export const useGame = create(
       set(state => { state.sceneIndex += 1 })
     },
 
-    submitScore: () => {
+    submitScoreAndCloseModal: (name) => {
+      console.log('submit', { score: get().money, name })
+      get().closeSubmitModal()
+    },
+
+    openSubmitModal: () => {
+      set(state => { state.showSubmitModal = true })
+    },
+
+    closeSubmitModal: () => {
+      set(state => { state.showSubmitModal = false })
     },
 
     mainLoop: (delta) => {
