@@ -3,6 +3,8 @@ import { BALL_COLOR, BLOCK, ITEM } from './game'
 export const IMG_KEY = {
   OFFICE: 'OFFICE',
   WALL: 'WALL',
+  CAVE: 'CAVE',
+  BREAK_WALL: 'BREAK_WALL',
 }
 
 export const IMG_URLS = {
@@ -45,9 +47,11 @@ export const IMG_URLS = {
   [ITEM.MONEY_XL]: '/img/dollar6.png',
   [IMG_KEY.OFFICE]: '/img/bg-doujou.jpg',
   [IMG_KEY.WALL]: '/img/bg-wall.jpg',
+  [IMG_KEY.BREAK_WALL]: '/img/bg-break-wall.jpg',
 }
 
 export const SPRITE = {
   [IMG_KEY.OFFICE]: { x: 40, y: 10, width: 1200, height: 675, scale: { x: 1200 / 1920, y: 675 / 1080 }, image: IMG_URLS[IMG_KEY.OFFICE] },
   [IMG_KEY.WALL]: { x: 40, y: 10, width: 1200, height: 675, scale: { x: 1200 / 600, y: 675 / 338 }, image: IMG_URLS[IMG_KEY.WALL] },
+  [IMG_KEY.BREAK_WALL]: { x: 40, y: 10, width: 1200, height: 675, scale: { x: 1200 / 600, y: 675 / 338 }, image: IMG_URLS[IMG_KEY.BREAK_WALL] },
 }

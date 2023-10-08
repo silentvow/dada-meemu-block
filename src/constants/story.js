@@ -154,9 +154,105 @@ export const STORY_CHAPTER_1 = [
 export const STORY_CHAPTER_2 = [
   {
     sprites: [
-      SPRITE[IMG_KEY.WALL],
+      SPRITE[IMG_KEY.BREAK_WALL],
     ],
-    content: 'chapter 2',
+    content: '兩人眼前的牆被撞出了一個大洞。',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.BREAK_WALL],
+    ],
+    content: '【灰妲】\n你看，路這不就出現了嗎。',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.BREAK_WALL],
+    ],
+    content: '【咪姆】\n我就不該相信你這雞腿！',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.BREAK_WALL],
+    ],
+    content: '【灰妲】\n你說誰是雞腿！',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.BREAK_WALL],
+    ],
+    content: '【咪姆】\n雞腿雞腿雞腿！',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.BREAK_WALL],
+    ],
+    content: '【灰妲】\n桌球桌球桌球！',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.BREAK_WALL],
+    ],
+    content: '【咪姆】\n你才是桌子！',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.BREAK_WALL],
+    ],
+    content: '【灰妲】\n屁啦，我是氣質優雅的灰鸚鵡！',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.BREAK_WALL],
+    ],
+    content: '轟隆隆隆隆隆隆隆隆－－－',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.BREAK_WALL],
+    ],
+    content: '突然，遺跡內發出奇怪的聲響。',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.BREAK_WALL],
+    ],
+    content: '【灰妲】\n什麼聲音？',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.BREAK_WALL],
+    ],
+    content: '【咪姆】\n我有種不好的預感。',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.BREAK_WALL],
+    ],
+    content: '轟隆隆隆隆隆隆隆隆－－－',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.BREAK_WALL],
+    ],
+    content: '遺跡開始劇烈震動，一塊巨大的石塊從天而降，重重地砸在入口前，將其完全堵住。',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.BREAK_WALL],
+    ],
+    content: '【灰妲&咪姆】\n靠盃！',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.BREAK_WALL],
+    ],
+    content: '【灰妲】\n只能繼續往前了！動作快！',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.BREAK_WALL],
+    ],
+    content: '兩人快速的衝進洞裡，面前出現了岔路。',
   },
 ]
 
@@ -165,7 +261,97 @@ export const STORY_CHAPTER_3 = [
     sprites: [
       SPRITE[IMG_KEY.WALL],
     ],
-    content: 'chapter 3',
+    content: '【咪姆】\n灰妲！走哪邊！',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: '【灰妲】\n我不知道！隨便啦！',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: '【咪姆】\n你這也太不負責任了吧！',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: '【灰妲】\n我也沒辦法阿，這地圖上又沒寫！',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: '【咪姆】\n那我們怎麼辦？',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: '【灰妲】\n我看就隨便選一邊走吧，能有多糟？',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: '【咪姆】\n那就選左邊吧，路看起來比較粗又直。',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: '【灰妲】\n你喜歡粗的噢。',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: '兩人走進了左邊的岔路。',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: '往前一段路後，兩人來到一座大廳。大廳裡空蕩蕩的，只有一座巨大的石門。',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: '【灰妲】\n哈，看來我們選對了。',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: '【咪姆】\n所以你有鑰匙嗎？',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: '【灰妲】\n用膝蓋想也知道怎麼可能有，阿我忘了你沒有膝蓋。',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: '【咪姆】\n你又想吵架了是嗎？',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: '【灰妲】\n你很沒幽默感欸，咱們先找找有沒有甚麼方法開門吧。',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: '兩人在大廳裏搜索，發現地板上有似乎有圖案被砂石遮掩著。',
   },
 ]
 
@@ -174,7 +360,55 @@ export const STORY_CHAPTER_4 = [
     sprites: [
       SPRITE[IMG_KEY.WALL],
     ],
-    content: 'chapter 4',
+    content: '【咪姆】\n我說，這不就是骰子嘛！',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: '【灰妲】\n地圖上恰好有一串數字，照著踩踩看吧。',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: '【咪姆】\n有這麼簡單嗎？',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: '【灰妲】\n試試看也不虧嘛，還能有多糟？',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: '【灰妲】\n我看看，首先是4，然後是1．．．',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: '兩人依據地圖上的數字陸續踩下。',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: '【灰妲】\n最後是6，好！完成了！',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: '【咪姆】\n小心！有破空聲！',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: '兩人話音剛落，從大廳的四周射出了一道道飛箭，直奔兩人而來。',
   },
 ]
 
