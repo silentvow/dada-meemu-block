@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { Assets, ColorMatrixFilter } from 'pixi.js'
 
 import Background from '@/components/Background'
+import Ending from '@/components/Ending'
 import GameMenu from '@/components/GameMenu'
 import MainGame from '@/components/MainGame'
 import Readme from '@/components/Readme'
@@ -103,6 +104,7 @@ function Home () {
                   {state === GAME_STATE.README && <Readme />}
                   {state === GAME_STATE.SCOREBOARD && <Scoreboard />}
                   {state === GAME_STATE.STORY && <Storyboard />}
+                  {state === GAME_STATE.ENDING && <Ending />}
                 </FilterContainer>
               </Stage>)
             : (

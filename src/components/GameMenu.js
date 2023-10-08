@@ -52,18 +52,18 @@ function GameMenu () {
         {inChallengeMenu
           ? (
             <>
-              <MenuButton x={200} y={40} text='標準難度' onClick={enterDadaChallengeMode} />
-              <MenuButton x={760} y={40} text='幼妲難度' onClick={enterYodaChallengeMode} />
-              <MenuButton x={200} y={160} text='？？？？' disabled={!unlockRealMode} onClick={enterRealChallengeMode} />
-              <MenuButton x={760} y={160} text='返回前頁' onClick={() => setInChallengeMenu(false)} />
+              <MenuButton x={200} y={30} text='標準難度' onClick={enterDadaChallengeMode} />
+              <MenuButton x={760} y={30} text='幼妲難度' onClick={enterYodaChallengeMode} />
+              <MenuButton x={200} y={140} text='？？？？' disabled={!unlockRealMode} onClick={enterRealChallengeMode} />
+              <MenuButton x={760} y={140} text='返回前頁' onClick={() => setInChallengeMenu(false)} />
             </>
             )
           : (
             <>
-              <MenuButton x={200} y={40} text='故事模式' onClick={enterStoryMode} />
-              <MenuButton x={760} y={40} text='挑戰模式' onClick={() => setInChallengeMenu(true)} />
-              <MenuButton x={200} y={160} text='遊戲說明' onClick={enterReadme} />
-              <MenuButton x={760} y={160} text='得分紀錄' onClick={enterScoreboard} />
+              <MenuButton x={200} y={30} text='故事模式' onClick={enterStoryMode} />
+              <MenuButton x={760} y={30} text='挑戰模式' onClick={() => setInChallengeMenu(true)} />
+              <MenuButton x={200} y={140} text='遊戲說明' onClick={enterReadme} />
+              <MenuButton x={760} y={140} text='得分紀錄' onClick={enterScoreboard} />
             </>
             )}
       </Container>

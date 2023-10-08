@@ -41,6 +41,7 @@ import {
   ITEM_DROP_SPEED_TO,
   ITEM_HEIGHT,
   ITEM_WIDTH,
+  LOCAL_STORAGE_KEY,
   MAX_LIVES,
   MAX_SPEED,
   MIN_SPEED,
@@ -64,7 +65,7 @@ import {
   TOP_BORDER_HEIGHT,
 } from './constants/game'
 import { BLOCK_CHAR_MAP, FULL_STAGE_MAPS, STORY_STAGE_MAPS } from './constants/stages'
-import { STORY_CHAPTER_1 } from './constants/story'
+import { ALL_CHAPTERS, STORY_CHAPTER_1 } from './constants/story'
 
 export const useGame = create(
   immer((set, get) => ({
@@ -105,6 +106,7 @@ export const useGame = create(
     enterStoryMode: () => {
       get().reset()
       set(state => {
+        state.stage = 0
         state.mode = GAME_MODE.STORY
         state.state = GAME_STATE.STORY
         state.chapter = STORY_CHAPTER_1
@@ -243,16 +245,30 @@ export const useGame = create(
       get().setupBlocks(stage)
     },
 
-    enterEndPage: () => {},
+    enterEndingPage: () => {
+      window.localStorage.setItem(LOCAL_STORAGE_KEY.UNLOCK_EXTRA_STORY, 'true')
+      window.localStorage.setItem(LOCAL_STORAGE_KEY.UNLOCK_REAL_CHALLENGE, 'true')
+      set(state => { state.state = GAME_STATE.ENDING })
+    },
 
     enterNextStage: () => {
-      const { stage, stageMaps, enterStage, enterEndPage } = get()
+      const { stage, stageMaps, enterStage, enterEndingPage } = get()
       if (stage + 1 >= stageMaps.length) {
-        enterEndPage()
+        enterEndingPage()
         return
       }
       set(state => { state.life = Math.min(MAX_LIVES, state.life + 1) })
       enterStage(stage + 1)
+    },
+
+    enterNextChapter: () => {
+      set(state => {
+        state.life = Math.min(MAX_LIVES, state.life + 1)
+        state.stage += 1
+        state.chapter = ALL_CHAPTERS[state.stage]
+        state.sceneIndex = 0
+        state.state = GAME_STATE.STORY
+      })
     },
 
     updateMoney: () => {
@@ -678,12 +694,19 @@ export const useGame = create(
     },
 
     gotoNextScene: () => {
-      const { chapter, sceneIndex, stage, enterStage } = get()
+      const { chapter, sceneIndex, stage, stageMaps, enterStage, enterEndingPage } = get()
       if (sceneIndex + 1 >= chapter.length) {
+        if (stage >= stageMaps.length) {
+          enterEndingPage()
+          return
+        }
         enterStage(stage)
-      } else {
-        set(state => { state.sceneIndex += 1 })
+        return
       }
+      set(state => { state.sceneIndex += 1 })
+    },
+
+    submitScore: () => {
     },
 
     mainLoop: (delta) => {
@@ -751,7 +774,11 @@ export const useGame = create(
       }
 
       if (get().state === GAME_STATE.STAGE_CLEAR) {
-        get().enterNextStage()
+        if (get().mode === GAME_MODE.STORY) {
+          get().enterNextChapter()
+        } else {
+          get().enterNextStage()
+        }
         return
       }
 

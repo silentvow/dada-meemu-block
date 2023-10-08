@@ -151,6 +151,56 @@ export const STORY_CHAPTER_1 = [
   },
 ]
 
+export const STORY_CHAPTER_2 = [
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: 'chapter 2',
+  },
+]
+
+export const STORY_CHAPTER_3 = [
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: 'chapter 3',
+  },
+]
+
+export const STORY_CHAPTER_4 = [
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: 'chapter 4',
+  },
+]
+
+export const STORY_CHAPTER_5 = [
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: 'chapter 5',
+  },
+]
+
+export const STORY_FINAL = [
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: 'final',
+  },
+]
+
 export const ALL_CHAPTERS = [
   STORY_CHAPTER_1,
+  STORY_CHAPTER_2,
+  STORY_CHAPTER_3,
+  STORY_CHAPTER_4,
+  STORY_CHAPTER_5,
+  STORY_FINAL,
 ]

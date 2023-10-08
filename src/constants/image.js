@@ -48,6 +48,6 @@ export const IMG_URLS = {
 }
 
 export const SPRITE = {
-  [IMG_KEY.OFFICE]: { x: 0, y: 0, width: 1200, height: 675, scale: { x: 1200 / 1920, y: 675 / 1080 }, image: IMG_URLS[IMG_KEY.OFFICE] },
-  [IMG_KEY.WALL]: { x: 0, y: 0, width: 1200, height: 675, scale: { x: 1200 / 1920, y: 675 / 1080 }, image: IMG_URLS[IMG_KEY.WALL] },
+  [IMG_KEY.OFFICE]: { x: 40, y: 10, width: 1200, height: 675, scale: { x: 1200 / 1920, y: 675 / 1080 }, image: IMG_URLS[IMG_KEY.OFFICE] },
+  [IMG_KEY.WALL]: { x: 40, y: 10, width: 1200, height: 675, scale: { x: 1200 / 600, y: 675 / 338 }, image: IMG_URLS[IMG_KEY.WALL] },
 }
