@@ -83,7 +83,7 @@ function Ending () {
       <Text
         x={10 + TEXT_PADDING}
         y={695 + TEXT_PADDING}
-        text={`遊戲結束！感謝您的遊玩！\n您的紀錄：$${money}\n您的評價：${getResultOf({ mode, money })}`}
+        text={`遊戲結束！感謝您的遊玩！\n本局紀錄：$${money}\n本局評價：${getResultOf({ mode, money })}`}
         style={textStyle}
       />
       <Container x={760} y={695}>
