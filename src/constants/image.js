@@ -7,10 +7,16 @@ export const IMG_KEY = {
   TREASURE_MAP: 'TREASURE_MAP',
   LINE_CENTERING: 'LINE_CENTERING',
   LINE_SPEED_UP: 'LINE_SPEED_UP',
+  STONE: 'STONE',
+  BG_SAND: 'BG_SAND',
+  TWO_CAVE: 'TWO_CAVE',
+  GATE_CLOSED: 'GATE_CLOSED',
+  BOWS: 'BOWS',
   MEEMU: 'MEEMU',
   RED_MEEMU: 'RED_MEEMU',
   DADA_01: 'DADA_01',
   DADA_02: 'DADA_02',
+  DADA_03: 'DADA_03',
 }
 
 export const IMG_URLS = {
@@ -57,10 +63,16 @@ export const IMG_URLS = {
   [IMG_KEY.TREASURE_MAP]: '/img/story/treasure-map.png',
   [IMG_KEY.LINE_CENTERING]: '/img/story/bg-centering.png',
   [IMG_KEY.LINE_SPEED_UP]: '/img/story/bg-speed-up.png',
+  [IMG_KEY.STONE]: '/img/story/stone.png',
+  [IMG_KEY.BG_SAND]: '/img/story/bg-sand.jpg',
+  [IMG_KEY.TWO_CAVE]: '/img/story/two-cave.png',
+  [IMG_KEY.GATE_CLOSED]: '/img/story/gate-closed.png',
+  [IMG_KEY.BOWS]: '/img/story/bows.png',
   [IMG_KEY.MEEMU]: '/img/story/meemu.png',
   [IMG_KEY.RED_MEEMU]: '/img/story/red-meemu.png',
   [IMG_KEY.DADA_01]: '/img/dada/01.png',
   [IMG_KEY.DADA_02]: '/img/dada/02.png',
+  [IMG_KEY.DADA_03]: '/img/dada/03.png',
 }
 
 /**
@@ -74,8 +86,14 @@ export const SPRITE = {
   [IMG_KEY.TREASURE_MAP]: { x: 640, y: 360, width: 800 * 0.7, height: 699 * 0.7, anchor: [0.5, 0.5], scale: { x: 0.7, y: 0.7 }, image: IMG_URLS[IMG_KEY.TREASURE_MAP] },
   [IMG_KEY.LINE_CENTERING]: { x: 40, y: 10, width: 1200, height: 675, scale: { x: 1200 / 1600, y: 675 / 900 }, image: IMG_URLS[IMG_KEY.LINE_CENTERING] },
   [IMG_KEY.LINE_SPEED_UP]: { x: 40, y: 10, width: 1200, height: 675, scale: { x: 1200 / 1600, y: 675 / 900 }, image: IMG_URLS[IMG_KEY.LINE_SPEED_UP] },
+  [IMG_KEY.STONE]: { x: 640, y: 0, width: 616 * 1.5, height: 483 * 1.5, anchor: [0.5, 0], scale: { x: 1.5, y: 1.5 }, image: IMG_URLS[IMG_KEY.STONE] },
+  [IMG_KEY.BG_SAND]: { x: 40, y: 10, width: 1200, height: 675, scale: { x: 1200 / 800, y: 675 / 450 }, image: IMG_URLS[IMG_KEY.BG_SAND] },
+  [IMG_KEY.TWO_CAVE]: { x: 640, y: 0, width: 735 * 1.64, height: 444 * 1.64, anchor: [0.5, 0], scale: { x: 1.64, y: 1.64 }, image: IMG_URLS[IMG_KEY.TWO_CAVE] },
+  [IMG_KEY.GATE_CLOSED]: { x: 640, y: 360, width: 800 * 1.75, height: 681 * 1.75, anchor: [0.5, 0.5], scale: { x: 1.75, y: 1.75 }, image: IMG_URLS[IMG_KEY.GATE_CLOSED] },
+  [IMG_KEY.BOWS]: { x: 640, y: 360, width: 657, height: 561, anchor: [0.5, 0.5], scale: { x: 1, y: 1 }, image: IMG_URLS[IMG_KEY.BOWS] },
   [IMG_KEY.MEEMU]: { x: 750, y: 250, width: 368, height: 364, scale: { x: 1, y: 1 }, image: IMG_URLS[IMG_KEY.MEEMU] },
-  [IMG_KEY.RED_MEEMU]: { x: 640, y: 360, width: 484 * 0.78, height: 467 * 0.78, anchor: [0.5, 0.5], scale: { x: 0.78, y: 0.78 }, image: IMG_URLS[IMG_KEY.RED_MEEMU] },
+  [IMG_KEY.RED_MEEMU]: { x: 640, y: 360, width: 484, height: 467, anchor: [0.5, 0.5], scale: { x: 1, y: 1 }, image: IMG_URLS[IMG_KEY.RED_MEEMU] },
   [IMG_KEY.DADA_01]: { x: -140, y: 10 + 675, width: 1200, height: 635.625, anchor: [0, 1], scale: { x: 1200 / 1920, y: 635.625 / 1017 }, image: IMG_URLS[IMG_KEY.DADA_01] },
   [IMG_KEY.DADA_02]: { x: 40, y: 10 + 675, width: 1200, height: 635.625, anchor: [0, 1], scale: { x: 1200 / 1920, y: 635.625 / 1017 }, image: IMG_URLS[IMG_KEY.DADA_02] },
+  [IMG_KEY.DADA_03]: { x: -140, y: 10 + 675, width: 1200, height: 635.625, anchor: [0, 1], scale: { x: 1200 / 1920, y: 635.625 / 1017 }, image: IMG_URLS[IMG_KEY.DADA_03] },
 }

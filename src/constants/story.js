@@ -6,11 +6,9 @@ export const STORY_SCREEN_HEIGHT = 675
 
 export const TEMP_STORY = {
   sprites: [
-    SPRITE[IMG_KEY.WALL],
-    { ...SPRITE[IMG_KEY.DADA_02], x: -200 },
-    SPRITE[IMG_KEY.MEEMU],
+    SPRITE[IMG_KEY.STONE],
   ],
-  content: '【灰妲】\n「路是人走出來的，看我的－－」',
+  content: '遺跡開始劇烈震動，一塊巨大的石塊從天而降，重重地砸在入口前，將其完全堵住。',
 }
 
 export const STORY_CHAPTER_1 = [
@@ -60,7 +58,6 @@ export const STORY_CHAPTER_1 = [
   {
     sprites: [
       SPRITE[IMG_KEY.OFFICE],
-      SPRITE[IMG_KEY.DADA_01],
       SPRITE[IMG_KEY.MEEMU],
     ],
     content: '【咪姆】\n「你還沒放棄威力彩阿？印象從認識你以來一次都沒中過耶。」',
@@ -69,7 +66,6 @@ export const STORY_CHAPTER_1 = [
     sprites: [
       SPRITE[IMG_KEY.OFFICE],
       SPRITE[IMG_KEY.DADA_01],
-      SPRITE[IMG_KEY.MEEMU],
     ],
     content: '【灰妲】\n「閉嘴啦那都是過去的事了，我們要放眼未來！」',
   },
@@ -85,7 +81,6 @@ export const STORY_CHAPTER_1 = [
     sprites: [
       SPRITE[IMG_KEY.OFFICE],
       SPRITE[IMG_KEY.DADA_01],
-      SPRITE[IMG_KEY.MEEMU],
     ],
     content: '【灰妲】\n「這是我好不容易從某個幫派偷－－」',
   },
@@ -93,30 +88,26 @@ export const STORY_CHAPTER_1 = [
     sprites: [
       SPRITE[IMG_KEY.OFFICE],
       SPRITE[IMG_KEY.DADA_01],
-      SPRITE[IMG_KEY.MEEMU],
     ],
     content: '【灰妲】\n「呃，借來的，對，應該有不少錢，那幫派挺富的。」',
   },
   {
     sprites: [
       SPRITE[IMG_KEY.OFFICE],
-      SPRITE[IMG_KEY.DADA_01],
       SPRITE[IMG_KEY.MEEMU],
     ],
-    content: '【咪姆】\n「喔是噢。」(毫無興趣的樣子)',
+    content: '【咪姆】\n「喔是噢。」',
   },
   {
     sprites: [
       SPRITE[IMG_KEY.OFFICE],
       SPRITE[IMG_KEY.DADA_01],
-      SPRITE[IMG_KEY.MEEMU],
     ],
     content: '【灰妲】\n「今天其他人都在鐵籠戰，所以就我們一起去找吧。」',
   },
   {
     sprites: [
       SPRITE[IMG_KEY.OFFICE],
-      SPRITE[IMG_KEY.DADA_01],
       SPRITE[IMG_KEY.MEEMU],
     ],
     content: '【咪姆】\n「阿你怎麼沒去打？」',
@@ -125,7 +116,6 @@ export const STORY_CHAPTER_1 = [
     sprites: [
       SPRITE[IMG_KEY.OFFICE],
       SPRITE[IMG_KEY.DADA_01],
-      SPRITE[IMG_KEY.MEEMU],
     ],
     content: '【灰妲】\n「上屆亞軍不用比預賽啦，出發GOGO！。」',
   },
@@ -152,14 +142,12 @@ export const STORY_CHAPTER_1 = [
     sprites: [
       SPRITE[IMG_KEY.WALL],
       { ...SPRITE[IMG_KEY.DADA_02], x: -200 },
-      SPRITE[IMG_KEY.MEEMU],
     ],
     content: '【灰妲】\n「你在說什麼，這才剛開始而已阿。」',
   },
   {
     sprites: [
       SPRITE[IMG_KEY.WALL],
-      { ...SPRITE[IMG_KEY.DADA_02], x: -200 },
       SPRITE[IMG_KEY.MEEMU],
     ],
     content: '【咪姆】\n「前面就沒路了，你那圖顯然是錯的。」',
@@ -168,7 +156,6 @@ export const STORY_CHAPTER_1 = [
     sprites: [
       SPRITE[IMG_KEY.WALL],
       SPRITE[IMG_KEY.DADA_02],
-      SPRITE[IMG_KEY.MEEMU],
     ],
     content: '【灰妲】\n「路是人走出來的，看我的－－」',
   },
@@ -183,7 +170,7 @@ export const STORY_CHAPTER_1 = [
   {
     sprites: [
       SPRITE[IMG_KEY.WALL],
-      SPRITE[IMG_KEY.DADA_02],
+      SPRITE[IMG_KEY.LINE_SPEED_UP],
       SPRITE[IMG_KEY.MEEMU],
     ],
     content: '咪姆還沒反應過來，就這樣被扔了出去－－',
@@ -208,48 +195,57 @@ export const STORY_CHAPTER_2 = [
   {
     sprites: [
       SPRITE[IMG_KEY.BREAK_WALL],
+      SPRITE[IMG_KEY.DADA_01],
     ],
     content: '【灰妲】\n「你看，路這不就出現了嗎。」',
   },
   {
     sprites: [
       SPRITE[IMG_KEY.BREAK_WALL],
+      { ...SPRITE[IMG_KEY.RED_MEEMU], x: 900 },
     ],
     content: '【咪姆】\n「我就不該相信你這雞腿！」',
   },
   {
     sprites: [
       SPRITE[IMG_KEY.BREAK_WALL],
+      SPRITE[IMG_KEY.DADA_03],
     ],
     content: '【灰妲】\n「你說誰是雞腿！」',
   },
   {
     sprites: [
       SPRITE[IMG_KEY.BREAK_WALL],
+      { ...SPRITE[IMG_KEY.RED_MEEMU], x: 900 },
     ],
     content: '【咪姆】\n「雞腿雞腿雞腿！」',
   },
   {
     sprites: [
       SPRITE[IMG_KEY.BREAK_WALL],
+      SPRITE[IMG_KEY.DADA_03],
     ],
     content: '【灰妲】\n「桌球桌球桌球！」',
   },
   {
     sprites: [
       SPRITE[IMG_KEY.BREAK_WALL],
+      { ...SPRITE[IMG_KEY.RED_MEEMU], x: 900 },
     ],
     content: '【咪姆】\n「你才是桌子！」',
   },
   {
     sprites: [
       SPRITE[IMG_KEY.BREAK_WALL],
+      SPRITE[IMG_KEY.DADA_03],
     ],
     content: '【灰妲】\n「屁啦，我是氣質優雅的灰鸚鵡！」',
   },
   {
     sprites: [
       SPRITE[IMG_KEY.BREAK_WALL],
+      SPRITE[IMG_KEY.DADA_03],
+      { ...SPRITE[IMG_KEY.RED_MEEMU], x: 900 },
     ],
     content: '轟隆隆隆隆隆隆隆隆－－－',
   },
@@ -262,42 +258,50 @@ export const STORY_CHAPTER_2 = [
   {
     sprites: [
       SPRITE[IMG_KEY.BREAK_WALL],
+      { ...SPRITE[IMG_KEY.DADA_02], x: -140 },
     ],
     content: '【灰妲】\n「什麼聲音？」',
   },
   {
     sprites: [
       SPRITE[IMG_KEY.BREAK_WALL],
+      SPRITE[IMG_KEY.MEEMU],
     ],
     content: '【咪姆】\n「我有種不好的預感。」',
   },
   {
     sprites: [
       SPRITE[IMG_KEY.BREAK_WALL],
+      { ...SPRITE[IMG_KEY.DADA_02], x: -140 },
+      SPRITE[IMG_KEY.MEEMU],
     ],
     content: '轟隆隆隆隆隆隆隆隆－－－',
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.BREAK_WALL],
+      SPRITE[IMG_KEY.BG_SAND],
+      SPRITE[IMG_KEY.STONE],
     ],
     content: '遺跡開始劇烈震動，一塊巨大的石塊從天而降，重重地砸在入口前，將其完全堵住。',
   },
   {
     sprites: [
       SPRITE[IMG_KEY.BREAK_WALL],
+      { ...SPRITE[IMG_KEY.DADA_02], x: -140 },
+      SPRITE[IMG_KEY.MEEMU],
     ],
     content: '【灰妲&咪姆】\n「靠盃！」',
   },
   {
     sprites: [
       SPRITE[IMG_KEY.BREAK_WALL],
+      { ...SPRITE[IMG_KEY.DADA_02], x: -140 },
     ],
     content: '【灰妲】\n「只能繼續往前了！動作快！」',
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.BREAK_WALL],
+      SPRITE[IMG_KEY.TWO_CAVE],
     ],
     content: '兩人快速的衝進洞裡，面前出現了岔路。',
   },
@@ -306,97 +310,110 @@ export const STORY_CHAPTER_2 = [
 export const STORY_CHAPTER_3 = [
   {
     sprites: [
-      SPRITE[IMG_KEY.WALL],
+      SPRITE[IMG_KEY.TWO_CAVE],
+      SPRITE[IMG_KEY.MEEMU],
     ],
     content: '【咪姆】\n「灰妲！走哪邊！」',
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.WALL],
+      SPRITE[IMG_KEY.TWO_CAVE],
+      { ...SPRITE[IMG_KEY.DADA_02], x: -140 },
     ],
     content: '【灰妲】\n「我不知道！隨便啦！」',
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.WALL],
+      SPRITE[IMG_KEY.TWO_CAVE],
+      SPRITE[IMG_KEY.MEEMU],
     ],
     content: '【咪姆】\n「你這也太不負責任了吧！」',
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.WALL],
+      SPRITE[IMG_KEY.TWO_CAVE],
+      { ...SPRITE[IMG_KEY.DADA_02], x: -140 },
     ],
     content: '【灰妲】\n「我也沒辦法阿，這地圖上又沒寫！」',
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.WALL],
+      SPRITE[IMG_KEY.TWO_CAVE],
+      SPRITE[IMG_KEY.MEEMU],
     ],
     content: '【咪姆】\n「那我們怎麼辦？」',
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.WALL],
+      SPRITE[IMG_KEY.TWO_CAVE],
+      { ...SPRITE[IMG_KEY.DADA_02], x: -140 },
     ],
     content: '【灰妲】\n「我看就隨便選一邊走吧，能有多糟？」',
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.WALL],
+      SPRITE[IMG_KEY.TWO_CAVE],
+      SPRITE[IMG_KEY.MEEMU],
     ],
     content: '【咪姆】\n「那就選左邊吧，路看起來比較粗。」',
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.WALL],
+      SPRITE[IMG_KEY.TWO_CAVE],
+      { ...SPRITE[IMG_KEY.DADA_02], x: -140 },
     ],
     content: '【灰妲】\n「你喜歡粗的噢。」',
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.WALL],
+      SPRITE[IMG_KEY.TWO_CAVE],
     ],
     content: '兩人走進了左邊的岔路。',
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.WALL],
+      SPRITE[IMG_KEY.GATE_CLOSED],
     ],
-    content: '往前一段路後，兩人來到一座大廳。大廳裡空蕩蕩的，只有一座巨大的石門。',
+    content: '往前一段路後，兩人來到一座大廳。大廳裡空蕩蕩的，只有一座巨大的門。',
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.WALL],
+      SPRITE[IMG_KEY.GATE_CLOSED],
+      SPRITE[IMG_KEY.DADA_01],
     ],
     content: '【灰妲】\n「哈，看來我們選對了。」',
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.WALL],
+      SPRITE[IMG_KEY.GATE_CLOSED],
+      SPRITE[IMG_KEY.MEEMU],
     ],
     content: '【咪姆】\n「所以你有鑰匙嗎？」',
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.WALL],
+      SPRITE[IMG_KEY.GATE_CLOSED],
+      { ...SPRITE[IMG_KEY.DADA_02], x: -140 },
     ],
     content: '【灰妲】\n「用膝蓋想也知道怎麼可能有，阿我忘了你沒有膝蓋。」',
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.WALL],
+      SPRITE[IMG_KEY.GATE_CLOSED],
+      { ...SPRITE[IMG_KEY.RED_MEEMU], x: 940 },
     ],
     content: '【咪姆】\n「你又想吵架了是嗎？」',
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.WALL],
+      SPRITE[IMG_KEY.GATE_CLOSED],
+      { ...SPRITE[IMG_KEY.DADA_02], x: -140 },
     ],
     content: '【灰妲】\n「你很沒幽默感欸，咱們先找找有沒有甚麼方法開門吧。」',
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.WALL],
+      SPRITE[IMG_KEY.BG_SAND],
     ],
     content: '兩人在大廳裏搜索，發現地板上有似乎有圖案被砂石遮掩著。',
   },
@@ -405,55 +422,64 @@ export const STORY_CHAPTER_3 = [
 export const STORY_CHAPTER_4 = [
   {
     sprites: [
-      SPRITE[IMG_KEY.WALL],
+      SPRITE[IMG_KEY.BG_SAND],
+      SPRITE[IMG_KEY.MEEMU],
     ],
     content: '【咪姆】\n「我說，這不就是骰子嘛！」',
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.WALL],
+      SPRITE[IMG_KEY.BG_SAND],
+      SPRITE[IMG_KEY.DADA_01],
     ],
     content: '【灰妲】\n「地圖上恰好有一串數字，照著踩踩看吧。」',
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.WALL],
+      SPRITE[IMG_KEY.BG_SAND],
+      SPRITE[IMG_KEY.MEEMU],
     ],
     content: '【咪姆】\n「有這麼簡單嗎？」',
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.WALL],
+      SPRITE[IMG_KEY.BG_SAND],
+      { ...SPRITE[IMG_KEY.DADA_02], x: -140 },
     ],
     content: '【灰妲】\n「試試看也不虧嘛，還能有多糟？」',
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.WALL],
+      SPRITE[IMG_KEY.BG_SAND],
+      SPRITE[IMG_KEY.DADA_01],
     ],
     content: '【灰妲】\n「我看看，首先是4，然後是1．．．」',
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.WALL],
+      SPRITE[IMG_KEY.BG_SAND],
     ],
     content: '兩人依據地圖上的數字陸續踩下。',
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.WALL],
+      SPRITE[IMG_KEY.BG_SAND],
+      SPRITE[IMG_KEY.DADA_01],
     ],
     content: '【灰妲】\n「最後是6，好！完成了！」',
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.WALL],
+      SPRITE[IMG_KEY.BG_SAND],
+      SPRITE[IMG_KEY.MEEMU],
     ],
     content: '【咪姆】\n「小心！有破空聲！」',
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.WALL],
+      SPRITE[IMG_KEY.BG_SAND],
+      SPRITE[IMG_KEY.LINE_SPEED_UP],
+      SPRITE[IMG_KEY.BOWS],
     ],
     content: '兩人話音剛落，從大廳的四周射出了一道道飛箭，直奔兩人而來。',
   },
@@ -463,60 +489,77 @@ export const STORY_CHAPTER_5 = [
   {
     sprites: [
       SPRITE[IMG_KEY.WALL],
+      SPRITE[IMG_KEY.BOWS],
     ],
     content: '兩人迅速做出閃躲動作，飛箭擦身而過，射向了牆面。',
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.WALL],
+      SPRITE[IMG_KEY.BG_SAND],
+      SPRITE[IMG_KEY.LINE_SPEED_UP],
+      SPRITE[IMG_KEY.BOWS],
+      SPRITE[IMG_KEY.DADA_03],
     ],
     content: '但飛箭仍未停止，如雨點般射來，灰妲當即縱身高躍，揮動雙臂，捲起一陣風將飛箭吹散得七零八落。',
   },
   {
     sprites: [
       SPRITE[IMG_KEY.WALL],
+      SPRITE[IMG_KEY.LINE_SPEED_UP],
+      SPRITE[IMG_KEY.RED_MEEMU],
     ],
-    content: '咪姆則蓄力一衝，在牆壁之間快速回彈，一個接一個地將機關摧毀。',
+    content: '咪姆則蓄力一衝，在牆壁之間快速回彈，一個接一個地將機關破壞掉。',
   },
   {
     sprites: [
       SPRITE[IMG_KEY.WALL],
+    ],
+    content: '不一會兒，大廳裏的機關就被兩人摧毀殆盡。',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+      SPRITE[IMG_KEY.MEEMU],
     ],
     content: '【咪姆】\n「呼，差點就抽筋了。」',
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.WALL],
+      SPRITE[IMG_KEY.BG_SAND],
+      SPRITE[IMG_KEY.DADA_01],
     ],
     content: '【灰妲】\n「你有得抽嗎？何況這只是小意思吧。」',
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.WALL],
+      SPRITE[IMG_KEY.BG_SAND],
+      SPRITE[IMG_KEY.MEEMU],
     ],
     content: '【咪姆】\n「也是，ReLive的員工訓練比這精實多了。」',
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.WALL],
+      SPRITE[IMG_KEY.BG_SAND],
+      SPRITE[IMG_KEY.DADA_02],
     ],
     content: '【灰妲】\n「倒是你剛才怎麼不順便把門撞開。」',
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.WALL],
+      SPRITE[IMG_KEY.BG_SAND],
+      SPRITE[IMG_KEY.RED_MEEMU],
     ],
     content: '【咪姆】\n「我是史萊姆！不是拆房子的鐵球！」',
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.WALL],
+      SPRITE[IMG_KEY.GATE_CLOSED],
     ],
-    content: '兩人邊打屁邊走到石門前。',
+    content: '兩人邊打屁邊走到門前。',
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.WALL],
+      SPRITE[IMG_KEY.GATE_CLOSED],
     ],
     content: '轟隆隆隆隆隆隆隆隆－－－',
   },
@@ -524,7 +567,7 @@ export const STORY_CHAPTER_5 = [
     sprites: [
       SPRITE[IMG_KEY.WALL],
     ],
-    content: '石門緩緩地打開，兩人大步向前。',
+    content: '門緩緩地打開，兩人大步向前。',
   },
   {
     sprites: [
