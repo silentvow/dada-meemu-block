@@ -417,7 +417,181 @@ export const STORY_CHAPTER_5 = [
     sprites: [
       SPRITE[IMG_KEY.WALL],
     ],
-    content: 'chapter 5',
+    content: '兩人迅速做出閃躲動作，飛箭擦身而過，射向了牆面。',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: '但飛箭仍未停止，如雨點般射來，灰妲當即縱身高躍，揮動雙臂，捲起一陣風將飛箭吹散得七零八落。',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: '咪姆則蓄力一衝，在牆壁之間快速回彈，一個接一個地將機關摧毀。',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: '【咪姆】\n呼，差點就抽筋了。',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: '【灰妲】\n你有得抽嗎？何況這只是小意思吧。',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: '【咪姆】\n也是，ReLive的員工訓練比這精實多了。',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: '【灰妲】\n倒是你剛才怎麼不順便把門撞開。',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: '【咪姆】\n我是史萊姆！不是拆房子的鐵球！',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: '兩人邊打屁邊走到石門前。',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: '轟隆隆隆隆隆隆隆隆－－－',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: '石門緩緩地打開，兩人大步向前。',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: '【灰妲】\n照地圖來看，接下來要先往左再往右。',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: '【咪姆】\n這地圖真的可信嗎．．．',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: '【灰妲】\n畢竟門都開了，沒問題的吧。',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: '一段時間後－－－',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: '【灰妲】\n到啦！',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: '【咪姆】\n你確定？',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: '【灰妲】\n至少圖上是這樣畫的。',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: '【咪姆】\n那這個你怎麼解釋？',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: '在兩人面前的，是一顆巨大的金屬球。',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: '【灰妲】\n也許這是－某種創新造型的－保險箱？',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: '【咪姆】\n顯然設計的人腦子進水了吧。',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: '【灰妲】\n阿這上面似乎有保齡球的球孔。',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: '灰妲將手插入金屬球。',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: '【機器音】\n嗶嗶，指紋無法辨識，請確認手指清潔後再試，系統將於連續失敗時發送警報。',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: '【咪姆】\n好像被你矇對了，但這大小我們也搬不出去。',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: '【灰妲】\n看來還是只能用老方法了，你也認真一點阿。',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: '【咪姆】\n唉，結果還是這樣嗎。',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: '兩人深吸了一口氣。',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: '【灰妲&咪姆】\n喝阿阿阿阿阿阿阿阿阿阿阿阿阿！！！！！',
   },
 ]
 
@@ -426,7 +600,73 @@ export const STORY_FINAL = [
     sprites: [
       SPRITE[IMG_KEY.WALL],
     ],
-    content: 'final',
+    content: '【灰妲&咪姆】\n歐拉歐拉歐拉歐拉歐拉歐拉歐拉歐拉歐拉歐拉歐拉歐拉歐拉歐拉歐拉歐拉歐拉歐拉！！！！！',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: '金屬球在兩人狂風暴雨般的攻勢之下，開始出現裂痕。',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: '【灰妲&咪姆】\n無駄無駄無駄無駄無駄無駄無駄無駄無駄無駄無駄無駄無駄無駄無駄無駄無駄無駄！！！！！',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: '終於，金屬球碎裂開來，裏頭的東西散落一地。',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: '【灰妲】\n哦哦哦哦哦！發財了發財了！',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: '【咪姆】\n居然－真的有寶藏－',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: '【灰妲】\n可以告別那些吃泡麵的日子了！',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: '見到寶藏的兩人，臉上洋溢著極度的喜悅。',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: '與此同時，他們眼中閃爍著貪婪的光芒，心中的慾望如野火般燃燒起來。',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: '【灰妲&咪姆】\n嘿嘿嘿嘿嘿嘿嘿嘿嘿－',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+    ],
+    content: '【灰妲&咪姆】\n哈哈哈哈哈哈哈哈哈哈哈哈！！！！！',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL], // NOTE: 轉黑畫面
+    ],
+    content: '【灰妲&咪姆】\n哈哈哈哈哈哈哈哈哈哈哈哈！！！！！',
   },
 ]
 
