@@ -1,10 +1,14 @@
 import { SCREEN_HEIGHT, SCREEN_WIDTH } from '@/constants/game'
 import { useGame } from '@/game'
-import { Container, Graphics, Sprite, Text } from '@pixi/react'
-import { TextStyle } from 'pixi.js'
+import { Container, Graphics, Sprite, Text, withFilters } from '@pixi/react'
+import { ColorMatrixFilter, TextStyle } from 'pixi.js'
 import { useEffect, useRef, useState } from 'react'
 
 const TEXT_PADDING = 16
+
+const FilterContainer = withFilters(Container, {
+  matrix: ColorMatrixFilter,
+})
 
 const textStyle = new TextStyle({
   align: 'left',
@@ -27,7 +31,7 @@ function drawMask (g) {
 function drawMainArea (g) {
   g.clear()
   g.lineStyle({ width: 4, color: 0xF4D29C })
-  g.beginFill(0x5B3138, 1)
+  g.beginFill(0xFFFFFF, 1)
   g.drawRoundedRect(40, 10, 1200, 675, 20)
   g.endFill()
 }
@@ -47,7 +51,6 @@ function Storyboard () {
     gotoNextScene: state.gotoNextScene,
   }))
   const story = chapter[sceneIndex] ?? {}
-  // const story = TEMP_STORY
   const [mask, setMask] = useState(null)
   const refMask = useRef(null)
 
@@ -59,9 +62,18 @@ function Storyboard () {
     <Container width={SCREEN_WIDTH} height={SCREEN_HEIGHT}>
       <Graphics draw={drawMainArea} />
       <Graphics draw={drawTextArea} eventMode='static' onclick={gotoNextScene} />
-      {story.sprites?.map((sprite, i) => <Sprite key={`${sprite.image}-${sprite.x}-${sprite.y}`} mask={mask} {...sprite} />)}
-      {story.graphics?.map((graphic, i) => <Graphics key={i} mask={mask} {...graphic} />)}
-      {story.texts?.map((text, i) => <Text key={i} style={textStyle} {...text} />)}
+      <FilterContainer
+        matrix={{ enabled: true }}
+        apply={({ matrix }) => {
+          matrix.reset()
+          if (story.desaturate) { matrix.desaturate() }
+          return matrix
+        }}
+      >
+        {story.sprites?.map((sprite, i) => <Sprite key={`${sprite.image}-${sprite.x}-${sprite.y}`} mask={mask} {...sprite} />)}
+        {story.graphics?.map((graphic, i) => <Graphics key={i} mask={mask} {...graphic} />)}
+        {story.texts?.map((text, i) => <Text key={i} style={textStyle} {...text} />)}
+      </FilterContainer>
       {story.content && (
         <Text
           x={10 + TEXT_PADDING}

@@ -1,5 +1,5 @@
 import { GAME_MODE, SCREEN_HEIGHT, SCREEN_WIDTH } from '@/constants/game'
-import { IMG_KEY, IMG_URLS } from '@/constants/image'
+import { IMG_KEY, SPRITE } from '@/constants/image'
 import { useGame } from '@/game'
 import { Container, Graphics, Sprite, Text } from '@pixi/react'
 import { TextStyle } from 'pixi.js'
@@ -79,7 +79,7 @@ function Ending () {
     <Container width={SCREEN_WIDTH} height={SCREEN_HEIGHT}>
       <Graphics draw={drawMainArea} />
       <Graphics draw={drawTextArea} />
-      <Sprite mask={mask} image={IMG_URLS[IMG_KEY.OFFICE]} />
+      <Sprite mask={mask} {...SPRITE[IMG_KEY.OFFICE]} />
       <Text
         x={10 + TEXT_PADDING}
         y={695 + TEXT_PADDING}

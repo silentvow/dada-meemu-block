@@ -1,29 +1,23 @@
 import { LOCAL_STORAGE_KEY } from '@/constants/game'
 import { IMG_URLS } from '@/constants/image'
 import { useGame } from '@/game'
-import { Container, Sprite } from '@pixi/react'
-import { useState } from 'react'
+import { Container, Graphics, Sprite } from '@pixi/react'
+import { useEffect, useRef, useState } from 'react'
 import MenuButton from './MenuButton'
 
-// FIXME: remove this
-// const menuStyle = new TextStyle({
-//   align: 'left',
-//   fontFamily: 'Roboto, "Xiaolai Mono SC", sans-serif',
-//   fontSize: 56,
-//   fontWeight: '400',
-//   fill: '#ffffff',
-//   fill: ['#ffffff', '#000000'], // gradient
-//   stroke: '#01d27e',
-//   strokeThickness: 8,
-//   letterSpacing: 12,
-//   dropShadow: true,
-//   dropShadowColor: '#ccced2',
-//   dropShadowBlur: 4,
-//   dropShadowAngle: Math.PI / 6,
-//   dropShadowDistance: 6,
-//   wordWrap: true,
-//   wordWrapWidth: 440,
-// })
+function drawMask (g) {
+  g.beginFill(0x000000)
+  g.drawRoundedRect(40 + 2, 10 + 2, 1200 - 4, 675 - 4, 18)
+  g.endFill()
+}
+
+function drawMainArea (g) {
+  g.clear()
+  g.lineStyle({ width: 4, color: 0xF4D29C })
+  g.beginFill(0x5B3138, 1)
+  g.drawRoundedRect(40, 10, 1200, 675, 20)
+  g.endFill()
+}
 
 function GameMenu () {
   const [unlockRealMode] = useState(() => { window.localStorage.getItem(LOCAL_STORAGE_KEY.UNLOCK_REAL_CHALLENGE) })
@@ -44,12 +38,22 @@ function GameMenu () {
       enterScoreboard: state.enterScoreboard,
     }),
   )
+  const [mask, setMask] = useState(null)
+  const refMask = useRef(null)
+
+  useEffect(() => {
+    setMask(refMask.current)
+  }, [])
+
   // const [inStoryMenu, setInStoryMenu] = useState(false)
   const [inChallengeMenu, setInChallengeMenu] = useState(false)
 
   return (
     <>
-      <Sprite x={40} y={20} width={1200} height={675} scale={{ x: 1200 / 1920, y: 675 / 1080 }} image={IMG_URLS.COVER} />
+      <Graphics draw={drawMainArea} />
+      <Sprite x={40} y={10} width={1200} height={675} scale={{ x: 1200 / 1920, y: 675 / 1080 }} image={IMG_URLS.COVER} mask={mask} />
+      <Sprite x={620} y={450} width={755 * 0.8} height={275 * 0.8} scale={{ x: 0.8, y: 0.8 }} image={IMG_URLS.TITLE} mask={mask} />
+      <Graphics ref={refMask} preventRedraw draw={drawMask} />
       <Container x={0} y={695}>
         {inChallengeMenu
           ? (

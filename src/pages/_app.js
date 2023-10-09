@@ -1,3 +1,4 @@
+import { ThemeProvider } from '@/components/ThemeProvider'
 import '@/styles/globals.css'
 import Head from 'next/head'
 
@@ -7,7 +8,9 @@ export default function App ({ Component, pageProps }) {
       <Head>
         <title>灰妲x咪姆x秘境尋寶</title>
       </Head>
-      <Component {...pageProps} />
+      <ThemeProvider defaultTheme='dark'>
+        <Component {...pageProps} />
+      </ThemeProvider>
     </>
   )
 }
