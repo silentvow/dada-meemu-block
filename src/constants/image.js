@@ -3,8 +3,14 @@ import { BALL_COLOR, BLOCK, ITEM } from './game'
 export const IMG_KEY = {
   OFFICE: 'OFFICE',
   WALL: 'WALL',
-  CAVE: 'CAVE',
   BREAK_WALL: 'BREAK_WALL',
+  TREASURE_MAP: 'TREASURE_MAP',
+  LINE_CENTERING: 'LINE_CENTERING',
+  LINE_SPEED_UP: 'LINE_SPEED_UP',
+  MEEMU: 'MEEMU',
+  RED_MEEMU: 'RED_MEEMU',
+  DADA_01: 'DADA_01',
+  DADA_02: 'DADA_02',
 }
 
 export const IMG_URLS = {
@@ -48,10 +54,28 @@ export const IMG_URLS = {
   [IMG_KEY.OFFICE]: '/img/bg-doujou.jpg',
   [IMG_KEY.WALL]: '/img/bg-wall.jpg',
   [IMG_KEY.BREAK_WALL]: '/img/bg-break-wall.jpg',
+  [IMG_KEY.TREASURE_MAP]: '/img/story/treasure-map.png',
+  [IMG_KEY.LINE_CENTERING]: '/img/story/bg-centering.png',
+  [IMG_KEY.LINE_SPEED_UP]: '/img/story/bg-speed-up.png',
+  [IMG_KEY.MEEMU]: '/img/story/meemu.png',
+  [IMG_KEY.RED_MEEMU]: '/img/story/red-meemu.png',
+  [IMG_KEY.DADA_01]: '/img/dada/01.png',
+  [IMG_KEY.DADA_02]: '/img/dada/02.png',
 }
 
+/**
+ * main area size: 1200x675
+ * main area position: 40, 10
+ */
 export const SPRITE = {
   [IMG_KEY.OFFICE]: { x: 40, y: 10, width: 1200, height: 675, scale: { x: 1200 / 1920, y: 675 / 1080 }, image: IMG_URLS[IMG_KEY.OFFICE] },
   [IMG_KEY.WALL]: { x: 40, y: 10, width: 1200, height: 675, scale: { x: 1200 / 600, y: 675 / 338 }, image: IMG_URLS[IMG_KEY.WALL] },
   [IMG_KEY.BREAK_WALL]: { x: 40, y: 10, width: 1200, height: 675, scale: { x: 1200 / 600, y: 675 / 338 }, image: IMG_URLS[IMG_KEY.BREAK_WALL] },
+  [IMG_KEY.TREASURE_MAP]: { x: 640, y: 360, width: 800 * 0.7, height: 699 * 0.7, anchor: [0.5, 0.5], scale: { x: 0.7, y: 0.7 }, image: IMG_URLS[IMG_KEY.TREASURE_MAP] },
+  [IMG_KEY.LINE_CENTERING]: { x: 40, y: 10, width: 1200, height: 675, scale: { x: 1200 / 1600, y: 675 / 900 }, image: IMG_URLS[IMG_KEY.LINE_CENTERING] },
+  [IMG_KEY.LINE_SPEED_UP]: { x: 40, y: 10, width: 1200, height: 675, scale: { x: 1200 / 1600, y: 675 / 900 }, image: IMG_URLS[IMG_KEY.LINE_SPEED_UP] },
+  [IMG_KEY.MEEMU]: { x: 750, y: 250, width: 368, height: 364, scale: { x: 1, y: 1 }, image: IMG_URLS[IMG_KEY.MEEMU] },
+  [IMG_KEY.RED_MEEMU]: { x: 640, y: 360, width: 484 * 0.78, height: 467 * 0.78, anchor: [0.5, 0.5], scale: { x: 0.78, y: 0.78 }, image: IMG_URLS[IMG_KEY.RED_MEEMU] },
+  [IMG_KEY.DADA_01]: { x: -140, y: 10 + 675, width: 1200, height: 635.625, anchor: [0, 1], scale: { x: 1200 / 1920, y: 635.625 / 1017 }, image: IMG_URLS[IMG_KEY.DADA_01] },
+  [IMG_KEY.DADA_02]: { x: 40, y: 10 + 675, width: 1200, height: 635.625, anchor: [0, 1], scale: { x: 1200 / 1920, y: 635.625 / 1017 }, image: IMG_URLS[IMG_KEY.DADA_02] },
 }

@@ -4,6 +4,15 @@ import { IMG_KEY, SPRITE } from './image'
 export const STORY_SCREEN_WIDTH = 1200
 export const STORY_SCREEN_HEIGHT = 675
 
+export const TEMP_STORY = {
+  sprites: [
+    SPRITE[IMG_KEY.WALL],
+    { ...SPRITE[IMG_KEY.DADA_02], x: -200 },
+    SPRITE[IMG_KEY.MEEMU],
+  ],
+  content: '【灰妲】\n「路是人走出來的，看我的－－」',
+}
+
 export const STORY_CHAPTER_1 = [
   {
     sprites: [],
@@ -44,60 +53,79 @@ export const STORY_CHAPTER_1 = [
   {
     sprites: [
       SPRITE[IMG_KEY.OFFICE],
+      SPRITE[IMG_KEY.DADA_01],
     ],
     content: '【灰妲】\n「今天，就是我灰妲發大財的日子！」',
   },
   {
     sprites: [
       SPRITE[IMG_KEY.OFFICE],
+      SPRITE[IMG_KEY.DADA_01],
+      SPRITE[IMG_KEY.MEEMU],
     ],
-    content: '【咪姆】\n「你還沒放棄威力彩阿？印象從認識你以來一次都沒中過。」',
+    content: '【咪姆】\n「你還沒放棄威力彩阿？印象從認識你以來一次都沒中過耶。」',
   },
   {
     sprites: [
       SPRITE[IMG_KEY.OFFICE],
+      SPRITE[IMG_KEY.DADA_01],
+      SPRITE[IMG_KEY.MEEMU],
     ],
     content: '【灰妲】\n「閉嘴啦那都是過去的事了，我們要放眼未來！」',
   },
   {
     sprites: [
       SPRITE[IMG_KEY.OFFICE],
+      SPRITE[IMG_KEY.LINE_CENTERING],
+      SPRITE[IMG_KEY.TREASURE_MAP],
     ],
     content: '灰妲拿出了一張地圖，上頭有各種奇怪的標記。',
   },
   {
     sprites: [
       SPRITE[IMG_KEY.OFFICE],
+      SPRITE[IMG_KEY.DADA_01],
+      SPRITE[IMG_KEY.MEEMU],
     ],
     content: '【灰妲】\n「這是我好不容易從某個幫派偷－－」',
   },
   {
     sprites: [
       SPRITE[IMG_KEY.OFFICE],
+      SPRITE[IMG_KEY.DADA_01],
+      SPRITE[IMG_KEY.MEEMU],
     ],
-    content: '【灰妲】\n「呃，借來的，對，聽說是一個大祕寶。」',
+    content: '【灰妲】\n「呃，借來的，對，應該有不少錢，那幫派挺富的。」',
   },
   {
     sprites: [
       SPRITE[IMG_KEY.OFFICE],
+      SPRITE[IMG_KEY.DADA_01],
+      SPRITE[IMG_KEY.MEEMU],
     ],
     content: '【咪姆】\n「喔是噢。」(毫無興趣的樣子)',
   },
   {
     sprites: [
       SPRITE[IMG_KEY.OFFICE],
+      SPRITE[IMG_KEY.DADA_01],
+      SPRITE[IMG_KEY.MEEMU],
     ],
     content: '【灰妲】\n「今天其他人都在鐵籠戰，所以就我們一起去找吧。」',
   },
   {
     sprites: [
       SPRITE[IMG_KEY.OFFICE],
+      SPRITE[IMG_KEY.DADA_01],
+      SPRITE[IMG_KEY.MEEMU],
     ],
     content: '【咪姆】\n「阿你怎麼沒去打？」',
   },
   {
     sprites: [
       SPRITE[IMG_KEY.OFFICE],
+      SPRITE[IMG_KEY.DADA_01],
+      SPRITE[IMG_KEY.MEEMU],
     ],
     content: '【灰妲】\n「上屆亞軍不用比預賽啦，出發GOGO！。」',
   },
@@ -116,36 +144,55 @@ export const STORY_CHAPTER_1 = [
   {
     sprites: [
       SPRITE[IMG_KEY.WALL],
+      SPRITE[IMG_KEY.MEEMU],
     ],
     content: '【咪姆】\n「我們可以回家了嗎。」',
   },
   {
     sprites: [
       SPRITE[IMG_KEY.WALL],
+      { ...SPRITE[IMG_KEY.DADA_02], x: -200 },
+      SPRITE[IMG_KEY.MEEMU],
     ],
     content: '【灰妲】\n「你在說什麼，這才剛開始而已阿。」',
   },
   {
     sprites: [
       SPRITE[IMG_KEY.WALL],
+      { ...SPRITE[IMG_KEY.DADA_02], x: -200 },
+      SPRITE[IMG_KEY.MEEMU],
     ],
     content: '【咪姆】\n「前面就沒路了，你那圖顯然是錯的。」',
   },
   {
     sprites: [
       SPRITE[IMG_KEY.WALL],
+      SPRITE[IMG_KEY.DADA_02],
+      SPRITE[IMG_KEY.MEEMU],
     ],
     content: '【灰妲】\n「路是人走出來的，看我的－－」',
   },
   {
     sprites: [
       SPRITE[IMG_KEY.WALL],
+      SPRITE[IMG_KEY.DADA_02],
+      SPRITE[IMG_KEY.MEEMU],
     ],
-    content: '灰妲把咪姆抓起來，同時擺出棒球投手的姿勢，\n把咪姆扔了出去－－',
+    content: '灰妲把咪姆抓起來，同時擺出棒球投手的姿勢。',
   },
   {
     sprites: [
       SPRITE[IMG_KEY.WALL],
+      SPRITE[IMG_KEY.DADA_02],
+      SPRITE[IMG_KEY.MEEMU],
+    ],
+    content: '咪姆還沒反應過來，就這樣被扔了出去－－',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+      SPRITE[IMG_KEY.LINE_SPEED_UP],
+      SPRITE[IMG_KEY.RED_MEEMU],
     ],
     content: '【咪姆】\n「幹－－－－－－－－」',
   },
@@ -630,7 +677,7 @@ export const STORY_FINAL = [
     sprites: [
       SPRITE[IMG_KEY.WALL],
     ],
-    content: '【咪姆】\n「居然－真的有寶藏－－」',
+    content: '【咪姆】\n「居然－有這麼多錢－－」',
   },
   {
     sprites: [

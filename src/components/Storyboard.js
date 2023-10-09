@@ -47,6 +47,7 @@ function Storyboard () {
     gotoNextScene: state.gotoNextScene,
   }))
   const story = chapter[sceneIndex] ?? {}
+  // const story = TEMP_STORY
   const [mask, setMask] = useState(null)
   const refMask = useRef(null)
 
@@ -58,7 +59,7 @@ function Storyboard () {
     <Container width={SCREEN_WIDTH} height={SCREEN_HEIGHT}>
       <Graphics draw={drawMainArea} />
       <Graphics draw={drawTextArea} eventMode='static' onclick={gotoNextScene} />
-      {story.sprites?.map((sprite, i) => <Sprite key={i} mask={mask} {...sprite} />)}
+      {story.sprites?.map((sprite, i) => <Sprite key={`${sprite.image}-${sprite.x}-${sprite.y}`} mask={mask} {...sprite} />)}
       {story.graphics?.map((graphic, i) => <Graphics key={i} mask={mask} {...graphic} />)}
       {story.texts?.map((text, i) => <Text key={i} style={textStyle} {...text} />)}
       {story.content && (
