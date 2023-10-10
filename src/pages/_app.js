@@ -22,8 +22,11 @@ export default function App ({ Component, pageProps }) {
         <meta name='twitter:title' content='【同人遊戲】灰妲x咪姆x秘境尋寶' />
         <meta name='twitter:site' content='@tn604000' />
         <meta name='twitter:image' content='https://dada-meemu-block.vercel.app/img/x.png' />
+        <meta name='twitter:image:alt' content='意外獲得藏寶圖的灰妲，與被拉壯丁的咪姆開始一場探險。' />
         <meta name='twitter:description' content='意外獲得藏寶圖的灰妲，與被拉壯丁的咪姆開始一場探險。' />
-        <meta name='twitter:creator' content='彼得與狼' />
+        <meta name='twitter:creator' content='@tn604000' />
+        <meta property='twitter:domain' content='dada-meemu-block.vercel.app' />
+        <meta property='twitter:url' content='https://dada-meemu-block.vercel.app' />
       </Head>
       <ThemeProvider attribute='class' defaultTheme='dark'>
         <Component {...pageProps} />
