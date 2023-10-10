@@ -1,7 +1,6 @@
 import { ThemeProvider } from '@/components/ThemeProvider'
 import '@/styles/globals.css'
 import Head from 'next/head'
-import Script from 'next/script'
 
 export default function App ({ Component, pageProps }) {
   return (
@@ -29,16 +28,6 @@ export default function App ({ Component, pageProps }) {
         <meta property='twitter:domain' content='dada-meemu-block.vercel.app' />
         <meta property='twitter:url' content='https://dada-meemu-block.vercel.app' />
       </Head>
-      <Script async src='https://www.googletagmanager.com/gtag/js?id=G-YNQ2XENHRF' />
-      <Script id='google-analytics'>
-        {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-
-          gtag('config', 'G-YNQ2XENHRF');
-        `}
-      </Script>
       <ThemeProvider attribute='class' defaultTheme='dark'>
         <Component {...pageProps} />
       </ThemeProvider>
