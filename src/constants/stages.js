@@ -515,14 +515,9 @@ export const FULL_STAGE_MAPS = [
 ]
 
 export const STORY_STAGE_MAPS = [
-  TEST_MAP,
-  TEST_MAP,
-  TEST_MAP,
-  TEST_MAP,
-  TEST_MAP,
-  // STAGE_1_MAP,
-  // STAGE_2_MAP,
-  // STAGE_3_MAP,
-  // STAGE_4_MAP,
-  // STAGE_5_MAP,
+  STAGE_1_MAP,
+  STAGE_2_MAP,
+  STAGE_3_MAP,
+  STAGE_4_MAP,
+  STAGE_5_MAP,
 ]
