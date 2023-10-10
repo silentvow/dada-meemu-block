@@ -55,6 +55,7 @@ import {
   PADDLE_YODA_DEFAULT_WIDTH,
   PADDLE_YODA_MAX_WIDTH,
   PADDLE_YODA_MIN_WIDTH,
+  REAL_ACCELERATION,
   REAL_BUFF_ITEMS,
   REAL_DEBUFF_ITEMS,
   REAL_DEFAULT_SPEED,
@@ -414,7 +415,7 @@ export const useGame = create(
     },
 
     detectBallPaddleCollision: () => {
-      const { balls, paddle } = get()
+      const { balls, paddle, mode } = get()
       for (let i = 0; i < balls.length; ++i) {
         const ball = balls[i]
         if (ball.x + ball.radius < paddle.x) continue
@@ -426,7 +427,8 @@ export const useGame = create(
         /* 根據碰撞的位置計算反彈角度，加速 */
         const hitX = Math.min(paddle.width, Math.max(0, ball.x - paddle.x))
         const hitPercent = ((hitX / paddle.width) - 0.5) * 0.7 + 0.5 /* 0.15 ~ 0.85 */
-        const velocity = Math.min(MAX_SPEED, Math.sqrt(ball.vx * ball.vx + ball.vy * ball.vy) * ACCELERATION)
+        const acceleration = mode === GAME_MODE.CHALLENGE_REAL ? REAL_ACCELERATION : ACCELERATION
+        const velocity = Math.min(MAX_SPEED, Math.sqrt(ball.vx * ball.vx + ball.vy * ball.vy) * acceleration)
         const angle = Math.PI - hitPercent * Math.PI
         const vx = Math.cos(angle) * velocity
         const vy = -Math.sin(angle) * velocity

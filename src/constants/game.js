@@ -52,6 +52,7 @@ export const BALL_MIN_RADIUS = 8
 export const BALL_MAX_RADIUS = 56
 export const BALL_UNIT_RADIUS = 16
 export const ACCELERATION = 1.01
+export const REAL_ACCELERATION = 1.02
 export const DEFAULT_SPEED = 5
 export const REAL_DEFAULT_SPEED = 7.5
 export const SPEED_MULTIPLIER = 1.5
