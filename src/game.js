@@ -5,6 +5,7 @@ import { immer } from 'zustand/middleware/immer'
 
 import {
   ACCELERATION,
+  API_URLS,
   BALL_ATK,
   BALL_COLOR,
   BALL_DEFAULT_RADIUS,
@@ -35,6 +36,7 @@ import {
   DROP_RATIO_MONEY_XS,
   GAME_MODE,
   GAME_STATE,
+  HIGH_SCORE_KEYS,
   ITEM,
   ITEM_DROP_SPEED_FROM,
   ITEM_DROP_SPEED_TO,
@@ -70,6 +72,7 @@ import { ALL_CHAPTERS, STORY_CHAPTER_1 } from './constants/story'
 
 export const useGame = create(
   immer((set, get) => ({
+    gId: null,
     state: GAME_STATE.MAIN_MENU,
     mode: GAME_MODE.STORY,
     money: 0,
@@ -90,6 +93,7 @@ export const useGame = create(
 
     reset: () => {
       set(state => {
+        state.gId = uuidv4()
         state.money = 0
         state.displayMoney = 0
         state.life = DEFAULT_LIVES
@@ -258,6 +262,11 @@ export const useGame = create(
       if (complete) {
         window.localStorage.setItem(LOCAL_STORAGE_KEY.UNLOCK_EXTRA_STORY, 'true')
         window.localStorage.setItem(LOCAL_STORAGE_KEY.UNLOCK_REAL_CHALLENGE, 'true')
+      }
+      const { money, mode } = get()
+      const highScore = parseInt(window.localStorage.getItem(HIGH_SCORE_KEYS[mode]) || '0')
+      if (money > highScore) {
+        window.localStorage.setItem(HIGH_SCORE_KEYS[mode], money.toString())
       }
       set(state => { state.state = GAME_STATE.ENDING; state.stageComplete = complete })
     },
@@ -720,9 +729,17 @@ export const useGame = create(
       set(state => { state.sceneIndex += 1 })
     },
 
-    submitScoreAndCloseModal: (name) => {
-      const { id, money, closeSubmitModal } = get()
-      console.log('submit', { id, name, score: money })
+    submitScoreAndCloseModal: async (name) => {
+      const { gId, mode, money, closeSubmitModal } = get()
+      try {
+        await fetch(API_URLS[mode], {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id: gId, name, score: money }),
+        })
+      } catch (e) {
+        console.error(e)
+      }
       closeSubmitModal()
     },
 

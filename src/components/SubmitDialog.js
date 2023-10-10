@@ -1,10 +1,14 @@
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 
 function SubmitDialog ({ open, onSubmit, onClose }) {
   const [name, setName] = useState('')
+  const handleSubmit = useCallback(async () => {
+    if (!name) return
+    await onSubmit(name)
+  }, [name, onSubmit])
 
   return (
     <Dialog open={open} onOpenChange={e => !e && onClose()}>
@@ -19,10 +23,11 @@ function SubmitDialog ({ open, onSubmit, onClose }) {
             placeholder='請輸入您的名稱'
             className='col-span-3'
             onChange={e => setName(e.target.value)}
+            maxLength={10}
           />
         </div>
         <DialogFooter>
-          <Button type='button' onClick={() => onSubmit(name)}>送出</Button>
+          <Button type='button' onClick={handleSubmit}>送出</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

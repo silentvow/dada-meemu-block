@@ -88,7 +88,7 @@ function Ending () {
         style={textStyle}
       />
       <Container x={760} y={695}>
-        {/* <MenuButton x={0} y={30} text='提交紀錄' onClick={openSubmitModal} /> */}
+        <MenuButton x={0} y={30} text='提交紀錄' onClick={openSubmitModal} />
         <MenuButton x={0} y={140} text='返回首頁' onClick={enterMainMenu} />
       </Container>
       <Graphics ref={refMask} preventRedraw draw={drawMask} />
