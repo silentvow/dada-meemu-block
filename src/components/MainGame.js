@@ -14,7 +14,6 @@ import {
 import { IMG_URLS, SPRITE } from '@/constants/image'
 import { useGame } from '@/game'
 import { Container, Sprite, Text, useTick, withPixiApp } from '@pixi/react'
-import { useEffect } from 'react'
 
 const hitArea = {
   contains: () => true,
@@ -43,7 +42,6 @@ function imgUrl (item) {
 
 function MainGame ({ app }) {
   const {
-    reset,
     life,
     stage,
     state,
@@ -57,9 +55,6 @@ function MainGame ({ app }) {
     onGameMouseMove,
     onGameClick,
   } = useGame(state => state)
-  useEffect(() => {
-    reset()
-  }, [reset])
 
   useTick((delta, ticker) => {
     mainLoop(delta)
