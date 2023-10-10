@@ -3,21 +3,17 @@ import {
   BULLET_HEIGHT,
   BULLET_IMG_HEIGHT,
   BULLET_IMG_WIDTH,
-  BULLET_OFFSET,
   BULLET_WIDTH,
   GAME_STATE,
   ITEM_HEIGHT,
   ITEM_WIDTH,
-  PADDLE_HEIGHT,
-  PADDLE_IMG_HEIGHT,
-  PADDLE_IMG_WIDTH,
   SCREEN_HEIGHT,
   SCREEN_WIDTH,
   TOP_BORDER_HEIGHT,
 } from '@/constants/game'
-import { IMG_URLS } from '@/constants/image'
+import { IMG_URLS, SPRITE } from '@/constants/image'
 import { useGame } from '@/game'
-import { Container, Graphics, Sprite, Text, useTick, withPixiApp } from '@pixi/react'
+import { Container, Sprite, Text, useTick, withPixiApp } from '@pixi/react'
 import { useEffect } from 'react'
 
 const hitArea = {
@@ -43,17 +39,6 @@ const footerStyle = {
 
 function imgUrl (item) {
   return IMG_URLS[item] || `https://placehold.co/${ITEM_WIDTH}x${ITEM_HEIGHT}/red/fff?text=${item}`
-}
-
-function drawFireHint (g, paddle) {
-  g.clear()
-  g.beginFill(0xffffff)
-  g.moveTo(paddle.x + paddle.width - BULLET_WIDTH * 0.75 - BULLET_OFFSET, paddle.y)
-  g.lineTo(paddle.x + paddle.width - BULLET_WIDTH * 0.25 - BULLET_OFFSET, paddle.y)
-  g.lineTo(paddle.x + paddle.width - BULLET_WIDTH * 0.5 - BULLET_OFFSET, paddle.y - 8)
-  g.lineTo(paddle.x + paddle.width - BULLET_WIDTH * 0.75 - BULLET_OFFSET, paddle.y)
-  g.closePath()
-  g.endFill()
 }
 
 function MainGame ({ app }) {
@@ -127,9 +112,7 @@ function MainGame ({ app }) {
       })}
       {state === GAME_STATE.READY && <Text x={640} y={500} anchor={[0.5, 1]} text={`STAGE ${stage + 1}\nREADY`} style={titleStyle} />}
       {state === GAME_STATE.STAGE_CLEAR && <Text x={640} y={500} anchor={[0.5, 1]} text={'STAGE\nCLEAR'} style={titleStyle} />}
-      {/* {state === GAME_STATE.GAME_OVER && <Text x={640} y={500} anchor={[0.5, 1]} text='GAME OVER' style={titleStyle} />} */}
       <Text x={4} y={0} text={`$${displayMoney}`} style={footerStyle} />
-      <Graphics draw={g => drawFireHint(g, paddle)} />
       <Sprite
         x={SCREEN_WIDTH - 110}
         y={4}
@@ -157,8 +140,7 @@ function MainGame ({ app }) {
       <Sprite
         x={paddle.x}
         y={paddle.y}
-        scale={{ x: paddle.width / PADDLE_IMG_WIDTH, y: PADDLE_HEIGHT / PADDLE_IMG_HEIGHT }}
-        image={IMG_URLS.PADDLE}
+        {...SPRITE[paddle.imgKey]}
       />
     </Container>
   )

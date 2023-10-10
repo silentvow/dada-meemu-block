@@ -19,7 +19,6 @@ import {
   BULLET_DEFAULT_COUNT,
   BULLET_HEIGHT,
   BULLET_MAX_COUNT,
-  BULLET_OFFSET,
   BULLET_RELOAD_COUNT,
   BULLET_SPEED,
   BULLET_WIDTH,
@@ -64,6 +63,7 @@ import {
   SPEED_MULTIPLIER,
   TOP_BORDER_HEIGHT,
 } from './constants/game'
+import { IMG_KEY, PADDLE_IMG_KEY } from './constants/image'
 import { BLOCK_CHAR_MAP, FULL_STAGE_MAPS, STORY_STAGE_MAPS } from './constants/stages'
 import { ALL_CHAPTERS, STORY_CHAPTER_1 } from './constants/story'
 
@@ -78,7 +78,7 @@ export const useGame = create(
     balls: [],
     blocks: [],
     bullets: [],
-    paddle: { x: 0, y: 0, width: 0, height: 0, bullet: 0 },
+    paddle: { x: 0, y: 0, width: 0, height: 0, bullet: 0, imgKey: IMG_KEY.PADDLE_MD },
     stage: 0,
     stageMaps: [],
     stageComplete: false,
@@ -220,6 +220,11 @@ export const useGame = create(
           width: state.mode === GAME_MODE.CHALLENGE_YODA ? PADDLE_YODA_DEFAULT_WIDTH : PADDLE_DEFAULT_WIDTH,
           height: PADDLE_HEIGHT,
           bullet: state.mode === GAME_MODE.CHALLENGE_REAL ? 0 : BULLET_DEFAULT_COUNT,
+        }
+        if (state.mode === GAME_MODE.CHALLENGE_REAL) {
+          state.paddle.imgKey = IMG_KEY.PADDLE_REAL
+        } else {
+          state.paddle.imgKey = PADDLE_IMG_KEY[state.paddle.width]
         }
 
         /* setup ball */
@@ -626,12 +631,14 @@ export const useGame = create(
           set(state => {
             const maxWidth = state.mode === GAME_MODE.CHALLENGE_YODA ? PADDLE_YODA_MAX_WIDTH : PADDLE_MAX_WIDTH
             state.paddle.width = Math.min(maxWidth, state.paddle.width + PADDLE_UNIT_WIDTH)
+            state.paddle.imgKey = PADDLE_IMG_KEY[state.paddle.width]
           })
           break
         case ITEM.PADDLE_MINUS:
           set(state => {
             const minWidth = state.mode === GAME_MODE.CHALLENGE_YODA ? PADDLE_YODA_MIN_WIDTH : PADDLE_MIN_WIDTH
             state.paddle.width = Math.max(minWidth, state.paddle.width - PADDLE_UNIT_WIDTH)
+            state.paddle.imgKey = PADDLE_IMG_KEY[state.paddle.width]
           })
           break
         case ITEM.BALL_DOUBLE: {
@@ -780,7 +787,7 @@ export const useGame = create(
             state.paddle.bullet -= 1
             state.bullets.push({
               id: uuidv4(),
-              x: state.paddle.x + state.paddle.width - BULLET_WIDTH - BULLET_OFFSET,
+              x: state.paddle.x + (state.paddle.width - BULLET_WIDTH) / 2,
               y: state.paddle.y - BULLET_HEIGHT,
               hit: false,
             })

@@ -20,7 +20,7 @@ function drawMainArea (g) {
 }
 
 function GameMenu () {
-  const [unlockRealMode] = useState(() => { window.localStorage.getItem(LOCAL_STORAGE_KEY.UNLOCK_REAL_CHALLENGE) })
+  const [unlockRealMode] = useState(() => { return window.localStorage.getItem(LOCAL_STORAGE_KEY.UNLOCK_REAL_CHALLENGE) })
   const {
     enterStoryMode,
     enterDadaChallengeMode,
@@ -60,7 +60,7 @@ function GameMenu () {
             <>
               <MenuButton x={200} y={30} text='標準難度' onClick={enterDadaChallengeMode} />
               <MenuButton x={760} y={30} text='幼妲難度' onClick={enterYodaChallengeMode} />
-              <MenuButton x={200} y={140} text={unlockRealMode ? '？？？？' : '真妲難度'} disabled={!unlockRealMode} onClick={enterRealChallengeMode} />
+              <MenuButton x={200} y={140} text={unlockRealMode ? '真妲難度' : '？？？？'} disabled={!unlockRealMode} onClick={enterRealChallengeMode} />
               <MenuButton x={760} y={140} text='返回前頁' onClick={() => setInChallengeMenu(false)} />
             </>
             )

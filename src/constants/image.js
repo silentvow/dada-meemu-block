@@ -1,4 +1,4 @@
-import { BALL_COLOR, BLOCK, ITEM } from './game'
+import { BALL_COLOR, BLOCK, ITEM, PADDLE_WIDTH } from './game'
 
 export const IMG_KEY = {
   OFFICE: 'OFFICE',
@@ -26,6 +26,12 @@ export const IMG_KEY = {
   DADA_04: 'DADA_04',
   DADA_05: 'DADA_05',
   ENDING: 'ENDING',
+  PADDLE_XL: 'PADDLE_XL',
+  PADDLE_LG: 'PADDLE_LG',
+  PADDLE_MD: 'PADDLE_MD',
+  PADDLE_SM: 'PADDLE_SM',
+  PADDLE_XS: 'PADDLE_XS',
+  PADDLE_REAL: 'PADDLE_REAL',
 }
 
 export const IMG_URLS = {
@@ -39,7 +45,6 @@ export const IMG_URLS = {
   BACKGROUND_4: '/img/bg-texture-4.png',
   BACKGROUND_5: '/img/bg-texture-5.png',
   MENU_BUTTON: '/img/button.png',
-  PADDLE: '/img/paddle.png',
   BULLET: '/img/fire-ball.png',
   HEART: '/img/heart.png',
   [BALL_COLOR.BLUE]: '/img/ball.png',
@@ -93,6 +98,12 @@ export const IMG_URLS = {
   [IMG_KEY.DADA_03]: '/img/dada/03.png',
   [IMG_KEY.DADA_04]: '/img/dada/04.png',
   [IMG_KEY.DADA_05]: '/img/dada/05.png',
+  [IMG_KEY.PADDLE_XL]: '/img/dada/paddle-xl.png',
+  [IMG_KEY.PADDLE_LG]: '/img/dada/paddle-lg.png',
+  [IMG_KEY.PADDLE_MD]: '/img/dada/paddle-md.png',
+  [IMG_KEY.PADDLE_SM]: '/img/dada/paddle-sm.png',
+  [IMG_KEY.PADDLE_XS]: '/img/dada/paddle-xs.png',
+  [IMG_KEY.PADDLE_REAL]: '/img/dada/paddle-real.png',
 }
 
 /**
@@ -125,4 +136,19 @@ export const SPRITE = {
   [IMG_KEY.DADA_04]: { x: -140, y: 10 + 675, width: 600 * 2, height: 317 * 2, anchor: [0, 1], scale: { x: 2, y: 2 }, image: IMG_URLS[IMG_KEY.DADA_04] },
   [IMG_KEY.DADA_05]: { x: -140, y: 10 + 675, width: 1200, height: 635.625, anchor: [0, 1], scale: { x: 1200 / 1920, y: 635.625 / 1017 }, image: IMG_URLS[IMG_KEY.DADA_05] },
   [IMG_KEY.ENDING]: { x: 40, y: 10, width: 1200, height: 675, scale: { x: 1200 / 1920, y: 675 / 1080 }, image: IMG_URLS.ENDING },
+
+  [IMG_KEY.PADDLE_XL]: { width: PADDLE_WIDTH.XL, height: 160 * (PADDLE_WIDTH.XL / 507), scale: { x: PADDLE_WIDTH.XL / 504, y: PADDLE_WIDTH.XL / 507 }, image: IMG_URLS[IMG_KEY.PADDLE_XL] },
+  [IMG_KEY.PADDLE_LG]: { width: PADDLE_WIDTH.LG, height: 161 * (PADDLE_WIDTH.LG / 468), scale: { x: PADDLE_WIDTH.LG / 468, y: PADDLE_WIDTH.LG / 468 }, image: IMG_URLS[IMG_KEY.PADDLE_LG] },
+  [IMG_KEY.PADDLE_MD]: { width: PADDLE_WIDTH.MD, height: 87 * (PADDLE_WIDTH.MD / 325), scale: { x: PADDLE_WIDTH.MD / 325, y: PADDLE_WIDTH.MD / 325 }, image: IMG_URLS[IMG_KEY.PADDLE_MD] },
+  [IMG_KEY.PADDLE_SM]: { width: PADDLE_WIDTH.SM, height: 97 * (PADDLE_WIDTH.SM / 223), scale: { x: PADDLE_WIDTH.SM / 223, y: PADDLE_WIDTH.SM / 223 }, image: IMG_URLS[IMG_KEY.PADDLE_SM] },
+  [IMG_KEY.PADDLE_XS]: { width: PADDLE_WIDTH.XS, height: 70 * (PADDLE_WIDTH.XS / 113), scale: { x: PADDLE_WIDTH.XS / 113, y: PADDLE_WIDTH.XS / 113 }, image: IMG_URLS[IMG_KEY.PADDLE_XS] },
+  [IMG_KEY.PADDLE_REAL]: { width: PADDLE_WIDTH.MD, height: 116 * (PADDLE_WIDTH.MD / 321), scale: { x: PADDLE_WIDTH.MD / 321, y: PADDLE_WIDTH.MD / 321 }, image: IMG_URLS[IMG_KEY.PADDLE_REAL] },
+}
+
+export const PADDLE_IMG_KEY = {
+  [PADDLE_WIDTH.XL]: IMG_KEY.PADDLE_XL,
+  [PADDLE_WIDTH.LG]: IMG_KEY.PADDLE_LG,
+  [PADDLE_WIDTH.MD]: IMG_KEY.PADDLE_MD,
+  [PADDLE_WIDTH.SM]: IMG_KEY.PADDLE_SM,
+  [PADDLE_WIDTH.XS]: IMG_KEY.PADDLE_XS,
 }
