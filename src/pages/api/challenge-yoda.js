@@ -35,14 +35,6 @@ export default async function handler (req, res) {
     const scoresRef = ref(database, DB_NAME)
 
     switch (req.method) {
-      case 'GET': {
-        onValue(scoresRef, snapshot => {
-          const data = snapshot.val() || DEFAULT_RECORDS
-          res.status(200).json({ data: formatData(data) })
-        })
-        return
-      }
-
       case 'POST': {
         const record = {
           id: req.body.id,
@@ -67,7 +59,7 @@ export default async function handler (req, res) {
 
           values.push(record)
           res.status(200).json({ data: formatData(values.slice(0, 10)) })
-        })
+        }, { onlyOnce: true })
         return
       }
     }

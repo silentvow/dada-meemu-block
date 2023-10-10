@@ -46,7 +46,7 @@ export default async function handler (req, res) {
               challenge_real: formatData(data.challenge_real || DEFAULT_RECORDS),
             },
           })
-        })
+        }, { onlyOnce: true })
         return
       }
     }

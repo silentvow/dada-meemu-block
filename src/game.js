@@ -69,6 +69,7 @@ import {
 import { IMG_KEY, PADDLE_IMG_KEY } from './constants/image'
 import { BLOCK_CHAR_MAP, FULL_STAGE_MAPS, STORY_STAGE_MAPS } from './constants/stages'
 import { ALL_CHAPTERS, STORY_CHAPTER_1 } from './constants/story'
+import { sendEvent } from './utils/gtag'
 
 export const useGame = create(
   immer((set, get) => ({
@@ -120,29 +121,35 @@ export const useGame = create(
         state.chapter = STORY_CHAPTER_1
         state.sceneIndex = 0
       })
+      sendEvent('enter', { name: 'enter-story-mode' })
     },
 
     enterDadaChallengeMode: () => {
       set(state => { state.mode = GAME_MODE.CHALLENGE_DADA })
       get().enterGame()
+      sendEvent('enter', { name: 'enter-dada-challenge-mode' })
     },
 
     enterYodaChallengeMode: () => {
       set(state => { state.mode = GAME_MODE.CHALLENGE_YODA })
       get().enterGame()
+      sendEvent('enter', { name: 'enter-yoda-challenge-mode' })
     },
 
     enterRealChallengeMode: () => {
       set(state => { state.mode = GAME_MODE.CHALLENGE_REAL })
       get().enterGame()
+      sendEvent('enter', { name: 'enter-real-challenge-mode' })
     },
 
     enterReadme: () => {
       set(state => { state.state = GAME_STATE.README })
+      sendEvent('enter', { name: 'enter-readme' })
     },
 
     enterScoreboard: () => {
       set(state => { state.state = GAME_STATE.SCOREBOARD })
+      sendEvent('enter', { name: 'enter-yoda-scoreboard' })
     },
 
     enterGame: () => {
@@ -256,6 +263,7 @@ export const useGame = create(
     enterStage: (stage) => {
       get().setupStage(stage)
       get().setupBlocks(stage)
+      sendEvent('game', { name: 'game-start', stage })
     },
 
     enterEndingPage: (complete) => {
@@ -263,12 +271,13 @@ export const useGame = create(
         window.localStorage.setItem(LOCAL_STORAGE_KEY.UNLOCK_EXTRA_STORY, 'true')
         window.localStorage.setItem(LOCAL_STORAGE_KEY.UNLOCK_REAL_CHALLENGE, 'true')
       }
-      const { money, mode } = get()
+      const { money, mode, stage } = get()
       const highScore = parseInt(window.localStorage.getItem(HIGH_SCORE_KEYS[mode]) || '0')
       if (money > highScore) {
         window.localStorage.setItem(HIGH_SCORE_KEYS[mode], money.toString())
       }
       set(state => { state.state = GAME_STATE.ENDING; state.stageComplete = complete })
+      sendEvent('game', { name: 'game-over', mode, stage, complete, score: money })
     },
 
     enterNextStage: () => {
@@ -714,6 +723,7 @@ export const useGame = create(
           console.warn('unknown item', item)
           break
       }
+      sendEvent('game', { name: 'catch-item', item })
     },
 
     gotoNextScene: () => {
@@ -738,7 +748,7 @@ export const useGame = create(
           body: JSON.stringify({ id: gId, name, score: money }),
         })
       } catch (e) {
-        console.error(e)
+        sendEvent('error', { name: 'submit-score', message: e.message })
       }
       closeSubmitModal()
     },
