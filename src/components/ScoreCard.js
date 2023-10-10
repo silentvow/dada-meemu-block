@@ -1,28 +1,39 @@
+import { HIGH_SCORE_KEYS } from '@/constants/game'
 import { Container, Text } from '@pixi/react'
 import { TextStyle } from 'pixi.js'
-import { Fragment } from 'react'
+import { Fragment, useState } from 'react'
 
-const textStyle = new TextStyle({
+const fontSize = 24
+const lineHeight = fontSize * 1.2
+const style = {
   align: 'left',
   fontFamily: 'Roboto, "Xiaolai Mono SC", sans-serif',
-  fontSize: 24,
+  fontSize,
   fill: '#ffffff',
   strokeThickness: 5,
-  lineHeight: 24 * 1.2,
-})
+  lineHeight,
+}
 
-function ScoreCard ({ x, y, title, records }) {
+const textStyle = new TextStyle(style)
+const textTopStyle = new TextStyle({ ...style, fill: ['#6dd8f8', '#ffffff'] })
+const textBottomStyle = new TextStyle({ ...style, fill: ['#ffffff', '#6dd8f8'] })
+
+function ScoreCard ({ x, y, title, records, mode }) {
+  const [score] = useState(() => { return window.localStorage.getItem(HIGH_SCORE_KEYS[mode]) || 0 })
+
   if (records.length === 0) return null
 
   return (
     <Container x={x} y={y}>
-      <Text x={0} y={0} text={title} style={textStyle} />
+      <Text x={0} y={0} text={title} style={textTopStyle} />
       {records.map((record, index) => (
         <Fragment key={record.id}>
-          <Text x={0} y={24 * 1.2 * (index + 1)} text={`${record.name}`} style={textStyle} />
-          <Text x={264} y={24 * 1.2 * (index + 1)} text={`${record.score}`} style={textStyle} />
+          <Text x={0} y={lineHeight * (index + 1)} text={`${record.name}`} style={textStyle} />
+          <Text x={264} y={lineHeight * (index + 1)} text={`${record.score}`} style={textStyle} />
         </Fragment>
       ))}
+      <Text x={0} y={lineHeight * 11} text='本機最佳' style={textBottomStyle} />
+      <Text x={264} y={lineHeight * 11} text={`${score}`} style={textBottomStyle} />
     </Container>
   )
 }
