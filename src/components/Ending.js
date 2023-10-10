@@ -1,5 +1,5 @@
 import { GAME_MODE, SCREEN_HEIGHT, SCREEN_WIDTH } from '@/constants/game'
-import { IMG_KEY, SPRITE } from '@/constants/image'
+import { IMG_URLS } from '@/constants/image'
 import { useGame } from '@/game'
 import { Container, Graphics, Sprite, Text } from '@pixi/react'
 import { TextStyle } from 'pixi.js'
@@ -62,9 +62,10 @@ function getResultOf ({ mode, money }) {
 }
 
 function Ending () {
-  const { mode, money, enterMainMenu, openSubmitModal } = useGame(state => ({
+  const { mode, money, stageComplete, enterMainMenu, openSubmitModal } = useGame(state => ({
     mode: state.mode,
     money: state.money,
+    stageComplete: state.stageComplete,
     enterMainMenu: state.enterMainMenu,
     openSubmitModal: state.openSubmitModal,
   }))
@@ -79,7 +80,7 @@ function Ending () {
     <Container width={SCREEN_WIDTH} height={SCREEN_HEIGHT}>
       <Graphics draw={drawMainArea} />
       <Graphics draw={drawTextArea} />
-      <Sprite mask={mask} {...SPRITE[IMG_KEY.OFFICE]} />
+      <Sprite mask={mask} x={40} y={10} width={1200} height={675} scale={{ x: 1200 / 1920, y: 675 / 1080 }} image={stageComplete ? IMG_URLS.ENDING : IMG_URLS.GAME_OVER} />
       <Text
         x={10 + TEXT_PADDING}
         y={695 + TEXT_PADDING}

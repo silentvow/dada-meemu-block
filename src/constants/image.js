@@ -7,7 +7,7 @@ export const IMG_KEY = {
   TREASURE_MAP: 'TREASURE_MAP',
   LINE_CENTERING: 'LINE_CENTERING',
   LINE_SPEED_UP: 'LINE_SPEED_UP',
-  STONE: 'STONE',
+  STONE: 'HUGE_STONE',
   BG_SAND: 'BG_SAND',
   TWO_CAVE: 'TWO_CAVE',
   GATE_CLOSED: 'GATE_CLOSED',
@@ -25,11 +25,14 @@ export const IMG_KEY = {
   DADA_03: 'DADA_03',
   DADA_04: 'DADA_04',
   DADA_05: 'DADA_05',
+  ENDING: 'ENDING',
 }
 
 export const IMG_URLS = {
   COVER: '/img/story/cover.png',
   TITLE: '/img/story/title.png',
+  ENDING: '/img/story/ending.png',
+  GAME_OVER: '/img/story/game-over.png',
   BACKGROUND_1: '/img/bg-texture-1.png',
   BACKGROUND_2: '/img/bg-texture-2.png',
   BACKGROUND_3: '/img/bg-texture-3.png',
@@ -121,4 +124,5 @@ export const SPRITE = {
   [IMG_KEY.DADA_03]: { x: -140, y: 10 + 675, width: 1200, height: 635.625, anchor: [0, 1], scale: { x: 1200 / 1920, y: 635.625 / 1017 }, image: IMG_URLS[IMG_KEY.DADA_03] },
   [IMG_KEY.DADA_04]: { x: -140, y: 10 + 675, width: 600 * 2, height: 317 * 2, anchor: [0, 1], scale: { x: 2, y: 2 }, image: IMG_URLS[IMG_KEY.DADA_04] },
   [IMG_KEY.DADA_05]: { x: -140, y: 10 + 675, width: 1200, height: 635.625, anchor: [0, 1], scale: { x: 1200 / 1920, y: 635.625 / 1017 }, image: IMG_URLS[IMG_KEY.DADA_05] },
+  [IMG_KEY.ENDING]: { x: 40, y: 10, width: 1200, height: 675, scale: { x: 1200 / 1920, y: 675 / 1080 }, image: IMG_URLS.ENDING },
 }

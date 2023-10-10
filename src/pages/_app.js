@@ -8,7 +8,7 @@ export default function App ({ Component, pageProps }) {
       <Head>
         <title>灰妲x咪姆x秘境尋寶</title>
       </Head>
-      <ThemeProvider defaultTheme='dark'>
+      <ThemeProvider attribute='class' defaultTheme='dark'>
         <Component {...pageProps} />
       </ThemeProvider>
     </>

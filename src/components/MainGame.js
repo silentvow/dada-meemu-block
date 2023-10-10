@@ -127,7 +127,7 @@ function MainGame ({ app }) {
       })}
       {state === GAME_STATE.READY && <Text x={640} y={500} anchor={[0.5, 1]} text={`STAGE ${stage + 1}\nREADY`} style={titleStyle} />}
       {state === GAME_STATE.STAGE_CLEAR && <Text x={640} y={500} anchor={[0.5, 1]} text={'STAGE\nCLEAR'} style={titleStyle} />}
-      {state === GAME_STATE.GAME_OVER && <Text x={640} y={500} anchor={[0.5, 1]} text='GAME OVER' style={titleStyle} />}
+      {/* {state === GAME_STATE.GAME_OVER && <Text x={640} y={500} anchor={[0.5, 1]} text='GAME OVER' style={titleStyle} />} */}
       <Text x={4} y={0} text={`$${displayMoney}`} style={footerStyle} />
       <Graphics draw={g => drawFireHint(g, paddle)} />
       <Sprite

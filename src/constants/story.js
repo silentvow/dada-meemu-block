@@ -693,7 +693,7 @@ export const STORY_CHAPTER_5 = [
       SPRITE[IMG_KEY.METAL_BALL],
       SPRITE[IMG_KEY.MEEMU_2],
     ],
-    content: '【咪姆】\n「唉，結果還是這樣嗎。」',
+    content: '【咪姆】\n「哼，結果還是這樣嗎。」',
   },
   {
     sprites: [
@@ -744,6 +744,16 @@ export const STORY_FINAL = [
   {
     sprites: [
       SPRITE[IMG_KEY.BG_SAND],
+      SPRITE[IMG_KEY.METAL_BALL],
+      SPRITE[IMG_KEY.BG_BREAK],
+      { ...SPRITE[IMG_KEY.BG_BREAK], x: 500, y: 450, width: 1200 * 0.25, height: 1200 * 0.25, scale: { x: 0.25, y: 0.25 } },
+      { ...SPRITE[IMG_KEY.BG_BREAK], x: 750, y: 500, width: 1200 * 0.2, height: 1200 * 0.2, scale: { x: 0.2, y: 0.2 } },
+    ],
+    content: '金屬球上的裂痕越來越多。',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.BG_SAND],
       SPRITE[IMG_KEY.COIN_HEAP],
     ],
     content: '最終，金屬球碎裂開來，裏頭的東西散落一地。',
@@ -781,35 +791,25 @@ export const STORY_FINAL = [
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.BG_SAND],
-      SPRITE[IMG_KEY.COIN_HEAP],
+      SPRITE[IMG_KEY.ENDING],
     ],
     content: '與此同時，他們眼中閃爍著貪婪的光芒，\n心中的慾望如野火般燃燒起來。',
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.BG_SAND],
-      SPRITE[IMG_KEY.COIN_HEAP],
-      SPRITE[IMG_KEY.DADA_05],
-      SPRITE[IMG_KEY.MEEMU],
+      SPRITE[IMG_KEY.ENDING],
     ],
     content: '【灰妲&咪姆】\n「嘿嘿嘿嘿嘿嘿嘿嘿嘿－－」',
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.BG_SAND],
-      SPRITE[IMG_KEY.COIN_HEAP],
-      SPRITE[IMG_KEY.DADA_05],
-      SPRITE[IMG_KEY.MEEMU],
+      SPRITE[IMG_KEY.ENDING],
     ],
     content: '【灰妲&咪姆】\n「哈哈哈哈哈哈哈哈哈哈哈哈！！！！！」',
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.BG_SAND], // NOTE: 轉黑畫面
-      SPRITE[IMG_KEY.COIN_HEAP],
-      SPRITE[IMG_KEY.DADA_05],
-      SPRITE[IMG_KEY.MEEMU],
+      SPRITE[IMG_KEY.ENDING],
     ],
     content: '【灰妲&咪姆】\n「哈哈哈哈哈哈哈哈哈哈哈哈！！！！！」',
     desaturate: true,

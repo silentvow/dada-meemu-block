@@ -81,6 +81,7 @@ export const useGame = create(
     paddle: { x: 0, y: 0, width: 0, height: 0, bullet: 0 },
     stage: 0,
     stageMaps: [],
+    stageComplete: false,
     knownItems: [],
     chapter: [],
     sceneIndex: 0,
@@ -91,6 +92,7 @@ export const useGame = create(
         state.money = 0
         state.displayMoney = 0
         state.life = DEFAULT_LIVES
+        state.stageComplete = false
 
         if (state.mode === GAME_MODE.STORY) {
           state.stageMaps = STORY_STAGE_MAPS
@@ -246,16 +248,18 @@ export const useGame = create(
       get().setupBlocks(stage)
     },
 
-    enterEndingPage: () => {
-      window.localStorage.setItem(LOCAL_STORAGE_KEY.UNLOCK_EXTRA_STORY, 'true')
-      window.localStorage.setItem(LOCAL_STORAGE_KEY.UNLOCK_REAL_CHALLENGE, 'true')
-      set(state => { state.state = GAME_STATE.ENDING })
+    enterEndingPage: (complete) => {
+      if (complete) {
+        window.localStorage.setItem(LOCAL_STORAGE_KEY.UNLOCK_EXTRA_STORY, 'true')
+        window.localStorage.setItem(LOCAL_STORAGE_KEY.UNLOCK_REAL_CHALLENGE, 'true')
+      }
+      set(state => { state.state = GAME_STATE.ENDING; state.stageComplete = complete })
     },
 
     enterNextStage: () => {
       const { stage, stageMaps, enterStage, enterEndingPage } = get()
       if (stage + 1 >= stageMaps.length) {
-        enterEndingPage()
+        enterEndingPage(true)
         return
       }
       set(state => { state.life = Math.min(MAX_LIVES, state.life + 1) })
@@ -698,7 +702,7 @@ export const useGame = create(
       const { chapter, sceneIndex, stage, stageMaps, enterStage, enterEndingPage } = get()
       if (sceneIndex + 1 >= chapter.length) {
         if (stage >= stageMaps.length) {
-          enterEndingPage()
+          enterEndingPage(true)
           return
         }
         enterStage(stage)
@@ -800,7 +804,7 @@ export const useGame = create(
       }
 
       if (get().state === GAME_STATE.GAME_OVER) {
-        set(state => { state.state = GAME_STATE.MAIN_MENU })
+        get().enterEndingPage(false)
         return
       }
 

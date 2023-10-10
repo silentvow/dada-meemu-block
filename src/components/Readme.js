@@ -21,8 +21,8 @@ const INTRODUCE_TEXT = `遊戲規則：
   獲得 $${MONEY_VALUES[ITEM.MONEY_XS]}
 `
 
-const STAFF_TEXT = `製作：彼得與狼
-美術：黑櫻焦阿巴
+const STAFF_TEXT = `設計製作：彼得與狼
+彩圖繪製：黑櫻焦阿巴
 素材來源：ReLive_灰妲 DaDa、ReLive_咪姆 MeeMu、
           いらすとや、Rotting Pixels`
 
