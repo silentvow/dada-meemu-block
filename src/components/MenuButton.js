@@ -3,12 +3,12 @@ import { Container, Sprite, Text, withFilters } from '@pixi/react'
 import { ColorMatrixFilter, TextStyle } from 'pixi.js'
 
 const menuStyle = new TextStyle({
-  align: 'left',
+  align: 'middle',
   fontFamily: 'Roboto, "Xiaolai Mono SC", sans-serif',
   fontSize: 56,
   fill: '#ffffff',
   strokeThickness: 5,
-  lineHeight: 80,
+  lineHeight: 56 * 1.2,
 })
 
 const FilterContainer = withFilters(Container, {
