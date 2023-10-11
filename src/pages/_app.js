@@ -7,7 +7,7 @@ import { useRouter } from 'next/router'
 import Script from 'next/script'
 import { useEffect } from 'react'
 
-const description = '《灰妲x咪姆x遺跡尋寶》是一款快節奏的打磚塊同人二次創作遊戲。Vtuber灰妲與咪姆將進入秘密的藏寶處，突破棘手的關卡，搜刮掉落的金錢。\n你需要運用技巧，操控球體，摧毀各種磚塊，遊戲中有多樣的道具，可以提高你的分數。挑戰你的朋友，爭取最高分，成為最優秀的寶藏獵人。'
+const description = '《灰妲x咪姆x遺跡尋寶》是一款快節奏的打磚塊同人二次創作遊戲。Vtuber灰妲與咪姆將進入秘密的藏寶處，突破棘手的關卡，搜刮掉落的金錢。你需要運用技巧，操控球體，摧毀各種磚塊，遊戲中有多樣的道具，可以提高你的分數。挑戰你的朋友，爭取最高分，成為最優秀的寶藏獵人。'
 
 export default function App ({ Component, pageProps }) {
   const router = useRouter()
