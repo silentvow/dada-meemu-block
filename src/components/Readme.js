@@ -15,7 +15,7 @@ const INTRODUCE_TEXT = `遊戲規則：
   放大咪姆的尺寸          縮小咪姆的尺寸
   降低咪姆的移動速度      提高咪姆的移動速度
   使灰妲變大              使灰妲變小
-  增加火球的發射次數      +1
+  增加                    增加
   獲得 $${MONEY_VALUES[ITEM.MONEY_XL]}            獲得 $${MONEY_VALUES[ITEM.MONEY_LG]}
   獲得 $${MONEY_VALUES[ITEM.MONEY_MD]}             獲得 $${MONEY_VALUES[ITEM.MONEY_SM]}
   獲得 $${MONEY_VALUES[ITEM.MONEY_XS]}              隨機一種非錢物品效果
@@ -74,7 +74,8 @@ function Readme () {
       {DEBUFF_ITEMS.map((item, index) => (
         <Sprite key={index} x={40 + 16 + 540} y={20 + 16 + (LINE_HEIGHT - ITEM_HEIGHT) * 0.5 + LINE_HEIGHT * (5 + index)} image={IMG_URLS[item]} />
       ))}
-      <Sprite x={40 + 16 + 540 + 96} y={20 + 16 + (LINE_HEIGHT - ITEM_HEIGHT) * 0.5 + LINE_HEIGHT * 10 + 4.5} image={IMG_URLS.HEART} />
+      <Sprite x={40 + 16 + 144} y={20 + 16 + (LINE_HEIGHT - ITEM_HEIGHT) * 0.5 + LINE_HEIGHT * 10 - 1.4} image={IMG_URLS.BULLET} scale={{ x: 0.8, y: 0.8 }} />
+      <Sprite x={40 + 16 + 540 + 144} y={20 + 16 + (LINE_HEIGHT - ITEM_HEIGHT) * 0.5 + LINE_HEIGHT * 10 + 4.5} image={IMG_URLS.HEART} />
       <Sprite x={40 + 16 + 540} y={20 + 16 + (LINE_HEIGHT - ITEM_HEIGHT) * 0.5 + LINE_HEIGHT * 13} image={IMG_URLS[ITEM.UNKNOWN]} />
       <Sprite x={40 + 16} y={20 + 16 + (LINE_HEIGHT - ITEM_HEIGHT) * 0.5 + LINE_HEIGHT * 11} image={IMG_URLS[ITEM.MONEY_XL]} />
       <Sprite x={40 + 16 + 540} y={20 + 16 + (LINE_HEIGHT - ITEM_HEIGHT) * 0.5 + LINE_HEIGHT * 11} image={IMG_URLS[ITEM.MONEY_LG]} />
