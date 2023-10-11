@@ -14,6 +14,7 @@ import {
 import { IMG_URLS, SPRITE } from '@/constants/image'
 import { useGame } from '@/game'
 import { Container, Sprite, Text, useTick, withPixiApp } from '@pixi/react'
+import { useEffect } from 'react'
 
 const hitArea = {
   contains: () => true,
@@ -54,11 +55,19 @@ function MainGame ({ app }) {
     mainLoop,
     onGameMouseMove,
     onGameClick,
+    onGameKeyDown,
   } = useGame(state => state)
 
   useTick((delta, ticker) => {
     mainLoop(delta)
   })
+
+  useEffect(() => {
+    document.addEventListener('keydown', onGameKeyDown)
+    return () => {
+      document.removeEventListener('keydown', onGameKeyDown)
+    }
+  }, [onGameKeyDown])
 
   return (
     <Container
@@ -106,6 +115,7 @@ function MainGame ({ app }) {
         )
       })}
       {state === GAME_STATE.READY && <Text x={640} y={500} anchor={[0.5, 1]} text={`STAGE ${stage + 1}\nREADY`} style={titleStyle} />}
+      {state === GAME_STATE.PAUSED && <Text x={640} y={500} anchor={[0.5, 1]} text='PAUSED' style={titleStyle} />}
       {state === GAME_STATE.STAGE_CLEAR && <Text x={640} y={500} anchor={[0.5, 1]} text={'STAGE\nCLEAR'} style={titleStyle} />}
       <Text x={4} y={0} text={`$${displayMoney}`} style={footerStyle} />
       <Sprite

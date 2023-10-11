@@ -25,7 +25,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { GAME_STATE, SCREEN_HEIGHT, SCREEN_WIDTH, TOP_BORDER_HEIGHT } from '@/constants/game'
+import { GAME_STATE, IN_GAME_STATES, SCREEN_HEIGHT, SCREEN_WIDTH, TOP_BORDER_HEIGHT } from '@/constants/game'
 import { IMG_URLS } from '@/constants/image'
 import { FONT_TEST_STRING } from '@/constants/text'
 import { useGame } from '@/game'
@@ -135,7 +135,7 @@ function Home () {
                   }}
                 >
                   <Background />
-                  {[GAME_STATE.READY, GAME_STATE.PLAYING, GAME_STATE.STAGE_CLEAR, GAME_STATE.STAGE_FAILED, GAME_STATE.GAME_OVER].includes(state) && <MainGame />}
+                  {IN_GAME_STATES.includes(state) && <MainGame />}
 
                   {state === GAME_STATE.MAIN_MENU && <GameMenu />}
                   {state === GAME_STATE.README && <Readme />}

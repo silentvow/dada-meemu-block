@@ -392,6 +392,20 @@ export const useGame = create(
       }
     },
 
+    pause: () => {
+      set(state => {
+        state.resumeState = state.state
+        state.state = GAME_STATE.PAUSED
+      })
+    },
+
+    resume: () => {
+      set(state => {
+        state.state = state.resumeState
+        delete state.resumeState
+      })
+    },
+
     gameOver: () => {
       set(state => {
         state.state = GAME_STATE.GAME_OVER
@@ -781,6 +795,8 @@ export const useGame = create(
         case GAME_STATE.STAGE_FAILED:
           set(state => { state.displayMoney = state.money })
           break
+        case GAME_STATE.PAUSED:
+          break
       }
     },
 
@@ -845,6 +861,17 @@ export const useGame = create(
       }
 
       console.warn('unknown state')
+    },
+
+    onGameKeyDown: (event) => {
+      if (event.key === 'p' || event.key === 'P') {
+        event.preventDefault()
+        if (get().state === GAME_STATE.PLAYING) {
+          get().pause()
+        } else if (get().state === GAME_STATE.PAUSED) {
+          get().resume()
+        }
+      }
     },
   })),
 )
