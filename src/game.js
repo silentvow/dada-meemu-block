@@ -453,7 +453,7 @@ export const useGame = create(
         if (ball.x + ball.radius < paddle.x) continue
         if (ball.x - ball.radius > paddle.x + paddle.width) continue
         if (ball.y + ball.radius < paddle.y) continue
-        if (ball.y - ball.radius > paddle.y) continue
+        if (ball.y - ball.radius > paddle.y + PADDLE_HEIGHT) continue
         if (ball.vy < 0) continue
 
         /* 根據碰撞的位置計算反彈角度，加速 */
@@ -495,7 +495,7 @@ export const useGame = create(
         })
       }
 
-      if (ball.y > SCREEN_HEIGHT) {
+      if (ball.y - ball.radius > SCREEN_HEIGHT) {
         set(state => {
           state.balls[i].lived = false
         })
