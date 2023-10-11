@@ -805,6 +805,20 @@ export const useGame = create(
       }
     },
 
+    shoot: () => {
+      if (get().paddle.bullet > 0) {
+        set(state => {
+          state.paddle.bullet -= 1
+          state.bullets.push({
+            id: uuidv4(),
+            x: state.paddle.x + (state.paddle.width - BULLET_WIDTH) / 2,
+            y: state.paddle.y - BULLET_HEIGHT,
+            hit: false,
+          })
+        })
+      }
+    },
+
     onGameMouseMove: (event) => {
       if ([GAME_STATE.READY, GAME_STATE.PLAYING].includes(get().state)) {
         set(state => {
@@ -820,7 +834,7 @@ export const useGame = create(
       }
     },
 
-    onGameClick: () => {
+    onGameClick: (event) => {
       if (get().state === GAME_STATE.READY) {
         set(state => {
           const speed = state.mode === GAME_MODE.CHALLENGE_REAL ? REAL_DEFAULT_SPEED : DEFAULT_SPEED
@@ -832,17 +846,8 @@ export const useGame = create(
       }
 
       if (get().state === GAME_STATE.PLAYING) {
-        if (get().paddle.bullet > 0) {
-          set(state => {
-            state.paddle.bullet -= 1
-            state.bullets.push({
-              id: uuidv4(),
-              x: state.paddle.x + (state.paddle.width - BULLET_WIDTH) / 2,
-              y: state.paddle.y - BULLET_HEIGHT,
-              hit: false,
-            })
-          })
-        }
+        if (event.type.toLowerCase() === 'pointerdown' && event.pointerType.toLowerCase() === 'touch') return
+        get().shoot()
         return
       }
 
@@ -876,6 +881,12 @@ export const useGame = create(
         } else if (get().state === GAME_STATE.PAUSED) {
           get().resume()
         }
+      }
+    },
+
+    onGameTouchEnd: (event) => {
+      if (get().state === GAME_STATE.PLAYING) {
+        get().shoot()
       }
     },
   })),

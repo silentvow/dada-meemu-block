@@ -56,6 +56,7 @@ function MainGame ({ app }) {
     onGameMouseMove,
     onGameClick,
     onGameKeyDown,
+    onGameTouchEnd,
   } = useGame(state => state)
 
   useTick((delta, ticker) => {
@@ -78,6 +79,9 @@ function MainGame ({ app }) {
       eventMode='static'
       onmousemove={onGameMouseMove}
       onclick={onGameClick}
+      ontouchmove={onGameMouseMove}
+      ontouchstart={onGameClick}
+      ontouchend={onGameTouchEnd}
       hitArea={hitArea}
     >
       {blocks.map(block => {

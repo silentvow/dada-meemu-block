@@ -27,8 +27,8 @@ function MenuButton ({ x, y, text, disabled, onClick }) {
         return matrix
       }}
     >
-      <Sprite x={0} y={0} width={320} height={80} scale={{ x: 320 / 380, y: 80 / 95 }} image={IMG_URLS.MENU_BUTTON} eventMode='static' onclick={disabled ? null : onClick} />
-      <Text x={160} y={40} anchor={[0.5, 0.5]} text={text} style={menuStyle} eventMode='static' onclick={disabled ? null : onClick} />
+      <Sprite x={0} y={0} width={320} height={80} scale={{ x: 320 / 380, y: 80 / 95 }} image={IMG_URLS.MENU_BUTTON} eventMode='static' onclick={disabled ? null : onClick} ontouchstart={disabled ? null : onClick} />
+      <Text x={160} y={40} anchor={[0.5, 0.5]} text={text} style={menuStyle} eventMode='static' onclick={disabled ? null : onClick} ontouchstart={disabled ? null : onClick} />
     </FilterContainer>
   )
 }

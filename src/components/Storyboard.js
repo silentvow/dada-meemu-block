@@ -61,7 +61,7 @@ function Storyboard () {
   return (
     <Container width={SCREEN_WIDTH} height={SCREEN_HEIGHT}>
       <Graphics draw={drawMainArea} />
-      <Graphics draw={drawTextArea} eventMode='static' onclick={gotoNextScene} />
+      <Graphics draw={drawTextArea} eventMode='static' onclick={gotoNextScene} ontouchstart={gotoNextScene} />
       <FilterContainer
         matrix={{ enabled: true }}
         apply={({ matrix }) => {
@@ -82,6 +82,7 @@ function Storyboard () {
           style={textStyle}
           eventMode='static'
           onclick={gotoNextScene}
+          ontouchstart={gotoNextScene}
         />
       )}
       <Graphics ref={refMask} preventRedraw draw={drawMask} />

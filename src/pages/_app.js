@@ -30,6 +30,7 @@ export default function App ({ Component, pageProps }) {
     <>
       <Head>
         <title>【同人遊戲】灰妲x咪姆x遺跡尋寶</title>
+        <meta name='viewport' content='width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimal-ui' />
         <meta name='description' content={description} />
         <meta property='og:url' content='https://dada-meemu-block.vercel.app' />
         <meta property='og:locale' content='zh_TW' />
