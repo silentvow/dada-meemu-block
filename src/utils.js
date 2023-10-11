@@ -17,7 +17,7 @@ export function pointToRectDistance (point, rect) {
 
 export function formatData (data) {
   return data.map((record) => ({
-    id: `${record.id}` || uuidv4(),
+    id: (`${record.id}` || uuidv4()).slice(0, 36),
     name: `${record.name}`.slice(0, 10),
     score: parseInt(record.score),
   }))
