@@ -4,14 +4,6 @@ import { IMG_KEY, SPRITE } from './image'
 export const STORY_SCREEN_WIDTH = 1200
 export const STORY_SCREEN_HEIGHT = 675
 
-export const TEMP_STORY = {
-  sprites: [
-    SPRITE[IMG_KEY.METAL_BALL],
-    SPRITE[IMG_KEY.BG_BREAK],
-  ],
-  content: '遺跡開始劇烈震動，一塊巨大的石塊從天而降，重重地砸在入口前，將其完全堵住。',
-}
-
 export const STORY_CHAPTER_1 = [
   {
     sprites: [],
@@ -41,7 +33,7 @@ export const STORY_CHAPTER_1 = [
         }),
       },
     ],
-    content: '※本故事純屬虛構，如有雷同，純屬巧合。',
+    content: '※本故事純屬虛構，如有雷同，純屬巧合。\n※如有OOC敬請見諒，請勿上升至本人。',
   },
   {
     sprites: [
@@ -811,7 +803,23 @@ export const STORY_FINAL = [
     sprites: [
       SPRITE[IMG_KEY.ENDING],
     ],
-    content: '【灰妲&咪姆】\n「哈哈哈哈哈哈哈哈哈哈哈哈！！！！！」',
+    texts: [
+      {
+        x: 1240 - 16,
+        y: 695 - 16,
+        text: 'To be continued...?',
+        anchor: [1, 1],
+        style: new TextStyle({
+          align: 'right',
+          fontSize: 48,
+          fontFamily: 'Roboto, "Xiaolai Mono SC", sans-serif',
+          lineHeight: 48 * 1.2,
+          fill: '#ffffff',
+          strokeThickness: 5,
+        }),
+      },
+    ],
+    content: '',
     desaturate: true,
   },
 ]
