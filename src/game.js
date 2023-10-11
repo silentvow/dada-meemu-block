@@ -733,6 +733,11 @@ export const useGame = create(
             state.money += MONEY_VALUES[item]
           })
           break
+        case ITEM.CHICKEN:
+          set(state => {
+            state.life = Math.min(MAX_LIVES, state.life + 1)
+          })
+          break
         default:
           console.warn('unknown item', item)
           break

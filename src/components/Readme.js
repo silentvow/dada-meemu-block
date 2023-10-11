@@ -8,17 +8,17 @@ import MenuButton from './MenuButton'
 const INTRODUCE_TEXT = `遊戲規則：
 用滑鼠移動灰妲反彈咪姆或者點擊左鍵發射火球以消除
 所有方塊，獲取掉落的金錢，避免咪姆掉落至灰妲下方。
-                                點擊Ｐ鍵暫停遊戲。
+                          點擊Ｐ鍵暫停或恢復遊戲。
 方塊掉落物：
   增加咪姆的攻擊力        減少咪姆的攻擊力
   使咪姆數量變成兩倍      復原咪姆的攻擊力
   放大咪姆的尺寸          縮小咪姆的尺寸
   降低咪姆的移動速度      提高咪姆的移動速度
   使灰妲變大              使灰妲變小
-  增加火球的發射次數      隨機一種其他物品效果
+  增加火球的發射次數      +1
   獲得 $${MONEY_VALUES[ITEM.MONEY_XL]}            獲得 $${MONEY_VALUES[ITEM.MONEY_LG]}
   獲得 $${MONEY_VALUES[ITEM.MONEY_MD]}             獲得 $${MONEY_VALUES[ITEM.MONEY_SM]}
-  獲得 $${MONEY_VALUES[ITEM.MONEY_XS]}
+  獲得 $${MONEY_VALUES[ITEM.MONEY_XS]}              隨機一種非錢物品效果
 `
 
 const STAFF_TEXT = `設計製作：彼得與狼
@@ -74,7 +74,8 @@ function Readme () {
       {DEBUFF_ITEMS.map((item, index) => (
         <Sprite key={index} x={40 + 16 + 540} y={20 + 16 + (LINE_HEIGHT - ITEM_HEIGHT) * 0.5 + LINE_HEIGHT * (5 + index)} image={IMG_URLS[item]} />
       ))}
-      <Sprite x={40 + 16 + 540} y={20 + 16 + (LINE_HEIGHT - ITEM_HEIGHT) * 0.5 + LINE_HEIGHT * 10} image={IMG_URLS[ITEM.UNKNOWN]} />
+      <Sprite x={40 + 16 + 540 + 96} y={20 + 16 + (LINE_HEIGHT - ITEM_HEIGHT) * 0.5 + LINE_HEIGHT * 10 + 4.5} image={IMG_URLS.HEART} />
+      <Sprite x={40 + 16 + 540} y={20 + 16 + (LINE_HEIGHT - ITEM_HEIGHT) * 0.5 + LINE_HEIGHT * 13} image={IMG_URLS[ITEM.UNKNOWN]} />
       <Sprite x={40 + 16} y={20 + 16 + (LINE_HEIGHT - ITEM_HEIGHT) * 0.5 + LINE_HEIGHT * 11} image={IMG_URLS[ITEM.MONEY_XL]} />
       <Sprite x={40 + 16 + 540} y={20 + 16 + (LINE_HEIGHT - ITEM_HEIGHT) * 0.5 + LINE_HEIGHT * 11} image={IMG_URLS[ITEM.MONEY_LG]} />
       <Sprite x={40 + 16} y={20 + 16 + (LINE_HEIGHT - ITEM_HEIGHT) * 0.5 + LINE_HEIGHT * 12} image={IMG_URLS[ITEM.MONEY_MD]} />

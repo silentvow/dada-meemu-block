@@ -68,6 +68,7 @@ export const IMG_URLS = {
   [ITEM.BALL_SMALL]: '/img/zoom-out.png',
   [ITEM.SPEED_PLUS]: '/img/fast.png',
   [ITEM.SPEED_MINUS]: '/img/slow.png',
+  [ITEM.CHICKEN]: '/img/chicken-leg.png',
   [ITEM.UNKNOWN]: '/img/black-box.png',
   [ITEM.MONEY_XS]: '/img/coin-bronze.png',
   [ITEM.MONEY_SM]: '/img/coin-silver.png',
