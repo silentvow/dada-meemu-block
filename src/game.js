@@ -149,7 +149,7 @@ export const useGame = create(
 
     enterScoreboard: () => {
       set(state => { state.state = GAME_STATE.SCOREBOARD })
-      sendEvent('enter', { name: 'enter-yoda-scoreboard' })
+      sendEvent('enter', { name: 'enter-scoreboard' })
     },
 
     enterGame: () => {
