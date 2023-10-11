@@ -66,7 +66,7 @@ export default function App ({ Component, pageProps }) {
           `,
         }}
       />
-      <ThemeProvider attribute='class' defaultTheme='dark'>
+      <ThemeProvider attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>
         <Component {...pageProps} />
       </ThemeProvider>
     </>
