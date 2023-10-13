@@ -39,7 +39,7 @@ export const LOCAL_STORAGE_KEY = {
   HIGH_SCORE_STORY: 'HIGH_SCORE_STORY',
 }
 
-export const DEFAULT_LIVES = 3
+export const DEFAULT_LIVES = 2
 export const MAX_LIVES = 9
 export const TOP_BORDER_HEIGHT = 0
 export const SCREEN_WIDTH = 1280
