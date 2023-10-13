@@ -6,7 +6,6 @@ export const STORY_SCREEN_HEIGHT = 675
 
 export const STORY_CHAPTER_1 = [
   {
-    sprites: [],
     graphics: [
       {
         draw: (g) => {
@@ -16,6 +15,7 @@ export const STORY_CHAPTER_1 = [
         },
       },
     ],
+    sprites: [],
     texts: [
       {
         x: 1280 / 2,
@@ -833,83 +833,450 @@ export const ALL_CHAPTERS = [
   STORY_FINAL,
 ]
 
-export const EXTRA_CHAPTERS = [
-  [
-    {
-      sprites: [
-        SPRITE[IMG_KEY.ENDING],
-      ],
-      content: '【灰妲】\n「哈哈哈哈哈哈哈哈哈哈哈哈！！！！！」',
-    },
-    {
-      sprites: [
-        SPRITE[IMG_KEY.ENDING],
-      ],
-      content: '【真妲】\n「起床了～」',
-    },
-    {
-      sprites: [
-        SPRITE[IMG_KEY.ENDING],
-      ],
-      content: '【灰妲】\n「哈哈哈哈哈哈哈－」',
-    },
-    {
-      sprites: [
-        SPRITE[IMG_KEY.ENDING],
-      ],
-      content: '【真妲】\n「起～床～了～」',
-    },
-    {
-      sprites: [
-        SPRITE[IMG_KEY.ENDING],
-      ],
-      content: '【灰妲】\n「咦？」',
-    },
-    {
-      sprites: [
-        SPRITE[IMG_KEY.ENDING],
-      ],
-      content: '【真妲】\n「快！點！起！床！」',
-    },
-  ],
-  [
-    {
-      sprites: [
-        SPRITE[IMG_KEY.ENDING],
-      ],
-      content: '【灰妲】\n「輕鬆突破之後接下來有岔路，」',
-    },
-  ],
-  [
-    {
-      sprites: [
-        SPRITE[IMG_KEY.ENDING],
-      ],
-      content: '【灰妲】\n「我們還破解了地板的機關，」',
-    },
-  ],
-  [
-    {
-      sprites: [
-        SPRITE[IMG_KEY.ENDING],
-      ],
-      content: '【灰妲】\n「以及陷阱，」',
-    },
-  ],
-  [
-    {
-      sprites: [
-        SPRITE[IMG_KEY.ENDING],
-      ],
-      content: '【灰妲】\n「最後解開寶藏的封印，」',
-    },
-  ],
-  [
-    {
-      sprites: [
-        SPRITE[IMG_KEY.ENDING],
-      ],
-      content: '【灰妲】\n「然後我就醒了。」',
-    },
-  ],
+export const EXTRA_CHAPTER = [
+  {
+    sprites: [
+      SPRITE[IMG_KEY.ENDING],
+    ],
+    content: '【灰妲】\n「哈哈哈哈哈哈哈哈哈哈哈哈！！！！！」',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.ENDING],
+      SPRITE[IMG_KEY.REAL_DA],
+    ],
+    content: '【真妲】\n「起床了～」',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.ENDING],
+    ],
+    content: '【灰妲】\n「哈哈哈哈哈哈哈－」',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.ENDING],
+      { ...SPRITE[IMG_KEY.REAL_DA], scale: { x: 0.85, y: 0.85 } },
+    ],
+    content: '【真妲】\n「起～床～了～」',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.ENDING],
+    ],
+    content: '【灰妲】\n「哈哈哈－」',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.ENDING],
+      { ...SPRITE[IMG_KEY.REAL_DA], scale: { x: 1, y: 1 } },
+    ],
+    content: '【真妲】\n「快！點！起！床！」',
+  },
+  {
+    graphics: [
+      {
+        draw: (g) => {
+          g.beginFill(0x5B3138)
+          g.drawRect(40, 10, 1200, 675)
+          g.endFill()
+        },
+      },
+    ],
+    sprites: [
+      SPRITE[IMG_KEY.BEDROOM],
+      SPRITE[IMG_KEY.DADA_06],
+    ],
+    content: '【灰妲】\n「呵－－阿－－醒了醒了～」',
+  },
+  {
+    graphics: [
+      {
+        draw: (g) => {
+          g.beginFill(0x5B3138)
+          g.drawRect(40, 10, 1200, 675)
+          g.endFill()
+        },
+      },
+    ],
+    sprites: [
+      SPRITE[IMG_KEY.BEDROOM],
+      SPRITE[IMG_KEY.REAL_DA],
+    ],
+    content: '【真妲】\n「趕快去洗臉，然後過來吃早餐了。」',
+  },
+  {
+    graphics: [
+      {
+        draw: (g) => {
+          g.beginFill(0x5B3138)
+          g.drawRect(40, 10, 1200, 675)
+          g.endFill()
+        },
+      },
+    ],
+    sprites: [
+      SPRITE[IMG_KEY.BEDROOM],
+      SPRITE[IMG_KEY.DADA_06],
+    ],
+    content: '【灰妲】\n「好－－」',
+  },
+  {
+    graphics: [
+      {
+        draw: (g) => {
+          g.beginFill(0x5B3138)
+          g.drawRect(40, 10, 1200, 675)
+          g.endFill()
+        },
+      },
+    ],
+    sprites: [
+      SPRITE[IMG_KEY.BATHROOM],
+      SPRITE[IMG_KEY.DADA_06],
+    ],
+    content: '鸚鵡梳洗中．．．',
+  },
+  {
+    graphics: [
+      {
+        draw: (g) => {
+          g.beginFill(0x5B3138)
+          g.drawRect(40, 10, 1200, 675)
+          g.endFill()
+        },
+      },
+    ],
+    sprites: [
+      SPRITE[IMG_KEY.BATHROOM],
+      SPRITE[IMG_KEY.DADA_06],
+    ],
+    content: '鸚鵡梳洗中．．．．．．',
+  },
+  {
+    graphics: [
+      {
+        draw: (g) => {
+          g.beginFill(0x5B3138)
+          g.drawRect(40, 10, 1200, 675)
+          g.endFill()
+        },
+      },
+    ],
+    sprites: [
+      SPRITE[IMG_KEY.BATHROOM],
+      SPRITE[IMG_KEY.DADA_06],
+    ],
+    content: '鸚鵡梳洗中．．．．．．．．．',
+  },
+  {
+    graphics: [
+      {
+        draw: (g) => {
+          g.beginFill(0x5B3138)
+          g.drawRect(40, 10, 1200, 675)
+          g.endFill()
+        },
+      },
+    ],
+    sprites: [
+      SPRITE[IMG_KEY.BATHROOM],
+      SPRITE[IMG_KEY.DADA_01],
+    ],
+    content: '【灰妲】\n「來了～」',
+  },
+  {
+    graphics: [
+      {
+        draw: (g) => {
+          g.beginFill(0x5B3138)
+          g.drawRect(40, 10, 1200, 675)
+          g.endFill()
+        },
+      },
+    ],
+    sprites: [
+      SPRITE[IMG_KEY.DINING_ROOM],
+      SPRITE[IMG_KEY.BREAKFAST],
+    ],
+    content: '桌子上擺放著美味的食物，包括麵包、炒蛋、咖啡等。',
+  },
+  {
+    graphics: [
+      {
+        draw: (g) => {
+          g.beginFill(0x5B3138)
+          g.drawRect(40, 10, 1200, 675)
+          g.endFill()
+        },
+      },
+    ],
+    sprites: [
+      SPRITE[IMG_KEY.DINING_ROOM],
+      SPRITE[IMG_KEY.BREAKFAST],
+      { ...SPRITE[IMG_KEY.DADA_02], x: -180 },
+    ],
+    content: '【灰妲】\n「哇噢，簡直就跟外頭的早午餐店一模一樣。」',
+  },
+  {
+    graphics: [
+      {
+        draw: (g) => {
+          g.beginFill(0x5B3138)
+          g.drawRect(40, 10, 1200, 675)
+          g.endFill()
+        },
+      },
+    ],
+    sprites: [
+      SPRITE[IMG_KEY.DINING_ROOM],
+      SPRITE[IMG_KEY.BREAKFAST],
+      { ...SPRITE[IMG_KEY.REAL_DA], x: 940 },
+    ],
+    content: '【真妲】\n「你喜歡就好，嘻嘻，快吃吧，都要涼掉了。」',
+  },
+  {
+    graphics: [
+      {
+        draw: (g) => {
+          g.beginFill(0x5B3138)
+          g.drawRect(40, 10, 1200, 675)
+          g.endFill()
+        },
+      },
+    ],
+    sprites: [
+      SPRITE[IMG_KEY.DINING_ROOM],
+      SPRITE[IMG_KEY.BREAKFAST],
+      { ...SPRITE[IMG_KEY.REAL_DA], x: 940 },
+      SPRITE[IMG_KEY.DADA_01],
+    ],
+    content: '兩人一邊吃著早餐，一邊聊著天。',
+  },
+  {
+    graphics: [
+      {
+        draw: (g) => {
+          g.beginFill(0x5B3138)
+          g.drawRect(40, 10, 1200, 675)
+          g.endFill()
+        },
+      },
+    ],
+    sprites: [
+      SPRITE[IMG_KEY.DINING_ROOM],
+      SPRITE[IMG_KEY.BREAKFAST],
+      { ...SPRITE[IMG_KEY.REAL_DA], x: 940 },
+    ],
+    content: '【真妲】\n「對了，你剛剛夢到了什麼？聽你笑得那麼開心。」',
+  },
+  {
+    graphics: [
+      {
+        draw: (g) => {
+          g.beginFill(0x5B3138)
+          g.drawRect(40, 10, 1200, 675)
+          g.endFill()
+        },
+      },
+    ],
+    sprites: [
+      SPRITE[IMG_KEY.DINING_ROOM],
+      SPRITE[IMG_KEY.BREAKFAST],
+      SPRITE[IMG_KEY.DADA_01],
+    ],
+    content: '【灰妲】\n「我差點就發大財了，啊姆啊姆。」',
+  },
+  {
+    graphics: [
+      {
+        draw: (g) => {
+          g.beginFill(0x5B3138)
+          g.drawRect(40, 10, 1200, 675)
+          g.endFill()
+        },
+      },
+    ],
+    sprites: [
+      SPRITE[IMG_KEY.DINING_ROOM],
+      SPRITE[IMG_KEY.BREAKFAST],
+      { ...SPRITE[IMG_KEY.REAL_DA], x: 940 },
+    ],
+    content: '【真妲】\n「欸－－－」',
+  },
+  {
+    graphics: [
+      {
+        draw: (g) => {
+          g.beginFill(0x5B3138)
+          g.drawRect(40, 10, 1200, 675)
+          g.endFill()
+        },
+      },
+    ],
+    sprites: [
+      SPRITE[IMG_KEY.DINING_ROOM],
+      SPRITE[IMG_KEY.BREAKFAST],
+    ],
+    content: '灰妲邊吃邊說著夢中的探險經歷。',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.WALL],
+      SPRITE[IMG_KEY.DADA_01],
+    ],
+    content: '【灰妲】\n「我跟咪姆一起去尋寶，最初我們碰上了一堵牆，」',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.BREAK_WALL],
+      SPRITE[IMG_KEY.DADA_01],
+      { ...SPRITE[IMG_KEY.RED_MEEMU], x: 900, scale: { x: 0.7, y: 0.7 } },
+    ],
+    content: '【灰妲】\n「靠我的智慧突破之後我們走過了岔路，」',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.BG_SAND],
+      SPRITE[IMG_KEY.DADA_01],
+    ],
+    content: '【灰妲】\n「接著我們破解了地板的機關，」',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.BG_SAND],
+      SPRITE[IMG_KEY.LINE_SPEED_UP],
+      SPRITE[IMG_KEY.BOWS],
+      SPRITE[IMG_KEY.DADA_01],
+    ],
+    content: '【灰妲】\n「有驚無險地解決陷阱，」',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.ENDING],
+    ],
+    content: '【灰妲】\n「最後找到了寶藏，正盤算怎麼分錢的時候。」',
+  },
+  {
+    graphics: [
+      {
+        draw: (g) => {
+          g.beginFill(0x5B3138)
+          g.drawRect(40, 10, 1200, 675)
+          g.endFill()
+        },
+      },
+    ],
+    sprites: [
+      SPRITE[IMG_KEY.DINING_ROOM],
+      SPRITE[IMG_KEY.BREAKFAST],
+      SPRITE[IMG_KEY.DADA_01],
+    ],
+    content: '【灰妲】\n「我就醒了。」',
+  },
+  {
+    graphics: [
+      {
+        draw: (g) => {
+          g.beginFill(0x5B3138)
+          g.drawRect(40, 10, 1200, 675)
+          g.endFill()
+        },
+      },
+    ],
+    sprites: [
+      SPRITE[IMG_KEY.DINING_ROOM],
+      SPRITE[IMG_KEY.BREAKFAST],
+      { ...SPRITE[IMG_KEY.REAL_DA], x: 940 },
+    ],
+    content: '【真妲】\n「嘿－－－聽起來是個好夢呢，不如今天去買張彩券吧。」',
+  },
+  {
+    graphics: [
+      {
+        draw: (g) => {
+          g.beginFill(0x5B3138)
+          g.drawRect(40, 10, 1200, 675)
+          g.endFill()
+        },
+      },
+    ],
+    sprites: [
+      SPRITE[IMG_KEY.DINING_ROOM],
+      SPRITE[IMG_KEY.BREAKFAST],
+      SPRITE[IMG_KEY.DADA_01],
+    ],
+    content: '【灰妲】\n「嗯嗯，剛好公司附近有投注站，這次我一定會中頭彩！」',
+  },
+  {
+    graphics: [
+      {
+        draw: (g) => {
+          g.beginFill(0x5B3138)
+          g.drawRect(40, 10, 1200, 675)
+          g.endFill()
+        },
+      },
+    ],
+    sprites: [
+      SPRITE[IMG_KEY.DINING_ROOM],
+      SPRITE[IMG_KEY.BREAKFAST],
+      { ...SPRITE[IMG_KEY.REAL_DA], x: 940 },
+    ],
+    content: '【真妲】\n「嘻嘻，那我就等著你請客囉。」',
+  },
+  {
+    graphics: [
+      {
+        draw: (g) => {
+          g.beginFill(0x5B3138)
+          g.drawRect(40, 10, 1200, 675)
+          g.endFill()
+        },
+      },
+    ],
+    sprites: [
+      SPRITE[IMG_KEY.DINING_ROOM],
+      SPRITE[IMG_KEY.DADA_01],
+    ],
+    content: '【灰妲】\n「那有什麼問題，好啦，我吃飽了，先出門囉。」',
+  },
+  {
+    graphics: [
+      {
+        draw: (g) => {
+          g.beginFill(0x5B3138)
+          g.drawRect(40, 10, 1200, 675)
+          g.endFill()
+        },
+      },
+    ],
+    sprites: [
+      SPRITE[IMG_KEY.DINING_ROOM],
+      { ...SPRITE[IMG_KEY.REAL_DA], x: 940 },
+    ],
+    content: '【真妲】\n「不要太晚回來喔～」',
+  },
+  {
+    graphics: [
+      {
+        draw: (g) => {
+          g.beginFill(0x5B3138)
+          g.drawRect(40, 10, 1200, 675)
+          g.endFill()
+        },
+      },
+    ],
+    sprites: [
+      SPRITE[IMG_KEY.GO_OUTSIDE],
+    ],
+    content: '灰妲走出家門，準備開始一天的工作。',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.NETWORK],
+      SPRITE[IMG_KEY.REAL_DA],
+    ],
+    content: '【真妲】\n「螢幕前的各位也要認真工作唷～掰掰～」',
+  },
 ]

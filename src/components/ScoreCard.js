@@ -15,8 +15,8 @@ const style = {
 }
 
 const textStyle = new TextStyle(style)
-const textTopStyle = new TextStyle({ ...style, fill: ['#6dd8f8', '#ffffff'] })
-const textBottomStyle = new TextStyle({ ...style, fill: ['#ffffff', '#6dd8f8'] })
+const textTopStyle = new TextStyle({ ...style, fill: '#6dd8f8' })
+const textBottomStyle = new TextStyle({ ...style, fill: '#b8b2b4' })
 
 function ScoreCard ({ x, y, title, records, mode }) {
   const [score] = useState(() => { return window.localStorage.getItem(HIGH_SCORE_KEYS[mode]) || 0 })

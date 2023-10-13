@@ -68,7 +68,7 @@ import {
 } from './constants/game'
 import { IMG_KEY, PADDLE_IMG_KEY } from './constants/image'
 import { BLOCK_CHAR_MAP, FULL_STAGE_MAPS, STORY_STAGE_MAPS } from './constants/stages'
-import { ALL_CHAPTERS, EXTRA_CHAPTERS, STORY_CHAPTER_1 } from './constants/story'
+import { ALL_CHAPTERS, EXTRA_CHAPTER, STORY_CHAPTER_1 } from './constants/story'
 import { sendEvent } from './utils/gtag'
 
 export const useGame = create(
@@ -100,8 +100,10 @@ export const useGame = create(
         state.life = DEFAULT_LIVES
         state.stageComplete = false
 
-        if ([GAME_MODE.STORY, GAME_MODE.EXTRA_STORY].includes(state.mode)) {
+        if ([GAME_MODE.STORY].includes(state.mode)) {
           state.stageMaps = STORY_STAGE_MAPS
+        } else if ([GAME_MODE.EXTRA_STORY].includes(state.mode)) {
+          state.stageMaps = []
         } else {
           state.stageMaps = FULL_STAGE_MAPS
         }
@@ -113,7 +115,6 @@ export const useGame = create(
     },
 
     enterStoryMode: () => {
-      get().reset()
       set(state => {
         state.stage = 0
         state.mode = GAME_MODE.STORY
@@ -121,18 +122,19 @@ export const useGame = create(
         state.chapter = STORY_CHAPTER_1
         state.sceneIndex = 0
       })
+      get().reset()
       sendEvent('enter', { name: 'enter-story-mode' })
     },
 
     enterExtraStoryMode: () => {
-      get().reset()
       set(state => {
         state.stage = 0
         state.mode = GAME_MODE.EXTRA_STORY
         state.state = GAME_STATE.STORY
-        state.chapter = EXTRA_CHAPTERS[0]
+        state.chapter = EXTRA_CHAPTER
         state.sceneIndex = 0
       })
+      get().reset()
       sendEvent('enter', { name: 'enter-story-mode' })
     },
 
@@ -279,6 +281,11 @@ export const useGame = create(
     },
 
     enterEndingPage: (complete) => {
+      if (get().mode === GAME_MODE.EXTRA_STORY) {
+        get().enterMainMenu()
+        return
+      }
+
       if (complete) {
         window.localStorage.setItem(LOCAL_STORAGE_KEY.UNLOCK_EXTRA_STORY, 'true')
         window.localStorage.setItem(LOCAL_STORAGE_KEY.UNLOCK_REAL_CHALLENGE, 'true')
@@ -298,18 +305,14 @@ export const useGame = create(
         enterEndingPage(true)
         return
       }
-      set(state => { state.life = Math.min(MAX_LIVES, state.life + 1) })
       enterStage(stage + 1)
     },
 
     enterNextChapter: () => {
       set(state => {
-        state.life = Math.min(MAX_LIVES, state.life + 1)
         state.stage += 1
         if (state.mode === GAME_MODE.STORY) {
           state.chapter = ALL_CHAPTERS[state.stage]
-        } else if (state.mode === GAME_MODE.EXTRA_STORY) {
-          state.chapter = EXTRA_CHAPTERS[state.stage]
         }
         state.sceneIndex = 0
         state.state = GAME_STATE.STORY
@@ -764,7 +767,9 @@ export const useGame = create(
     gotoNextScene: () => {
       const { chapter, sceneIndex, stage, stageMaps, enterStage, enterEndingPage } = get()
       if (sceneIndex + 1 >= chapter.length) {
+        console.log({ stage, stageMaps })
         if (stage >= stageMaps.length) {
+          console.log('enter ending page')
           enterEndingPage(true)
           return
         }

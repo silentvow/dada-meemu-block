@@ -50,11 +50,10 @@ function Scoreboard () {
     <Container width={1280} height={960}>
       <Graphics draw={drawBoard} />
       {loading && <Text x={640} y={480} text='讀取中...' anchor={[0.5, 0.5]} style={textStyle} />}
-      <ScoreCard x={40 + 16} y={20 + 16} title='故事模式 (正篇)' records={records[0]} mode={GAME_MODE.STORY} />
-      {unlockRealMode && <ScoreCard x={40 + 16 + 396} y={20 + 16} title='故事模式 (附錄)' records={records[1]} mode={GAME_MODE.EXTRA_STORY} />}
-      <ScoreCard x={40 + 16} y={20 + 16 + 375} title='挑戰模式 (標準難度)' records={records[2]} mode={GAME_MODE.CHALLENGE_DADA} />
-      <ScoreCard x={40 + 16 + 396} y={20 + 16 + 375} title='挑戰模式 (幼妲難度)' records={records[3]} mode={GAME_MODE.CHALLENGE_YODA} />
-      {unlockRealMode && <ScoreCard x={40 + 16 + 792} y={20 + 16 + 375} title='挑戰模式 (真妲難度)' records={records[4]} mode={GAME_MODE.CHALLENGE_REAL} />}
+      <ScoreCard x={120 + 40} y={20 + 16} title='故事模式' records={records[0]} mode={GAME_MODE.STORY} />
+      <ScoreCard x={120 + 40} y={20 + 16 + 375 + 24} title='挑戰模式 (標準難度)' records={records[2]} mode={GAME_MODE.CHALLENGE_DADA} />
+      <ScoreCard x={760 - 40} y={20 + 16} title='挑戰模式 (幼妲難度)' records={records[3]} mode={GAME_MODE.CHALLENGE_YODA} />
+      {unlockRealMode && <ScoreCard x={760 - 40} y={20 + 16 + 375 + 24} title='挑戰模式 (真妲難度)' records={records[4]} mode={GAME_MODE.CHALLENGE_REAL} />}
       <MenuButton x={760} y={140 + 695} text='返回前頁' onClick={enterMainMenu} />
     </Container>
   )

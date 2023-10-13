@@ -25,6 +25,7 @@ export const IMG_KEY = {
   DADA_03: 'DADA_03',
   DADA_04: 'DADA_04',
   DADA_05: 'DADA_05',
+  DADA_06: 'DADA_06',
   ENDING: 'ENDING',
   PADDLE_XL: 'PADDLE_XL',
   PADDLE_LG: 'PADDLE_LG',
@@ -32,6 +33,13 @@ export const IMG_KEY = {
   PADDLE_SM: 'PADDLE_SM',
   PADDLE_XS: 'PADDLE_XS',
   PADDLE_REAL: 'PADDLE_REAL',
+  REAL_DA: 'REAL_DA',
+  BEDROOM: 'BEDROOM',
+  BATHROOM: 'BATHROOM',
+  DINING_ROOM: 'DINING_ROOM',
+  BREAKFAST: 'BREAKFAST',
+  GO_OUTSIDE: 'GO_OUTSIDE',
+  NETWORK: 'NETWORK',
 }
 
 export const IMG_URLS = {
@@ -99,12 +107,20 @@ export const IMG_URLS = {
   [IMG_KEY.DADA_03]: '/img/dada/03.png',
   [IMG_KEY.DADA_04]: '/img/dada/04.png',
   [IMG_KEY.DADA_05]: '/img/dada/05.png',
+  [IMG_KEY.DADA_06]: '/img/dada/06.png',
   [IMG_KEY.PADDLE_XL]: '/img/dada/paddle-xl.png',
   [IMG_KEY.PADDLE_LG]: '/img/dada/paddle-lg.png',
   [IMG_KEY.PADDLE_MD]: '/img/dada/paddle-md.png',
   [IMG_KEY.PADDLE_SM]: '/img/dada/paddle-sm.png',
   [IMG_KEY.PADDLE_XS]: '/img/dada/paddle-xs.png',
   [IMG_KEY.PADDLE_REAL]: '/img/dada/paddle-real.png',
+  [IMG_KEY.REAL_DA]: '/img/story/realda.png',
+  [IMG_KEY.BEDROOM]: '/img/story/bedroom.png',
+  [IMG_KEY.BATHROOM]: '/img/story/bathroom.png',
+  [IMG_KEY.DINING_ROOM]: '/img/story/dining-room.png',
+  [IMG_KEY.BREAKFAST]: '/img/story/breakfast.png',
+  [IMG_KEY.GO_OUTSIDE]: '/img/story/go-outside.png',
+  [IMG_KEY.NETWORK]: '/img/story/network.jpg',
 }
 
 /**
@@ -136,6 +152,7 @@ export const SPRITE = {
   [IMG_KEY.DADA_03]: { x: -140, y: 10 + 675, width: 1200, height: 635.625, anchor: [0, 1], scale: { x: 1200 / 1920, y: 635.625 / 1017 }, image: IMG_URLS[IMG_KEY.DADA_03] },
   [IMG_KEY.DADA_04]: { x: -140, y: 10 + 675, width: 600 * 2, height: 317 * 2, anchor: [0, 1], scale: { x: 2, y: 2 }, image: IMG_URLS[IMG_KEY.DADA_04] },
   [IMG_KEY.DADA_05]: { x: -140, y: 10 + 675, width: 1200, height: 635.625, anchor: [0, 1], scale: { x: 1200 / 1920, y: 635.625 / 1017 }, image: IMG_URLS[IMG_KEY.DADA_05] },
+  [IMG_KEY.DADA_06]: { x: -140, y: 10 + 675, width: 1200, height: 635.625, anchor: [0, 1], scale: { x: 1200 / 1920, y: 635.625 / 1017 }, image: IMG_URLS[IMG_KEY.DADA_06] },
   [IMG_KEY.ENDING]: { x: 40, y: 10, width: 1200, height: 675, scale: { x: 1200 / 1920, y: 675 / 1080 }, image: IMG_URLS.ENDING },
 
   [IMG_KEY.PADDLE_XL]: { width: PADDLE_WIDTH.XL, height: 160 * (PADDLE_WIDTH.XL / 507), scale: { x: PADDLE_WIDTH.XL / 504, y: PADDLE_WIDTH.XL / 507 }, image: IMG_URLS[IMG_KEY.PADDLE_XL] },
@@ -144,6 +161,14 @@ export const SPRITE = {
   [IMG_KEY.PADDLE_SM]: { width: PADDLE_WIDTH.SM, height: 97 * (PADDLE_WIDTH.SM / 223), scale: { x: PADDLE_WIDTH.SM / 223, y: PADDLE_WIDTH.SM / 223 }, image: IMG_URLS[IMG_KEY.PADDLE_SM] },
   [IMG_KEY.PADDLE_XS]: { width: PADDLE_WIDTH.XS, height: 70 * (PADDLE_WIDTH.XS / 113), scale: { x: PADDLE_WIDTH.XS / 113, y: PADDLE_WIDTH.XS / 113 }, image: IMG_URLS[IMG_KEY.PADDLE_XS] },
   [IMG_KEY.PADDLE_REAL]: { width: PADDLE_WIDTH.MD, height: 116 * (PADDLE_WIDTH.MD / 321), scale: { x: PADDLE_WIDTH.MD / 321, y: PADDLE_WIDTH.MD / 321 }, image: IMG_URLS[IMG_KEY.PADDLE_REAL] },
+
+  [IMG_KEY.REAL_DA]: { x: 640, y: 10 + 675, anchor: [0.5, 1], scale: { x: 0.7, y: 0.7 }, image: IMG_URLS[IMG_KEY.REAL_DA] },
+  [IMG_KEY.BEDROOM]: { x: 640, y: 10, width: 675, height: 675, anchor: [0.5, 0], scale: { x: 675 / 587, y: 675 / 587 }, image: IMG_URLS[IMG_KEY.BEDROOM] },
+  [IMG_KEY.BATHROOM]: { x: 640, y: 10, width: 675, height: 675, anchor: [0.5, 0], scale: { x: 675 / 587, y: 675 / 587 }, image: IMG_URLS[IMG_KEY.BATHROOM] },
+  [IMG_KEY.DINING_ROOM]: { x: 640, y: 695, width: 800, height: 800, anchor: [0.5, 1], scale: { x: 800 / 587, y: 800 / 587 }, image: IMG_URLS[IMG_KEY.DINING_ROOM] },
+  [IMG_KEY.BREAKFAST]: { x: 640, y: 400, anchor: [0.5, 0.5], scale: { x: 0.3, y: 0.3 }, image: IMG_URLS[IMG_KEY.BREAKFAST] },
+  [IMG_KEY.GO_OUTSIDE]: { x: 640, y: 10, anchor: [0.5, 0], scale: { x: 675 / 800, y: 675 / 800 }, image: IMG_URLS[IMG_KEY.GO_OUTSIDE] },
+  [IMG_KEY.NETWORK]: { x: 640, y: 10, anchor: [0.5, 0], scale: { x: 675 / 450, y: 675 / 450 }, image: IMG_URLS[IMG_KEY.NETWORK] },
 }
 
 export const PADDLE_IMG_KEY = {
