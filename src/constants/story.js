@@ -225,7 +225,7 @@ export const STORY_CHAPTER_2 = [
       SPRITE[IMG_KEY.BREAK_WALL],
       { ...SPRITE[IMG_KEY.RED_MEEMU], x: 900 },
     ],
-    content: '【咪姆】\n「你才是桌子！」',
+    content: '【咪姆】\n「你才是桌子啦！誰是桌球啊！」',
   },
   {
     sprites: [
@@ -831,4 +831,85 @@ export const ALL_CHAPTERS = [
   STORY_CHAPTER_4,
   STORY_CHAPTER_5,
   STORY_FINAL,
+]
+
+export const EXTRA_CHAPTERS = [
+  [
+    {
+      sprites: [
+        SPRITE[IMG_KEY.ENDING],
+      ],
+      content: '【灰妲】\n「哈哈哈哈哈哈哈哈哈哈哈哈！！！！！」',
+    },
+    {
+      sprites: [
+        SPRITE[IMG_KEY.ENDING],
+      ],
+      content: '【真妲】\n「起床了～」',
+    },
+    {
+      sprites: [
+        SPRITE[IMG_KEY.ENDING],
+      ],
+      content: '【灰妲】\n「哈哈哈哈哈哈哈－」',
+    },
+    {
+      sprites: [
+        SPRITE[IMG_KEY.ENDING],
+      ],
+      content: '【真妲】\n「起～床～了～」',
+    },
+    {
+      sprites: [
+        SPRITE[IMG_KEY.ENDING],
+      ],
+      content: '【灰妲】\n「咦？」',
+    },
+    {
+      sprites: [
+        SPRITE[IMG_KEY.ENDING],
+      ],
+      content: '【真妲】\n「快！點！起！床！」',
+    },
+  ],
+  [
+    {
+      sprites: [
+        SPRITE[IMG_KEY.ENDING],
+      ],
+      content: '【灰妲】\n「輕鬆突破之後接下來有岔路，」',
+    },
+  ],
+  [
+    {
+      sprites: [
+        SPRITE[IMG_KEY.ENDING],
+      ],
+      content: '【灰妲】\n「我們還破解了地板的機關，」',
+    },
+  ],
+  [
+    {
+      sprites: [
+        SPRITE[IMG_KEY.ENDING],
+      ],
+      content: '【灰妲】\n「以及陷阱，」',
+    },
+  ],
+  [
+    {
+      sprites: [
+        SPRITE[IMG_KEY.ENDING],
+      ],
+      content: '【灰妲】\n「最後解開寶藏的封印，」',
+    },
+  ],
+  [
+    {
+      sprites: [
+        SPRITE[IMG_KEY.ENDING],
+      ],
+      content: '【灰妲】\n「然後我就醒了。」',
+    },
+  ],
 ]

@@ -68,7 +68,7 @@ import {
 } from './constants/game'
 import { IMG_KEY, PADDLE_IMG_KEY } from './constants/image'
 import { BLOCK_CHAR_MAP, FULL_STAGE_MAPS, STORY_STAGE_MAPS } from './constants/stages'
-import { ALL_CHAPTERS, STORY_CHAPTER_1 } from './constants/story'
+import { ALL_CHAPTERS, EXTRA_CHAPTERS, STORY_CHAPTER_1 } from './constants/story'
 import { sendEvent } from './utils/gtag'
 
 export const useGame = create(
@@ -100,7 +100,7 @@ export const useGame = create(
         state.life = DEFAULT_LIVES
         state.stageComplete = false
 
-        if (state.mode === GAME_MODE.STORY) {
+        if ([GAME_MODE.STORY, GAME_MODE.EXTRA_STORY].includes(state.mode)) {
           state.stageMaps = STORY_STAGE_MAPS
         } else {
           state.stageMaps = FULL_STAGE_MAPS
@@ -119,6 +119,18 @@ export const useGame = create(
         state.mode = GAME_MODE.STORY
         state.state = GAME_STATE.STORY
         state.chapter = STORY_CHAPTER_1
+        state.sceneIndex = 0
+      })
+      sendEvent('enter', { name: 'enter-story-mode' })
+    },
+
+    enterExtraStoryMode: () => {
+      get().reset()
+      set(state => {
+        state.stage = 0
+        state.mode = GAME_MODE.EXTRA_STORY
+        state.state = GAME_STATE.STORY
+        state.chapter = EXTRA_CHAPTERS[0]
         state.sceneIndex = 0
       })
       sendEvent('enter', { name: 'enter-story-mode' })
@@ -181,7 +193,7 @@ export const useGame = create(
         const items = []
         let buffItems = BUFF_ITEMS.concat([ITEM.UNKNOWN])
         let debuffItems = DEBUFF_ITEMS.concat([ITEM.UNKNOWN])
-        if (state.mode === GAME_MODE.CHALLENGE_REAL) {
+        if ([GAME_MODE.CHALLENGE_REAL, GAME_MODE.EXTRA_STORY].includes(state.mode)) {
           buffItems = REAL_BUFF_ITEMS.concat([ITEM.UNKNOWN])
           debuffItems = REAL_DEBUFF_ITEMS.concat([ITEM.UNKNOWN])
         }
@@ -231,9 +243,9 @@ export const useGame = create(
           y: PADDLE_DEFAULT_Y,
           width: state.mode === GAME_MODE.CHALLENGE_YODA ? PADDLE_YODA_DEFAULT_WIDTH : PADDLE_DEFAULT_WIDTH,
           height: PADDLE_HEIGHT,
-          bullet: state.mode === GAME_MODE.CHALLENGE_REAL ? 0 : BULLET_DEFAULT_COUNT,
+          bullet: [GAME_MODE.CHALLENGE_REAL, GAME_MODE.EXTRA_STORY].includes(state.mode) ? 0 : BULLET_DEFAULT_COUNT,
         }
-        if (state.mode === GAME_MODE.CHALLENGE_REAL) {
+        if ([GAME_MODE.CHALLENGE_REAL, GAME_MODE.EXTRA_STORY].includes(state.mode)) {
           state.paddle.imgKey = IMG_KEY.PADDLE_REAL
         } else {
           state.paddle.imgKey = PADDLE_IMG_KEY[state.paddle.width]
@@ -294,7 +306,11 @@ export const useGame = create(
       set(state => {
         state.life = Math.min(MAX_LIVES, state.life + 1)
         state.stage += 1
-        state.chapter = ALL_CHAPTERS[state.stage]
+        if (state.mode === GAME_MODE.STORY) {
+          state.chapter = ALL_CHAPTERS[state.stage]
+        } else if (state.mode === GAME_MODE.EXTRA_STORY) {
+          state.chapter = EXTRA_CHAPTERS[state.stage]
+        }
         state.sceneIndex = 0
         state.state = GAME_STATE.STORY
       })
@@ -459,7 +475,7 @@ export const useGame = create(
         /* 根據碰撞的位置計算反彈角度，加速 */
         const hitX = Math.min(paddle.width, Math.max(0, ball.x - paddle.x))
         const hitPercent = ((hitX / paddle.width) - 0.5) * 0.7 + 0.5 /* 0.15 ~ 0.85 */
-        const acceleration = mode === GAME_MODE.CHALLENGE_REAL ? REAL_ACCELERATION : ACCELERATION
+        const acceleration = [GAME_MODE.CHALLENGE_REAL, GAME_MODE.EXTRA_STORY].includes(mode) ? REAL_ACCELERATION : ACCELERATION
         const velocity = Math.min(MAX_SPEED, Math.sqrt(ball.vx * ball.vx + ball.vy * ball.vy) * acceleration)
         const angle = Math.PI - hitPercent * Math.PI
         const vx = Math.cos(angle) * velocity
@@ -552,12 +568,12 @@ export const useGame = create(
 
         if (isCollidedX && timeToX <= timeToY) {
           set(state => {
-            state.balls[i].vx = -state.balls[i].vx // + (Math.random() - 0.5) * 0.02
+            state.balls[i].vx = -state.balls[i].vx
           })
         }
         if (isCollidedY && timeToY <= timeToX) {
           set(state => {
-            state.balls[i].vy = -state.balls[i].vy // + (Math.random() - 0.5) * 0.02
+            state.balls[i].vy = -state.balls[i].vy
           })
         }
       }
@@ -835,9 +851,10 @@ export const useGame = create(
     },
 
     onGameClick: (event) => {
+      event.preventDefault()
       if (get().state === GAME_STATE.READY) {
         set(state => {
-          const speed = state.mode === GAME_MODE.CHALLENGE_REAL ? REAL_DEFAULT_SPEED : DEFAULT_SPEED
+          const speed = [GAME_MODE.CHALLENGE_REAL, GAME_MODE.EXTRA_STORY].includes(state.mode) ? REAL_DEFAULT_SPEED : DEFAULT_SPEED
           state.state = GAME_STATE.PLAYING
           state.balls[0].vx = speed * Math.cos(Math.PI / 3)
           state.balls[0].vy = -speed * Math.sin(Math.PI / 3)
@@ -852,7 +869,7 @@ export const useGame = create(
       }
 
       if (get().state === GAME_STATE.STAGE_CLEAR) {
-        if (get().mode === GAME_MODE.STORY) {
+        if ([GAME_MODE.STORY, GAME_MODE.EXTRA_STORY].includes(get().mode)) {
           get().enterNextChapter()
         } else {
           get().enterNextStage()

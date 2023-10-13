@@ -23,6 +23,7 @@ function GameMenu () {
   const [unlockRealMode] = useState(() => { return window.localStorage.getItem(LOCAL_STORAGE_KEY.UNLOCK_REAL_CHALLENGE) })
   const {
     enterStoryMode,
+    enterExtraStoryMode,
     enterDadaChallengeMode,
     enterYodaChallengeMode,
     enterRealChallengeMode,
@@ -31,6 +32,7 @@ function GameMenu () {
   } = useGame(
     state => ({
       enterStoryMode: state.enterStoryMode,
+      enterExtraStoryMode: state.enterExtraStoryMode,
       enterDadaChallengeMode: state.enterDadaChallengeMode,
       enterYodaChallengeMode: state.enterYodaChallengeMode,
       enterRealChallengeMode: state.enterRealChallengeMode,
@@ -45,7 +47,7 @@ function GameMenu () {
     setMask(refMask.current)
   }, [])
 
-  // const [inStoryMenu, setInStoryMenu] = useState(false)
+  const [inStoryMenu, setInStoryMenu] = useState(false)
   const [inChallengeMenu, setInChallengeMenu] = useState(false)
 
   return (
@@ -55,23 +57,29 @@ function GameMenu () {
       <Sprite x={620} y={450} width={755 * 0.8} height={275 * 0.8} scale={{ x: 0.8, y: 0.8 }} image={IMG_URLS.TITLE} mask={mask} />
       <Graphics ref={refMask} preventRedraw draw={drawMask} />
       <Container x={0} y={695}>
-        {inChallengeMenu
-          ? (
-            <>
-              <MenuButton x={200} y={30} text='標準難度' onClick={enterDadaChallengeMode} />
-              <MenuButton x={760} y={30} text='幼妲難度' onClick={enterYodaChallengeMode} />
-              <MenuButton x={200} y={140} text={unlockRealMode ? '真妲難度' : '？？？？'} disabled={!unlockRealMode} onClick={enterRealChallengeMode} />
-              <MenuButton x={760} y={140} text='返回前頁' onClick={() => setInChallengeMenu(false)} />
-            </>
-            )
-          : (
-            <>
-              <MenuButton x={200} y={30} text='故事模式' onClick={enterStoryMode} />
-              <MenuButton x={760} y={30} text='挑戰模式' onClick={() => setInChallengeMenu(true)} />
-              <MenuButton x={200} y={140} text='遊戲說明' onClick={enterReadme} />
-              <MenuButton x={760} y={140} text='得分紀錄' onClick={enterScoreboard} />
-            </>
-            )}
+        {inStoryMenu && (
+          <>
+            <MenuButton x={200} y={30} text='正篇故事' onClick={enterStoryMode} />
+            <MenuButton x={760} y={30} text={unlockRealMode ? '附錄故事' : '？？？？'} disabled={!unlockRealMode} onClick={enterExtraStoryMode} />
+            <MenuButton x={760} y={140} text='返回前頁' onClick={() => setInStoryMenu(false)} />
+          </>
+        )}
+        {inChallengeMenu && (
+          <>
+            <MenuButton x={200} y={30} text='標準難度' onClick={enterDadaChallengeMode} />
+            <MenuButton x={760} y={30} text='幼妲難度' onClick={enterYodaChallengeMode} />
+            <MenuButton x={200} y={140} text={unlockRealMode ? '真妲難度' : '？？？？'} disabled={!unlockRealMode} onClick={enterRealChallengeMode} />
+            <MenuButton x={760} y={140} text='返回前頁' onClick={() => setInChallengeMenu(false)} />
+          </>
+        )}
+        {!inStoryMenu && !inChallengeMenu && (
+          <>
+            <MenuButton x={200} y={30} text='故事模式' onClick={() => setInStoryMenu(true)} />
+            <MenuButton x={760} y={30} text='挑戰模式' onClick={() => setInChallengeMenu(true)} />
+            <MenuButton x={200} y={140} text='遊戲說明' onClick={enterReadme} />
+            <MenuButton x={760} y={140} text='得分紀錄' onClick={enterScoreboard} />
+          </>
+        )}
       </Container>
     </>
   )
