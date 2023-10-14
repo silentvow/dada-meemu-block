@@ -124,7 +124,7 @@ export const useGame = create(
         state.sceneIndex = 0
       })
       get().reset()
-      sendEvent('enter', { name: 'enter-story-mode' })
+      sendEvent('enter-story-mode')
     },
 
     enterExtraStoryMode: () => {
@@ -136,35 +136,35 @@ export const useGame = create(
         state.sceneIndex = 0
       })
       get().reset()
-      sendEvent('enter', { name: 'enter-story-mode' })
+      sendEvent('enter-extra-story-mode')
     },
 
     enterDadaChallengeMode: () => {
       set(state => { state.mode = GAME_MODE.CHALLENGE_DADA })
       get().enterGame()
-      sendEvent('enter', { name: 'enter-dada-challenge-mode' })
+      sendEvent('enter-dada-challenge-mode')
     },
 
     enterYodaChallengeMode: () => {
       set(state => { state.mode = GAME_MODE.CHALLENGE_YODA })
       get().enterGame()
-      sendEvent('enter', { name: 'enter-yoda-challenge-mode' })
+      sendEvent('enter-yoda-challenge-mode')
     },
 
     enterRealChallengeMode: () => {
       set(state => { state.mode = GAME_MODE.CHALLENGE_REAL })
       get().enterGame()
-      sendEvent('enter', { name: 'enter-real-challenge-mode' })
+      sendEvent('enter-real-challenge-mode')
     },
 
     enterReadme: () => {
       set(state => { state.state = GAME_STATE.README })
-      sendEvent('enter', { name: 'enter-readme' })
+      sendEvent('enter-readme')
     },
 
     enterScoreboard: () => {
       set(state => { state.state = GAME_STATE.SCOREBOARD })
-      sendEvent('enter', { name: 'enter-scoreboard' })
+      sendEvent('enter-scoreboard')
     },
 
     enterGame: () => {
@@ -278,7 +278,7 @@ export const useGame = create(
     enterStage: (stage) => {
       get().setupStage(stage)
       get().setupBlocks(stage)
-      sendEvent('game', { name: 'game-start', stage })
+      sendEvent('game-start', { stage })
     },
 
     enterEndingPage: (complete) => {
@@ -297,7 +297,7 @@ export const useGame = create(
         window.localStorage.setItem(HIGH_SCORE_KEYS[mode], money.toString())
       }
       set(state => { state.state = GAME_STATE.ENDING; state.stageComplete = complete })
-      sendEvent('game', { name: 'game-over', mode, stage, complete, score: money })
+      sendEvent('game-over', { mode, stage, complete, score: money })
     },
 
     enterNextStage: () => {
@@ -759,7 +759,6 @@ export const useGame = create(
           console.warn('unknown item', item)
           break
       }
-      sendEvent('game', { name: 'catch-item', item })
     },
 
     gotoNextScene: () => {
@@ -786,7 +785,7 @@ export const useGame = create(
           body: JSON.stringify({ id: gId, name, score: money }),
         })
       } catch (e) {
-        sendEvent('error', { name: 'submit-score', message: e.message })
+        sendEvent('error-submit-score', { message: e.message })
       }
       closeSubmitModal()
     },
