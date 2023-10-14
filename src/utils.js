@@ -15,114 +15,80 @@ export function pointToRectDistance (point, rect) {
   return Math.sqrt(dx * dx + dy * dy)
 }
 
-/**
-  計算圓心到矩形最近點的距離。
+export function calculateCollision ({ circle, rectangle }) {
+  // Calculate relative velocity components
+  const vx = circle.vx
+  const vy = circle.vy
+  const radius = circle.radius
 
-  Args:
-    x: 圓心x坐標。
-    y: 圓心y坐標。
-    rx: 矩形左上角x坐標。
-    ry: 矩形左上角y坐標。
-    width: 矩形寬度。
-    height: 矩形高度。
+  // Initialize collision times for x-axis and y-axis
+  let tMinX, tMaxX, tMinY, tMaxY
 
-  Returns:
-    圓心到矩形最近點的距離。
-*/
-function distanceToRectangle ({ x, y, rx, ry, width, height }) {
-  // 計算圓心到矩形四個頂點的距離。
-
-  const d1 = Math.abs(x - rx)
-  const d2 = Math.abs(y - ry)
-  const d3 = Math.abs(x - rx - width)
-  const d4 = Math.abs(y - ry - height)
-
-  // 找到最近點的距離。
-
-  const d = Math.min(d1, d2, d3, d4)
-
-  return d
-}
-
-/**
-  計算圓與矩形碰撞所需的時間。
-
-  Args:
-    x: 圓心x坐標。
-    y: 圓心y坐標。
-    vx: 圓的x方向速度。
-    vy: 圓的y方向速度。
-    rx: 矩形左上角x坐標。
-    ry: 矩形左上角y坐標。
-    width: 矩形寬度。
-    height: 矩形高度。
-    radius: 圓的半徑。
-
-  Returns:
-    圓與矩形碰撞所需的時間，如果兩者不碰撞，則返回-1。
-*/
-export function timeToCollision ({ x, y, vx, vy, rx, ry, width, height, radius }) {
-  // 判斷圓形是否與矩形重疊。
-
-  const d = distanceToRectangle({ x, y, rx, ry, width, height })
-  if (d >= radius) { return -1 }
-
-  // 計算圓心與矩形最近點的連線與圓心速度的夾角。
-
-  // const theta = Math.acos((d *d - radius *radius - (vx *vx + vy *vy) / 2 * d) / (vx *vx))
-
-  // 計算圓心到矩形最近點的距離除以圓的速度。
-
-  const t = d / Math.sqrt(vx * vx + vy * vy)
-
-  return t
-}
-
-/**
-  計算碰撞的是矩形的水平面還是垂直面。
-
-  Args:
-    x: 圓心x坐標。
-    y: 圓心y坐標。
-    vx: 圓的x方向速度。
-    vy: 圓的y方向速度。
-    rx: 矩形左上角x坐標。
-    ry: 矩形左上角y坐標。
-    width: 矩形寬度。
-    height: 矩形高度。
-    radius: 圓的半徑。
-
-  Returns:
-    碰撞的是矩形的水平面還是垂直面，'horizontal'表示水平面，'vertical'表示垂直面。
-*/
-export function collisionSurface ({ x, y, vx, vy, rx, ry, width, height, radius }) {
-  // 判斷圓形是否與矩形重疊。
-
-  const d = distanceToRectangle(x, y, rx, ry, width, height)
-  if (d >= radius) {
-    return -1
-  }
-
-  // 計算圓心與矩形最近點的連線與圓心速度的夾角。
-
-  const theta = Math.acos((d ** 2 - radius ** 2 - (vx ** 2 + vy ** 2) / 2 * d) / (vx ** 2))
-  const t = timeToCollision({ x, y, vx, vy, rx, ry, width, height, radius })
-
-  // 計算圓心到矩形最近點的x分量。
-
-  const dx = x - rx + (vx * t) * Math.cos(theta)
-
-  // 計算圓心到矩形最近點的y分量。
-
-  // const dy = y - ry + (vy * t) * Math.sin(theta)
-
-  // 如果圓心到矩形最近點的x分量在矩形的寬度範圍內，則碰撞的是水平面。
-
-  if (Math.abs(dx) <= width / 2) {
-    return 'horizontal'
+  // Calculate the collision times along x-axis
+  if (vx !== 0) {
+    tMinX = (rectangle.x - (circle.x + radius)) / vx
+    tMaxX = (rectangle.x + rectangle.width - (circle.x - radius)) / vx
   } else {
-    return 'vertical'
+    // Circle is not moving horizontally, set extreme values for x-axis
+    tMinX = Number.POSITIVE_INFINITY
+    tMaxX = Number.POSITIVE_INFINITY
   }
+
+  // Calculate the collision times along y-axis
+  if (vy !== 0) {
+    tMinY = (rectangle.y - (circle.y + radius)) / vy
+    tMaxY = (rectangle.y + rectangle.height - (circle.y - radius)) / vy
+  } else {
+    // Circle is not moving vertically, set extreme values for y-axis
+    tMinY = Number.POSITIVE_INFINITY
+    tMaxY = Number.POSITIVE_INFINITY
+  }
+
+  // Find the earliest and latest collision times for both axes
+  let tx = Number.POSITIVE_INFINITY
+  if (tMinX > 0 && tMinX < tx &&
+    (circle.y + radius + vy * tMinX >= rectangle.y) &&
+    (circle.y - radius + vy * tMinX <= rectangle.y + rectangle.height)
+  ) {
+    tx = tMinX
+  }
+  if (tMaxX > 0 && tMaxX < tx &&
+    (circle.y + radius + vy * tMaxX >= rectangle.y) &&
+    (circle.y - radius + vy * tMaxX <= rectangle.y + rectangle.height)
+  ) {
+    tx = tMaxX
+  }
+
+  let ty = Number.POSITIVE_INFINITY
+  if (tMinY >= 0 && tMinY < ty &&
+    (circle.x + radius + vx * tMinY >= rectangle.x) &&
+    (circle.x - radius + vx * tMinY <= rectangle.x + rectangle.width)
+  ) {
+    ty = tMinY
+  }
+  if (tMaxY >= 0 && tMaxY < ty &&
+    (circle.x + radius + vx * tMaxY >= rectangle.x) &&
+    (circle.x - radius + vx * tMaxY <= rectangle.x + rectangle.width)
+  ) {
+    ty = tMaxY
+  }
+
+  // Check if there's a valid collision within the time interval
+  const time = Math.min(tx, ty)
+  if (!isFinite(time) || time > 1) {
+    // No collision within the time interval
+    return { time: null, surface: null }
+  }
+
+  // Determine the collision surface (horizontal or vertical)
+  let surface
+  if (tx < ty) {
+    surface = 'vertical'
+  } else {
+    surface = 'horizontal'
+  }
+
+  return { time, surface }
 }
 
 export function formatData (data) {

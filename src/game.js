@@ -69,6 +69,7 @@ import {
 import { IMG_KEY, PADDLE_IMG_KEY } from './constants/image'
 import { BLOCK_CHAR_MAP, FULL_STAGE_MAPS, STORY_STAGE_MAPS } from './constants/stages'
 import { ALL_CHAPTERS, EXTRA_CHAPTER, STORY_CHAPTER_1 } from './constants/story'
+import { calculateCollision } from './utils'
 import { sendEvent } from './utils/gtag'
 
 export const useGame = create(
@@ -544,37 +545,58 @@ export const useGame = create(
     },
 
     detectAllBallBlockCollision: () => {
-      const { balls, blocks, detectBallBlockCollisionX, detectBallBlockCollisionY } = get()
+      const { balls, blocks } = get()
       for (let i = 0; i < balls.length; ++i) {
         let isCollidedX = false
         let isCollidedY = false
-        let timeToX = Infinity
-        let timeToY = Infinity
+        const possibleHitBlocks = []
         for (let j = 0; j < blocks.length; ++j) {
           if (blocks[j].hp <= 0) continue
-          let isBlockHit = false
-          if (detectBallBlockCollisionX(i, j)) {
-            isBlockHit = true
-            isCollidedX = true
-            timeToX = Math.min(timeToX, get().timeToBallBlockCollisionX(i, j))
-          }
-          if (detectBallBlockCollisionY(i, j)) {
-            isBlockHit = true
-            isCollidedY = true
-            timeToY = Math.min(timeToY, get().timeToBallBlockCollisionY(i, j))
-          }
 
-          if (isBlockHit) {
-            get().damageBlock(j, BALL_ATK[balls[i].color])
+          const { time, surface } = calculateCollision({
+            circle: {
+              x: balls[i].x,
+              y: balls[i].y,
+              vx: balls[i].vx,
+              vy: balls[i].vy,
+              radius: balls[i].radius,
+            },
+            rectangle: {
+              x: blocks[j].x,
+              y: blocks[j].y,
+              width: BLOCK_WIDTH,
+              height: BLOCK_HEIGHT,
+            },
+          })
+          if (time !== null) {
+            possibleHitBlocks.push({ blockIdx: j, time, surface })
           }
         }
 
-        if (isCollidedX && timeToX <= timeToY) {
+        if (possibleHitBlocks.length === 0) continue
+        possibleHitBlocks.sort((x1, x2) => {
+          return x1.time - x2.time
+        })
+
+        possibleHitBlocks.forEach(({ blockIdx, time, surface }) => {
+          if (time > possibleHitBlocks[0].time) {
+            return
+          }
+
+          get().damageBlock(blockIdx, BALL_ATK[balls[i].color])
+          if (surface === 'horizontal') {
+            isCollidedY = true
+          } else if (surface === 'vertical') {
+            isCollidedX = true
+          }
+        })
+
+        if (isCollidedX) {
           set(state => {
             state.balls[i].vx = -state.balls[i].vx
           })
         }
-        if (isCollidedY && timeToY <= timeToX) {
+        if (isCollidedY) {
           set(state => {
             state.balls[i].vy = -state.balls[i].vy
           })
@@ -582,30 +604,6 @@ export const useGame = create(
       }
 
       get().removeDeadBlocks()
-    },
-
-    detectBallBlockCollisionX: (ballIdx, blockIdx) => {
-      const ball = get().balls[ballIdx]
-      const block = get().blocks[blockIdx]
-      if (ball.x + ball.radius < block.x) return false
-      if (ball.x - ball.radius > block.x + BLOCK_WIDTH) return false
-      if (ball.y + ball.radius < block.y) return false
-      if (ball.y - ball.radius > block.y + BLOCK_HEIGHT) return false
-      if (ball.x < block.x && ball.vx > 0) return true
-      if (ball.x > block.x + BLOCK_WIDTH && ball.vx < 0) return true
-      return false
-    },
-
-    detectBallBlockCollisionY: (ballIdx, blockIdx) => {
-      const ball = get().balls[ballIdx]
-      const block = get().blocks[blockIdx]
-      if (ball.x + ball.radius < block.x) return false
-      if (ball.x - ball.radius > block.x + BLOCK_WIDTH) return false
-      if (ball.y + ball.radius < block.y) return false
-      if (ball.y - ball.radius > block.y + BLOCK_HEIGHT) return false
-      if (ball.y < block.y && ball.vy > 0) return true
-      if (ball.y > block.y + BLOCK_HEIGHT && ball.vy < 0) return true
-      return false
     },
 
     detectAllItemPaddleCollision: () => {
