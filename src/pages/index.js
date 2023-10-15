@@ -92,9 +92,21 @@ function Home () {
             >
               <Link
                 href='/'
+                className='text-lg font-medium transition-colors hover:text-primary'
+              >
+                <b>DaDa &amp; MeeMu&rsquo;s Treasure Hunt</b>
+              </Link>
+              <Link
+                href='/about'
                 className='text-md font-medium transition-colors hover:text-primary'
               >
-                DaDa &amp; MeeMu&rsquo;s Treasure Hunt
+                About
+              </Link>
+              <Link
+                href='/changelog'
+                className='text-md font-medium transition-colors hover:text-primary'
+              >
+                Changelog
               </Link>
             </nav>
             <div className='ml-auto flex items-center space-x-4'>
@@ -165,6 +177,7 @@ function Home () {
           </div>
         </div>
       </div>
+      <div className='flex justify-center'>Please report any bugs, problems, or issues you may have found to GitHub while playing this game.</div>
     </>
   )
 }
