@@ -37,7 +37,7 @@ export default function App ({ Component, pageProps }) {
         <meta property='og:type' content='website' />
         <meta property='og:title' content='【同人遊戲】灰妲x咪姆x遺跡尋寶' />
         <meta property='og:description' content={description} />
-        <meta property='og:image' content='https://dada-meemu-block.vercel.app/img/og.png' />
+        <meta property='og:image' content='https://dada-meemu-block.vercel.app/img/commission/og.png' />
         <meta property='og:image:alt' content={description} />
         <meta property='og:image:type' content='image/png' />
         <meta property='og:image:width' content='1200' />
@@ -45,7 +45,7 @@ export default function App ({ Component, pageProps }) {
         <meta name='twitter:card' content='summary_large_image' />
         <meta name='twitter:title' content='【同人遊戲】灰妲x咪姆x遺跡尋寶' />
         <meta name='twitter:site' content='@tn604000' />
-        <meta name='twitter:image' content='https://dada-meemu-block.vercel.app/img/x.png' />
+        <meta name='twitter:image' content='https://dada-meemu-block.vercel.app/img/commission/x.png' />
         <meta name='twitter:image:alt' content={description} />
         <meta name='twitter:description' content={description} />
         <meta name='twitter:creator' content='@tn604000' />

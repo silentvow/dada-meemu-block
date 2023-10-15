@@ -1,40 +1,51 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## Getting Started
+# DaDa & Meemu's s Treasure Hunt
 
-First, run the development server:
+Play: https://dada-meemu-block.vercel.app/
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Image Licenses
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- public/img/dada/*:
+  - Source: [ReLive_灰妲 DaDa](https://www.youtube.com/@ReLiveDaDa) [![DadaRelive][1.1]][1]
+- public/img/meemu/*:
+  - Source: [ReLive_咪姆 MeeMu](https://www.youtube.com/@relive_meemu4350) [![MeeMuRelive][1.1]][2]
+- public/img/commission/*:
+  - Source: [黑櫻焦阿巴](https://twitter.com/kuroo_sd) [![kuroo_sd][1.1]][3]
+- Other image sources:
+  - [いらすとや](https://www.irasutoya.com/)
+  - [Rotting Pixels](https://rottingpixels.itch.io/four-seasons-platformer-tileset-16x16free)
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+<!-- Please don't remove this: Grab your social icons from https://github.com/carlsednaoui/gitsocial -->
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+<!-- links to social media icons -->
+<!-- no need to change these -->
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+<!-- icons with padding -->
 
-## Learn More
+[1.1]: http://i.imgur.com/tXSoThF.png (twitter icon with padding)
+[2.1]: http://i.imgur.com/P3YfQoD.png (facebook icon with padding)
+[3.1]: http://i.imgur.com/yCsTjba.png (google plus icon with padding)
+[4.1]: http://i.imgur.com/YckIOms.png (tumblr icon with padding)
+[5.1]: http://i.imgur.com/1AGmwO3.png (dribbble icon with padding)
+[6.1]: http://i.imgur.com/0o48UoR.png (github icon with padding)
 
-To learn more about Next.js, take a look at the following resources:
+<!-- icons without padding -->
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+[1.2]: http://i.imgur.com/wWzX9uB.png (twitter icon without padding)
+[2.2]: http://i.imgur.com/fep1WsG.png (facebook icon without padding)
+[3.2]: http://i.imgur.com/VlgBKQ9.png (google plus icon without padding)
+[4.2]: http://i.imgur.com/jDRp47c.png (tumblr icon without padding)
+[5.2]: http://i.imgur.com/Vvy3Kru.png (dribbble icon without padding)
+[6.2]: http://i.imgur.com/9I6NRUm.png (github icon without padding)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+<!-- links to your social media accounts -->
+<!-- update these accordingly -->
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+[1]: https://twitter.com/DadaRelive
+[2]: https://twitter.com/MeeMuRelive
+[3]: https://twitter.com/kuroo_sd
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+<!-- Please don't remove this: Grab your social icons from https://github.com/carlsednaoui/gitsocial -->
