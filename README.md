@@ -4,14 +4,30 @@
 
 Play: https://dada-meemu-block.vercel.app/
 
+This is a fan-made, second-generation adaptation of a brick-breaking game by React and Pixi.js.
+
+## Development
+
+```bash
+$ npm install
+$ npm run dev
+```
+
+## Build
+
+```bash
+$ npm run build
+```
+
 ## Image Licenses
 
-- public/img/dada/*:
-  - Source: [ReLive_灰妲 DaDa](https://www.youtube.com/@ReLiveDaDa) [![DadaRelive][1.1]][1]
-- public/img/meemu/*:
-  - Source: [ReLive_咪姆 MeeMu](https://www.youtube.com/@relive_meemu4350) [![MeeMuRelive][1.1]][2]
-- public/img/commission/*:
-  - Source: [黑櫻焦阿巴](https://twitter.com/kuroo_sd) [![kuroo_sd][1.1]][3]
+- Images under public/img/dada
+  - Source: ReLive_灰妲 DaDa [![DadaRelive][2.1]][4] [![DadaRelive][1.1]][1]
+- Images under public/img/meemu
+  - Source: ReLive_咪姆 MeeMu
+  [![MeeMuRelive][2.1]][5] [![MeeMuRelive][1.1]][2]
+- Images under public/img/commission
+  - Source: 黑櫻焦阿巴 [![kuroo_sd][1.1]][3]
 - Other image sources:
   - [いらすとや](https://www.irasutoya.com/)
   - [Rotting Pixels](https://rottingpixels.itch.io/four-seasons-platformer-tileset-16x16free)
@@ -22,24 +38,8 @@ Play: https://dada-meemu-block.vercel.app/
 <!-- links to social media icons -->
 <!-- no need to change these -->
 
-<!-- icons with padding -->
-
-[1.1]: http://i.imgur.com/tXSoThF.png (twitter icon with padding)
-[2.1]: http://i.imgur.com/P3YfQoD.png (facebook icon with padding)
-[3.1]: http://i.imgur.com/yCsTjba.png (google plus icon with padding)
-[4.1]: http://i.imgur.com/YckIOms.png (tumblr icon with padding)
-[5.1]: http://i.imgur.com/1AGmwO3.png (dribbble icon with padding)
-[6.1]: http://i.imgur.com/0o48UoR.png (github icon with padding)
-
-<!-- icons without padding -->
-
-[1.2]: http://i.imgur.com/wWzX9uB.png (twitter icon without padding)
-[2.2]: http://i.imgur.com/fep1WsG.png (facebook icon without padding)
-[3.2]: http://i.imgur.com/VlgBKQ9.png (google plus icon without padding)
-[4.2]: http://i.imgur.com/jDRp47c.png (tumblr icon without padding)
-[5.2]: http://i.imgur.com/Vvy3Kru.png (dribbble icon without padding)
-[6.2]: http://i.imgur.com/9I6NRUm.png (github icon without padding)
-
+[1.1]: https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white (twitter)
+[2.1]: https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white (youtube)
 
 <!-- links to your social media accounts -->
 <!-- update these accordingly -->
@@ -47,5 +47,7 @@ Play: https://dada-meemu-block.vercel.app/
 [1]: https://twitter.com/DadaRelive
 [2]: https://twitter.com/MeeMuRelive
 [3]: https://twitter.com/kuroo_sd
+[4]: https://www.youtube.com/@ReLiveDaDa
+[5]: https://www.youtube.com/@relive_meemu4350
 
 <!-- Please don't remove this: Grab your social icons from https://github.com/carlsednaoui/gitsocial -->
