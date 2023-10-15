@@ -4,7 +4,7 @@
 
 Play: https://dada-meemu-block.vercel.app/
 
-This is a fan-made, second-generation adaptation of a brick-breaking game by React and Pixi.js.
+This is a fan-made, derivative work of a brick-breaking game by React and Pixi.js.
 
 ## Development
 
