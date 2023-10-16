@@ -15,7 +15,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 
-function Home () {
+function About () {
   const { setTheme } = useTheme()
 
   return (
@@ -122,7 +122,7 @@ function Home () {
         </div>
         <div className='flex-1 p-8 flex justify-center'>
           <div>
-            <p className='pb-8 text-4xl'>This work is based on...</p>
+            <p className='pb-8 text-4xl'>Motivation</p>
             <iframe width='1280' height='720' src='https://www.youtube.com/embed/1w4Ktq3c_Mc?si=W80OdoZUu8-LhCzL' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' allowfullscreen />
           </div>
         </div>
@@ -131,4 +131,4 @@ function Home () {
   )
 }
 
-export default Home
+export default About
