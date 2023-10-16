@@ -188,11 +188,13 @@ export const useGame = create(
               x: x * BLOCK_WIDTH,
               y: y * BLOCK_HEIGHT + TOP_BORDER_HEIGHT,
               hp: BLOCK_HP[type],
+              item: null,
               type,
             })
           }
         }
 
+        const length = state.blocks.filter(block => isFinite(block.hp)).length
         const items = []
         let buffItems = BUFF_ITEMS.concat([ITEM.UNKNOWN])
         let debuffItems = DEBUFF_ITEMS.concat([ITEM.UNKNOWN])
@@ -202,33 +204,34 @@ export const useGame = create(
         }
         state.knownItems = [...buffItems, ...debuffItems].filter(item => item !== ITEM.UNKNOWN)
 
-        for (let i = 0; i < state.blocks.length * DROP_RATIO_BUFF; ++i) {
+        for (let i = 1; i < length * DROP_RATIO_BUFF; ++i) {
           items.push(buffItems[Math.floor(Math.random() * buffItems.length)])
         }
-        for (let i = 0; i < state.blocks.length * DROP_RATIO_DEBUFF; ++i) {
+        for (let i = 1; i < length * DROP_RATIO_DEBUFF; ++i) {
           items.push(debuffItems[Math.floor(Math.random() * debuffItems.length)])
         }
-        for (let i = 0; i < state.blocks.length * DROP_RATIO_MONEY_XL; ++i) {
+        for (let i = 1; i < length * DROP_RATIO_MONEY_XL; ++i) {
           items.push(ITEM.MONEY_XL)
         }
-        for (let i = 0; i < state.blocks.length * DROP_RATIO_MONEY_LG; ++i) {
+        for (let i = 1; i < length * DROP_RATIO_MONEY_LG; ++i) {
           items.push(ITEM.MONEY_LG)
         }
-        for (let i = 0; i < state.blocks.length * DROP_RATIO_MONEY_MD; ++i) {
+        for (let i = 1; i < length * DROP_RATIO_MONEY_MD; ++i) {
           items.push(ITEM.MONEY_MD)
         }
-        for (let i = 0; i < state.blocks.length * DROP_RATIO_MONEY_SM; ++i) {
+        for (let i = 1; i < length * DROP_RATIO_MONEY_SM; ++i) {
           items.push(ITEM.MONEY_SM)
         }
-        for (let i = 0; i < state.blocks.length * DROP_RATIO_MONEY_XS; ++i) {
+        for (let i = 1; i < length * DROP_RATIO_MONEY_XS; ++i) {
           items.push(ITEM.MONEY_XS)
         }
-        for (let i = items.length; i < state.blocks.length; ++i) {
+        for (let i = items.length; i < length; ++i) {
           items.push(null)
         }
         const shuffledItems = shuffle(items)
-        for (let i = 0; i < state.blocks.length; ++i) {
-          state.blocks[i].item = shuffledItems[i]
+        for (let i = 0, j = 0; i < state.blocks.length; ++i) {
+          if (!isFinite(state.blocks[i].hp)) continue
+          state.blocks[i].item = shuffledItems[j++]
         }
       })
     },

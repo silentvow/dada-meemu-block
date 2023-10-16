@@ -44,11 +44,11 @@ function drawTextArea (g) {
 
 function getResultOf ({ mode, money }) {
   if ([GAME_MODE.STORY, GAME_MODE.EXTRA_STORY].includes(mode)) {
-    if (money >= 12500000) { return '鸚鵡王' }
-    if (money >= 11000000) { return '挖到石油的鸚鵡' }
+    if (money >= 12000000) { return '鸚鵡王' }
+    if (money >= 10500000) { return '挖到石油的鸚鵡' }
     if (money >= 9000000) { return '鸚鵡幫幹部' }
-    if (money >= 6000000) { return '正職間諜鸚鵡' }
-    if (money >= 3000000) { return '見習間諜鸚鵡' }
+    if (money >= 6500000) { return '正職間諜鸚鵡' }
+    if (money >= 4000000) { return '見習間諜鸚鵡' }
     return '雞腿'
   }
 
