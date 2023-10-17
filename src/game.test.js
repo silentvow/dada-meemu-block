@@ -18,6 +18,18 @@ test('stage test', () => {
   })
 
   let sum = 0
+  for (let i = 0; i < 5; i++) {
+    act(() => {
+      result.current.enterStage(i)
+    })
+    result.current.blocks.forEach(block => {
+      sum += MONEY_VALUES[block.item] || 0
+    })
+  }
+
+  expect(sum).toBe(12832000)
+
+  sum = 0
   for (let i = 0; i < 20; i++) {
     act(() => {
       result.current.enterStage(i)
@@ -26,7 +38,6 @@ test('stage test', () => {
       sum += MONEY_VALUES[block.item] || 0
     })
   }
-  console.log({ sum })
 
-  expect()
+  expect(sum).toBe(523432000)
 })
