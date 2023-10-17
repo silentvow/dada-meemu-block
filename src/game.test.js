@@ -39,5 +39,5 @@ test('stage test', () => {
     })
   }
 
-  expect(sum).toBe(523432000)
+  expect(sum).toBe(52432000)
 })

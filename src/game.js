@@ -904,6 +904,12 @@ export const useGame = create(
           get().resume()
         }
       }
+      if (event.key === 'd' || event.key === 'D') {
+        event.preventDefault()
+        if (get().state === GAME_STATE.PLAYING) {
+          get().failStage()
+        }
+      }
     },
 
     onGameTouchEnd: (event) => {
