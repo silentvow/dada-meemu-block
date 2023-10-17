@@ -53,11 +53,11 @@ function getResultOf ({ mode, money }) {
   }
 
   /* NOTE: challenge mode */
-  if (money >= 500000000) { return '鸚鵡王' }
-  if (money >= 420000000) { return '挖到石油的鸚鵡' }
-  if (money >= 360000000) { return '鸚鵡幫幹部' }
-  if (money >= 250000000) { return '正職間諜鸚鵡' }
-  if (money >= 150000000) { return '見習間諜鸚鵡' }
+  if (money >= 48000000) { return '鸚鵡王' }
+  if (money >= 42000000) { return '挖到石油的鸚鵡' }
+  if (money >= 36000000) { return '鸚鵡幫幹部' }
+  if (money >= 25000000) { return '正職間諜鸚鵡' }
+  if (money >= 14000000) { return '見習間諜鸚鵡' }
   return '雞腿'
 }
 
