@@ -39,7 +39,6 @@ export const IMG_KEY = {
   DINING_ROOM: 'DINING_ROOM',
   BREAKFAST: 'BREAKFAST',
   GO_OUTSIDE: 'GO_OUTSIDE',
-  NETWORK: 'NETWORK',
 }
 
 export const IMG_URLS = {
@@ -120,7 +119,6 @@ export const IMG_URLS = {
   [IMG_KEY.DINING_ROOM]: '/img/story/dining-room.png',
   [IMG_KEY.BREAKFAST]: '/img/story/breakfast.png',
   [IMG_KEY.GO_OUTSIDE]: '/img/story/go-outside.png',
-  [IMG_KEY.NETWORK]: '/img/story/network.jpg',
 }
 
 /**
@@ -168,7 +166,6 @@ export const SPRITE = {
   [IMG_KEY.DINING_ROOM]: { x: 640, y: 695, width: 800, height: 800, anchor: [0.5, 1], scale: { x: 800 / 587, y: 800 / 587 }, image: IMG_URLS[IMG_KEY.DINING_ROOM] },
   [IMG_KEY.BREAKFAST]: { x: 640, y: 400, anchor: [0.5, 0.5], scale: { x: 0.3, y: 0.3 }, image: IMG_URLS[IMG_KEY.BREAKFAST] },
   [IMG_KEY.GO_OUTSIDE]: { x: 640, y: 10, anchor: [0.5, 0], scale: { x: 675 / 800, y: 675 / 800 }, image: IMG_URLS[IMG_KEY.GO_OUTSIDE] },
-  [IMG_KEY.NETWORK]: { x: 640, y: 10, anchor: [0.5, 0], scale: { x: 675 / 450, y: 675 / 450 }, image: IMG_URLS[IMG_KEY.NETWORK] },
 }
 
 export const PADDLE_IMG_KEY = {

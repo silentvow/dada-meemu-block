@@ -1,30 +1,16 @@
 import { Container, Stage, withFilters } from '@pixi/react'
-import { Moon, Sun } from 'lucide-react'
-import { useTheme } from 'next-themes'
-import Link from 'next/link'
 import { Assets, ColorMatrixFilter } from 'pixi.js'
 import { useEffect, useState } from 'react'
 
 import Background from '@/components/Background'
 import Ending from '@/components/Ending'
 import GameMenu from '@/components/GameMenu'
+import Header from '@/components/Header'
 import MainGame from '@/components/MainGame'
 import Readme from '@/components/Readme'
 import Scoreboard from '@/components/Scoreboard'
 import Storyboard from '@/components/Storyboard'
 import SubmitDialog from '@/components/SubmitDialog'
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from '@/components/ui/avatar'
-import { Button } from '@/components/ui/button'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
 import { GAME_STATE, IN_GAME_STATES, SCREEN_HEIGHT, SCREEN_WIDTH, TOP_BORDER_HEIGHT } from '@/constants/game'
 import { IMG_URLS } from '@/constants/image'
 import { FONT_TEST_STRING } from '@/constants/text'
@@ -44,7 +30,6 @@ function handleStageMount (app) {
 }
 
 function Home () {
-  const { setTheme } = useTheme()
   const [fontsLoaded, setFontsLoaded] = useState(false)
   const [assetsLoaded, setAssetsLoaded] = useState(false)
   const {
@@ -81,67 +66,11 @@ function Home () {
 
   return (
     <>
-      <div className='flex md:hidden'>
-        This website is not supported on screen smaller than 768px.
+      <Header />
+      <div className='flex sm:hidden'>
+        This website is not supported on screen smaller than 640px.
       </div>
-      <div className='hidden flex-col md:flex'>
-        <div className='border-b'>
-          <div className='flex h-16 items-center px-4'>
-            <nav
-              className='flex items-center space-x-4 lg:space-x-6'
-            >
-              <Link
-                href='/'
-                className='text-lg font-medium transition-colors hover:text-primary'
-              >
-                <Avatar className='h-8 w-8'>
-                  <AvatarImage src='/apple-touch-icon.png' alt='github' />
-                  <AvatarFallback>DM</AvatarFallback>
-                </Avatar>
-              </Link>
-              <Link
-                href='/about'
-                className='text-md font-medium transition-colors hover:text-primary'
-              >
-                About
-              </Link>
-              <Link
-                href='/changelog'
-                className='text-md font-medium transition-colors hover:text-primary'
-              >
-                Changelog
-              </Link>
-            </nav>
-            <div className='ml-auto flex items-center space-x-4'>
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant='ghost' size='icon'>
-                    <Sun className='h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0' />
-                    <Moon className='absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100' />
-                    <span className='sr-only'>Toggle theme</span>
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align='end'>
-                  <DropdownMenuItem onClick={() => setTheme('light')}>
-                    Light
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => setTheme('dark')}>
-                    Dark
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => setTheme('system')}>
-                    System
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-              <Link target='_blank' href='https://github.com/silentvow/dada-meemu-block'>
-                <Avatar className='h-8 w-8'>
-                  <AvatarImage src='https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png' alt='github' />
-                  <AvatarFallback>GH</AvatarFallback>
-                </Avatar>
-              </Link>
-            </div>
-          </div>
-        </div>
+      <div className='hidden flex-col sm:flex'>
         <div className='flex-1 p-8 flex justify-center'>
           <div className='border-2 border-black select-none'>
             {assetsLoaded && fontsLoaded
@@ -179,8 +108,8 @@ function Home () {
             <SubmitDialog open={showSubmitModal} onSubmit={submitScoreAndCloseModal} onClose={closeSubmitModal} />
           </div>
         </div>
+        <div className='flex justify-center'>Please report any bugs, problems, or issues you may have found to GitHub while playing this game.</div>
       </div>
-      <div className='flex justify-center'>Please report any bugs, problems, or issues you may have found to GitHub while playing this game.</div>
     </>
   )
 }

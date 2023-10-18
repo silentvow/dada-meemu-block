@@ -1273,10 +1273,35 @@ export const EXTRA_CHAPTER = [
     content: '灰妲走出家門，準備開始一天的工作。',
   },
   {
-    sprites: [
-      SPRITE[IMG_KEY.NETWORK],
-      SPRITE[IMG_KEY.REAL_DA],
+    graphics: [
+      {
+        draw: (g) => {
+          g.beginFill(0x5B3138)
+          g.drawRect(40, 10, 1200, 675)
+          g.endFill()
+        },
+      },
     ],
-    content: '【真妲】\n「螢幕前的各位也要認真工作唷～掰掰～」',
+    sprites: [
+      SPRITE[IMG_KEY.GO_OUTSIDE],
+    ],
+    texts: [
+      {
+        x: 1240 - 16,
+        y: 695 - 16,
+        text: 'Fin.',
+        anchor: [1, 1],
+        style: new TextStyle({
+          align: 'right',
+          fontSize: 48,
+          fontFamily: 'Roboto, "Xiaolai Mono SC", sans-serif',
+          lineHeight: 48 * 1.2,
+          fill: '#ffffff',
+          strokeThickness: 5,
+        }),
+      },
+    ],
+    content: '',
+    desaturate: true,
   },
 ]
