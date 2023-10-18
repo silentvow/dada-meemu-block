@@ -77,16 +77,25 @@ function Home () {
         </div>
         <div className='p-8 flex justify-center'>
           <div className='w-[1280px]'>
+            <h2 className='text-2xl border-b border-b-foreground'>2023-10-17</h2>
+            <ul className='list-disc p-6'>
+              <li>feat: add suicide function</li>
+              <li>feat: adjust score levels</li>
+            </ul>
+            <h2 className='text-2xl border-b border-b-foreground'>2023-10-16</h2>
+            <ul className='list-disc p-6'>
+              <li>feat: add changelog page</li>
+            </ul>
             <h2 className='text-2xl border-b border-b-foreground'>2023-10-15</h2>
             <ul className='list-disc p-6'>
               <li>feat: add readme and license</li>
-              <li>feat: add about and changelog pages</li>
+              <li>feat: add about page</li>
             </ul>
             <h2 className='text-2xl border-b border-b-foreground'>2023-10-14</h2>
             <ul className='list-disc p-6'>
               <li>feat: add extra story</li>
               <li>feat: update button design</li>
-              <li>fix: collision issues</li>
+              <li>fix: ball collision issues</li>
             </ul>
             <h2 className='text-2xl border-b border-b-foreground'>2023-10-11</h2>
             <ul className='list-disc p-6'>

@@ -94,7 +94,10 @@ function Home () {
                 href='/'
                 className='text-lg font-medium transition-colors hover:text-primary'
               >
-                <b>DaDa &amp; MeeMu&rsquo;s Treasure Hunt</b>
+                <Avatar className='h-8 w-8'>
+                  <AvatarImage src='/apple-touch-icon.png' alt='github' />
+                  <AvatarFallback>DM</AvatarFallback>
+                </Avatar>
               </Link>
               <Link
                 href='/about'
