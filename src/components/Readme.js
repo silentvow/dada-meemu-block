@@ -5,7 +5,7 @@ import { Container, Graphics, Sprite, Text } from '@pixi/react'
 import { TextStyle } from 'pixi.js'
 import MenuButton from './MenuButton'
 
-const INTRODUCE_TEXT = `遊戲規則：
+export const INTRODUCE_TEXT = `遊戲規則：
 用滑鼠移動灰妲反彈咪姆或者點擊左鍵發射火球以消除
 所有方塊，獲取掉落的金錢，避免咪姆掉落至灰妲下方。
         點擊Ｐ鍵暫停或恢復遊戲，點擊Ｄ鍵立刻失敗。
@@ -21,7 +21,7 @@ const INTRODUCE_TEXT = `遊戲規則：
   獲得 $${MONEY_VALUES[ITEM.MONEY_XS]}              隨機一種非錢物品效果
 `
 
-const STAFF_TEXT = `設計製作：彼得與狼
+export const STAFF_TEXT = `設計製作：彼得與狼
 彩圖繪製：黑櫻焦阿巴
 素材來源：ReLive_灰妲 DaDa、ReLive_咪姆 MeeMu、
           いらすとや、Rotting Pixels`

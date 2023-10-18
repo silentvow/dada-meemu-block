@@ -25,6 +25,8 @@ const FilterContainer = withFilters(Container, {
 function handleStageMount (app) {
   const canvas = document.querySelector('canvas')
   if (!canvas) return
+  canvas.style.minWidth = 'min(1440px, 100vw)'
+  canvas.style.minHeight = 'min(1080px, calc(100vw * 3 / 4))'
   canvas.style.maxWidth = '100vw'
   canvas.style.maxHeight = 'calc(100vw * 3 / 4)'
 }
