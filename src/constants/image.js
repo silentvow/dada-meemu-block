@@ -89,7 +89,7 @@ export const IMG_URLS = {
   [IMG_KEY.LINE_CENTERING]: '/img/story/bg-centering.png',
   [IMG_KEY.LINE_SPEED_UP]: '/img/story/bg-speed-up.png',
   [IMG_KEY.STONE]: '/img/story/stone.png',
-  [IMG_KEY.BG_SAND]: '/img/story/bg-sand.jpg',
+  [IMG_KEY.BG_SAND]: '/img/story/bg-rock.png',
   [IMG_KEY.TWO_CAVE]: '/img/story/two-cave.png',
   [IMG_KEY.GATE_CLOSED]: '/img/story/gate-closed.png',
   [IMG_KEY.GATE_OPENED]: '/img/story/gate-opened.png',
