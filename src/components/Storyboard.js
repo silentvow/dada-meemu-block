@@ -71,7 +71,7 @@ function Storyboard () {
         }}
       >
         {story.graphics?.map((graphic, i) => <Graphics key={i} mask={mask} {...graphic} />)}
-        {story.sprites?.map((sprite, i) => <Sprite key={`${sprite.image}-${sprite.x}-${sprite.y}`} mask={mask} {...sprite} />)}
+        {story.sprites?.map(({ filters, ...sprite }, i) => <Sprite key={`${sprite.image}-${sprite.x}-${sprite.y}`} mask={mask} {...sprite} filters={filters?.() ?? null} />)}
         {story.texts?.map((text, i) => <Text key={i} style={textStyle} {...text} />)}
       </FilterContainer>
       {story.content && (

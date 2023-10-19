@@ -108,9 +108,9 @@ export const STORY_CHAPTER_1 = [
   {
     sprites: [
       SPRITE[IMG_KEY.OFFICE],
-      SPRITE[IMG_KEY.DADA_01],
+      { ...SPRITE[IMG_KEY.DADA_02], x: -180 },
     ],
-    content: '【灰妲】\n「上屆亞軍不用比預賽啦，出發GOGO！。」',
+    content: '【灰妲】\n「上屆亞軍不用比預賽啦，出發GOGO！」',
   },
   {
     sprites: [
@@ -120,9 +120,28 @@ export const STORY_CHAPTER_1 = [
   },
   {
     sprites: [
+      SPRITE[IMG_KEY.RUIN_ENTRY],
+    ],
+    content: '一段時間後，兩人到了一座遺跡前。',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.RUIN_ENTRY],
+      SPRITE[IMG_KEY.DADA_01],
+    ],
+    content: '【灰妲】\n「呼呼，我聞到寶藏的味道了。」',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.RUIN_ENTRY],
+    ],
+    content: '兩人抱著些許的興奮踏入遺跡。',
+  },
+  {
+    sprites: [
       SPRITE[IMG_KEY.WALL],
     ],
-    content: '一段時間後，兩人到了一座遺跡裏，面前出現了一堵牆。',
+    content: '走啊走啊走，前方突然出現了一面牆。',
   },
   {
     sprites: [
@@ -143,7 +162,7 @@ export const STORY_CHAPTER_1 = [
       SPRITE[IMG_KEY.WALL],
       SPRITE[IMG_KEY.MEEMU],
     ],
-    content: '【咪姆】\n「前面就沒路了，你那圖顯然是錯的。」',
+    content: '【咪姆】\n「這麼快就沒路了，你那圖顯然是錯的。」',
   },
   {
     sprites: [
@@ -833,10 +852,11 @@ export const ALL_CHAPTERS = [
   STORY_FINAL,
 ]
 
-const blurFilter = new BlurFilter()
-blurFilter.blur = 10
-const blurFilter2 = new BlurFilter()
-blurFilter2.blur = 20
+const createBlurFilter = (blur) => {
+  const filter = new BlurFilter()
+  filter.blur = blur
+  return filter
+}
 
 export const EXTRA_CHAPTER = [
   {
@@ -847,33 +867,33 @@ export const EXTRA_CHAPTER = [
   },
   {
     sprites: [
-      { ...SPRITE[IMG_KEY.ENDING], filters: [blurFilter] },
+      { ...SPRITE[IMG_KEY.ENDING], filters: () => { return [createBlurFilter(10)] } },
       SPRITE[IMG_KEY.REAL_DA],
     ],
     content: '【真妲】\n「起床了～」',
   },
   {
     sprites: [
-      { ...SPRITE[IMG_KEY.ENDING], filters: [blurFilter] },
+      { ...SPRITE[IMG_KEY.ENDING], filters: () => { return [createBlurFilter(10)] } },
     ],
     content: '【灰妲】\n「哈哈哈哈哈哈哈－」',
   },
   {
     sprites: [
-      { ...SPRITE[IMG_KEY.ENDING], filters: [blurFilter2] },
+      { ...SPRITE[IMG_KEY.ENDING], filters: () => { return [createBlurFilter(20)] } },
       { ...SPRITE[IMG_KEY.REAL_DA], scale: { x: 0.85, y: 0.85 } },
     ],
     content: '【真妲】\n「起～床～了～」',
   },
   {
     sprites: [
-      { ...SPRITE[IMG_KEY.ENDING], filters: [blurFilter2] },
+      { ...SPRITE[IMG_KEY.ENDING], filters: () => { return [createBlurFilter(20)] } },
     ],
     content: '【灰妲】\n「哈哈哈－」',
   },
   {
     sprites: [
-      { ...SPRITE[IMG_KEY.ENDING], filters: [blurFilter2] },
+      { ...SPRITE[IMG_KEY.ENDING], filters: () => { return [createBlurFilter(20)] } },
       { ...SPRITE[IMG_KEY.REAL_DA], scale: { x: 1, y: 1 } },
     ],
     content: '【真妲】\n「快！點！起！床！」',
