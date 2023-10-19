@@ -291,7 +291,7 @@ export const STORY_CHAPTER_2 = [
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.BG_ROCK],
+      SPRITE[IMG_KEY.RUIN_ENTRY],
       SPRITE[IMG_KEY.STONE],
     ],
     content: '遺跡開始劇烈震動，一塊巨大的石塊從天而降，重重地砸在入口前，將其完全堵住。',
@@ -325,7 +325,7 @@ export const STORY_CHAPTER_3 = [
       SPRITE[IMG_KEY.TWO_CAVE],
       SPRITE[IMG_KEY.MEEMU],
     ],
-    content: '【咪姆】\n「灰妲！走哪邊！」',
+    content: '【咪姆】\n「灰妲！我們要往哪邊走！」',
   },
   {
     sprites: [
@@ -353,34 +353,34 @@ export const STORY_CHAPTER_3 = [
       SPRITE[IMG_KEY.TWO_CAVE],
       SPRITE[IMG_KEY.MEEMU],
     ],
-    content: '【咪姆】\n「那我們怎麼辦？」',
+    content: '【咪姆】\n「那到底該怎麼辦？」',
   },
   {
     sprites: [
       SPRITE[IMG_KEY.TWO_CAVE],
       { ...SPRITE[IMG_KEY.DADA_02], x: -140 },
     ],
-    content: '【灰妲】\n「我看就隨便選一邊走吧，能有多糟？」',
+    content: '【灰妲】\n「就隨便選一邊走吧，能有多糟？」',
   },
   {
     sprites: [
       SPRITE[IMG_KEY.TWO_CAVE],
       SPRITE[IMG_KEY.MEEMU],
     ],
-    content: '【咪姆】\n「那就選左邊吧，路看起來比較粗。」',
+    content: '【咪姆】\n「那就選左邊吧，路看起來比較直。」',
   },
   {
     sprites: [
       SPRITE[IMG_KEY.TWO_CAVE],
       { ...SPRITE[IMG_KEY.DADA_02], x: -140 },
     ],
-    content: '【灰妲】\n「原來你喜歡粗的噢。」',
+    content: '【灰妲】\n「看來你也是個直男。」',
   },
   {
     sprites: [
       SPRITE[IMG_KEY.TWO_CAVE],
     ],
-    content: '兩人走進了左邊的岔路。',
+    content: '兩人走進了岔路的左側。',
   },
   {
     sprites: [
@@ -393,7 +393,7 @@ export const STORY_CHAPTER_3 = [
       SPRITE[IMG_KEY.GATE_CLOSED],
       SPRITE[IMG_KEY.DADA_01],
     ],
-    content: '【灰妲】\n「哈，看來我們選對了。」',
+    content: '【灰妲】\n「哈，我們似乎選對了。」',
   },
   {
     sprites: [
@@ -427,7 +427,7 @@ export const STORY_CHAPTER_3 = [
     sprites: [
       SPRITE[IMG_KEY.BG_ROCK],
     ],
-    content: '兩人在大廳裏細細搜索，發現地板上有似乎有圖案被砂石遮掩著。',
+    content: '兩人在大廳裏仔細搜索，發現地板上有似乎有圖案被砂石遮掩著。',
   },
 ]
 
