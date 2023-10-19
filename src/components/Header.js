@@ -4,7 +4,6 @@ import Link from 'next/link'
 
 import {
   Avatar,
-  AvatarFallback,
   AvatarImage,
 } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
@@ -29,7 +28,6 @@ function Header () {
           >
             <Avatar className='h-8 w-8'>
               <AvatarImage src='/apple-touch-icon.png' alt='github' />
-              <AvatarFallback>DM</AvatarFallback>
             </Avatar>
           </Link>
           <Link
@@ -69,7 +67,6 @@ function Header () {
           <Link target='_blank' href='https://github.com/silentvow/dada-meemu-block'>
             <Avatar className='h-8 w-8'>
               <AvatarImage src='https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png' alt='github' />
-              <AvatarFallback>GH</AvatarFallback>
             </Avatar>
           </Link>
         </div>

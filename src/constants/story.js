@@ -1,4 +1,4 @@
-import { TextStyle } from 'pixi.js'
+import { BlurFilter, TextStyle } from 'pixi.js'
 import { IMG_KEY, SPRITE } from './image'
 
 export const STORY_SCREEN_WIDTH = 1200
@@ -272,7 +272,7 @@ export const STORY_CHAPTER_2 = [
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.BG_SAND],
+      SPRITE[IMG_KEY.BG_ROCK],
       SPRITE[IMG_KEY.STONE],
     ],
     content: '遺跡開始劇烈震動，一塊巨大的石塊從天而降，重重地砸在入口前，將其完全堵住。',
@@ -406,7 +406,7 @@ export const STORY_CHAPTER_3 = [
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.BG_SAND],
+      SPRITE[IMG_KEY.BG_ROCK],
     ],
     content: '兩人在大廳裏細細搜索，發現地板上有似乎有圖案被砂石遮掩著。',
   },
@@ -415,62 +415,62 @@ export const STORY_CHAPTER_3 = [
 export const STORY_CHAPTER_4 = [
   {
     sprites: [
-      SPRITE[IMG_KEY.BG_SAND],
+      SPRITE[IMG_KEY.BG_ROCK],
       SPRITE[IMG_KEY.MEEMU],
     ],
     content: '【咪姆】\n「我說，這不就是骰子嘛！」',
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.BG_SAND],
+      SPRITE[IMG_KEY.BG_ROCK],
       SPRITE[IMG_KEY.DADA_01],
     ],
     content: '【灰妲】\n「地圖上恰好有一串數字，照著踩踩看吧。」',
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.BG_SAND],
+      SPRITE[IMG_KEY.BG_ROCK],
       SPRITE[IMG_KEY.MEEMU],
     ],
     content: '【咪姆】\n「有這麼簡單嗎？」',
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.BG_SAND],
+      SPRITE[IMG_KEY.BG_ROCK],
       { ...SPRITE[IMG_KEY.DADA_02], x: -140 },
     ],
     content: '【灰妲】\n「試試看也不虧嘛，還能有多糟？」',
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.BG_SAND],
+      SPRITE[IMG_KEY.BG_ROCK],
       SPRITE[IMG_KEY.DADA_01],
     ],
     content: '【灰妲】\n「我看看，首先是4，然後是1．．．」',
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.BG_SAND],
+      SPRITE[IMG_KEY.BG_ROCK],
     ],
     content: '兩人依據地圖上的數字陸續踩下。',
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.BG_SAND],
+      SPRITE[IMG_KEY.BG_ROCK],
       SPRITE[IMG_KEY.DADA_01],
     ],
     content: '【灰妲】\n「最後是6，好！完成了！」',
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.BG_SAND],
+      SPRITE[IMG_KEY.BG_ROCK],
       SPRITE[IMG_KEY.MEEMU],
     ],
     content: '【咪姆】\n「小心！有破空聲！」',
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.BG_SAND],
+      SPRITE[IMG_KEY.BG_ROCK],
       SPRITE[IMG_KEY.LINE_SPEED_UP],
       SPRITE[IMG_KEY.BOWS],
     ],
@@ -488,7 +488,7 @@ export const STORY_CHAPTER_5 = [
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.BG_SAND],
+      SPRITE[IMG_KEY.BG_ROCK],
       SPRITE[IMG_KEY.LINE_SPEED_UP],
       SPRITE[IMG_KEY.BOWS],
       SPRITE[IMG_KEY.DADA_03],
@@ -518,28 +518,28 @@ export const STORY_CHAPTER_5 = [
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.BG_SAND],
+      SPRITE[IMG_KEY.BG_ROCK],
       SPRITE[IMG_KEY.DADA_01],
     ],
     content: '【灰妲】\n「你有得抽嗎？何況這只是小意思吧。」',
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.BG_SAND],
+      SPRITE[IMG_KEY.BG_ROCK],
       SPRITE[IMG_KEY.MEEMU],
     ],
     content: '【咪姆】\n「也是，ReLive的員工訓練比這精實多了。」',
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.BG_SAND],
+      SPRITE[IMG_KEY.BG_ROCK],
       SPRITE[IMG_KEY.DADA_02],
     ],
     content: '【灰妲】\n「倒是你剛才怎麼不順便把門撞開。」',
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.BG_SAND],
+      SPRITE[IMG_KEY.BG_ROCK],
       SPRITE[IMG_KEY.RED_MEEMU],
     ],
     content: '【咪姆】\n「我是史萊姆！不是拆房子的鐵球！」',
@@ -591,42 +591,42 @@ export const STORY_CHAPTER_5 = [
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.BG_SAND],
+      SPRITE[IMG_KEY.BG_ROCK],
       SPRITE[IMG_KEY.DADA_01],
     ],
     content: '【灰妲】\n「到啦！」',
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.BG_SAND],
+      SPRITE[IMG_KEY.BG_ROCK],
       SPRITE[IMG_KEY.MEEMU],
     ],
     content: '【咪姆】\n「你確定？」',
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.BG_SAND],
+      SPRITE[IMG_KEY.BG_ROCK],
       { ...SPRITE[IMG_KEY.DADA_02], x: -140 },
     ],
     content: '【灰妲】\n「至少圖上是這樣畫的。」',
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.BG_SAND],
+      SPRITE[IMG_KEY.BG_ROCK],
       SPRITE[IMG_KEY.MEEMU],
     ],
     content: '【咪姆】\n「那這個你怎麼解釋？」',
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.BG_SAND],
+      SPRITE[IMG_KEY.BG_ROCK],
       SPRITE[IMG_KEY.METAL_BALL],
     ],
     content: '在兩人面前的，是一顆巨大的金屬球。',
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.BG_SAND],
+      SPRITE[IMG_KEY.BG_ROCK],
       SPRITE[IMG_KEY.METAL_BALL],
       { ...SPRITE[IMG_KEY.DADA_02], x: -140 },
     ],
@@ -634,7 +634,7 @@ export const STORY_CHAPTER_5 = [
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.BG_SAND],
+      SPRITE[IMG_KEY.BG_ROCK],
       SPRITE[IMG_KEY.METAL_BALL],
       SPRITE[IMG_KEY.MEEMU],
     ],
@@ -642,7 +642,7 @@ export const STORY_CHAPTER_5 = [
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.BG_SAND],
+      SPRITE[IMG_KEY.BG_ROCK],
       SPRITE[IMG_KEY.METAL_BALL_2],
       SPRITE[IMG_KEY.DADA_01],
     ],
@@ -650,7 +650,7 @@ export const STORY_CHAPTER_5 = [
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.BG_SAND],
+      SPRITE[IMG_KEY.BG_ROCK],
       SPRITE[IMG_KEY.METAL_BALL_2],
       SPRITE[IMG_KEY.DADA_02],
     ],
@@ -658,14 +658,14 @@ export const STORY_CHAPTER_5 = [
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.BG_SAND],
+      SPRITE[IMG_KEY.BG_ROCK],
       SPRITE[IMG_KEY.METAL_BALL_2],
     ],
     content: '【機器音】\n「嗶嗶，指紋無法辨識，請確認手指清潔後再試，系統將於連續失敗時發送警報。」',
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.BG_SAND],
+      SPRITE[IMG_KEY.BG_ROCK],
       SPRITE[IMG_KEY.METAL_BALL],
       SPRITE[IMG_KEY.MEEMU],
     ],
@@ -673,7 +673,7 @@ export const STORY_CHAPTER_5 = [
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.BG_SAND],
+      SPRITE[IMG_KEY.BG_ROCK],
       SPRITE[IMG_KEY.METAL_BALL],
       SPRITE[IMG_KEY.DADA_04],
     ],
@@ -681,7 +681,7 @@ export const STORY_CHAPTER_5 = [
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.BG_SAND],
+      SPRITE[IMG_KEY.BG_ROCK],
       SPRITE[IMG_KEY.METAL_BALL],
       SPRITE[IMG_KEY.MEEMU_2],
     ],
@@ -689,14 +689,14 @@ export const STORY_CHAPTER_5 = [
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.BG_SAND],
+      SPRITE[IMG_KEY.BG_ROCK],
       SPRITE[IMG_KEY.METAL_BALL],
     ],
     content: '兩人深吸了一口氣。',
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.BG_SAND],
+      SPRITE[IMG_KEY.BG_ROCK],
       SPRITE[IMG_KEY.METAL_BALL],
       SPRITE[IMG_KEY.DADA_03],
       { ...SPRITE[IMG_KEY.RED_MEEMU], x: 900 },
@@ -708,7 +708,7 @@ export const STORY_CHAPTER_5 = [
 export const STORY_FINAL = [
   {
     sprites: [
-      SPRITE[IMG_KEY.BG_SAND],
+      SPRITE[IMG_KEY.BG_ROCK],
       SPRITE[IMG_KEY.METAL_BALL],
       SPRITE[IMG_KEY.DADA_03],
       { ...SPRITE[IMG_KEY.RED_MEEMU], x: 900 },
@@ -717,7 +717,7 @@ export const STORY_FINAL = [
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.BG_SAND],
+      SPRITE[IMG_KEY.BG_ROCK],
       SPRITE[IMG_KEY.METAL_BALL],
       SPRITE[IMG_KEY.BG_BREAK],
     ],
@@ -725,7 +725,7 @@ export const STORY_FINAL = [
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.BG_SAND],
+      SPRITE[IMG_KEY.BG_ROCK],
       SPRITE[IMG_KEY.METAL_BALL],
       SPRITE[IMG_KEY.BG_BREAK],
       SPRITE[IMG_KEY.DADA_03],
@@ -735,7 +735,7 @@ export const STORY_FINAL = [
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.BG_SAND],
+      SPRITE[IMG_KEY.BG_ROCK],
       SPRITE[IMG_KEY.METAL_BALL],
       SPRITE[IMG_KEY.BG_BREAK],
       { ...SPRITE[IMG_KEY.BG_BREAK], x: 500, y: 450, width: 1200 * 0.25, height: 1200 * 0.25, scale: { x: 0.25, y: 0.25 } },
@@ -745,14 +745,14 @@ export const STORY_FINAL = [
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.BG_SAND],
+      SPRITE[IMG_KEY.BG_ROCK],
       SPRITE[IMG_KEY.COIN_HEAP],
     ],
     content: '最終，金屬球碎裂開來，裏頭的東西散落一地。',
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.BG_SAND],
+      SPRITE[IMG_KEY.BG_ROCK],
       SPRITE[IMG_KEY.COIN_HEAP],
       SPRITE[IMG_KEY.DADA_05],
     ],
@@ -760,7 +760,7 @@ export const STORY_FINAL = [
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.BG_SAND],
+      SPRITE[IMG_KEY.BG_ROCK],
       SPRITE[IMG_KEY.COIN_HEAP],
       SPRITE[IMG_KEY.MEEMU],
     ],
@@ -768,7 +768,7 @@ export const STORY_FINAL = [
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.BG_SAND],
+      SPRITE[IMG_KEY.BG_ROCK],
       SPRITE[IMG_KEY.COIN_HEAP],
       SPRITE[IMG_KEY.DADA_05],
     ],
@@ -776,7 +776,7 @@ export const STORY_FINAL = [
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.BG_SAND],
+      SPRITE[IMG_KEY.BG_ROCK],
       SPRITE[IMG_KEY.COIN_HEAP],
     ],
     content: '見到寶藏的兩人，臉上洋溢著極度的喜悅。',
@@ -833,6 +833,11 @@ export const ALL_CHAPTERS = [
   STORY_FINAL,
 ]
 
+const blurFilter = new BlurFilter()
+blurFilter.blur = 10
+const blurFilter2 = new BlurFilter()
+blurFilter2.blur = 20
+
 export const EXTRA_CHAPTER = [
   {
     sprites: [
@@ -842,33 +847,33 @@ export const EXTRA_CHAPTER = [
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.ENDING],
+      { ...SPRITE[IMG_KEY.ENDING], filters: [blurFilter] },
       SPRITE[IMG_KEY.REAL_DA],
     ],
     content: '【真妲】\n「起床了～」',
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.ENDING],
+      { ...SPRITE[IMG_KEY.ENDING], filters: [blurFilter] },
     ],
     content: '【灰妲】\n「哈哈哈哈哈哈哈－」',
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.ENDING],
+      { ...SPRITE[IMG_KEY.ENDING], filters: [blurFilter2] },
       { ...SPRITE[IMG_KEY.REAL_DA], scale: { x: 0.85, y: 0.85 } },
     ],
     content: '【真妲】\n「起～床～了～」',
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.ENDING],
+      { ...SPRITE[IMG_KEY.ENDING], filters: [blurFilter2] },
     ],
     content: '【灰妲】\n「哈哈哈－」',
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.ENDING],
+      { ...SPRITE[IMG_KEY.ENDING], filters: [blurFilter2] },
       { ...SPRITE[IMG_KEY.REAL_DA], scale: { x: 1, y: 1 } },
     ],
     content: '【真妲】\n「快！點！起！床！」',
@@ -885,7 +890,7 @@ export const EXTRA_CHAPTER = [
     ],
     sprites: [
       SPRITE[IMG_KEY.BEDROOM],
-      SPRITE[IMG_KEY.DADA_06],
+      { ...SPRITE[IMG_KEY.DADA_06], x: -180 },
     ],
     content: '【灰妲】\n「呵－－阿－－醒了醒了～」',
   },
@@ -917,7 +922,7 @@ export const EXTRA_CHAPTER = [
     ],
     sprites: [
       SPRITE[IMG_KEY.BEDROOM],
-      SPRITE[IMG_KEY.DADA_06],
+      { ...SPRITE[IMG_KEY.DADA_06], x: -180 },
     ],
     content: '【灰妲】\n「好－－」',
   },
@@ -933,7 +938,7 @@ export const EXTRA_CHAPTER = [
     ],
     sprites: [
       SPRITE[IMG_KEY.BATHROOM],
-      SPRITE[IMG_KEY.DADA_06],
+      { ...SPRITE[IMG_KEY.DADA_06], x: -180 },
     ],
     content: '鸚鵡梳洗中．．．',
   },
@@ -949,7 +954,7 @@ export const EXTRA_CHAPTER = [
     ],
     sprites: [
       SPRITE[IMG_KEY.BATHROOM],
-      SPRITE[IMG_KEY.DADA_06],
+      { ...SPRITE[IMG_KEY.DADA_06], x: -180 },
     ],
     content: '鸚鵡梳洗中．．．．．．',
   },
@@ -965,7 +970,7 @@ export const EXTRA_CHAPTER = [
     ],
     sprites: [
       SPRITE[IMG_KEY.BATHROOM],
-      SPRITE[IMG_KEY.DADA_06],
+      { ...SPRITE[IMG_KEY.DADA_06], x: -180 },
     ],
     content: '鸚鵡梳洗中．．．．．．．．．',
   },
@@ -1137,19 +1142,19 @@ export const EXTRA_CHAPTER = [
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.BG_SAND],
+      SPRITE[IMG_KEY.BG_ROCK],
       SPRITE[IMG_KEY.DADA_01],
     ],
     content: '【灰妲】\n「接著我們破解了地板的機關，」',
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.BG_SAND],
+      SPRITE[IMG_KEY.BG_ROCK],
       SPRITE[IMG_KEY.LINE_SPEED_UP],
       SPRITE[IMG_KEY.BOWS],
       SPRITE[IMG_KEY.DADA_01],
     ],
-    content: '【灰妲】\n「有驚無險地解決陷阱，」',
+    content: '【灰妲】\n「觸發了陷阱，但也是輕鬆解決，」',
   },
   {
     sprites: [
@@ -1189,7 +1194,7 @@ export const EXTRA_CHAPTER = [
       SPRITE[IMG_KEY.BREAKFAST],
       { ...SPRITE[IMG_KEY.REAL_DA], x: 940 },
     ],
-    content: '【真妲】\n「嘿－－－聽起來是個好夢呢，不如今天去買張彩券吧。」',
+    content: '【真妲】\n「嘿－－聽起來是個好夢呢，不如今天去買張彩券吧。」',
   },
   {
     graphics: [
@@ -1206,7 +1211,7 @@ export const EXTRA_CHAPTER = [
       SPRITE[IMG_KEY.BREAKFAST],
       SPRITE[IMG_KEY.DADA_01],
     ],
-    content: '【灰妲】\n「嗯嗯，剛好公司附近有投注站，這次我一定會中頭彩！」',
+    content: '【灰妲】\n「嗯，剛好公司附近有投注站，這次我一定會中頭彩！」',
   },
   {
     graphics: [
@@ -1301,7 +1306,7 @@ export const EXTRA_CHAPTER = [
         }),
       },
     ],
-    content: '',
+    content: '希望他真的會發大財，吧？',
     desaturate: true,
   },
 ]

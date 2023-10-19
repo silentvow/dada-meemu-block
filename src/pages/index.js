@@ -110,7 +110,7 @@ function Home () {
             <SubmitDialog open={showSubmitModal} onSubmit={submitScoreAndCloseModal} onClose={closeSubmitModal} />
           </div>
         </div>
-        <div className='flex justify-center'>Please report any bugs, problems, or issues you may have found to GitHub while playing this game.</div>
+        <div className='flex justify-center'>If you come across any bugs, issues, or problems while enjoying this game, we would greatly appreciate it if you could report them on GitHub.</div>
       </div>
     </>
   )
