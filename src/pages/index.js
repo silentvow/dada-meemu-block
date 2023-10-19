@@ -103,7 +103,7 @@ function Home () {
                   </FilterContainer>
                 </Stage>)
               : (
-                <div className='w-[1280px] h-[960px] text-[#423934] font-comic text-[96px] flex justify-center items-center bg-[url("/img/bg1.png")]'>
+                <div className='w-[min(1440px,100vw)] h-[min(1080px,calc(100vw*0.75))] text-[#423934] font-comic text-[96px] flex justify-center items-center bg-[url("/img/bg1.png")]'>
                   Loading...
                 </div>
                 )}
