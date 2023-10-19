@@ -1,0 +1,12 @@
+{
+  "about": {
+    "characters": "人物",
+    "gen1": "一期生",
+    "gen2": "二期生",
+    "motivation": "動機"
+  },
+  "header": {
+    "about": "關於遊戲",
+    "changelog": "更新記錄"
+  }
+}

@@ -2,6 +2,7 @@ import { ThemeProvider } from '@/components/ThemeProvider'
 import '@/styles/globals.css'
 import { sendPageView } from '@/utils/gtag'
 import { Analytics } from '@vercel/analytics/react'
+import { NextIntlClientProvider } from 'next-intl'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import Script from 'next/script'
@@ -27,7 +28,7 @@ export default function App ({ Component, pageProps }) {
   }, [router.events])
 
   return (
-    <>
+    <NextIntlClientProvider messages={pageProps.messages}>
       <Head>
         <title>【同人遊戲】灰妲x咪姆x遺跡尋寶</title>
         <meta name='viewport' content='width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimal-ui' />
@@ -74,6 +75,6 @@ export default function App ({ Component, pageProps }) {
         <Component {...pageProps} />
       </ThemeProvider>
       <Analytics />
-    </>
+    </NextIntlClientProvider>
   )
 }

@@ -1,0 +1,12 @@
+{
+  "about": {
+    "characters": "Characters",
+    "gen1": "Gen 1",
+    "gen2": "Gen 2",
+    "motivation": "Motivation"
+  },
+  "header": {
+    "about": "About",
+    "changelog": "Changelog"
+  }
+}

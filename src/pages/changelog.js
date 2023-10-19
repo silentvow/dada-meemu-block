@@ -1,12 +1,16 @@
 import Header from '@/components/Header'
 
-function Home () {
+function Changelog () {
   return (
     <>
       <Header />
       <div className='flex-col flex'>
         <div className='p-8 flex justify-center'>
           <div className='w-[1280px]'>
+            <h2 className='text-2xl border-b border-b-foreground'>2023-10-19</h2>
+            <ul className='list-disc p-6'>
+              <li>feat: add language switcher</li>
+            </ul>
             <h2 className='text-2xl border-b border-b-foreground'>2023-10-17</h2>
             <ul className='list-disc p-6'>
               <li>feat: add suicide function</li>
@@ -86,4 +90,12 @@ function Home () {
   )
 }
 
-export default Home
+export default Changelog
+
+export async function getStaticProps (context) {
+  return {
+    props: {
+      messages: (await import(`../locales/${context.locale}.json`)).default,
+    },
+  }
+}
