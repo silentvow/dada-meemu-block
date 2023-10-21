@@ -8,5 +8,8 @@
   "header": {
     "about": "About",
     "changelog": "Changelog"
+  },
+  "index": {
+    "footnote": "If you come across any bugs, issues, or problems while enjoying this game, we would greatly appreciate it if you could report them on GitHub."
   }
 }

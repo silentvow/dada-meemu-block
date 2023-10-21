@@ -53,14 +53,42 @@ export const STORY_CHAPTER_1 = [
       SPRITE[IMG_KEY.OFFICE],
       SPRITE[IMG_KEY.MEEMU],
     ],
-    content: '【咪姆】\n「你還沒放棄威力彩阿？印象從認識你以來一次都沒中過耶。」',
+    content: '【咪姆】\n「喔喔！你接到了什麼大乾爹的工商嗎？該不會是肯Ｏ基吧？」',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.OFFICE],
+      { ...SPRITE[IMG_KEY.DADA_02], x: -180 },
+    ],
+    content: '【灰妲】\n「如果是這樣也不錯啦－－但我不要跟肯Ｏ基！」',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.OFFICE],
+      SPRITE[IMG_KEY.MEEMU],
+    ],
+    content: '【咪姆】\n「不然－－你又去買威力彩了？印象你一次都沒中過耶。」',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.OFFICE],
+      { ...SPRITE[IMG_KEY.DADA_02], x: -180 },
+    ],
+    content: '【灰妲】\n「兩百塊還是有過啦，但也不是這個。」',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.OFFICE],
+      SPRITE[IMG_KEY.MEEMU],
+    ],
+    content: '【咪姆】\n「難道你又想作什麼恐怖的企劃？我先聽聽看要搞啥，\n上次那個ReLive神前刀工對決差點就讓咱們工作室改名\nReReLive了。」',
   },
   {
     sprites: [
       SPRITE[IMG_KEY.OFFICE],
       SPRITE[IMG_KEY.DADA_01],
     ],
-    content: '【灰妲】\n「閉嘴啦那都是過去的事了，我們要放眼未來！」',
+    content: '【灰妲】\n「不是啦，而且那都是過去的事了，我們要放眼未來！」',
   },
   {
     sprites: [
@@ -141,7 +169,7 @@ export const STORY_CHAPTER_1 = [
     sprites: [
       SPRITE[IMG_KEY.WALL],
     ],
-    content: '走啊走啊走，前方突然出現了一面牆。',
+    content: '走著走著，前方突然出現了一面牆。',
   },
   {
     sprites: [

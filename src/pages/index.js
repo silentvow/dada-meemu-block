@@ -15,6 +15,7 @@ import { GAME_STATE, IN_GAME_STATES, SCREEN_HEIGHT, SCREEN_WIDTH, TOP_BORDER_HEI
 import { IMG_URLS } from '@/constants/image'
 import { FONT_TEST_STRING } from '@/constants/text'
 import { useGame } from '@/game'
+import { useTranslations } from 'next-intl'
 
 Object.entries(IMG_URLS).forEach(([key, url]) => Assets.add(key, url))
 
@@ -32,6 +33,7 @@ function handleStageMount (app) {
 }
 
 function Home () {
+  const t = useTranslations()
   const [fontsLoaded, setFontsLoaded] = useState(false)
   const [assetsLoaded, setAssetsLoaded] = useState(false)
   const {
@@ -110,7 +112,7 @@ function Home () {
             <SubmitDialog open={showSubmitModal} onSubmit={submitScoreAndCloseModal} onClose={closeSubmitModal} />
           </div>
         </div>
-        <div className='flex justify-center'>If you come across any bugs, issues, or problems while enjoying this game, we would greatly appreciate it if you could report them on GitHub.</div>
+        <div className='flex justify-center'>{t('index.footnote')}</div>
       </div>
     </>
   )
