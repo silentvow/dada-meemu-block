@@ -195,7 +195,7 @@ export const useGame = create(
         }
 
         const length = state.blocks.filter(block => isFinite(block.hp)).length
-        const items = []
+        const items = [ITEM.CHICKEN]
         let buffItems = BUFF_ITEMS.concat([ITEM.UNKNOWN])
         let debuffItems = DEBUFF_ITEMS.concat([ITEM.UNKNOWN])
         if ([GAME_MODE.CHALLENGE_REAL, GAME_MODE.EXTRA_STORY].includes(state.mode)) {
@@ -764,8 +764,13 @@ export const useGame = create(
       }
     },
 
+    endEnterStageTransition: () => {
+      set(state => { state.isTransitioning = false })
+      get().enterStage(get().stage)
+    },
+
     gotoNextScene: () => {
-      const { chapter, sceneIndex, stage, stageMaps, enterStage, enterEndingPage } = get()
+      const { chapter, sceneIndex, stage, stageMaps, enterEndingPage } = get()
       if (sceneIndex + 1 >= chapter.length) {
         console.log({ stage, stageMaps })
         if (stage >= stageMaps.length) {
@@ -773,7 +778,7 @@ export const useGame = create(
           enterEndingPage(true)
           return
         }
-        enterStage(stage)
+        set(state => { state.isTransitioning = true })
         return
       }
       set(state => { state.sceneIndex += 1 })

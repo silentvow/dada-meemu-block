@@ -53,7 +53,7 @@ export const STORY_CHAPTER_1 = [
       SPRITE[IMG_KEY.OFFICE],
       SPRITE[IMG_KEY.MEEMU],
     ],
-    content: '【咪姆】\n「喔喔！你接到了什麼大乾爹的工商嗎？該不會是肯Ｏ基吧？」',
+    content: '【咪姆】\n「喔喔！你接到了什麼大乾爹的工商嗎？\n該不會是肯Ｏ基吧？」',
   },
   {
     sprites: [
@@ -74,14 +74,14 @@ export const STORY_CHAPTER_1 = [
       SPRITE[IMG_KEY.OFFICE],
       { ...SPRITE[IMG_KEY.DADA_02], x: -180 },
     ],
-    content: '【灰妲】\n「兩百塊還是有過啦，但也不是這個。」',
+    content: '【灰妲】\n「兩百塊還是有的啦，上期頭彩剛被端走，我要等累積到十億再去買。」',
   },
   {
     sprites: [
       SPRITE[IMG_KEY.OFFICE],
       SPRITE[IMG_KEY.MEEMU],
     ],
-    content: '【咪姆】\n「難道你又想作什麼恐怖的企劃？我先聽聽看要搞啥，\n上次那個ReLive神前刀工對決差點就讓咱們工作室改名\nReReLive了。」',
+    content: '【咪姆】\n「難道你又想作什麼恐怖的企劃？我先聽聽看要搞啥，\n上次箱活那場神前刀工對決差點就讓咱們工作室改名\nReReLive了。」',
   },
   {
     sprites: [
@@ -110,21 +110,21 @@ export const STORY_CHAPTER_1 = [
       SPRITE[IMG_KEY.OFFICE],
       SPRITE[IMG_KEY.DADA_01],
     ],
-    content: '【灰妲】\n「呃，借來的，對，應該有不少錢，那幫派挺富的。」',
+    content: '【灰妲】\n「呃，借來的，對，應該藏了不少錢，那幫派挺富的。」',
   },
   {
     sprites: [
       SPRITE[IMG_KEY.OFFICE],
       SPRITE[IMG_KEY.MEEMU],
     ],
-    content: '【咪姆】\n「喔是噢。」',
+    content: '【咪姆】\n「總覺得好像有哪裡不太對欸。」',
   },
   {
     sprites: [
       SPRITE[IMG_KEY.OFFICE],
       SPRITE[IMG_KEY.DADA_01],
     ],
-    content: '【灰妲】\n「今天其他人都在鐵籠戰，所以就我們一起去找吧。」',
+    content: '【灰妲】\n「今天其他人都在鐵籠戰，所以就我們去撈一票吧。」',
   },
   {
     sprites: [

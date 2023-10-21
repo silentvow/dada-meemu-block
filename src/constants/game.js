@@ -86,7 +86,7 @@ export const BULLET_RELOAD_COUNT = 10
 export const DELTA_UNIT = 0.42
 
 export const DROP_RATIO_BUFF = 0.1
-export const DROP_RATIO_DEBUFF = 0.1
+export const DROP_RATIO_DEBUFF = 0.09
 export const DROP_RATIO_MONEY_XS = 0.3
 export const DROP_RATIO_MONEY_SM = 0.2
 export const DROP_RATIO_MONEY_MD = 0.15
@@ -143,6 +143,31 @@ export const ITEM = {
   MONEY_XL: 'ITEM_MONEY_XL',
 }
 
+export const README_ITEMS = [
+  [
+    ITEM.BALL_RED,
+    ITEM.BALL_DOUBLE,
+    ITEM.BALL_LARGE,
+    ITEM.SPEED_MINUS,
+    ITEM.PADDLE_PLUS,
+    ITEM.BULLET_PACK,
+    ITEM.MONEY_XL,
+    ITEM.MONEY_MD,
+    ITEM.MONEY_XS,
+  ],
+  [
+    ITEM.BALL_BLACK,
+    ITEM.BALL_BLUE,
+    ITEM.BALL_SMALL,
+    ITEM.SPEED_PLUS,
+    ITEM.PADDLE_MINUS,
+    ITEM.CHICKEN,
+    ITEM.MONEY_LG,
+    ITEM.MONEY_SM,
+    ITEM.UNKNOWN,
+  ],
+]
+
 export const BUFF_ITEMS = [
   ITEM.BALL_RED,
   ITEM.BALL_DOUBLE,
@@ -158,7 +183,6 @@ export const DEBUFF_ITEMS = [
   ITEM.BALL_SMALL,
   ITEM.SPEED_PLUS,
   ITEM.PADDLE_MINUS,
-  ITEM.CHICKEN,
 ]
 
 export const REAL_BUFF_ITEMS = BUFF_ITEMS.filter(item => ![ITEM.BULLET_PACK, ITEM.PADDLE_PLUS].includes(item))
