@@ -55,8 +55,8 @@ function Home () {
     const WebFont = require('webfontloader')
     WebFont.load({
       custom: {
-        families: ['Xiaolai Mono SC'],
-        urls: ['https://cdn.jsdelivr.net/npm/cn-fontsource-xiaolai-mono-sc-regular/font.css'],
+        families: ['Xiaolai Mono SC', 'Joystix Monospace'],
+        urls: ['https://cdn.jsdelivr.net/npm/cn-fontsource-xiaolai-mono-sc-regular/font.css', '/fonts/fonts.css'],
         testStrings: { 'Xiaolai Mono SC': FONT_TEST_STRING },
       },
       google: {

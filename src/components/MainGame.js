@@ -22,19 +22,21 @@ const hitArea = {
 
 const titleStyle = {
   fill: '#fff',
-  fontSize: 84,
-  fontFamily: '"Sono", sans-serif',
+  fontSize: 96,
+  fontFamily: '"Joystix Monospace", sans-serif',
   stroke: '#000',
   strokeThickness: 8,
   align: 'center',
+  letterSpacing: 8,
 }
 
 const footerStyle = {
   fill: '#fff',
-  fontSize: 36,
-  fontFamily: '"Sono", sans-serif',
+  fontSize: 32,
+  fontFamily: '"Joystix Monospace", sans-serif',
   stroke: '#000',
   strokeThickness: 4,
+  letterSpacing: 2,
 }
 
 function imgUrl (item) {
@@ -118,32 +120,36 @@ function MainGame ({ app }) {
           />
         )
       })}
-      {state === GAME_STATE.READY && <Text x={640} y={500} anchor={[0.5, 1]} text={`STAGE ${stage + 1}\nREADY`} style={titleStyle} />}
+      {state === GAME_STATE.READY && <Text x={640} y={560} anchor={[0.5, 1]} text={`STAGE ${stage + 1}\nREADY`} style={titleStyle} />}
       {state === GAME_STATE.PAUSED && <Text x={640} y={500} anchor={[0.5, 1]} text='PAUSED' style={titleStyle} />}
-      {state === GAME_STATE.STAGE_CLEAR && <Text x={640} y={500} anchor={[0.5, 1]} text={'STAGE\nCLEAR'} style={titleStyle} />}
-      <Text x={4} y={0} text={`$${displayMoney}`} style={footerStyle} />
+      {state === GAME_STATE.STAGE_CLEAR && <Text x={640} y={560} anchor={[0.5, 1]} text={'STAGE\nCLEAR'} style={titleStyle} />}
+      <Text x={8} y={0} text={`$${displayMoney}`} style={footerStyle} />
       <Sprite
-        x={SCREEN_WIDTH - 110}
+        x={SCREEN_WIDTH - 8 - 32 - 32}
         y={4}
+        anchor={[1, 0]}
         scale={{ x: BULLET_WIDTH / BULLET_IMG_WIDTH, y: BULLET_HEIGHT / BULLET_IMG_HEIGHT }}
         image={IMG_URLS.BULLET}
       />
       <Text
-        x={SCREEN_WIDTH - 76}
+        x={SCREEN_WIDTH - 8}
         y={0}
-        text={`x${paddle.bullet.toString().padStart(2, '0')}`}
+        anchor={[1, 0]}
+        text={`${paddle.bullet.toString().padStart(2, '0')}`}
         style={footerStyle}
       />
       <Sprite
-        x={SCREEN_WIDTH - 196}
+        x={SCREEN_WIDTH - 8 - 32 - 32 - 32 - 16 - 32 - 4}
         y={12}
+        anchor={[1, 0]}
         scale={{ x: 30 / 48, y: 24.375 / 39 }}
         image={IMG_URLS.HEART}
       />
       <Text
-        x={SCREEN_WIDTH - 162}
+        x={SCREEN_WIDTH - 8 - 32 - 32 - 32 - 16}
         y={0}
-        text={`x${life}`}
+        anchor={[1, 0]}
+        text={`${life}`}
         style={footerStyle}
       />
       <Sprite

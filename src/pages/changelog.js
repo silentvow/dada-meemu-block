@@ -7,9 +7,16 @@ function Changelog () {
       <div className='flex-col flex'>
         <div className='p-8 flex justify-center'>
           <div className='w-[1280px]'>
+            <h2 className='text-2xl border-b border-b-foreground'>2023-10-21</h2>
+            <ul className='list-disc p-6'>
+              <li>feat: add transition between story scene and game</li>
+              <li>feat: adjust story chapter 1 content</li>
+              <li>feat: adjust fonts</li>
+            </ul>
             <h2 className='text-2xl border-b border-b-foreground'>2023-10-19</h2>
             <ul className='list-disc p-6'>
               <li>feat: add language switcher</li>
+              <li>fix: window sizing</li>
             </ul>
             <h2 className='text-2xl border-b border-b-foreground'>2023-10-17</h2>
             <ul className='list-disc p-6'>
