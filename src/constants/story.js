@@ -1208,7 +1208,7 @@ export const EXTRA_CHAPTER = [
     sprites: [
       SPRITE[IMG_KEY.ENDING],
     ],
-    content: '【灰妲】\n「最後找到了寶藏，正盤算怎麼分錢的時候。」',
+    content: '【灰妲】\n「最後找到了財寶，正盤算怎麼分錢的時候。」',
   },
   {
     graphics: [
