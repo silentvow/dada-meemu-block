@@ -74,7 +74,7 @@ export const STORY_CHAPTER_1 = [
       SPRITE[IMG_KEY.OFFICE],
       { ...SPRITE[IMG_KEY.DADA_02], x: -180 },
     ],
-    content: '【灰妲】\n「我刮刮樂有中過100啊，上期頭彩剛被端走，我要等累積到十億再去買。」',
+    content: '【灰妲】\n「我刮刮樂有中過一百啊，上期頭彩剛被端走，我要等累積到十億再去買。」',
   },
   {
     sprites: [
@@ -1193,7 +1193,7 @@ export const EXTRA_CHAPTER = [
       SPRITE[IMG_KEY.BG_ROCK],
       SPRITE[IMG_KEY.DADA_01],
     ],
-    content: '【灰妲】\n「接著我們破解了地板的機關，」',
+    content: '【灰妲】\n「接著我們破解地板的機關，」',
   },
   {
     sprites: [
@@ -1202,7 +1202,7 @@ export const EXTRA_CHAPTER = [
       SPRITE[IMG_KEY.BOWS],
       SPRITE[IMG_KEY.DADA_01],
     ],
-    content: '【灰妲】\n「觸發了陷阱，但也是輕鬆解決，」',
+    content: '【灰妲】\n「雖然陷阱也被觸發了，但輕輕鬆鬆解決，」',
   },
   {
     sprites: [
@@ -1259,7 +1259,7 @@ export const EXTRA_CHAPTER = [
       SPRITE[IMG_KEY.BREAKFAST],
       SPRITE[IMG_KEY.DADA_01],
     ],
-    content: '【灰妲】\n「嗯，剛好公司附近有投注站，這次我一定會中頭彩！」',
+    content: '【灰妲】\n「嗯，剛好工作室附近有投注站，這次我一定會中頭彩！」',
   },
   {
     graphics: [
@@ -1290,9 +1290,43 @@ export const EXTRA_CHAPTER = [
     ],
     sprites: [
       SPRITE[IMG_KEY.DINING_ROOM],
+      SPRITE[IMG_KEY.BREAKFAST],
       SPRITE[IMG_KEY.DADA_01],
     ],
-    content: '【灰妲】\n「那有什麼問題，好啦，我吃飽了，先出門囉。」',
+    content: '【灰妲】\n「那有什麼問題。嘿我覺得這麵包好好吃，口感鬆鬆軟軟的，又有一點淡淡的奶香。」',
+  },
+  {
+    graphics: [
+      {
+        draw: (g) => {
+          g.beginFill(0x5B3138)
+          g.drawRect(40, 10, 1200, 675)
+          g.endFill()
+        },
+      },
+    ],
+    sprites: [
+      SPRITE[IMG_KEY.DINING_ROOM],
+      SPRITE[IMG_KEY.BREAKFAST],
+      { ...SPRITE[IMG_KEY.REAL_DA], x: 940 },
+    ],
+    content: '【真妲】\n「真的？這我最近才從網路上學來的，還是第一次在家烤呢。」',
+  },
+  {
+    graphics: [
+      {
+        draw: (g) => {
+          g.beginFill(0x5B3138)
+          g.drawRect(40, 10, 1200, 675)
+          g.endFill()
+        },
+      },
+    ],
+    sprites: [
+      SPRITE[IMG_KEY.DINING_ROOM],
+      SPRITE[IMG_KEY.DADA_01],
+    ],
+    content: '【灰妲】\n「我蠻喜歡的耶，感覺很適合帶去工作室當下午茶。」',
   },
   {
     graphics: [
@@ -1308,7 +1342,87 @@ export const EXTRA_CHAPTER = [
       SPRITE[IMG_KEY.DINING_ROOM],
       { ...SPRITE[IMG_KEY.REAL_DA], x: 940 },
     ],
-    content: '【真妲】\n「不要太晚回來喔～」',
+    content: '【真妲】\n「可以呀～這種電鍋料理很簡單的，等你有空我們一起做吧～」',
+  },
+  {
+    graphics: [
+      {
+        draw: (g) => {
+          g.beginFill(0x5B3138)
+          g.drawRect(40, 10, 1200, 675)
+          g.endFill()
+        },
+      },
+    ],
+    sprites: [
+      SPRITE[IMG_KEY.DINING_ROOM],
+      SPRITE[IMG_KEY.DADA_01],
+    ],
+    content: '【灰妲】\n「好哇，順便也做一些給小精靈們。我差不多該出門了，再給我一杯咖啡。」',
+  },
+  {
+    graphics: [
+      {
+        draw: (g) => {
+          g.beginFill(0x5B3138)
+          g.drawRect(40, 10, 1200, 675)
+          g.endFill()
+        },
+      },
+    ],
+    sprites: [
+      SPRITE[IMG_KEY.DINING_ROOM],
+      { ...SPRITE[IMG_KEY.REAL_DA], x: 940 },
+    ],
+    content: '【真妲】\n「給，不要太晚回來喔～」',
+  },
+  {
+    graphics: [
+      {
+        draw: (g) => {
+          g.beginFill(0x5B3138)
+          g.drawRect(40, 10, 1200, 675)
+          g.endFill()
+        },
+      },
+    ],
+    sprites: [
+      SPRITE[IMG_KEY.DINING_ROOM],
+      { ...SPRITE[IMG_KEY.DADA_02], x: -180 },
+    ],
+    content: '【灰妲】\n「我盡量，最近案子有點多，可能會稍微加個班。」',
+  },
+  {
+    graphics: [
+      {
+        draw: (g) => {
+          g.beginFill(0x5B3138)
+          g.drawRect(40, 10, 1200, 675)
+          g.endFill()
+        },
+      },
+    ],
+    sprites: [
+      SPRITE[IMG_KEY.DINING_ROOM],
+      { ...SPRITE[IMG_KEY.REAL_DA], x: 940 },
+    ],
+    content: '【真妲】\n「不要太勉強嘿，雖然工作很重要，不過生活也是要好好過，錢夠用就好哩。」',
+  },
+  {
+    graphics: [
+      {
+        draw: (g) => {
+          g.beginFill(0x5B3138)
+          g.drawRect(40, 10, 1200, 675)
+          g.endFill()
+        },
+      },
+    ],
+    sprites: [
+      SPRITE[IMG_KEY.DINING_ROOM],
+      SPRITE[IMG_KEY.DADA_01],
+    ],
+    content: '【灰妲】\n「沒問題的啦，我很快就會發大財滴，到時我要盡情享受人生，掰掰～」',
   },
   {
     graphics: [
