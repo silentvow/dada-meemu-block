@@ -956,7 +956,7 @@ export const EXTRA_CHAPTER = [
       SPRITE[IMG_KEY.BEDROOM],
       SPRITE[IMG_KEY.REAL_DA],
     ],
-    content: '【真妲】\n「趕快去洗臉，然後過來吃早餐了。」',
+    content: '【真妲】\n「趕快去洗臉整理頭髮，然後過來吃早餐了。」',
   },
   {
     graphics: [
@@ -1002,7 +1002,7 @@ export const EXTRA_CHAPTER = [
     ],
     sprites: [
       SPRITE[IMG_KEY.BATHROOM],
-      { ...SPRITE[IMG_KEY.DADA_06], x: -180 },
+      { ...SPRITE[IMG_KEY.DADA_06], x: 100 },
     ],
     content: '鸚鵡梳洗中．．．．．．',
   },
@@ -1018,7 +1018,7 @@ export const EXTRA_CHAPTER = [
     ],
     sprites: [
       SPRITE[IMG_KEY.BATHROOM],
-      { ...SPRITE[IMG_KEY.DADA_06], x: -180 },
+      { ...SPRITE[IMG_KEY.DADA_02], x: 0 },
     ],
     content: '鸚鵡梳洗中．．．．．．．．．',
   },
@@ -1069,7 +1069,7 @@ export const EXTRA_CHAPTER = [
       SPRITE[IMG_KEY.BREAKFAST],
       { ...SPRITE[IMG_KEY.DADA_02], x: -180 },
     ],
-    content: '【灰妲】\n「哇噢，簡直就跟外頭的早午餐店一模一樣。」',
+    content: '【灰妲】\n「哇噢，簡直像是外面早午餐店賣的一樣。」',
   },
   {
     graphics: [
@@ -1087,6 +1087,24 @@ export const EXTRA_CHAPTER = [
       { ...SPRITE[IMG_KEY.REAL_DA], x: 940 },
     ],
     content: '【真妲】\n「你喜歡就好，嘻嘻，快吃吧，都要涼掉了。」',
+  },
+  {
+    graphics: [
+      {
+        draw: (g) => {
+          g.beginFill(0x5B3138)
+          g.drawRect(40, 10, 1200, 675)
+          g.endFill()
+        },
+      },
+    ],
+    sprites: [
+      SPRITE[IMG_KEY.DINING_ROOM],
+      SPRITE[IMG_KEY.BREAKFAST],
+      SPRITE[IMG_KEY.DADA_01],
+      { ...SPRITE[IMG_KEY.REAL_DA], x: 940 },
+    ],
+    content: '【灰妲&真妲】\n「我要開動了－－」',
   },
   {
     graphics: [
@@ -1175,10 +1193,10 @@ export const EXTRA_CHAPTER = [
   },
   {
     sprites: [
-      SPRITE[IMG_KEY.WALL],
+      SPRITE[IMG_KEY.RUIN_ENTRY],
       SPRITE[IMG_KEY.DADA_01],
     ],
-    content: '【灰妲】\n「我跟咪姆一起去尋寶，最初我們碰上了一堵牆，」',
+    content: '【灰妲】\n「我跟咪姆一起去遺跡尋寶，最初我們碰上了一堵牆，」',
   },
   {
     sprites: [
@@ -1186,7 +1204,7 @@ export const EXTRA_CHAPTER = [
       SPRITE[IMG_KEY.DADA_01],
       { ...SPRITE[IMG_KEY.RED_MEEMU], x: 900, scale: { x: 0.7, y: 0.7 } },
     ],
-    content: '【灰妲】\n「靠我的智慧突破之後我們走過了岔路，」',
+    content: '【灰妲】\n「靠我的智慧突破之後走到一個岔路，」',
   },
   {
     sprites: [
@@ -1259,7 +1277,7 @@ export const EXTRA_CHAPTER = [
       SPRITE[IMG_KEY.BREAKFAST],
       SPRITE[IMG_KEY.DADA_01],
     ],
-    content: '【灰妲】\n「嗯，剛好工作室附近有投注站，這次我一定會中頭彩！」',
+    content: '【灰妲】\n「嗯嗯，剛好工作室附近有投注站，這次我一定會中頭彩！」',
   },
   {
     graphics: [
@@ -1406,7 +1424,7 @@ export const EXTRA_CHAPTER = [
       SPRITE[IMG_KEY.DINING_ROOM],
       { ...SPRITE[IMG_KEY.REAL_DA], x: 940 },
     ],
-    content: '【真妲】\n「不要太勉強嘿，雖然工作很重要，不過生活也是要好好過，錢夠用就好哩。」',
+    content: '【真妲】\n「那也不要太勉強欸，雖然工作很重要，不過生活也是要好好過，錢夠用就好哩。」',
   },
   {
     graphics: [

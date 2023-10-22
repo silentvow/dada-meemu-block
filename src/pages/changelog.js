@@ -7,6 +7,10 @@ function Changelog () {
       <div className='flex-col flex'>
         <div className='p-8 flex justify-center'>
           <div className='w-[1280px]'>
+            <h2 className='text-2xl border-b border-b-foreground'>2023-10-22</h2>
+            <ul className='list-disc p-6'>
+              <li>feat: adjust extra story content</li>
+            </ul>
             <h2 className='text-2xl border-b border-b-foreground'>2023-10-21</h2>
             <ul className='list-disc p-6'>
               <li>feat: add transition between story scene and game</li>
