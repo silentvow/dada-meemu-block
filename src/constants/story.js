@@ -74,7 +74,7 @@ export const STORY_CHAPTER_1 = [
       SPRITE[IMG_KEY.OFFICE],
       { ...SPRITE[IMG_KEY.DADA_02], x: -180 },
     ],
-    content: '【灰妲】\n「兩百塊還是有的啦，上期頭彩剛被端走，我要等累積到十億再去買。」',
+    content: '【灰妲】\n「我刮刮樂有中過100啊，上期頭彩剛被端走，我要等累積到十億再去買。」',
   },
   {
     sprites: [
