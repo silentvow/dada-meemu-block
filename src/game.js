@@ -553,8 +553,8 @@ export const useGame = create(
 
           const { time, surface } = calculateCollision({
             circle: {
-              x: balls[i].x,
-              y: balls[i].y,
+              x: balls[i].px,
+              y: balls[i].py,
               vx: balls[i].vx,
               vy: balls[i].vy,
               radius: balls[i].radius,
@@ -579,7 +579,7 @@ export const useGame = create(
           }
           return 0
         })
-        console.log({ possibleHitBlocks })
+        // console.log({ possibleHitBlocks })
         if (!isFinite(possibleHitBlocks[0].time)) continue
 
         possibleHitBlocks.forEach(({ blockIdx, time, surface }) => {
