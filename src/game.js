@@ -69,7 +69,7 @@ import {
 import { IMG_KEY, PADDLE_IMG_KEY } from './constants/image'
 import { BLOCK_CHAR_MAP, FULL_STAGE_MAPS, STORY_STAGE_MAPS } from './constants/stages'
 import { ALL_CHAPTERS, EXTRA_CHAPTER, STORY_CHAPTER_1 } from './constants/story'
-import { calculateCollision } from './utils'
+import { calculateCollision, isSegmentRectangleIntersect } from './utils'
 import { sendEvent } from './utils/gtag'
 
 export const useGame = create(
@@ -525,28 +525,6 @@ export const useGame = create(
       }
     },
 
-    timeToBallBlockCollisionX: (ballIdx, blockIdx) => {
-      const ball = get().balls[ballIdx]
-      const block = get().blocks[blockIdx]
-      if (ball.vx === 0) return Infinity
-      if (ball.vx > 0) {
-        return Math.abs((block.x - ball.radius - ball.px) / ball.vx)
-      } else {
-        return Math.abs((ball.px - ball.radius - block.x - BLOCK_WIDTH) / ball.vx)
-      }
-    },
-
-    timeToBallBlockCollisionY: (ballIdx, blockIdx) => {
-      const ball = get().balls[ballIdx]
-      const block = get().blocks[blockIdx]
-      if (ball.vy === 0) return Infinity
-      if (ball.vy > 0) {
-        return Math.abs((block.y - ball.radius - ball.py) / ball.vy)
-      } else {
-        return Math.abs((ball.py - ball.radius - block.y - BLOCK_HEIGHT) / ball.vy)
-      }
-    },
-
     detectAllBallBlockCollision: () => {
       const { balls, blocks } = get()
       for (let i = 0; i < balls.length; ++i) {
@@ -556,6 +534,23 @@ export const useGame = create(
         for (let j = 0; j < blocks.length; ++j) {
           if (blocks[j].hp <= 0) continue
 
+          const isIntersect = isSegmentRectangleIntersect({
+            circle: {
+              x: balls[i].x,
+              y: balls[i].y,
+              px: balls[i].px,
+              py: balls[i].py,
+              radius: balls[i].radius,
+            },
+            rect: {
+              x: blocks[j].x,
+              y: blocks[j].y,
+              width: BLOCK_WIDTH,
+              height: BLOCK_HEIGHT,
+            },
+          })
+          if (!isIntersect) continue
+
           const { time, surface } = calculateCollision({
             circle: {
               x: balls[i].x,
@@ -564,22 +559,28 @@ export const useGame = create(
               vy: balls[i].vy,
               radius: balls[i].radius,
             },
-            rectangle: {
+            rect: {
               x: blocks[j].x,
               y: blocks[j].y,
               width: BLOCK_WIDTH,
               height: BLOCK_HEIGHT,
             },
           })
-          if (time !== null) {
-            possibleHitBlocks.push({ blockIdx: j, time, surface })
-          }
+          possibleHitBlocks.push({ blockIdx: j, time, surface })
         }
 
         if (possibleHitBlocks.length === 0) continue
         possibleHitBlocks.sort((x1, x2) => {
-          return x1.time - x2.time
+          if (x1.time < x2.time) {
+            return -1
+          }
+          if (x1.time > x2.time) {
+            return 1
+          }
+          return 0
         })
+        console.log({ possibleHitBlocks })
+        if (!isFinite(possibleHitBlocks[0].time)) continue
 
         possibleHitBlocks.forEach(({ blockIdx, time, surface }) => {
           if (time > possibleHitBlocks[0].time) {
