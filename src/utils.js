@@ -24,8 +24,19 @@ export function isSegmentRectangleIntersect ({ circle, rect }) {
 }
 
 export function calculateCollision ({ circle: { x, y, vx, vy, radius }, rect: { x: rx, y: ry, width, height } }) {
-  if (isSegmentRectangleIntersect({ circle: { x, y, px: x, py: y, radius }, rect: { x: rx, y: ry, width, height } })) {
+  const center = point(x, y)
+  const [d1] = center.distanceTo(segment(point(rx, ry), point(rx + width, ry)))
+  const [d2] = center.distanceTo(segment(point(rx, ry), point(rx, ry + height)))
+  const [d3] = center.distanceTo(segment(point(rx + width, ry), point(rx + width, ry + height)))
+  const [d4] = center.distanceTo(segment(point(rx, ry + height), point(rx + width, ry + height)))
+  const dh = Math.min(d1, d3)
+  const dv = Math.min(d2, d4)
+
+  if (dh <= dv && dh <= radius) {
     return { time: 0, surface: 'horizontal' }
+  }
+  if (dv <= dh && dv <= radius) {
+    return { time: 0, surface: 'vertical' }
   }
 
   let th = Infinity; let tv = Infinity
