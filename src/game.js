@@ -610,6 +610,8 @@ export const useGame = create(
               state.balls[i].x += state.balls[i].vx * (duration - t)
               state.balls[i].y -= state.balls[i].vy * (duration - t)
             }
+            state.balls[i].px = state.balls[i].x
+            state.balls[i].py = state.balls[i].y
           })
         }
         if (isCollidedX) {
