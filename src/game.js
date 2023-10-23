@@ -579,7 +579,6 @@ export const useGame = create(
           }
           return 0
         })
-        // console.log({ possibleHitBlocks })
         if (!isFinite(possibleHitBlocks[0].time)) continue
 
         possibleHitBlocks.forEach(({ blockIdx, time, surface }) => {
@@ -595,6 +594,13 @@ export const useGame = create(
           }
         })
 
+        const t = possibleHitBlocks[0].time
+        if (t > 0) {
+          set(state => {
+            state.balls[i].x = state.balls[i].px + state.balls[i].vx * t
+            state.balls[i].y = state.balls[i].py + state.balls[i].vy * t
+          })
+        }
         if (isCollidedX) {
           set(state => {
             state.balls[i].vx = -state.balls[i].vx
@@ -773,9 +779,7 @@ export const useGame = create(
     gotoNextScene: () => {
       const { chapter, sceneIndex, stage, stageMaps, enterEndingPage } = get()
       if (sceneIndex + 1 >= chapter.length) {
-        console.log({ stage, stageMaps })
         if (stage >= stageMaps.length) {
-          console.log('enter ending page')
           enterEndingPage(true)
           return
         }
