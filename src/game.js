@@ -377,7 +377,7 @@ export const useGame = create(
           state.balls[i].x += state.balls[i].vx * delta / DELTA_UNIT
           state.balls[i].py = state.balls[i].y
           state.balls[i].y += state.balls[i].vy * delta / DELTA_UNIT
-          state.balls[i].angle += 1
+          state.balls[i].angle += 1 * delta / DELTA_UNIT
           if (state.balls[i].angle > 360) state.balls[i].angle = 0
         })
       }
@@ -597,8 +597,19 @@ export const useGame = create(
         const t = possibleHitBlocks[0].time
         if (t > 0) {
           set(state => {
+            const duration = state.balls[i].vx !== 0
+              ? (state.balls[i].x - state.balls[i].px) / state.balls[i].vx
+              : (state.balls[i].y - state.balls[i].py) / state.balls[i].vy
             state.balls[i].x = state.balls[i].px + state.balls[i].vx * t
             state.balls[i].y = state.balls[i].py + state.balls[i].vy * t
+            if (isCollidedX) {
+              state.balls[i].x -= state.balls[i].vx * (duration - t)
+              state.balls[i].y += state.balls[i].vy * (duration - t)
+            }
+            if (isCollidedY) {
+              state.balls[i].x += state.balls[i].vx * (duration - t)
+              state.balls[i].y -= state.balls[i].vy * (duration - t)
+            }
           })
         }
         if (isCollidedX) {

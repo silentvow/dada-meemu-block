@@ -29,14 +29,29 @@ export function calculateCollision ({ circle: { x, y, vx, vy, radius }, rect: { 
   const [d2] = center.distanceTo(segment(point(rx, ry), point(rx, ry + height)))
   const [d3] = center.distanceTo(segment(point(rx + width, ry), point(rx + width, ry + height)))
   const [d4] = center.distanceTo(segment(point(rx, ry + height), point(rx + width, ry + height)))
-  const dh = Math.min(d1, d3)
-  const dv = Math.min(d2, d4)
+  const dh = Math.min(d1, d4)
+  const dv = Math.min(d2, d3)
+  const dMin = Math.min(dh, dv)
 
-  if (dh <= dv && dh <= radius) {
-    return { time: 0, surface: 'horizontal' }
-  }
-  if (dv <= dh && dv <= radius) {
-    return { time: 0, surface: 'vertical' }
+  if (dMin <= radius) {
+    if (vy > 0 && y <= ry + height * 0.5) {
+      return { time: 0, surface: 'horizontal' }
+    }
+    if (vy < 0 && y >= ry + height * 0.5) {
+      return { time: 0, surface: 'horizontal' }
+    }
+    if (vx > 0 && x <= rx + width * 0.5) {
+      return { time: 0, surface: 'vertical' }
+    }
+    if (vx < 0 && x >= rx + width * 0.5) {
+      return { time: 0, surface: 'vertical' }
+    }
+    if (dh <= dv) {
+      return { time: 0, surface: 'horizontal' }
+    }
+    if (dv <= dh) {
+      return { time: 0, surface: 'vertical' }
+    }
   }
 
   let th = Infinity; let tv = Infinity
