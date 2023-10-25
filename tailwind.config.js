@@ -17,7 +17,7 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        comic: ['"Comic Sans MS"', 'Comic Sans', 'cursive'],
+        comic: ['"Comic Sans MS"', 'Comic Sans', 'Chalkboard', 'ChalkboardSE-Regular', 'cursive'],
       },
       colors: {
         border: 'hsl(var(--border))',

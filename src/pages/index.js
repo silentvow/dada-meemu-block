@@ -112,7 +112,7 @@ function Home () {
             <SubmitDialog open={showSubmitModal} onSubmit={submitScoreAndCloseModal} onClose={closeSubmitModal} />
           </div>
         </div>
-        <div className='flex justify-center'>{t.rich('index.footnote', { github: chunk => <a className='px-1 text-blue-800' target='_blank' href='https://github.com/silentvow/dada-meemu-block/issues'>{chunk}</a> })}</div>
+        <div className='flex justify-center'>{t.rich('index.footnote', { github: chunk => <a className='px-1 underline' target='_blank' href='https://github.com/silentvow/dada-meemu-block/issues'>{chunk}</a> })}</div>
       </div>
     </>
   )
