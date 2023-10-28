@@ -42,7 +42,8 @@
     "2023-10-21-2": "feat: adjust story chapter 1 content",
     "2023-10-21-3": "feat: adjust fonts",
     "2023-10-22-1": "feat: adjust extra story content",
-    "2023-10-23-1": "fix: collision between ball and block"
+    "2023-10-23-1": "fix: collision between ball and block",
+    "2023-10-28-1": "feat: add sound effects"
   },
   "header": {
     "about": "About",

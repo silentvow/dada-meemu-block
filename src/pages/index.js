@@ -12,10 +12,13 @@ import Scoreboard from '@/components/Scoreboard'
 import Storyboard from '@/components/Storyboard'
 import SubmitDialog from '@/components/SubmitDialog'
 import { GAME_STATE, IN_GAME_STATES, SCREEN_HEIGHT, SCREEN_WIDTH, TOP_BORDER_HEIGHT } from '@/constants/game'
-import { IMG_URLS } from '@/constants/image'
+import { IMG_URLS, SOUND_URLS } from '@/constants/image'
 import { FONT_TEST_STRING } from '@/constants/text'
 import { useGame } from '@/game'
 import { useTranslations } from 'next-intl'
+import dynamic from 'next/dynamic'
+
+const SoundProvider = dynamic(() => import('@/components/SoundProvider'), { ssr: false })
 
 Object.entries(IMG_URLS).forEach(([key, url]) => Assets.add(key, url))
 
@@ -49,7 +52,7 @@ function Home () {
   }))
 
   useEffect(() => {
-    Assets.load(Object.keys(IMG_URLS)).then(() => {
+    Assets.load([...Object.keys(IMG_URLS), ...Object.keys(SOUND_URLS)]).then(() => {
       setAssetsLoaded(true)
     })
     const WebFont = require('webfontloader')
@@ -69,7 +72,7 @@ function Home () {
   }, [])
 
   return (
-    <>
+    <SoundProvider>
       <Header />
       <div className='flex sm:hidden'>
         This website is not supported on screen smaller than 640px.
@@ -114,7 +117,7 @@ function Home () {
         </div>
         <div className='flex justify-center'>{t.rich('index.footnote', { github: chunk => <a className='px-1 underline' target='_blank' href='https://github.com/silentvow/dada-meemu-block/issues'>{chunk}</a> })}</div>
       </div>
-    </>
+    </SoundProvider>
   )
 }
 

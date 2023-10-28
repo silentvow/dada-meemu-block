@@ -4,6 +4,14 @@ import { useGame } from '@/game'
 import { Container, Graphics, Sprite } from '@pixi/react'
 import { useEffect, useRef, useState } from 'react'
 import MenuButton from './MenuButton'
+import VolumeControl from './VolumeControl'
+
+const MENU = {
+  MAIN: 'MAIN',
+  STORY: 'STORY',
+  CHALLENGE: 'CHALLENGE',
+  OPTIONS: 'OPTIONS',
+}
 
 function drawMask (g) {
   g.beginFill(0x000000)
@@ -47,36 +55,44 @@ function GameMenu () {
     setMask(refMask.current)
   }, [])
 
-  const [inStoryMenu, setInStoryMenu] = useState(false)
-  const [inChallengeMenu, setInChallengeMenu] = useState(false)
+  const [menu, setMenu] = useState(MENU.MAIN)
+  const [showVolume, setShowVolume] = useState(false)
 
   return (
     <>
       <Graphics draw={drawMainArea} />
       <Sprite x={40} y={10} width={1200} height={675} scale={{ x: 1200 / 1920, y: 675 / 1080 }} image={IMG_URLS.COVER} mask={mask} />
       <Sprite x={620} y={450} width={755 * 0.8} height={275 * 0.8} scale={{ x: 0.8, y: 0.8 }} image={IMG_URLS.TITLE} mask={mask} />
+      {showVolume && <VolumeControl onCancel={() => setShowVolume(false)} />}
       <Graphics ref={refMask} preventRedraw draw={drawMask} />
       <Container x={0} y={695}>
-        {inStoryMenu && (
+        {menu === MENU.STORY && (
           <>
             <MenuButton x={200} y={30} text='正篇故事' onClick={enterStoryMode} />
             <MenuButton x={760} y={30} text={unlockRealMode ? '附錄故事' : '？？？？'} disabled={!unlockRealMode} onClick={enterExtraStoryMode} />
-            <MenuButton x={760} y={140} text='返回前頁' onClick={() => setInStoryMenu(false)} />
+            <MenuButton x={760} y={140} text='返回前頁' onClick={() => setMenu(MENU.MAIN)} />
           </>
         )}
-        {inChallengeMenu && (
+        {menu === MENU.CHALLENGE && (
           <>
             <MenuButton x={200} y={30} text='標準難度' onClick={enterDadaChallengeMode} />
             <MenuButton x={760} y={30} text='幼妲難度' onClick={enterYodaChallengeMode} />
             <MenuButton x={200} y={140} text={unlockRealMode ? '真妲難度' : '？？？？'} disabled={!unlockRealMode} onClick={enterRealChallengeMode} />
-            <MenuButton x={760} y={140} text='返回前頁' onClick={() => setInChallengeMenu(false)} />
+            <MenuButton x={760} y={140} text='返回前頁' onClick={() => setMenu(MENU.MAIN)} />
           </>
         )}
-        {!inStoryMenu && !inChallengeMenu && (
+        {menu === MENU.OPTIONS && (
           <>
-            <MenuButton x={200} y={30} text='故事模式' onClick={() => setInStoryMenu(true)} />
-            <MenuButton x={760} y={30} text='挑戰模式' onClick={() => setInChallengeMenu(true)} />
-            <MenuButton x={200} y={140} text='遊戲說明' onClick={enterReadme} />
+            <MenuButton x={200} y={30} text='音量調整' onClick={() => setShowVolume(true)} />
+            <MenuButton x={760} y={30} text='遊戲說明' onClick={enterReadme} />
+            <MenuButton x={760} y={140} text='返回前頁' onClick={() => { setShowVolume(false); setMenu(MENU.MAIN) }} />
+          </>
+        )}
+        {menu === MENU.MAIN && (
+          <>
+            <MenuButton x={200} y={30} text='故事模式' onClick={() => setMenu(MENU.STORY)} />
+            <MenuButton x={760} y={30} text='挑戰模式' onClick={() => setMenu(MENU.CHALLENGE)} />
+            <MenuButton x={200} y={140} text='遊戲設定' onClick={() => setMenu(MENU.OPTIONS)} />
             <MenuButton x={760} y={140} text='得分紀錄' onClick={enterScoreboard} />
           </>
         )}

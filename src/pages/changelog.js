@@ -9,6 +9,10 @@ function Changelog () {
       <div className='flex-col flex'>
         <div className='p-8 flex justify-center'>
           <div className='w-[1280px]'>
+            <h2 className='text-2xl border-b border-b-foreground'>2023-10-28</h2>
+            <ul className='list-disc p-6'>
+              <li>{t('2023-10-28-1')}</li>
+            </ul>
             <h2 className='text-2xl border-b border-b-foreground'>2023-10-23</h2>
             <ul className='list-disc p-6'>
               <li>{t('2023-10-23-1')}</li>

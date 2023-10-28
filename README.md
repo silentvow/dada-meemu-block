@@ -19,7 +19,7 @@ $ npm run dev
 $ npm run build
 ```
 
-## Image Licenses
+## Resource Licenses
 
 - Images under public/img/dada
   - Source: ReLive_灰妲 DaDa [![DadaRelive][2.1]][4] [![DadaRelive][1.1]][1]
@@ -31,6 +31,8 @@ $ npm run build
 - Other image sources:
   - [いらすとや](https://www.irasutoya.com/)
   - [Rotting Pixels](https://rottingpixels.itch.io/four-seasons-platformer-tileset-16x16free)
+- Sound effects
+  - [ZapSplat](https://www.zapsplat.com)
 
 <!-- Please don't remove this: Grab your social icons from https://github.com/carlsednaoui/gitsocial -->
 

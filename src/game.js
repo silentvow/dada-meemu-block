@@ -66,7 +66,7 @@ import {
   SPEED_MULTIPLIER,
   TOP_BORDER_HEIGHT,
 } from './constants/game'
-import { IMG_KEY, PADDLE_IMG_KEY } from './constants/image'
+import { IMG_KEY, PADDLE_IMG_KEY, SOUND_KEY } from './constants/image'
 import { BLOCK_CHAR_MAP, FULL_STAGE_MAPS, STORY_STAGE_MAPS } from './constants/stages'
 import { ALL_CHAPTERS, EXTRA_CHAPTER, STORY_CHAPTER_1 } from './constants/story'
 import { calculateCollision, isSegmentRectangleIntersect } from './utils'
@@ -92,6 +92,7 @@ export const useGame = create(
     chapter: [],
     sceneIndex: 0,
     showSubmitModal: false,
+    soundQueue: [],
 
     reset: () => {
       set(state => {
@@ -408,6 +409,7 @@ export const useGame = create(
 
     failStage: () => {
       set(state => { state.state = GAME_STATE.STAGE_FAILED })
+      get().pushSoundQueue(SOUND_KEY.FAILURE)
       if (get().life > 0) {
         set(state => { state.life -= 1 })
       } else {
@@ -454,6 +456,7 @@ export const useGame = create(
               state.bullets[i].hit = true
             })
             get().damageBlock(j, BULLET_ATK)
+            get().pushSoundQueue(SOUND_KEY.BULLET_HIT)
           }
         }
       }
@@ -491,6 +494,7 @@ export const useGame = create(
           state.balls[i].vx = vx
           state.balls[i].vy = vy
         })
+        get().pushSoundQueue(SOUND_KEY.BOUNCE)
       }
     },
 
@@ -527,6 +531,7 @@ export const useGame = create(
 
     detectAllBallBlockCollision: () => {
       const { balls, blocks } = get()
+      let hasAnyCollision = false
       for (let i = 0; i < balls.length; ++i) {
         let isCollidedX = false
         let isCollidedY = false
@@ -618,15 +623,20 @@ export const useGame = create(
           set(state => {
             state.balls[i].vx = -state.balls[i].vx
           })
+          hasAnyCollision = true
         }
         if (isCollidedY) {
           set(state => {
             state.balls[i].vy = -state.balls[i].vy
           })
+          hasAnyCollision = true
         }
       }
 
       get().removeDeadBlocks()
+      if (hasAnyCollision) {
+        get().pushSoundQueue(SOUND_KEY.BALL_HIT)
+      }
     },
 
     detectAllItemPaddleCollision: () => {
@@ -694,7 +704,7 @@ export const useGame = create(
       switch (item) {
         case ITEM.UNKNOWN: {
           catchItem(knownItems[Math.floor(Math.random() * knownItems.length)])
-          break
+          return
         }
         case ITEM.BULLET_PACK:
           set(state => {
@@ -782,6 +792,7 @@ export const useGame = create(
           console.warn('unknown item', item)
           break
       }
+      get().pushSoundQueue(SOUND_KEY.CATCH_ITEM)
     },
 
     endEnterStageTransition: () => {
@@ -851,6 +862,12 @@ export const useGame = create(
 
     shoot: () => {
       if (get().paddle.bullet > 0) {
+        if (get().paddle.width <= PADDLE_YODA_MAX_WIDTH) {
+          get().pushSoundQueue(SOUND_KEY.SHOOT_YODA)
+        } else {
+          get().pushSoundQueue(SOUND_KEY.SHOOT_DADA)
+        }
+
         set(state => {
           state.paddle.bullet -= 1
           state.bullets.push({
@@ -861,6 +878,16 @@ export const useGame = create(
           })
         })
       }
+    },
+
+    popSoundQueue: () => {
+      const sound = get().soundQueue[0]
+      set(state => { state.soundQueue = state.soundQueue.slice(1) })
+      return sound
+    },
+
+    pushSoundQueue: (sound) => {
+      set(state => { state.soundQueue = [...state.soundQueue, sound] })
     },
 
     onGameMouseMove: (event) => {

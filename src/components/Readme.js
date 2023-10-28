@@ -24,7 +24,7 @@ export const INTRODUCE_TEXT = `遊戲規則：
 export const STAFF_TEXT = `設計製作：彼得與狼
 彩圖繪製：黑櫻焦阿巴
 素材來源：ReLive_灰妲 DaDa、ReLive_咪姆 MeeMu、
-          いらすとや、Rotting Pixels`
+          いらすとや、Rotting Pixels、ZapSplat`
 
 const FONT_SIZE = 45
 const LINE_HEIGHT = FONT_SIZE * 1.2
