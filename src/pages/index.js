@@ -2,7 +2,9 @@ import { Container, Stage, withFilters } from '@pixi/react'
 import { Assets, ColorMatrixFilter } from 'pixi.js'
 import { useEffect, useState } from 'react'
 
+import AlertDialog from '@/components/AlertDialog'
 import Background from '@/components/Background'
+import BounceText from '@/components/BounceText'
 import Ending from '@/components/Ending'
 import GameMenu from '@/components/GameMenu'
 import Header from '@/components/Header'
@@ -21,7 +23,6 @@ import dynamic from 'next/dynamic'
 const SoundProvider = dynamic(() => import('@/components/SoundProvider'), { ssr: false })
 
 Object.entries(IMG_URLS).forEach(([key, url]) => Assets.add(key, url))
-Object.entries(SOUND_URLS).forEach(([key, url]) => Assets.add(key, url))
 
 const FilterContainer = withFilters(Container, {
   matrix: ColorMatrixFilter,
@@ -38,8 +39,8 @@ function handleStageMount (app) {
 
 function Home () {
   const t = useTranslations()
-  const [fontsLoaded, setFontsLoaded] = useState(false)
   const [assetsLoaded, setAssetsLoaded] = useState(false)
+  const [assetsLoadFailed, setAssetsLoadFailed] = useState(false)
   const {
     state,
     showSubmitModal,
@@ -53,25 +54,34 @@ function Home () {
   }))
 
   useEffect(() => {
-    Promise.all([
-      Assets.load(Object.keys(IMG_URLS)),
-      ...Object.keys(SOUND_URLS).map(key => Assets.load(key)),
-    ]).then(() => {
+    Assets.load(Object.keys(IMG_URLS)).then(() => {
+      const promise = new Promise((resolve, reject) => {
+        const { sound } = require('@pixi/sound')
+        sound.add(SOUND_URLS, { preload: true, loaded: () => resolve() })
+      })
+      return promise
+    }).then(() => {
+      const promise = new Promise((resolve, reject) => {
+        const WebFont = require('webfontloader')
+        WebFont.load({
+          custom: {
+            families: ['Xiaolai Mono SC', 'Joystix Monospace'],
+            urls: ['https://cdn.jsdelivr.net/npm/cn-fontsource-xiaolai-mono-sc-regular/font.css', '/fonts/fonts.css'],
+            testStrings: { 'Xiaolai Mono SC': FONT_TEST_STRING },
+          },
+          google: {
+            families: ['Sono', 'Noto Sans TC'],
+          },
+          active: e => {
+            resolve()
+          },
+        })
+      })
+      return promise
+    }).then(() => {
       setAssetsLoaded(true)
-    })
-    const WebFont = require('webfontloader')
-    WebFont.load({
-      custom: {
-        families: ['Xiaolai Mono SC', 'Joystix Monospace'],
-        urls: ['https://cdn.jsdelivr.net/npm/cn-fontsource-xiaolai-mono-sc-regular/font.css', '/fonts/fonts.css'],
-        testStrings: { 'Xiaolai Mono SC': FONT_TEST_STRING },
-      },
-      google: {
-        families: ['Sono', 'Noto Sans TC'],
-      },
-      active: e => {
-        setFontsLoaded(true)
-      },
+    }).catch(() => {
+      setAssetsLoadFailed(true)
     })
   }, [])
 
@@ -84,7 +94,7 @@ function Home () {
       <div className='hidden flex-col sm:flex'>
         <div className='flex-1 p-8 flex justify-center'>
           <div className='border-2 border-black select-none'>
-            {assetsLoaded && fontsLoaded
+            {assetsLoaded
               ? (
                 <Stage
                   width={SCREEN_WIDTH}
@@ -112,11 +122,12 @@ function Home () {
                   </FilterContainer>
                 </Stage>)
               : (
-                <div className='w-[min(1440px,100vw)] h-[min(1080px,calc(100vw*0.75))] text-[#423934] font-comic text-[96px] flex justify-center items-center bg-[url("/img/bg1.png")]'>
-                  Loading...
+                <div className='w-[min(1440px,100vw)] h-[min(1080px,calc(100vw*0.75))] text-[#423934] font-comic text-[min(144px,10vw)] flex justify-center items-center bg-[url("/img/bg1.png")]'>
+                  <BounceText text='Loading...' />
                 </div>
                 )}
             <SubmitDialog open={showSubmitModal} onSubmit={submitScoreAndCloseModal} onClose={closeSubmitModal} />
+            <AlertDialog open={assetsLoadFailed} onClose={() => setAssetsLoadFailed(false)} />
           </div>
         </div>
         <div className='flex justify-center'>{t.rich('index.footnote', { github: chunk => <a className='px-1 underline' target='_blank' href='https://github.com/silentvow/dada-meemu-block/issues'>{chunk}</a> })}</div>

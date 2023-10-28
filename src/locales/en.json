@@ -45,6 +45,14 @@
     "2023-10-23-1": "fix: collision between ball and block",
     "2023-10-28-1": "feat: add sound effects"
   },
+  "dialog": {
+    "close": "Close",
+    "error": "Error",
+    "error_load": "Failed to load resources, please try again later.",
+    "placeholder": "Please enter your name",
+    "submit": "Submit",
+    "submit_record": "Submit Record"
+  },
   "header": {
     "about": "About",
     "changelog": "Changelog"

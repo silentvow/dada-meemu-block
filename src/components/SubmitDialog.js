@@ -1,9 +1,11 @@
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
+import { useTranslations } from 'next-intl'
 import { useCallback, useState } from 'react'
 
 function SubmitDialog ({ open, onSubmit, onClose }) {
+  const t = useTranslations()
   const [name, setName] = useState('')
   const handleSubmit = useCallback(async () => {
     if (!name) return
@@ -14,20 +16,20 @@ function SubmitDialog ({ open, onSubmit, onClose }) {
     <Dialog open={open} onOpenChange={e => !e && onClose()}>
       <DialogContent className='sm:max-w-[425px]'>
         <DialogHeader>
-          <DialogTitle>提交紀錄</DialogTitle>
+          <DialogTitle>{t('dialog.submit_record')}</DialogTitle>
         </DialogHeader>
         <div className='grid gap-4 py-4'>
           <Input
             id='name'
             value={name}
-            placeholder='請輸入您的名稱'
+            placeholder={t('dialog.placeholder')}
             className='col-span-3'
             onChange={e => setName(e.target.value)}
             maxLength={10}
           />
         </div>
         <DialogFooter>
-          <Button type='button' onClick={handleSubmit}>送出</Button>
+          <Button type='button' onClick={handleSubmit}>{t('dialog.submit')}</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
