@@ -21,6 +21,7 @@ import dynamic from 'next/dynamic'
 const SoundProvider = dynamic(() => import('@/components/SoundProvider'), { ssr: false })
 
 Object.entries(IMG_URLS).forEach(([key, url]) => Assets.add(key, url))
+Object.entries(SOUND_URLS).forEach(([key, url]) => Assets.add(key, url))
 
 const FilterContainer = withFilters(Container, {
   matrix: ColorMatrixFilter,
@@ -52,7 +53,10 @@ function Home () {
   }))
 
   useEffect(() => {
-    Assets.load([...Object.keys(IMG_URLS), ...Object.keys(SOUND_URLS)]).then(() => {
+    Promise.all([
+      Assets.load(Object.keys(IMG_URLS)),
+      ...Object.keys(SOUND_URLS).map(key => Assets.load(key)),
+    ]).then(() => {
       setAssetsLoaded(true)
     })
     const WebFont = require('webfontloader')
