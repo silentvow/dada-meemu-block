@@ -1,5 +1,6 @@
 import { BlurFilter, TextStyle } from 'pixi.js'
 import { IMG_KEY, SPRITE } from './image'
+import { SOUND_KEY } from './sound'
 
 export const STORY_SCREEN_WIDTH = 1200
 export const STORY_SCREEN_HEIGHT = 675
@@ -888,6 +889,7 @@ const createBlurFilter = (blur) => {
 
 export const EXTRA_CHAPTER = [
   {
+    bgm: SOUND_KEY.STORY_END,
     sprites: [
       SPRITE[IMG_KEY.ENDING],
     ],
@@ -975,6 +977,7 @@ export const EXTRA_CHAPTER = [
     content: '【灰妲】\n「好－－」',
   },
   {
+    bgm: SOUND_KEY.STORY_EXTRA,
     graphics: [
       {
         draw: (g) => {

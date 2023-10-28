@@ -1,8 +1,9 @@
 import { BALL_COLOR, SCREEN_HEIGHT, SCREEN_WIDTH } from '@/constants/game'
 import { IMG_URLS } from '@/constants/image'
 import { useGame } from '@/game'
-import { Container, Graphics, Sprite, Text, useApp, withFilters } from '@pixi/react'
+import { Container, Graphics, Sprite, Text, withFilters } from '@pixi/react'
 import { ColorMatrixFilter, TextStyle } from 'pixi.js'
+import { animate, linear } from 'popmotion'
 import { useEffect, useRef, useState } from 'react'
 
 const TEXT_PADDING = 16
@@ -46,7 +47,6 @@ function drawTextArea (g) {
 }
 
 function Storyboard () {
-  const app = useApp()
   const { chapter, sceneIndex, gotoNextScene, isTransitioning, endEnterStageTransition } = useGame(state => ({
     chapter: state.chapter,
     sceneIndex: state.sceneIndex,
@@ -65,44 +65,50 @@ function Storyboard () {
   const [scaleY, setScaleY] = useState(1)
   useEffect(() => {
     if (!isTransitioning) return
-    function fn () {
-      setScaleY(y => Math.max(0, y - 0.03))
-    }
-    app.ticker.add(fn)
-    return () => {
-      app.ticker.remove(fn)
-    }
-  }, [app.ticker, isTransitioning])
-
-  useEffect(() => {
-    if (scaleY <= 0) {
-      endEnterStageTransition()
-    }
-  }, [endEnterStageTransition, scaleY])
+    animate({
+      from: 1,
+      to: 0,
+      duration: 300,
+      onUpdate: latest => setScaleY(latest),
+      onComplete: () => endEnterStageTransition(),
+    })
+  }, [endEnterStageTransition, isTransitioning])
 
   const [angle, setAngle] = useState(0)
   useEffect(() => {
-    function fn () {
-      setAngle(a => (a + 1) % 360)
-    }
-    app.ticker.add(fn)
+    const playback = animate({
+      from: 0,
+      to: 360,
+      ease: linear,
+      duration: 2000,
+      repeat: Infinity,
+      repeatType: 'loop',
+      onUpdate: latest => setAngle(Math.round(latest)),
+    })
+
     return () => {
-      app.ticker.remove(fn)
+      playback.stop()
     }
-  }, [app.ticker])
+  }, [])
 
   const [displayLength, setDisplayLength] = useState(0)
-  const isTextAppeared = displayLength >= story.content?.length
+  const [isTextAppeared, setIsTextAppeared] = useState(false)
   useEffect(() => {
-    function fn () {
-      setDisplayLength(a => Math.min(a + 0.5, story.content?.length ?? 0))
-    }
-    app.ticker.add(fn)
+    const contentLength = story.content?.length ?? 0
+    animate({
+      from: 0,
+      to: contentLength,
+      ease: linear,
+      duration: contentLength * 20,
+      onUpdate: latest => setDisplayLength(Math.round(latest)),
+      onComplete: () => setIsTextAppeared(true),
+    })
+
     return () => {
-      app.ticker.remove(fn)
+      setIsTextAppeared(false)
       setDisplayLength(0)
     }
-  }, [app.ticker, story.content])
+  }, [story.content])
 
   return (
     <Container width={SCREEN_WIDTH} height={SCREEN_HEIGHT}>
@@ -122,7 +128,7 @@ function Storyboard () {
         </FilterContainer>
         <Graphics ref={refMask} preventRedraw draw={drawMask} />
       </Container>
-      <Container x={0} y={695 * (1 - scaleY) + 0} scale={{ x: 1, y: scaleY }}>
+      <Container x={0} y={695 * (1 - scaleY)} scale={{ x: 1, y: scaleY }}>
         <Graphics
           draw={drawTextArea}
           eventMode='static'

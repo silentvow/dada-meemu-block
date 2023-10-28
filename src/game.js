@@ -66,7 +66,8 @@ import {
   SPEED_MULTIPLIER,
   TOP_BORDER_HEIGHT,
 } from './constants/game'
-import { IMG_KEY, PADDLE_IMG_KEY, SOUND_KEY } from './constants/image'
+import { IMG_KEY, PADDLE_IMG_KEY } from './constants/image'
+import { SOUND_KEY } from './constants/sound'
 import { BLOCK_CHAR_MAP, FULL_STAGE_MAPS, STORY_STAGE_MAPS } from './constants/stages'
 import { ALL_CHAPTERS, EXTRA_CHAPTER, STORY_CHAPTER_1 } from './constants/story'
 import { calculateCollision, isSegmentRectangleIntersect } from './utils'
@@ -93,6 +94,7 @@ export const useGame = create(
     sceneIndex: 0,
     showSubmitModal: false,
     soundQueue: [],
+    bgm: null,
 
     reset: () => {
       set(state => {
@@ -113,7 +115,10 @@ export const useGame = create(
     },
 
     enterMainMenu: () => {
-      set(state => { state.state = GAME_STATE.MAIN_MENU })
+      set(state => {
+        state.bgm = null
+        state.state = GAME_STATE.MAIN_MENU
+      })
     },
 
     enterStoryMode: () => {
@@ -123,6 +128,7 @@ export const useGame = create(
         state.state = GAME_STATE.STORY
         state.chapter = STORY_CHAPTER_1
         state.sceneIndex = 0
+        state.bgm = state.chapter[0].bgm
       })
       get().reset()
       sendEvent('enter-story-mode')
@@ -135,6 +141,7 @@ export const useGame = create(
         state.state = GAME_STATE.STORY
         state.chapter = EXTRA_CHAPTER
         state.sceneIndex = 0
+        state.bgm = state.chapter[0].bgm
       })
       get().reset()
       sendEvent('enter-extra-story-mode')
@@ -294,6 +301,9 @@ export const useGame = create(
       if (complete) {
         window.localStorage.setItem(LOCAL_STORAGE_KEY.UNLOCK_EXTRA_STORY, 'true')
         window.localStorage.setItem(LOCAL_STORAGE_KEY.UNLOCK_REAL_CHALLENGE, 'true')
+        set(state => { state.bgm = null })
+      } else {
+        set(state => { state.bgm = null })
       }
       const { money, mode, stage } = get()
       const highScore = parseInt(window.localStorage.getItem(HIGH_SCORE_KEYS[mode]) || '0')
@@ -321,6 +331,7 @@ export const useGame = create(
         }
         state.sceneIndex = 0
         state.state = GAME_STATE.STORY
+        state.bgm = state.chapter[0].bgm
       })
     },
 
@@ -807,10 +818,18 @@ export const useGame = create(
           enterEndingPage(true)
           return
         }
-        set(state => { state.isTransitioning = true })
+        set(state => {
+          state.isTransitioning = true
+          state.bgm = null
+        })
         return
       }
-      set(state => { state.sceneIndex += 1 })
+      set(state => {
+        state.sceneIndex += 1
+        if (typeof state.chapter[state.sceneIndex].bgm === 'string') {
+          state.bgm = state.chapter[state.sceneIndex].bgm
+        }
+      })
     },
 
     submitScoreAndCloseModal: async (name) => {
