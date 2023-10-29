@@ -30,6 +30,7 @@ export const GAME_MODE = {
 }
 
 export const LOCAL_STORAGE_KEY = {
+  FPS_LIMIT: 'FPS_LIMIT',
   TEXT_SPEED: 'TEXT_SPEED',
   VOLUME_BGM: 'VOLUME_BGM',
   VOLUME_SFX: 'VOLUME_SFX',

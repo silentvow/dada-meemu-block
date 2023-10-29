@@ -4,7 +4,7 @@ import { useGame } from '@/game'
 import { Container, Graphics, Sprite } from '@pixi/react'
 import { useEffect, useRef, useState } from 'react'
 import MenuButton from '../MenuButton'
-import TextControl from './TextControl'
+import DisplayControl from './DisplayControl'
 import VolumeControl from './VolumeControl'
 
 const MENU = {
@@ -17,7 +17,7 @@ const MENU = {
 const SUB_MENU = {
   NONE: 'NONE',
   VOLUME: 'VOLUME',
-  TEXT: 'TEXT',
+  DISPLAY: 'DISPLAY',
 }
 
 function drawMask (g) {
@@ -71,7 +71,7 @@ function GameMenu () {
       <Sprite x={40} y={10} width={1200} height={675} scale={{ x: 1200 / 1920, y: 675 / 1080 }} image={IMG_URLS.COVER} mask={mask} />
       <Sprite x={620} y={450} width={755 * 0.8} height={275 * 0.8} scale={{ x: 0.8, y: 0.8 }} image={IMG_URLS.TITLE} mask={mask} />
       {subMenu === SUB_MENU.VOLUME && <VolumeControl onCancel={() => setSubMenu(SUB_MENU.NONE)} />}
-      {subMenu === SUB_MENU.TEXT && <TextControl onCancel={() => setSubMenu(SUB_MENU.NONE)} />}
+      {subMenu === SUB_MENU.DISPLAY && <DisplayControl onCancel={() => setSubMenu(SUB_MENU.NONE)} />}
       <Graphics ref={refMask} preventRedraw draw={drawMask} />
       <Container x={0} y={695}>
         {menu === MENU.STORY && (
@@ -91,8 +91,8 @@ function GameMenu () {
         )}
         {menu === MENU.OPTIONS && (
           <>
-            <MenuButton x={200} y={30} text='音量設定' onClick={() => setSubMenu(SUB_MENU.VOLUME)} />
-            <MenuButton x={200} y={140} text='文字設定' onClick={() => setSubMenu(SUB_MENU.TEXT)} />
+            <MenuButton x={200} y={30} text='顯示設定' onClick={() => setSubMenu(SUB_MENU.DISPLAY)} />
+            <MenuButton x={200} y={140} text='音量設定' onClick={() => setSubMenu(SUB_MENU.VOLUME)} />
             <MenuButton x={760} y={30} text='遊戲說明' onClick={enterReadme} />
             <MenuButton x={760} y={140} text='返回前頁' onClick={() => { setSubMenu(SUB_MENU.NONE); setMenu(MENU.MAIN) }} />
           </>

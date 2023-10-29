@@ -7,11 +7,13 @@ import {
   GAME_STATE,
   ITEM_HEIGHT,
   ITEM_WIDTH,
+  LOCAL_STORAGE_KEY,
   SCREEN_HEIGHT,
   SCREEN_WIDTH,
   TOP_BORDER_HEIGHT,
 } from '@/constants/game'
 import { IMG_URLS, SPRITE } from '@/constants/image'
+import { FPS_LIMIT, FPS_LIMIT_VALUE } from '@/constants/text'
 import { useGame } from '@/game'
 import { Container, Sprite, Text, useTick, withPixiApp } from '@pixi/react'
 import { useEffect } from 'react'
@@ -71,6 +73,11 @@ function MainGame ({ app }) {
       document.removeEventListener('keydown', onGameKeyDown)
     }
   }, [onGameKeyDown])
+
+  useEffect(() => {
+    const fpsLimit = localStorage.getItem(LOCAL_STORAGE_KEY.FPS_LIMIT) ?? FPS_LIMIT.NO_LIMIT
+    app.ticker.maxFPS = FPS_LIMIT_VALUE[fpsLimit]
+  }, [app])
 
   return (
     <Container
