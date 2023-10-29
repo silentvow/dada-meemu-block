@@ -9,6 +9,10 @@
     "lint": "next lint",
     "test": "jest"
   },
+  "engines": {
+    "node": ">=18",
+    "pnpm": ">=8"
+  },
   "dependencies": {
     "@flatten-js/core": "^1.4.4",
     "@pixi/react": "^7.1.1",
