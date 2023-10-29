@@ -96,6 +96,10 @@ export const useGame = create(
     soundQueue: [],
     bgm: null,
 
+    initBGM: () => { set(state => { state.bgm = SOUND_KEY.BGM_MENU }) },
+    getMediaInstance: () => { return get().mediaInstance },
+    setMediaInstance: (instance) => { set(state => { state.mediaInstance = instance }) },
+
     reset: () => {
       set(state => {
         state.gId = uuidv4()
@@ -116,7 +120,7 @@ export const useGame = create(
 
     enterMainMenu: () => {
       set(state => {
-        state.bgm = null
+        state.bgm = SOUND_KEY.BGM_MENU
         state.state = GAME_STATE.MAIN_MENU
       })
     },
@@ -301,7 +305,7 @@ export const useGame = create(
       if (complete) {
         window.localStorage.setItem(LOCAL_STORAGE_KEY.UNLOCK_EXTRA_STORY, 'true')
         window.localStorage.setItem(LOCAL_STORAGE_KEY.UNLOCK_REAL_CHALLENGE, 'true')
-        set(state => { state.bgm = SOUND_KEY.STORY_END })
+        set(state => { state.bgm = SOUND_KEY.BGM_END })
       } else {
         set(state => { state.bgm = SOUND_KEY.GAME_OVER })
       }

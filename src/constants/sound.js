@@ -8,8 +8,17 @@ export const SOUND_KEY = {
   FAILURE: 'SOUND_FAILURE',
   GAME_OVER: 'SOUND_GAME_OVER',
 
-  STORY_END: 'SOUND_STORY_END',
-  STORY_EXTRA: 'SOUND_STORY_EXTRA',
+  BGM_MENU: 'SOUND_BGM_MENU',
+  BGM_OFFICE: 'SOUND_BGM_OFFICE',
+  BGM_RUINS: 'SOUND_BGM_RUINS',
+  BGM_THROW: 'SOUND_BGM_THROW',
+  BGM_EARTHQUAKE: 'SOUND_BGM_EARTHQUAKE',
+  BGM_HALL: 'SOUND_BGM_HALL',
+  BGM_TRAP: 'SOUND_BGM_TRAP',
+  BGM_BALLROOM: 'SOUND_BGM_BALLROOM',
+  BGM_FIGHT: 'SOUND_BGM_FIGHT',
+  BGM_END: 'SOUND_BGM_END',
+  BGM_EXTRA: 'SOUND_BGM_EXTRA',
 }
 
 export const SOUND_URLS = {
@@ -22,6 +31,15 @@ export const SOUND_URLS = {
   [SOUND_KEY.FAILURE]: '/assets/failure.mp3',
   [SOUND_KEY.GAME_OVER]: '/assets/game-over.mp3',
 
-  [SOUND_KEY.STORY_END]: '/assets/story-end.mp3',
-  [SOUND_KEY.STORY_EXTRA]: '/assets/story-extra.mp3',
+  [SOUND_KEY.BGM_MENU]: '/assets/bgm-menu.mp3',
+  [SOUND_KEY.BGM_OFFICE]: '/assets/bgm-office.mp3',
+  [SOUND_KEY.BGM_RUINS]: '/assets/bgm-ruins.mp3',
+  [SOUND_KEY.BGM_THROW]: '/assets/bgm-throw.mp3',
+  [SOUND_KEY.BGM_EARTHQUAKE]: '/assets/bgm-earthquake.mp3',
+  [SOUND_KEY.BGM_HALL]: '/assets/bgm-hall.mp3',
+  [SOUND_KEY.BGM_TRAP]: '/assets/bgm-trap.mp3',
+  [SOUND_KEY.BGM_BALLROOM]: '/assets/bgm-ballroom.mp3',
+  [SOUND_KEY.BGM_FIGHT]: '/assets/bgm-fight.mp3',
+  [SOUND_KEY.BGM_END]: '/assets/bgm-end.mp3',
+  [SOUND_KEY.BGM_EXTRA]: '/assets/bgm-extra.mp3',
 }

@@ -33,6 +33,7 @@ $ npm run build
   - [Rotting Pixels](https://rottingpixels.itch.io/four-seasons-platformer-tileset-16x16free)
 - Sound effects
   - [ZapSplat](https://www.zapsplat.com)
+  - [DOVA-SYNDROME](https://dova-s.jp/)
 
 <!-- Please don't remove this: Grab your social icons from https://github.com/carlsednaoui/gitsocial -->
 

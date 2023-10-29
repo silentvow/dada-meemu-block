@@ -12,6 +12,7 @@ function Changelog () {
             <h2 className='text-2xl border-b border-b-foreground'>2023-10-29</h2>
             <ul className='list-disc p-6'>
               <li>{t('2023-10-29-1')}</li>
+              <li>{t('2023-10-29-2')}</li>
             </ul>
             <h2 className='text-2xl border-b border-b-foreground'>2023-10-28</h2>
             <ul className='list-disc p-6'>
