@@ -1,4 +1,3 @@
-import { LOCAL_STORAGE_KEY } from '@/constants/game'
 import { IMG_URLS } from '@/constants/image'
 import { useGame } from '@/game'
 import { Container, Graphics, Sprite } from '@pixi/react'
@@ -35,7 +34,7 @@ function drawMainArea (g) {
 }
 
 function GameMenu () {
-  const [unlockRealMode] = useState(() => { return window.localStorage.getItem(LOCAL_STORAGE_KEY.UNLOCK_REAL_CHALLENGE) })
+  const [unlockRealMode] = useState(true)
   const {
     enterStoryMode,
     enterExtraStoryMode,
