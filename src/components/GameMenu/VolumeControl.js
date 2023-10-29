@@ -26,7 +26,7 @@ const textStyle = new TextStyle({
 })
 
 function VolumeControl ({ onCancel }) {
-  const { getMediaInstance } = useGame(state => ({ getMediaInstance: state.getMediaInstance }))
+  const getMediaInstance = useGame(state => state.getMediaInstance)
   const [volumeBGM, setVolumeBGM] = useState(() => Math.round((localStorage.getItem(LOCAL_STORAGE_KEY.VOLUME_BGM) ?? 1) * 100))
   const [volumeSFX, setVolumeSFX] = useState(() => Math.round((localStorage.getItem(LOCAL_STORAGE_KEY.VOLUME_SFX) ?? 1) * 100))
 

@@ -182,7 +182,10 @@ export const useGame = create(
     enterGame: () => {
       get().reset()
       get().enterStage(0)
-      set(state => { state.state = GAME_STATE.READY })
+      set(state => {
+        state.bgm = null
+        state.state = GAME_STATE.READY
+      })
     },
 
     setupBlocks: (stage) => {

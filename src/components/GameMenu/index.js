@@ -3,6 +3,7 @@ import { IMG_URLS } from '@/constants/image'
 import { useGame } from '@/game'
 import { Container, Graphics, Sprite } from '@pixi/react'
 import { useEffect, useRef, useState } from 'react'
+import { useShallow } from 'zustand/react/shallow'
 import MenuButton from '../MenuButton'
 import DisplayControl from './DisplayControl'
 import VolumeControl from './VolumeControl'
@@ -45,7 +46,7 @@ function GameMenu () {
     enterReadme,
     enterScoreboard,
   } = useGame(
-    state => ({
+    useShallow(state => ({
       enterStoryMode: state.enterStoryMode,
       enterExtraStoryMode: state.enterExtraStoryMode,
       enterDadaChallengeMode: state.enterDadaChallengeMode,
@@ -53,7 +54,7 @@ function GameMenu () {
       enterRealChallengeMode: state.enterRealChallengeMode,
       enterReadme: state.enterReadme,
       enterScoreboard: state.enterScoreboard,
-    }),
+    })),
   )
   const [mask, setMask] = useState(null)
   const refMask = useRef(null)

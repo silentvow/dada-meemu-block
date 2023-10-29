@@ -24,7 +24,7 @@ function drawBoard (g) {
 }
 
 function Scoreboard () {
-  const { enterMainMenu } = useGame(state => ({ enterMainMenu: state.enterMainMenu }))
+  const enterMainMenu = useGame(state => state.enterMainMenu)
   const [loading, setLoading] = useState(true)
   const [records, setRecords] = useState([[], [], [], [], []])
   const [unlockRealMode] = useState(() => { return window.localStorage.getItem(LOCAL_STORAGE_KEY.UNLOCK_REAL_CHALLENGE) })

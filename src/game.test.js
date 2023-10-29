@@ -11,7 +11,7 @@ jest.mock('./utils/gtag', () => {
 })
 
 test('stage test', () => {
-  const { result } = renderHook(() => useGame(state => state))
+  const { result } = renderHook(() => useGame())
 
   act(() => {
     result.current.enterDadaChallengeMode()
