@@ -52,8 +52,8 @@ const textOffsetX = 10 + TEXT_PADDING
 const textOffsetY = 695 + TEXT_PADDING
 const spinnerOffsetX = 1280 - TEXT_PADDING - 10 - 12
 const spinnerOffsetY = 960 - TEXT_PADDING - 10 - 12
-const skipButtonOffsetX = 1280 - TEXT_PADDING - 10 - 216 * 0.6 * 80 / 95
-const skipButtonOffsetY = 695 + TEXT_PADDING
+const skipButtonOffsetX = 1280 - 10 - 216 * 0.6 * 80 / 95
+const skipButtonOffsetY = 10
 
 function Storyboard () {
   const [textSpeed] = useState(() => { return TEXT_SPEED_VALUE[window.localStorage.getItem(LOCAL_STORAGE_KEY.TEXT_SPEED) ?? TEXT_SPEED.NORMAL] })
@@ -163,8 +163,8 @@ function Storyboard () {
             image={IMG_URLS[BALL_COLOR.BLUE]}
           />
         )}
-        <SmallMenuButton x={skipButtonOffsetX} y={skipButtonOffsetY} scale={0.6} text='略過' onClick={skipScenes} />
       </Container>
+      <SmallMenuButton x={skipButtonOffsetX} y={skipButtonOffsetY} scale={0.6} text='略過' onClick={skipScenes} />
     </Container>
   )
 }

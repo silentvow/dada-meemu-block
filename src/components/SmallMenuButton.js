@@ -12,9 +12,9 @@ const menuStyle = new TextStyle({
   lineHeight: 56 * 1.2,
 })
 
-function SmallMenuButton ({ x, y, scale, text, onClick }) {
+function SmallMenuButton ({ x, y, scale = 1, text, onClick }) {
   return (
-    <Container x={x} y={y} scale={scale}>
+    <Container x={x} y={y} scale={{ x: scale, y: scale }}>
       <Sprite x={0} y={0} width={216 * ratio} height={95 * ratio} scale={ratio} image={IMG_URLS.SMALL_BUTTON} eventMode='static' onclick={onClick} ontouchstart={onClick} />
       <Text x={216 * ratio / 2} y={40} anchor={[0.5, 0.5]} text={text} style={menuStyle} eventMode='static' onclick={onClick} ontouchstart={onClick} />
     </Container>

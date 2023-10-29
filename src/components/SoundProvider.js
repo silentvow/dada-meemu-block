@@ -3,12 +3,11 @@ import { SOUND_URLS } from '@/constants/sound'
 import { useGame } from '@/game'
 import { sound } from '@pixi/sound'
 import { animate } from 'popmotion'
-import { useEffect, useRef } from 'react'
+import { useEffect } from 'react'
 
 sound.add(SOUND_URLS)
 
 function SoundProvider ({ children }) {
-  const mediaRef = useRef(null)
   const { bgm, initBGM, soundQueue, popSoundQueue, setMediaInstance } = useGame(state => ({
     bgm: state.bgm,
     initBGM: state.initBGM,
@@ -35,7 +34,6 @@ function SoundProvider ({ children }) {
     if (typeof bgm === 'string') {
       const volume = localStorage.getItem(LOCAL_STORAGE_KEY.VOLUME_BGM) ?? 1
       const media = sound.play(bgm, { loop: true, volume: 0 })
-      mediaRef.current = media
       Promise.resolve(media).then(
         function (value) {
           animate({
@@ -59,10 +57,10 @@ function SoundProvider ({ children }) {
             Promise.resolve(media).then(media => media.set('volume', latest))
           },
           onComplete: () => {
-            setMediaInstance(null)
             sound.stop(bgm)
           },
         })
+        setMediaInstance(null)
       }
     }
   }, [bgm, setMediaInstance])
