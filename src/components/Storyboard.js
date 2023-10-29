@@ -1,10 +1,12 @@
-import { BALL_COLOR, SCREEN_HEIGHT, SCREEN_WIDTH } from '@/constants/game'
+import { BALL_COLOR, LOCAL_STORAGE_KEY, SCREEN_HEIGHT, SCREEN_WIDTH } from '@/constants/game'
 import { IMG_URLS } from '@/constants/image'
+import { TEXT_SPEED, TEXT_SPEED_VALUE } from '@/constants/text'
 import { useGame } from '@/game'
 import { Container, Graphics, Sprite, Text, withFilters } from '@pixi/react'
 import { ColorMatrixFilter, TextStyle } from 'pixi.js'
 import { animate, linear } from 'popmotion'
 import { useEffect, useRef, useState } from 'react'
+import SmallMenuButton from './SmallMenuButton'
 
 const TEXT_PADDING = 16
 
@@ -46,10 +48,19 @@ function drawTextArea (g) {
   g.endFill()
 }
 
+const textOffsetX = 10 + TEXT_PADDING
+const textOffsetY = 695 + TEXT_PADDING
+const spinnerOffsetX = 1280 - TEXT_PADDING - 10 - 12
+const spinnerOffsetY = 960 - TEXT_PADDING - 10 - 12
+const skipButtonOffsetX = 1280 - TEXT_PADDING - 10 - 216 * 0.6 * 80 / 95
+const skipButtonOffsetY = 695 + TEXT_PADDING
+
 function Storyboard () {
-  const { chapter, sceneIndex, gotoNextScene, isTransitioning, endEnterStageTransition } = useGame(state => ({
+  const [textSpeed] = useState(() => { return TEXT_SPEED_VALUE[window.localStorage.getItem(LOCAL_STORAGE_KEY.TEXT_SPEED) ?? TEXT_SPEED.NORMAL] })
+  const { chapter, sceneIndex, skipScenes, gotoNextScene, isTransitioning, endEnterStageTransition } = useGame(state => ({
     chapter: state.chapter,
     sceneIndex: state.sceneIndex,
+    skipScenes: state.skipScenes,
     gotoNextScene: state.gotoNextScene,
     isTransitioning: state.isTransitioning,
     endEnterStageTransition: state.endEnterStageTransition,
@@ -99,7 +110,7 @@ function Storyboard () {
       from: 0,
       to: contentLength,
       ease: linear,
-      duration: contentLength * 20,
+      duration: contentLength * textSpeed,
       onUpdate: latest => setDisplayLength(Math.round(latest)),
       onComplete: () => setIsTextAppeared(true),
     })
@@ -108,7 +119,7 @@ function Storyboard () {
       setIsTextAppeared(false)
       setDisplayLength(0)
     }
-  }, [story.content])
+  }, [story.content, textSpeed])
 
   return (
     <Container width={SCREEN_WIDTH} height={SCREEN_HEIGHT}>
@@ -137,21 +148,22 @@ function Storyboard () {
         />
         {story.content && (
           <Text
-            x={10 + TEXT_PADDING}
-            y={695 + TEXT_PADDING}
+            x={textOffsetX}
+            y={textOffsetY}
             text={story.content.slice(0, Math.floor(displayLength))}
             style={textStyle}
           />
         )}
         {isTextAppeared && (
           <Sprite
-            x={1280 - TEXT_PADDING - 10 - 12}
-            y={960 - TEXT_PADDING - 10 - 12}
+            x={spinnerOffsetX}
+            y={spinnerOffsetY}
             anchor={[0.5, 0.5]} scale={0.5}
             angle={angle}
             image={IMG_URLS[BALL_COLOR.BLUE]}
           />
         )}
+        <SmallMenuButton x={skipButtonOffsetX} y={skipButtonOffsetY} scale={0.6} text='略過' onClick={skipScenes} />
       </Container>
     </Container>
   )

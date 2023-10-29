@@ -301,9 +301,9 @@ export const useGame = create(
       if (complete) {
         window.localStorage.setItem(LOCAL_STORAGE_KEY.UNLOCK_EXTRA_STORY, 'true')
         window.localStorage.setItem(LOCAL_STORAGE_KEY.UNLOCK_REAL_CHALLENGE, 'true')
-        set(state => { state.bgm = null })
+        set(state => { state.bgm = SOUND_KEY.STORY_END })
       } else {
-        set(state => { state.bgm = null })
+        set(state => { state.bgm = SOUND_KEY.GAME_OVER })
       }
       const { money, mode, stage } = get()
       const highScore = parseInt(window.localStorage.getItem(HIGH_SCORE_KEYS[mode]) || '0')
@@ -829,6 +829,18 @@ export const useGame = create(
         if (typeof state.chapter[state.sceneIndex].bgm === 'string') {
           state.bgm = state.chapter[state.sceneIndex].bgm
         }
+      })
+    },
+
+    skipScenes: () => {
+      const { stage, stageMaps, enterEndingPage } = get()
+      if (stage >= stageMaps.length) {
+        enterEndingPage(true)
+        return
+      }
+      set(state => {
+        state.isTransitioning = true
+        state.bgm = null
       })
     },
 
