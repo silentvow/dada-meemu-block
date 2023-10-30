@@ -790,6 +790,11 @@ export const useGame = create(
             })
           })
           break
+        case ITEM.CHICKEN:
+          set(state => {
+            state.life = Math.min(MAX_LIVES, state.life + 1)
+          })
+          break
         case ITEM.MONEY_XS:
         case ITEM.MONEY_SM:
         case ITEM.MONEY_MD:
@@ -798,12 +803,8 @@ export const useGame = create(
           set(state => {
             state.money += MONEY_VALUES[item]
           })
-          break
-        case ITEM.CHICKEN:
-          set(state => {
-            state.life = Math.min(MAX_LIVES, state.life + 1)
-          })
-          break
+          get().pushSoundQueue(SOUND_KEY.CATCH_COIN)
+          return
         default:
           console.warn('unknown item', item)
           break

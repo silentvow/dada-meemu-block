@@ -1,4 +1,4 @@
-import { BALL_COLOR, BLOCK, ITEM, PADDLE_WIDTH } from './game'
+import { BALL_COLOR, ITEM, PADDLE_WIDTH } from './game'
 
 export const IMG_KEY = {
   RUIN_ENTRY: 'RUIN_ENTRY',
@@ -50,6 +50,12 @@ export const IMG_KEY = {
   BLOCK_NORMAL_3: 'BLOCK_NORMAL_3',
   BLOCK_NORMAL_3_1: 'BLOCK_NORMAL_3_1',
   BLOCK_NORMAL_3_2: 'BLOCK_NORMAL_3_2',
+  BLOCK_NORMAL_1_DOLLAR: 'BLOCK_NORMAL_1_DOLLAR',
+  BLOCK_NORMAL_2_DOLLAR: 'BLOCK_NORMAL_2_DOLLAR',
+  BLOCK_NORMAL_2_DOLLAR_1: 'BLOCK_NORMAL_2_DOLLAR_1',
+  BLOCK_NORMAL_3_DOLLAR: 'BLOCK_NORMAL_3_DOLLAR',
+  BLOCK_NORMAL_3_DOLLAR_1: 'BLOCK_NORMAL_3_DOLLAR_1',
+  BLOCK_NORMAL_3_DOLLAR_2: 'BLOCK_NORMAL_3_DOLLAR_2',
   BLOCK_STONE: 'BLOCK_STONE',
 }
 
@@ -76,7 +82,13 @@ export const IMG_URLS = {
   [IMG_KEY.BLOCK_NORMAL_3]: '/img/box3.png',
   [IMG_KEY.BLOCK_NORMAL_3_1]: '/img/box3-1.png',
   [IMG_KEY.BLOCK_NORMAL_3_2]: '/img/box3-2.png',
-  [BLOCK.STONE]: '/img/stone.png',
+  [IMG_KEY.BLOCK_NORMAL_1_DOLLAR]: '/img/box1-dollar.png',
+  [IMG_KEY.BLOCK_NORMAL_2_DOLLAR]: '/img/box2-dollar.png',
+  [IMG_KEY.BLOCK_NORMAL_2_DOLLAR_1]: '/img/box2-dollar-1.png',
+  [IMG_KEY.BLOCK_NORMAL_3_DOLLAR]: '/img/box3-dollar.png',
+  [IMG_KEY.BLOCK_NORMAL_3_DOLLAR_1]: '/img/box3-dollar-1.png',
+  [IMG_KEY.BLOCK_NORMAL_3_DOLLAR_2]: '/img/box3-dollar-2.png',
+  [IMG_KEY.BLOCK_STONE]: '/img/stone.png',
   [ITEM.BULLET_PACK]: '/img/chili-sauce.png',
   [ITEM.PADDLE_PLUS]: '/img/longer.png',
   [ITEM.PADDLE_MINUS]: '/img/shorter.png',
@@ -96,9 +108,9 @@ export const IMG_URLS = {
   [ITEM.MONEY_LG]: '/img/dollar1.png',
   [ITEM.MONEY_XL]: '/img/dollar6.png',
   [IMG_KEY.RUIN_ENTRY]: '/img/story/ruin-entry.png',
-  [IMG_KEY.OFFICE]: '/img/bg-doujou.jpg',
-  [IMG_KEY.WALL]: '/img/bg-wall.jpg',
-  [IMG_KEY.BREAK_WALL]: '/img/bg-break-wall.jpg',
+  [IMG_KEY.OFFICE]: '/img/story/bg-doujou.jpg',
+  [IMG_KEY.WALL]: '/img/story/bg-wall.jpg',
+  [IMG_KEY.BREAK_WALL]: '/img/story/bg-break-wall.jpg',
   [IMG_KEY.TREASURE_MAP]: '/img/story/treasure-map.png',
   [IMG_KEY.LINE_CENTERING]: '/img/story/bg-centering.png',
   [IMG_KEY.LINE_SPEED_UP]: '/img/story/bg-speed-up.png',

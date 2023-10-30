@@ -191,6 +191,14 @@ export const REAL_BUFF_ITEMS = BUFF_ITEMS.filter(item => ![ITEM.BULLET_PACK, ITE
 
 export const REAL_DEBUFF_ITEMS = DEBUFF_ITEMS.filter(item => ![ITEM.PADDLE_MINUS, ITEM.CHICKEN].includes(item))
 
+export const MONEY_ITEMS = [
+  ITEM.MONEY_XS,
+  ITEM.MONEY_SM,
+  ITEM.MONEY_MD,
+  ITEM.MONEY_LG,
+  ITEM.MONEY_XL,
+]
+
 export const MONEY_VALUES = {
   [ITEM.MONEY_XS]: 1000,
   [ITEM.MONEY_SM]: 4000,

@@ -9,6 +9,7 @@ import {
   ITEM_HEIGHT,
   ITEM_WIDTH,
   LOCAL_STORAGE_KEY,
+  MONEY_ITEMS,
   SCREEN_HEIGHT,
   SCREEN_WIDTH,
   TOP_BORDER_HEIGHT,
@@ -47,18 +48,19 @@ function imgUrl (item) {
 }
 
 function blockImgUrl (block) {
+  const hasMoney = MONEY_ITEMS.includes(block.item)
   switch (block.type) {
     case BLOCK.NORMAL_1: {
-      return imgUrl(IMG_KEY.BLOCK_NORMAL_1)
+      return imgUrl(hasMoney ? IMG_KEY.BLOCK_NORMAL_1_DOLLAR : IMG_KEY.BLOCK_NORMAL_1)
     }
     case BLOCK.NORMAL_2: {
       switch (block.hp) {
         case 1:
         case 2:
-          return imgUrl(IMG_KEY.BLOCK_NORMAL_2_1)
+          return imgUrl(hasMoney ? IMG_KEY.BLOCK_NORMAL_2_DOLLAR_1 : IMG_KEY.BLOCK_NORMAL_2_1)
         case 3:
         case 4:
-          return imgUrl(IMG_KEY.BLOCK_NORMAL_2)
+          return imgUrl(hasMoney ? IMG_KEY.BLOCK_NORMAL_2_DOLLAR : IMG_KEY.BLOCK_NORMAL_2)
       }
       break
     }
@@ -66,13 +68,13 @@ function blockImgUrl (block) {
       switch (block.hp) {
         case 1:
         case 2:
-          return imgUrl(IMG_KEY.BLOCK_NORMAL_3_2)
+          return imgUrl(hasMoney ? IMG_KEY.BLOCK_NORMAL_3_DOLLAR_2 : IMG_KEY.BLOCK_NORMAL_3_2)
         case 3:
         case 4:
-          return imgUrl(IMG_KEY.BLOCK_NORMAL_3_1)
+          return imgUrl(hasMoney ? IMG_KEY.BLOCK_NORMAL_3_DOLLAR_1 : IMG_KEY.BLOCK_NORMAL_3_1)
         case 5:
         case 6:
-          return imgUrl(IMG_KEY.BLOCK_NORMAL_3)
+          return imgUrl(hasMoney ? IMG_KEY.BLOCK_NORMAL_3_DOLLAR : IMG_KEY.BLOCK_NORMAL_3)
       }
       break
     }
