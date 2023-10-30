@@ -179,6 +179,11 @@ export const useGame = create(
       sendEvent('enter-scoreboard')
     },
 
+    enterSandbox: () => {
+      set(state => { state.state = GAME_STATE.SANDBOX })
+      sendEvent('enter-sandbox')
+    },
+
     enterGame: () => {
       get().reset()
       get().enterStage(0)
@@ -872,6 +877,8 @@ export const useGame = create(
     closeSubmitModal: () => {
       set(state => { state.showSubmitModal = false })
     },
+
+    setSandboxText: (text) => { set(state => { state.sandboxText = text }) },
 
     mainLoop: (delta) => {
       switch (get().state) {
