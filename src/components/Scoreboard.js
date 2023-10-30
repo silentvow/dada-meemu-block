@@ -1,4 +1,4 @@
-import { API_URLS, GAME_MODE, LOCAL_STORAGE_KEY } from '@/constants/game'
+import { API_URLS, GAME_MODE } from '@/constants/game'
 import { useGame } from '@/game'
 import { Container, Graphics, Text } from '@pixi/react'
 import { TextStyle } from 'pixi.js'
@@ -27,7 +27,7 @@ function Scoreboard () {
   const enterMainMenu = useGame(state => state.enterMainMenu)
   const [loading, setLoading] = useState(true)
   const [records, setRecords] = useState([[], [], [], [], []])
-  const [unlockRealMode] = useState(() => { return window.localStorage.getItem(LOCAL_STORAGE_KEY.UNLOCK_REAL_CHALLENGE) })
+  const [unlockRealMode] = useState(true)
 
   useEffect(() => {
     fetch(API_URLS.HIGH_SCORE).then(
