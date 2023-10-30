@@ -101,10 +101,7 @@ export const DROP_RATIO_MONEY_XL = 0.05
 export const BLOCK = {
   NORMAL_1: 'NORMAL_1',
   NORMAL_2: 'NORMAL_2',
-  NORMAL_2_1: 'NORMAL_2_1',
   NORMAL_3: 'NORMAL_3',
-  NORMAL_3_1: 'NORMAL_3_1',
-  NORMAL_3_2: 'NORMAL_3_2',
   STONE: 'STONE',
 }
 

@@ -1,5 +1,6 @@
 import {
   BALL_IMAGE_RADIUS,
+  BLOCK,
   BULLET_HEIGHT,
   BULLET_IMG_HEIGHT,
   BULLET_IMG_WIDTH,
@@ -12,7 +13,7 @@ import {
   SCREEN_WIDTH,
   TOP_BORDER_HEIGHT,
 } from '@/constants/game'
-import { IMG_URLS, SPRITE } from '@/constants/image'
+import { IMG_KEY, IMG_URLS, SPRITE } from '@/constants/image'
 import { FPS_LIMIT, FPS_LIMIT_VALUE } from '@/constants/text'
 import { useGame } from '@/game'
 import { Container, Sprite, Text, useTick, withPixiApp } from '@pixi/react'
@@ -43,6 +44,41 @@ const footerStyle = {
 
 function imgUrl (item) {
   return IMG_URLS[item] || `https://placehold.co/${ITEM_WIDTH}x${ITEM_HEIGHT}/red/fff?text=${item}`
+}
+
+function blockImgUrl (block) {
+  switch (block.type) {
+    case BLOCK.NORMAL_1: {
+      return imgUrl(IMG_KEY.BLOCK_NORMAL_1)
+    }
+    case BLOCK.NORMAL_2: {
+      switch (block.hp) {
+        case 1:
+        case 2:
+          return imgUrl(IMG_KEY.BLOCK_NORMAL_2_1)
+        case 3:
+        case 4:
+          return imgUrl(IMG_KEY.BLOCK_NORMAL_2)
+      }
+      break
+    }
+    case BLOCK.NORMAL_3: {
+      switch (block.hp) {
+        case 1:
+        case 2:
+          return imgUrl(IMG_KEY.BLOCK_NORMAL_3_2)
+        case 3:
+        case 4:
+          return imgUrl(IMG_KEY.BLOCK_NORMAL_3_1)
+        case 5:
+        case 6:
+          return imgUrl(IMG_KEY.BLOCK_NORMAL_3)
+      }
+      break
+    }
+    case BLOCK.STONE:
+      return imgUrl(IMG_KEY.BLOCK_STONE)
+  }
 }
 
 function MainGame ({ app }) {
@@ -95,7 +131,7 @@ function MainGame ({ app }) {
     >
       {blocks.map(block => {
         return (
-          <Sprite key={block.id} x={block.x} y={block.y} image={imgUrl(block.type)} />
+          <Sprite key={block.id} x={block.x} y={block.y} image={blockImgUrl(block)} />
         )
       })}
       {items.map(item => {

@@ -43,6 +43,14 @@ export const IMG_KEY = {
   DINING_ROOM: 'DINING_ROOM',
   BREAKFAST: 'BREAKFAST',
   GO_OUTSIDE: 'GO_OUTSIDE',
+
+  BLOCK_NORMAL_1: 'BLOCK_NORMAL_1',
+  BLOCK_NORMAL_2: 'BLOCK_NORMAL_2',
+  BLOCK_NORMAL_2_1: 'BLOCK_NORMAL_2_1',
+  BLOCK_NORMAL_3: 'BLOCK_NORMAL_3',
+  BLOCK_NORMAL_3_1: 'BLOCK_NORMAL_3_1',
+  BLOCK_NORMAL_3_2: 'BLOCK_NORMAL_3_2',
+  BLOCK_STONE: 'BLOCK_STONE',
 }
 
 export const IMG_URLS = {
@@ -62,12 +70,12 @@ export const IMG_URLS = {
   [BALL_COLOR.BLUE]: '/img/meemu/ball.png',
   [BALL_COLOR.RED]: '/img/meemu/red-ball.png',
   [BALL_COLOR.BLACK]: '/img/meemu/black-ball.png',
-  [BLOCK.NORMAL_1]: '/img/box1.png',
-  [BLOCK.NORMAL_2]: '/img/box2.png',
-  [BLOCK.NORMAL_2_1]: '/img/box2-1.png',
-  [BLOCK.NORMAL_3]: '/img/box3.png',
-  [BLOCK.NORMAL_3_1]: '/img/box3-1.png',
-  [BLOCK.NORMAL_3_2]: '/img/box3-2.png',
+  [IMG_KEY.BLOCK_NORMAL_1]: '/img/box1.png',
+  [IMG_KEY.BLOCK_NORMAL_2]: '/img/box2.png',
+  [IMG_KEY.BLOCK_NORMAL_2_1]: '/img/box2-1.png',
+  [IMG_KEY.BLOCK_NORMAL_3]: '/img/box3.png',
+  [IMG_KEY.BLOCK_NORMAL_3_1]: '/img/box3-1.png',
+  [IMG_KEY.BLOCK_NORMAL_3_2]: '/img/box3-2.png',
   [BLOCK.STONE]: '/img/stone.png',
   [ITEM.BULLET_PACK]: '/img/chili-sauce.png',
   [ITEM.PADDLE_PLUS]: '/img/longer.png',
