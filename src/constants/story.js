@@ -1,4 +1,4 @@
-import { BlurFilter, TextStyle } from 'pixi.js'
+import { BlurFilter, ColorMatrixFilter, TextStyle } from 'pixi.js'
 import { IMG_KEY, SPRITE } from './image'
 import { SOUND_KEY } from './sound'
 
@@ -968,7 +968,7 @@ export const STORY_CHAPTER_5 = [
       SPRITE[IMG_KEY.METAL_BALL],
       SPRITE[IMG_KEY.DADA_04],
     ],
-    content: '【灰妲】\n「我也不知道，看來解鎖是行不通了，還是用老方法解決吧。」',
+    content: '【灰妲】\n「我也不記得，看來解鎖是行不通了，還是用老方法解決吧。」',
   },
   {
     sprites: [
@@ -976,7 +976,7 @@ export const STORY_CHAPTER_5 = [
       SPRITE[IMG_KEY.METAL_BALL],
       SPRITE[IMG_KEY.MEEMU_2],
     ],
-    content: '【咪姆】\n「不打算嘗試一下嗎？」',
+    content: '【咪姆】\n「不考慮嘗試一下嗎？」',
   },
   {
     sprites: [
@@ -984,7 +984,7 @@ export const STORY_CHAPTER_5 = [
       SPRITE[IMG_KEY.METAL_BALL],
       SPRITE[IMG_KEY.DADA_04],
     ],
-    content: '【灰妲】\n「用不著，剛好我想活動一下筋骨。」',
+    content: '【灰妲】\n「用不著，正好我想活動一下筋骨。」',
   },
   {
     sprites: [
@@ -1142,11 +1142,35 @@ export const ALL_CHAPTERS = [
   STORY_FINAL,
 ]
 
-const createBlurFilter = (blur) => {
-  const filter = new BlurFilter()
-  filter.blur = blur
-  return filter
-}
+const Blur10Filter = (function () {
+  let cache
+  return function () {
+    if (typeof cache === 'object') return cache
+    this.v = new BlurFilter()
+    this.v.blur = 10
+    cache = this
+  }
+}())
+
+const Blur20Filter = (function () {
+  let cache
+  return function () {
+    if (typeof cache === 'object') return cache
+    this.v = new BlurFilter()
+    this.v.blur = 20
+    cache = this
+  }
+}())
+
+const SilhouetteFilter = (function () {
+  let cache
+  return function () {
+    if (typeof cache === 'object') return cache
+    this.v = new ColorMatrixFilter()
+    this.v.grayscale(0)
+    cache = this
+  }
+}())
 
 export const EXTRA_CHAPTER = [
   {
@@ -1158,34 +1182,34 @@ export const EXTRA_CHAPTER = [
   },
   {
     sprites: [
-      { ...SPRITE[IMG_KEY.ENDING], filters: () => { return [createBlurFilter(10)] } },
-      SPRITE[IMG_KEY.REAL_DA],
+      { ...SPRITE[IMG_KEY.ENDING], filters: () => { return [new Blur10Filter().v] } },
+      { ...SPRITE[IMG_KEY.REAL_DA_1], filters: () => { return [new SilhouetteFilter().v] } },
     ],
     content: '【真妲】\n「起床了～」',
   },
   {
     sprites: [
-      { ...SPRITE[IMG_KEY.ENDING], filters: () => { return [createBlurFilter(10)] } },
+      { ...SPRITE[IMG_KEY.ENDING], filters: () => { return [new Blur10Filter().v] } },
     ],
     content: '【灰妲】\n「哈哈哈哈哈哈哈－」',
   },
   {
     sprites: [
-      { ...SPRITE[IMG_KEY.ENDING], filters: () => { return [createBlurFilter(20)] } },
-      { ...SPRITE[IMG_KEY.REAL_DA], scale: { x: 0.85, y: 0.85 } },
+      { ...SPRITE[IMG_KEY.ENDING], filters: () => { return [new Blur20Filter().v] } },
+      { ...SPRITE[IMG_KEY.REAL_DA_1], scale: { x: 0.7, y: 0.7 }, filters: () => { return [new SilhouetteFilter().v] } },
     ],
     content: '【真妲】\n「起～床～了～」',
   },
   {
     sprites: [
-      { ...SPRITE[IMG_KEY.ENDING], filters: () => { return [createBlurFilter(20)] } },
+      { ...SPRITE[IMG_KEY.ENDING], filters: () => { return [new Blur20Filter().v] } },
     ],
     content: '【灰妲】\n「哈哈哈－」',
   },
   {
     sprites: [
-      { ...SPRITE[IMG_KEY.ENDING], filters: () => { return [createBlurFilter(20)] } },
-      { ...SPRITE[IMG_KEY.REAL_DA], scale: { x: 1, y: 1 } },
+      { ...SPRITE[IMG_KEY.ENDING], filters: () => { return [new Blur20Filter().v] } },
+      { ...SPRITE[IMG_KEY.REAL_DA_1], scale: { x: 0.75, y: 0.75 }, filters: () => { return [new SilhouetteFilter().v] } },
     ],
     content: '【真妲】\n「快！點！起！床！」',
   },
@@ -1217,7 +1241,7 @@ export const EXTRA_CHAPTER = [
     ],
     sprites: [
       SPRITE[IMG_KEY.BEDROOM],
-      SPRITE[IMG_KEY.REAL_DA],
+      { ...SPRITE[IMG_KEY.REAL_DA_1], x: 940 },
     ],
     content: '【真妲】\n「趕快去洗臉整理頭髮，然後過來吃早餐了。」',
   },
@@ -1348,7 +1372,7 @@ export const EXTRA_CHAPTER = [
     sprites: [
       SPRITE[IMG_KEY.DINING_ROOM],
       SPRITE[IMG_KEY.BREAKFAST],
-      { ...SPRITE[IMG_KEY.REAL_DA], x: 940 },
+      SPRITE[IMG_KEY.REAL_DA_2],
     ],
     content: '【真妲】\n「你喜歡就好，嘻嘻，快吃吧，都要涼掉了。」',
   },
@@ -1366,7 +1390,7 @@ export const EXTRA_CHAPTER = [
       SPRITE[IMG_KEY.DINING_ROOM],
       SPRITE[IMG_KEY.BREAKFAST],
       SPRITE[IMG_KEY.DADA_01],
-      { ...SPRITE[IMG_KEY.REAL_DA], x: 940 },
+      SPRITE[IMG_KEY.REAL_DA_4],
     ],
     content: '【灰妲&真妲】\n「我要開動了－－」',
   },
@@ -1383,8 +1407,6 @@ export const EXTRA_CHAPTER = [
     sprites: [
       SPRITE[IMG_KEY.DINING_ROOM],
       SPRITE[IMG_KEY.BREAKFAST],
-      { ...SPRITE[IMG_KEY.REAL_DA], x: 940 },
-      SPRITE[IMG_KEY.DADA_01],
     ],
     content: '兩人一邊吃著早餐，一邊聊著天。',
   },
@@ -1401,7 +1423,7 @@ export const EXTRA_CHAPTER = [
     sprites: [
       SPRITE[IMG_KEY.DINING_ROOM],
       SPRITE[IMG_KEY.BREAKFAST],
-      { ...SPRITE[IMG_KEY.REAL_DA], x: 940 },
+      SPRITE[IMG_KEY.REAL_DA_3],
     ],
     content: '【真妲】\n「對了，你剛剛夢到了什麼？聽你笑得那麼開心。」',
   },
@@ -1435,7 +1457,7 @@ export const EXTRA_CHAPTER = [
     sprites: [
       SPRITE[IMG_KEY.DINING_ROOM],
       SPRITE[IMG_KEY.BREAKFAST],
-      { ...SPRITE[IMG_KEY.REAL_DA], x: 940 },
+      SPRITE[IMG_KEY.REAL_DA_3],
     ],
     content: '【真妲】\n「欸－－－」',
   },
@@ -1522,7 +1544,7 @@ export const EXTRA_CHAPTER = [
     sprites: [
       SPRITE[IMG_KEY.DINING_ROOM],
       SPRITE[IMG_KEY.BREAKFAST],
-      { ...SPRITE[IMG_KEY.REAL_DA], x: 940 },
+      SPRITE[IMG_KEY.REAL_DA_4],
     ],
     content: '【真妲】\n「嘿－－聽起來是個好夢呢，不如今天去買張彩券吧。」',
   },
@@ -1556,7 +1578,7 @@ export const EXTRA_CHAPTER = [
     sprites: [
       SPRITE[IMG_KEY.DINING_ROOM],
       SPRITE[IMG_KEY.BREAKFAST],
-      { ...SPRITE[IMG_KEY.REAL_DA], x: 940 },
+      SPRITE[IMG_KEY.REAL_DA_2],
     ],
     content: '【真妲】\n「嘻嘻，那我就等著你請客囉。」',
   },
@@ -1590,9 +1612,9 @@ export const EXTRA_CHAPTER = [
     sprites: [
       SPRITE[IMG_KEY.DINING_ROOM],
       SPRITE[IMG_KEY.BREAKFAST],
-      { ...SPRITE[IMG_KEY.REAL_DA], x: 940 },
+      SPRITE[IMG_KEY.REAL_DA_4],
     ],
-    content: '【真妲】\n「真的？這我最近才從網路上學來的，還是第一次在家烤呢。」',
+    content: '【真妲】\n「真的？這我最近才從網路上看來的，還是第一次在家烤呢。」',
   },
   {
     graphics: [
@@ -1622,7 +1644,7 @@ export const EXTRA_CHAPTER = [
     ],
     sprites: [
       SPRITE[IMG_KEY.DINING_ROOM],
-      { ...SPRITE[IMG_KEY.REAL_DA], x: 940 },
+      SPRITE[IMG_KEY.REAL_DA_2],
     ],
     content: '【真妲】\n「可以呀～這種電鍋料理很簡單的，等你有空我們一起做吧～」',
   },
@@ -1654,7 +1676,7 @@ export const EXTRA_CHAPTER = [
     ],
     sprites: [
       SPRITE[IMG_KEY.DINING_ROOM],
-      { ...SPRITE[IMG_KEY.REAL_DA], x: 940 },
+      SPRITE[IMG_KEY.REAL_DA_3],
     ],
     content: '【真妲】\n「給，不要太晚回來喔～」',
   },
@@ -1686,7 +1708,7 @@ export const EXTRA_CHAPTER = [
     ],
     sprites: [
       SPRITE[IMG_KEY.DINING_ROOM],
-      { ...SPRITE[IMG_KEY.REAL_DA], x: 940 },
+      SPRITE[IMG_KEY.REAL_DA_4],
     ],
     content: '【真妲】\n「那也不要太勉強欸，雖然工作很重要，不過生活也是要好好過，錢夠用就好哩。」',
   },
