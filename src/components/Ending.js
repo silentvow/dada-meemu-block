@@ -4,6 +4,7 @@ import { useGame } from '@/game'
 import { Container, Graphics, Sprite, Text } from '@pixi/react'
 import { TextStyle } from 'pixi.js'
 import { useEffect, useRef, useState } from 'react'
+import { useShallow } from 'zustand/react/shallow'
 import MenuButton from './MenuButton'
 
 const TEXT_PADDING = 16
@@ -62,13 +63,15 @@ function getResultOf ({ mode, money }) {
 }
 
 function Ending () {
-  const { mode, money, stageComplete, enterMainMenu, openSubmitModal } = useGame(state => ({
-    mode: state.mode,
-    money: state.money,
-    stageComplete: state.stageComplete,
-    enterMainMenu: state.enterMainMenu,
-    openSubmitModal: state.openSubmitModal,
-  }))
+  const { mode, money, stageComplete, enterMainMenu, openSubmitModal } = useGame(
+    useShallow(state => ({
+      mode: state.mode,
+      money: state.money,
+      stageComplete: state.stageComplete,
+      enterMainMenu: state.enterMainMenu,
+      openSubmitModal: state.openSubmitModal,
+    })),
+  )
   const [mask, setMask] = useState(null)
   const refMask = useRef(null)
 

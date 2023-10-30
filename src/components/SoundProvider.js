@@ -4,17 +4,20 @@ import { useGame } from '@/game'
 import { sound } from '@pixi/sound'
 import { animate } from 'popmotion'
 import { useEffect } from 'react'
+import { useShallow } from 'zustand/react/shallow'
 
 sound.add(SOUND_URLS)
 
 function SoundProvider ({ children }) {
-  const { bgm, initBGM, soundQueue, popSoundQueue, setMediaInstance } = useGame(state => ({
-    bgm: state.bgm,
-    initBGM: state.initBGM,
-    soundQueue: state.soundQueue,
-    popSoundQueue: state.popSoundQueue,
-    setMediaInstance: state.setMediaInstance,
-  }))
+  const { bgm, initBGM, soundQueue, popSoundQueue, setMediaInstance } = useGame(
+    useShallow(state => ({
+      bgm: state.bgm,
+      initBGM: state.initBGM,
+      soundQueue: state.soundQueue,
+      popSoundQueue: state.popSoundQueue,
+      setMediaInstance: state.setMediaInstance,
+    })),
+  )
 
   useEffect(() => {
     sound.disableAutoPause = true

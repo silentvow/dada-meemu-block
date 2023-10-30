@@ -62,7 +62,7 @@ function drawBoard (g) {
 }
 
 function Readme () {
-  const { enterMainMenu } = useGame(state => ({ enterMainMenu: state.enterMainMenu }))
+  const enterMainMenu = useGame(state => state.enterMainMenu)
 
   return (
     <Container width={1280} height={960} eventMode='static'>

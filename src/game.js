@@ -182,7 +182,10 @@ export const useGame = create(
     enterGame: () => {
       get().reset()
       get().enterStage(0)
-      set(state => { state.state = GAME_STATE.READY })
+      set(state => {
+        state.bgm = null
+        state.state = GAME_STATE.READY
+      })
     },
 
     setupBlocks: (stage) => {
@@ -339,11 +342,11 @@ export const useGame = create(
       })
     },
 
-    updateMoney: () => {
+    updateMoney: (delta) => {
       const { money, displayMoney } = get()
       if (displayMoney < money) {
         set(state => {
-          state.displayMoney += Math.max(1, Math.floor((state.money - state.displayMoney) * 0.03))
+          state.displayMoney += Math.max(1, Math.floor((state.money - state.displayMoney) * 0.03 * delta / DELTA_UNIT))
           state.displayMoney = Math.min(state.displayMoney, state.money)
         })
       }
@@ -876,7 +879,7 @@ export const useGame = create(
           get().updateBalls(delta)
           break
         case GAME_STATE.PLAYING:
-          get().updateMoney()
+          get().updateMoney(delta)
           get().updateBullets(delta)
           get().updateItems(delta)
           get().updateBalls(delta)

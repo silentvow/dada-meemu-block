@@ -20,6 +20,7 @@ import { FONT_TEST_STRING } from '@/constants/text'
 import { useGame } from '@/game'
 import { useTranslations } from 'next-intl'
 import dynamic from 'next/dynamic'
+import { useShallow } from 'zustand/react/shallow'
 
 const SoundProvider = dynamic(() => import('@/components/SoundProvider'), { ssr: false })
 
@@ -47,12 +48,14 @@ function Home () {
     showSubmitModal,
     closeSubmitModal,
     submitScoreAndCloseModal,
-  } = useGame(state => ({
-    state: state.state,
-    showSubmitModal: state.showSubmitModal,
-    closeSubmitModal: state.closeSubmitModal,
-    submitScoreAndCloseModal: state.submitScoreAndCloseModal,
-  }))
+  } = useGame(
+    useShallow(state => ({
+      state: state.state,
+      showSubmitModal: state.showSubmitModal,
+      closeSubmitModal: state.closeSubmitModal,
+      submitScoreAndCloseModal: state.submitScoreAndCloseModal,
+    })),
+  )
 
   useEffect(() => {
     Assets.load(Object.keys(IMG_URLS)).then(() => {

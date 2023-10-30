@@ -849,13 +849,126 @@ export const STORY_CHAPTER_5 = [
     content: '【咪姆】\n「我試了下這玩意還挺結實的，而且這大小光靠我們搬出去也不實際。」',
   },
   {
+    sprites: [
+      SPRITE[IMG_KEY.BG_ROCK],
+      SPRITE[IMG_KEY.METAL_BALL],
+      { ...SPRITE[IMG_KEY.DADA_02], x: -140 },
+    ],
+    content: '【灰妲】\n「既然是科技產物的話，應該還有其他解鎖方法吧。」',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.BG_ROCK],
+      SPRITE[IMG_KEY.METAL_BALL_2],
+    ],
+    content: '【機器音】\n「嗶嗶，偵測到關鍵詞，請說出解鎖暗號。」',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.BG_ROCK],
+      SPRITE[IMG_KEY.METAL_BALL_2],
+      SPRITE[IMG_KEY.DADA_01],
+    ],
+    content: '【灰妲】\n「芝麻開門！」',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.BG_ROCK],
+      SPRITE[IMG_KEY.METAL_BALL_2],
+    ],
+    content: '【機器音】\n「嗶嗶，暗號錯誤，請再試一次。」',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.BG_ROCK],
+      SPRITE[IMG_KEY.METAL_BALL_2],
+      SPRITE[IMG_KEY.MEEMU],
+    ],
+    content: '【咪姆】\n「星爆氣流斬！」',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.BG_ROCK],
+      SPRITE[IMG_KEY.METAL_BALL_2],
+    ],
+    content: '【機器音】\n「嗶嗶，暗號錯誤，請再試一次。」',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.BG_ROCK],
+      SPRITE[IMG_KEY.METAL_BALL_2],
+      SPRITE[IMG_KEY.DADA_01],
+    ],
+    content: '【灰妲】\n「灰妲大波鸚！」',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.BG_ROCK],
+      SPRITE[IMG_KEY.METAL_BALL_2],
+    ],
+    content: '【機器音】\n「嗶嗶，暗號錯誤，請再試一次。」',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.BG_ROCK],
+      SPRITE[IMG_KEY.METAL_BALL_2],
+      SPRITE[IMG_KEY.MEEMU],
+    ],
+    content: '【咪姆】\n「趕羚羊草枝擺！」',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.BG_ROCK],
+      SPRITE[IMG_KEY.METAL_BALL_2],
+    ],
+    content: '【機器音】\n「嗶嗶，暗號錯誤，請再試一次。」',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.BG_ROCK],
+      SPRITE[IMG_KEY.METAL_BALL_2],
+      { ...SPRITE[IMG_KEY.DADA_02], x: -140 },
+    ],
+    content: '【灰妲】\n「我愛幼妲！」',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.BG_ROCK],
+      SPRITE[IMG_KEY.METAL_BALL_2],
+    ],
+    content: '【機器音】\n「嗶嗶，暗號錯誤，請再試一次。」',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.BG_ROCK],
+      SPRITE[IMG_KEY.METAL_BALL_2],
+      SPRITE[IMG_KEY.MEEMU],
+    ],
+    content: '【咪姆】\n「千本雞腿！」',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.BG_ROCK],
+      SPRITE[IMG_KEY.METAL_BALL_2],
+    ],
+    content: '【機器音】\n「嗶嗶，暗號正確，進入二階段驗證，請在十分鐘內唱完千本雞腿。」',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.BG_ROCK],
+      SPRITE[IMG_KEY.METAL_BALL_2],
+      SPRITE[IMG_KEY.MEEMU],
+    ],
+    content: '【咪姆】\n「啊我忘記要怎麼唱了。」',
+  },
+  {
     bgm: SOUND_KEY.BGM_FIGHT,
     sprites: [
       SPRITE[IMG_KEY.BG_ROCK],
       SPRITE[IMG_KEY.METAL_BALL],
       SPRITE[IMG_KEY.DADA_04],
     ],
-    content: '【灰妲】\n「看來還是只能用老方法了，咱們應該不用花太多時間。」',
+    content: '【灰妲】\n「我也不知道，看來解鎖是行不通了，還是用老方法解決吧。」',
   },
   {
     sprites: [
@@ -863,7 +976,23 @@ export const STORY_CHAPTER_5 = [
       SPRITE[IMG_KEY.METAL_BALL],
       SPRITE[IMG_KEY.MEEMU_2],
     ],
-    content: '【咪姆】\n「哼，結果還是這樣嗎。」',
+    content: '【咪姆】\n「不打算嘗試一下嗎？」',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.BG_ROCK],
+      SPRITE[IMG_KEY.METAL_BALL],
+      SPRITE[IMG_KEY.DADA_04],
+    ],
+    content: '【灰妲】\n「用不著，剛好我想活動一下筋骨。」',
+  },
+  {
+    sprites: [
+      SPRITE[IMG_KEY.BG_ROCK],
+      SPRITE[IMG_KEY.METAL_BALL],
+      SPRITE[IMG_KEY.MEEMU_2],
+    ],
+    content: '【咪姆】\n「好吧好吧。」',
   },
   {
     sprites: [

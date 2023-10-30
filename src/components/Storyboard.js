@@ -6,6 +6,7 @@ import { Container, Graphics, Sprite, Text, withFilters } from '@pixi/react'
 import { ColorMatrixFilter, TextStyle } from 'pixi.js'
 import { animate, linear } from 'popmotion'
 import { useEffect, useRef, useState } from 'react'
+import { useShallow } from 'zustand/react/shallow'
 import SmallMenuButton from './SmallMenuButton'
 
 const TEXT_PADDING = 16
@@ -57,14 +58,16 @@ const skipButtonOffsetY = 10
 
 function Storyboard () {
   const [textSpeed] = useState(() => { return TEXT_SPEED_VALUE[window.localStorage.getItem(LOCAL_STORAGE_KEY.TEXT_SPEED) ?? TEXT_SPEED.NORMAL] })
-  const { chapter, sceneIndex, skipScenes, gotoNextScene, isTransitioning, endEnterStageTransition } = useGame(state => ({
-    chapter: state.chapter,
-    sceneIndex: state.sceneIndex,
-    skipScenes: state.skipScenes,
-    gotoNextScene: state.gotoNextScene,
-    isTransitioning: state.isTransitioning,
-    endEnterStageTransition: state.endEnterStageTransition,
-  }))
+  const { chapter, sceneIndex, skipScenes, gotoNextScene, isTransitioning, endEnterStageTransition } = useGame(
+    useShallow(state => ({
+      chapter: state.chapter,
+      sceneIndex: state.sceneIndex,
+      skipScenes: state.skipScenes,
+      gotoNextScene: state.gotoNextScene,
+      isTransitioning: state.isTransitioning,
+      endEnterStageTransition: state.endEnterStageTransition,
+    })),
+  )
   const story = chapter[sceneIndex] ?? {}
   const [mask, setMask] = useState(null)
   const refMask = useRef(null)

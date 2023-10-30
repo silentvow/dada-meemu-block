@@ -61,7 +61,7 @@ function MainGame ({ app }) {
     onGameClick,
     onGameKeyDown,
     onGameTouchEnd,
-  } = useGame(state => state)
+  } = useGame()
 
   useTick((delta, ticker) => {
     mainLoop(delta)
