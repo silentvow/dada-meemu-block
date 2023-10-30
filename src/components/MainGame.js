@@ -51,14 +51,22 @@ function blockImgUrl (block) {
   const hasMoney = MONEY_ITEMS.includes(block.item)
   switch (block.type) {
     case BLOCK.NORMAL_1: {
-      return imgUrl(hasMoney ? IMG_KEY.BLOCK_NORMAL_1_DOLLAR : IMG_KEY.BLOCK_NORMAL_1)
+      switch (block.hp) {
+        case 1:
+          return imgUrl(hasMoney ? IMG_KEY.BLOCK_NORMAL_1_DOLLAR_1 : IMG_KEY.BLOCK_NORMAL_1_1)
+        case 2:
+          return imgUrl(hasMoney ? IMG_KEY.BLOCK_NORMAL_1_DOLLAR : IMG_KEY.BLOCK_NORMAL_1)
+      }
+      break
     }
     case BLOCK.NORMAL_2: {
       switch (block.hp) {
         case 1:
+          return imgUrl(hasMoney ? IMG_KEY.BLOCK_NORMAL_2_DOLLAR_3 : IMG_KEY.BLOCK_NORMAL_2_3)
         case 2:
-          return imgUrl(hasMoney ? IMG_KEY.BLOCK_NORMAL_2_DOLLAR_1 : IMG_KEY.BLOCK_NORMAL_2_1)
+          return imgUrl(hasMoney ? IMG_KEY.BLOCK_NORMAL_2_DOLLAR_2 : IMG_KEY.BLOCK_NORMAL_2_2)
         case 3:
+          return imgUrl(hasMoney ? IMG_KEY.BLOCK_NORMAL_2_DOLLAR_1 : IMG_KEY.BLOCK_NORMAL_2_1)
         case 4:
           return imgUrl(hasMoney ? IMG_KEY.BLOCK_NORMAL_2_DOLLAR : IMG_KEY.BLOCK_NORMAL_2)
       }
@@ -67,12 +75,15 @@ function blockImgUrl (block) {
     case BLOCK.NORMAL_3: {
       switch (block.hp) {
         case 1:
+          return imgUrl(hasMoney ? IMG_KEY.BLOCK_NORMAL_3_DOLLAR_5 : IMG_KEY.BLOCK_NORMAL_3_5)
         case 2:
-          return imgUrl(hasMoney ? IMG_KEY.BLOCK_NORMAL_3_DOLLAR_2 : IMG_KEY.BLOCK_NORMAL_3_2)
+          return imgUrl(hasMoney ? IMG_KEY.BLOCK_NORMAL_3_DOLLAR_4 : IMG_KEY.BLOCK_NORMAL_3_4)
         case 3:
+          return imgUrl(hasMoney ? IMG_KEY.BLOCK_NORMAL_3_DOLLAR_3 : IMG_KEY.BLOCK_NORMAL_3_3)
         case 4:
-          return imgUrl(hasMoney ? IMG_KEY.BLOCK_NORMAL_3_DOLLAR_1 : IMG_KEY.BLOCK_NORMAL_3_1)
+          return imgUrl(hasMoney ? IMG_KEY.BLOCK_NORMAL_3_DOLLAR_2 : IMG_KEY.BLOCK_NORMAL_3_2)
         case 5:
+          return imgUrl(hasMoney ? IMG_KEY.BLOCK_NORMAL_3_DOLLAR_1 : IMG_KEY.BLOCK_NORMAL_3_1)
         case 6:
           return imgUrl(hasMoney ? IMG_KEY.BLOCK_NORMAL_3_DOLLAR : IMG_KEY.BLOCK_NORMAL_3)
       }
