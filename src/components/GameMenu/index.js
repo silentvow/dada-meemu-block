@@ -73,6 +73,7 @@ function GameMenu () {
       {subMenu === SUB_MENU.VOLUME && <VolumeControl onCancel={() => setSubMenu(SUB_MENU.NONE)} />}
       {subMenu === SUB_MENU.DISPLAY && <DisplayControl onCancel={() => setSubMenu(SUB_MENU.NONE)} />}
       <Graphics ref={refMask} preventRedraw draw={drawMask} />
+      <MenuButton x={900} y={30} text='Beta 版' onClick={() => {}} />
       <Container x={0} y={695}>
         {menu === MENU.STORY && (
           <>
