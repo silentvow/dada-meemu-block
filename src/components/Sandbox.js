@@ -157,7 +157,7 @@ function Sandbox ({ onEditText }) {
           <MenuButton x={480} y={30} text='改變姿勢' onClick={changeDa} />
           <MenuButton x={860} y={30} text='設定文字' onClick={handleEditText} />
           <MenuButton x={100} y={140} text='改變位置' onClick={changePos} />
-          <MenuButton x={480} y={140} text='改變距離' onClick={changeDis} />
+          <MenuButton x={480} y={140} text='改變比例' onClick={changeDis} />
           <MenuButton x={860} y={140} text='返回前頁' onClick={enterMainMenu} />
         </Container>
       )}
