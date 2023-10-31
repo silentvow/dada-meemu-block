@@ -12,7 +12,7 @@ import {
   BALL_MAX_RADIUS,
   BALL_MIN_RADIUS,
   BALL_UNIT_RADIUS,
-  BLOCK, BLOCK_HEIGHT,
+  BLOCK_HEIGHT,
   BLOCK_HP,
   BLOCK_WIDTH,
   BUFF_ITEMS,
@@ -177,6 +177,11 @@ export const useGame = create(
     enterScoreboard: () => {
       set(state => { state.state = GAME_STATE.SCOREBOARD })
       sendEvent('enter-scoreboard')
+    },
+
+    enterSandbox: () => {
+      set(state => { state.state = GAME_STATE.SANDBOX })
+      sendEvent('enter-sandbox')
     },
 
     enterGame: () => {
@@ -680,13 +685,6 @@ export const useGame = create(
       set(state => {
         const block = state.blocks[blockIdx]
         block.hp -= damage
-        if (block.type === BLOCK.NORMAL_2 && block.hp < BLOCK_HP[BLOCK.NORMAL_2] - BALL_ATK[BALL_COLOR.BLACK]) {
-          block.type = BLOCK.NORMAL_2_1
-        } else if (block.type === BLOCK.NORMAL_3 && block.hp < BLOCK_HP[BLOCK.NORMAL_3] - BALL_ATK[BALL_COLOR.BLACK]) {
-          block.type = BLOCK.NORMAL_3_1
-        } else if (block.type === BLOCK.NORMAL_3_1 && block.hp < BLOCK_HP[BLOCK.NORMAL_2] - BALL_ATK[BALL_COLOR.BLACK]) {
-          block.type = BLOCK.NORMAL_3_2
-        }
         state.blocks[blockIdx] = block
       })
     },
@@ -792,6 +790,11 @@ export const useGame = create(
             })
           })
           break
+        case ITEM.CHICKEN:
+          set(state => {
+            state.life = Math.min(MAX_LIVES, state.life + 1)
+          })
+          break
         case ITEM.MONEY_XS:
         case ITEM.MONEY_SM:
         case ITEM.MONEY_MD:
@@ -800,12 +803,8 @@ export const useGame = create(
           set(state => {
             state.money += MONEY_VALUES[item]
           })
-          break
-        case ITEM.CHICKEN:
-          set(state => {
-            state.life = Math.min(MAX_LIVES, state.life + 1)
-          })
-          break
+          get().pushSoundQueue(SOUND_KEY.CATCH_COIN)
+          return
         default:
           console.warn('unknown item', item)
           break
@@ -872,6 +871,8 @@ export const useGame = create(
     closeSubmitModal: () => {
       set(state => { state.showSubmitModal = false })
     },
+
+    setSandboxText: (text) => { set(state => { state.sandboxText = text }) },
 
     mainLoop: (delta) => {
       switch (get().state) {

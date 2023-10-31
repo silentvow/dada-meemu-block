@@ -2,6 +2,7 @@ export const GAME_STATE = {
   MAIN_MENU: 'MAIN_MENU',
   README: 'README',
   SCOREBOARD: 'SCOREBOARD',
+  SANDBOX: 'SANDBOX',
   STORY: 'STORY',
   READY: 'READY',
   PLAYING: 'PLAYING',
@@ -100,10 +101,7 @@ export const DROP_RATIO_MONEY_XL = 0.05
 export const BLOCK = {
   NORMAL_1: 'NORMAL_1',
   NORMAL_2: 'NORMAL_2',
-  NORMAL_2_1: 'NORMAL_2_1',
   NORMAL_3: 'NORMAL_3',
-  NORMAL_3_1: 'NORMAL_3_1',
-  NORMAL_3_2: 'NORMAL_3_2',
   STONE: 'STONE',
 }
 
@@ -192,6 +190,14 @@ export const DEBUFF_ITEMS = [
 export const REAL_BUFF_ITEMS = BUFF_ITEMS.filter(item => ![ITEM.BULLET_PACK, ITEM.PADDLE_PLUS].includes(item))
 
 export const REAL_DEBUFF_ITEMS = DEBUFF_ITEMS.filter(item => ![ITEM.PADDLE_MINUS, ITEM.CHICKEN].includes(item))
+
+export const MONEY_ITEMS = [
+  ITEM.MONEY_XS,
+  ITEM.MONEY_SM,
+  ITEM.MONEY_MD,
+  ITEM.MONEY_LG,
+  ITEM.MONEY_XL,
+]
 
 export const MONEY_VALUES = {
   [ITEM.MONEY_XS]: 1000,

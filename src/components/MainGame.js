@@ -1,5 +1,6 @@
 import {
   BALL_IMAGE_RADIUS,
+  BLOCK,
   BULLET_HEIGHT,
   BULLET_IMG_HEIGHT,
   BULLET_IMG_WIDTH,
@@ -8,11 +9,12 @@ import {
   ITEM_HEIGHT,
   ITEM_WIDTH,
   LOCAL_STORAGE_KEY,
+  MONEY_ITEMS,
   SCREEN_HEIGHT,
   SCREEN_WIDTH,
   TOP_BORDER_HEIGHT,
 } from '@/constants/game'
-import { IMG_URLS, SPRITE } from '@/constants/image'
+import { IMG_KEY, IMG_URLS, SPRITE } from '@/constants/image'
 import { FPS_LIMIT, FPS_LIMIT_VALUE } from '@/constants/text'
 import { useGame } from '@/game'
 import { Container, Sprite, Text, useTick, withPixiApp } from '@pixi/react'
@@ -43,6 +45,53 @@ const footerStyle = {
 
 function imgUrl (item) {
   return IMG_URLS[item] || `https://placehold.co/${ITEM_WIDTH}x${ITEM_HEIGHT}/red/fff?text=${item}`
+}
+
+function blockImgUrl (block) {
+  const hasMoney = MONEY_ITEMS.includes(block.item)
+  switch (block.type) {
+    case BLOCK.NORMAL_1: {
+      switch (block.hp) {
+        case 1:
+          return imgUrl(hasMoney ? IMG_KEY.BLOCK_NORMAL_1_DOLLAR_1 : IMG_KEY.BLOCK_NORMAL_1_1)
+        case 2:
+          return imgUrl(hasMoney ? IMG_KEY.BLOCK_NORMAL_1_DOLLAR : IMG_KEY.BLOCK_NORMAL_1)
+      }
+      break
+    }
+    case BLOCK.NORMAL_2: {
+      switch (block.hp) {
+        case 1:
+          return imgUrl(hasMoney ? IMG_KEY.BLOCK_NORMAL_2_DOLLAR_3 : IMG_KEY.BLOCK_NORMAL_2_3)
+        case 2:
+          return imgUrl(hasMoney ? IMG_KEY.BLOCK_NORMAL_2_DOLLAR_2 : IMG_KEY.BLOCK_NORMAL_2_2)
+        case 3:
+          return imgUrl(hasMoney ? IMG_KEY.BLOCK_NORMAL_2_DOLLAR_1 : IMG_KEY.BLOCK_NORMAL_2_1)
+        case 4:
+          return imgUrl(hasMoney ? IMG_KEY.BLOCK_NORMAL_2_DOLLAR : IMG_KEY.BLOCK_NORMAL_2)
+      }
+      break
+    }
+    case BLOCK.NORMAL_3: {
+      switch (block.hp) {
+        case 1:
+          return imgUrl(hasMoney ? IMG_KEY.BLOCK_NORMAL_3_DOLLAR_5 : IMG_KEY.BLOCK_NORMAL_3_5)
+        case 2:
+          return imgUrl(hasMoney ? IMG_KEY.BLOCK_NORMAL_3_DOLLAR_4 : IMG_KEY.BLOCK_NORMAL_3_4)
+        case 3:
+          return imgUrl(hasMoney ? IMG_KEY.BLOCK_NORMAL_3_DOLLAR_3 : IMG_KEY.BLOCK_NORMAL_3_3)
+        case 4:
+          return imgUrl(hasMoney ? IMG_KEY.BLOCK_NORMAL_3_DOLLAR_2 : IMG_KEY.BLOCK_NORMAL_3_2)
+        case 5:
+          return imgUrl(hasMoney ? IMG_KEY.BLOCK_NORMAL_3_DOLLAR_1 : IMG_KEY.BLOCK_NORMAL_3_1)
+        case 6:
+          return imgUrl(hasMoney ? IMG_KEY.BLOCK_NORMAL_3_DOLLAR : IMG_KEY.BLOCK_NORMAL_3)
+      }
+      break
+    }
+    case BLOCK.STONE:
+      return imgUrl(IMG_KEY.BLOCK_STONE)
+  }
 }
 
 function MainGame ({ app }) {
@@ -95,7 +144,7 @@ function MainGame ({ app }) {
     >
       {blocks.map(block => {
         return (
-          <Sprite key={block.id} x={block.x} y={block.y} image={imgUrl(block.type)} />
+          <Sprite key={block.id} x={block.x} y={block.y} image={blockImgUrl(block)} />
         )
       })}
       {items.map(item => {

@@ -1,15 +1,17 @@
 import { Container, Stage, withFilters } from '@pixi/react'
 import { Assets, ColorMatrixFilter } from 'pixi.js'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 import AlertDialog from '@/components/AlertDialog'
 import Background from '@/components/Background'
 import BounceText from '@/components/BounceText'
+import EditTextDialog from '@/components/EditTextDialog'
 import Ending from '@/components/Ending'
 import GameMenu from '@/components/GameMenu'
 import Header from '@/components/Header'
 import MainGame from '@/components/MainGame'
 import Readme from '@/components/Readme'
+import Sandbox from '@/components/Sandbox'
 import Scoreboard from '@/components/Scoreboard'
 import Storyboard from '@/components/Storyboard'
 import SubmitDialog from '@/components/SubmitDialog'
@@ -48,12 +50,14 @@ function Home () {
     showSubmitModal,
     closeSubmitModal,
     submitScoreAndCloseModal,
+    setSandboxText,
   } = useGame(
     useShallow(state => ({
       state: state.state,
       showSubmitModal: state.showSubmitModal,
       closeSubmitModal: state.closeSubmitModal,
       submitScoreAndCloseModal: state.submitScoreAndCloseModal,
+      setSandboxText: state.setSandboxText,
     })),
   )
 
@@ -87,6 +91,11 @@ function Home () {
     }).catch(() => {
       setAssetsLoadFailed(true)
     })
+  }, [])
+
+  const [showEditTextModal, setShowEditTextModal] = useState(false)
+  const handleEditText = useCallback(async () => {
+    setShowEditTextModal(true)
   }, [])
 
   return (
@@ -123,6 +132,7 @@ function Home () {
                     {state === GAME_STATE.SCOREBOARD && <Scoreboard />}
                     {state === GAME_STATE.STORY && <Storyboard />}
                     {state === GAME_STATE.ENDING && <Ending />}
+                    {state === GAME_STATE.SANDBOX && <Sandbox onEditText={handleEditText} />}
                   </FilterContainer>
                 </Stage>)
               : (
@@ -132,6 +142,11 @@ function Home () {
                 )}
             <SubmitDialog open={showSubmitModal} onSubmit={submitScoreAndCloseModal} onClose={closeSubmitModal} />
             <AlertDialog open={assetsLoadFailed} onClose={() => setAssetsLoadFailed(false)} />
+            <EditTextDialog
+              open={showEditTextModal}
+              onSubmit={text => { setSandboxText(text); setShowEditTextModal(false) }}
+              onClose={() => setShowEditTextModal(false)}
+            />
           </div>
         </div>
         <div className='flex justify-center'>{t.rich('index.footnote', { github: chunk => <a className='px-1 underline' target='_blank' href='https://github.com/silentvow/dada-meemu-block/issues'>{chunk}</a> })}</div>

@@ -44,6 +44,7 @@ function GameMenu () {
     enterRealChallengeMode,
     enterReadme,
     enterScoreboard,
+    enterSandbox,
   } = useGame(
     useShallow(state => ({
       enterStoryMode: state.enterStoryMode,
@@ -53,6 +54,7 @@ function GameMenu () {
       enterRealChallengeMode: state.enterRealChallengeMode,
       enterReadme: state.enterReadme,
       enterScoreboard: state.enterScoreboard,
+      enterSandbox: state.enterSandbox,
     })),
   )
   const [mask, setMask] = useState(null)
@@ -79,6 +81,7 @@ function GameMenu () {
           <>
             <MenuButton x={200} y={30} text='正篇故事' onClick={enterStoryMode} />
             <MenuButton x={760} y={30} text={unlockRealMode ? '附錄故事' : '？？？？'} disabled={!unlockRealMode} onClick={enterExtraStoryMode} />
+            <MenuButton x={200} y={140} text={unlockRealMode ? '鑑賞模式' : '？？？？'} disabled={!unlockRealMode} onClick={enterSandbox} />
             <MenuButton x={760} y={140} text='返回前頁' onClick={() => setMenu(MENU.MAIN)} />
           </>
         )}
