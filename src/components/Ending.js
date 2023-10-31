@@ -1,4 +1,4 @@
-import { GAME_MODE, SCREEN_HEIGHT, SCREEN_WIDTH } from '@/constants/game'
+import { GAME_MODE, LIFE_AS_MONEY_VALUE, SCREEN_HEIGHT, SCREEN_WIDTH } from '@/constants/game'
 import { IMG_URLS } from '@/constants/image'
 import { useGame } from '@/game'
 import { Container, Graphics, Sprite, Text } from '@pixi/react'
@@ -63,9 +63,10 @@ function getResultOf ({ mode, money }) {
 }
 
 function Ending () {
-  const { mode, money, stageComplete, enterMainMenu, openSubmitModal } = useGame(
+  const { mode, life, money, stageComplete, enterMainMenu, openSubmitModal } = useGame(
     useShallow(state => ({
       mode: state.mode,
+      life: state.life,
       money: state.money,
       stageComplete: state.stageComplete,
       enterMainMenu: state.enterMainMenu,
@@ -79,6 +80,8 @@ function Ending () {
     setMask(refMask.current)
   }, [])
 
+  const score = money + life * LIFE_AS_MONEY_VALUE
+
   return (
     <Container width={SCREEN_WIDTH} height={SCREEN_HEIGHT}>
       <Graphics draw={drawMainArea} />
@@ -87,7 +90,7 @@ function Ending () {
       <Text
         x={10 + TEXT_PADDING}
         y={695 + TEXT_PADDING}
-        text={`${stageComplete ? '恭喜破關' : '遊戲結束'}！感謝您的遊玩！\n本局紀錄：$${money}\n本局評價：${getResultOf({ mode, money })}`}
+        text={`${stageComplete ? '恭喜破關' : '遊戲結束'}！感謝您的遊玩！\n本局紀錄：$${score}\n本局評價：${getResultOf({ mode, money: score })}`}
         style={textStyle}
       />
       <Container x={760} y={695}>

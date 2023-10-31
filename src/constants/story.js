@@ -412,7 +412,7 @@ export const STORY_CHAPTER_2 = [
     sprites: [
       SPRITE[IMG_KEY.TWO_CAVE],
     ],
-    content: '兩人快速的衝進洞裡，面前出現了岔路。',
+    content: '兩人快速的衝進洞裡，前方分成了兩條路。',
   },
 ]
 
@@ -423,14 +423,14 @@ export const STORY_CHAPTER_3 = [
       SPRITE[IMG_KEY.TWO_CAVE],
       SPRITE[IMG_KEY.MEEMU],
     ],
-    content: '【咪姆】\n「灰妲！我們要往哪邊走！」',
+    content: '【咪姆】\n「灰妲！哪條路才是對的！」',
   },
   {
     sprites: [
       SPRITE[IMG_KEY.TWO_CAVE],
       { ...SPRITE[IMG_KEY.DADA_02], x: -140 },
     ],
-    content: '【灰妲】\n「我不知道！隨便啦！」',
+    content: '【灰妲】\n「我不知道！隨便選一條啦！」',
   },
   {
     sprites: [
@@ -458,7 +458,7 @@ export const STORY_CHAPTER_3 = [
       SPRITE[IMG_KEY.TWO_CAVE],
       { ...SPRITE[IMG_KEY.DADA_02], x: -140 },
     ],
-    content: '【灰妲】\n「也只能挑一邊走啦，大不了再拐回來就是了。」',
+    content: '【灰妲】\n「也只能先走走看啦，大不了再拐回來就是了。」',
   },
   {
     sprites: [
@@ -472,13 +472,13 @@ export const STORY_CHAPTER_3 = [
       SPRITE[IMG_KEY.TWO_CAVE],
       SPRITE[IMG_KEY.DADA_01],
     ],
-    content: '【灰妲】\n「走囉，我可是幸運灰鸚鵡！」',
+    content: '【灰妲】\n「我也是這樣覺得，走囉，讓你知道幸運灰鸚鵡不是浪得虛名！」',
   },
   {
     sprites: [
       SPRITE[IMG_KEY.TWO_CAVE],
     ],
-    content: '兩人大步走進了岔路的左側。',
+    content: '兩人大步走進了左側的洞口。',
   },
   {
     bgm: SOUND_KEY.BGM_HALL,
@@ -1054,9 +1054,10 @@ export const STORY_FINAL = [
   {
     sprites: [
       SPRITE[IMG_KEY.BG_ROCK],
-      SPRITE[IMG_KEY.COIN_HEAP],
+      SPRITE[IMG_KEY.METAL_BALL],
+      SPRITE[IMG_KEY.BG_BREAK],
     ],
-    content: '最終，金屬球碎裂開來，裏頭的東西散落一地。',
+    content: '最終，金屬球爆裂開來，裏頭的東西散落一地。',
   },
   {
     bgm: SOUND_KEY.BGM_END,
@@ -1128,7 +1129,7 @@ export const STORY_FINAL = [
         }),
       },
     ],
-    content: '',
+    content: '兩人就這樣發大財了嗎？讓我們繼續看下去．．．',
     desaturate: true,
   },
 ]

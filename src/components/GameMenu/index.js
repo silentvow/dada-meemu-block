@@ -37,6 +37,7 @@ function drawMainArea (g) {
 
 function GameMenu () {
   const [unlockRealMode] = useState(() => { return window.localStorage.getItem(LOCAL_STORAGE_KEY.UNLOCK_REAL_CHALLENGE) })
+  const [unlockSandbox] = useState(() => { return window.localStorage.getItem(LOCAL_STORAGE_KEY.UNLOCK_SANDBOX) })
   const {
     enterStoryMode,
     enterExtraStoryMode,
@@ -81,7 +82,7 @@ function GameMenu () {
           <>
             <MenuButton x={200} y={30} text='正篇故事' onClick={enterStoryMode} />
             <MenuButton x={760} y={30} text={unlockRealMode ? '附錄故事' : '？？？？'} disabled={!unlockRealMode} onClick={enterExtraStoryMode} />
-            <MenuButton x={200} y={140} text={unlockRealMode ? '鑑賞模式' : '？？？？'} disabled={!unlockRealMode} onClick={enterSandbox} />
+            <MenuButton x={200} y={140} text={unlockSandbox ? '鑑賞模式' : '？？？？'} disabled={!unlockSandbox} onClick={enterSandbox} />
             <MenuButton x={760} y={140} text='返回前頁' onClick={() => setMenu(MENU.MAIN)} />
           </>
         )}

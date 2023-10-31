@@ -42,6 +42,7 @@ import {
   ITEM_DROP_SPEED_TO,
   ITEM_HEIGHT,
   ITEM_WIDTH,
+  LIFE_AS_MONEY_VALUE,
   LOCAL_STORAGE_KEY,
   MAX_LIVES,
   MAX_SPEED,
@@ -306,12 +307,12 @@ export const useGame = create(
 
     enterEndingPage: (complete) => {
       if (get().mode === GAME_MODE.EXTRA_STORY) {
+        window.localStorage.setItem(LOCAL_STORAGE_KEY.UNLOCK_SANDBOX, 'true')
         get().enterMainMenu()
         return
       }
 
       if (complete) {
-        window.localStorage.setItem(LOCAL_STORAGE_KEY.UNLOCK_EXTRA_STORY, 'true')
         window.localStorage.setItem(LOCAL_STORAGE_KEY.UNLOCK_REAL_CHALLENGE, 'true')
         set(state => { state.bgm = SOUND_KEY.BGM_END })
       } else {
@@ -851,12 +852,13 @@ export const useGame = create(
     },
 
     submitScoreAndCloseModal: async (name) => {
-      const { gId, mode, money, closeSubmitModal } = get()
+      const { gId, mode, life, money, closeSubmitModal } = get()
+      const score = money + life * LIFE_AS_MONEY_VALUE
       try {
         await fetch(API_URLS[mode], {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ id: gId, name, score: money }),
+          body: JSON.stringify({ id: gId, name, score }),
         })
       } catch (e) {
         sendEvent('error-submit-score', { message: e.message })
