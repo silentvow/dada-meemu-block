@@ -32,6 +32,8 @@ const titleStyle = {
   strokeThickness: 8,
   align: 'center',
   letterSpacing: 8,
+  lineHeight: 96 * 1.2,
+  trim: true,
 }
 
 const footerStyle = {
@@ -41,6 +43,8 @@ const footerStyle = {
   stroke: '#000',
   strokeThickness: 4,
   letterSpacing: 2,
+  lineHeight: 32 * 1.2,
+  trim: true,
 }
 
 function imgUrl (item) {
@@ -179,7 +183,7 @@ function MainGame ({ app }) {
       {state === GAME_STATE.READY && <Text x={640} y={560} anchor={[0.5, 1]} text={`STAGE ${stage + 1}\nREADY`} style={titleStyle} />}
       {state === GAME_STATE.PAUSED && <Text x={640} y={500} anchor={[0.5, 1]} text='PAUSED' style={titleStyle} />}
       {state === GAME_STATE.STAGE_CLEAR && <Text x={640} y={560} anchor={[0.5, 1]} text={'STAGE\nCLEAR'} style={titleStyle} />}
-      <Text x={8} y={0} text={`$${displayMoney}`} style={footerStyle} />
+      <Text x={8} y={8} text={`$${displayMoney}`} style={footerStyle} />
       <Sprite
         x={SCREEN_WIDTH - 8 - 32 - 32}
         y={4}
@@ -189,21 +193,21 @@ function MainGame ({ app }) {
       />
       <Text
         x={SCREEN_WIDTH - 8}
-        y={0}
+        y={8}
         anchor={[1, 0]}
         text={`${paddle.bullet.toString().padStart(2, '0')}`}
         style={footerStyle}
       />
       <Sprite
         x={SCREEN_WIDTH - 8 - 32 - 32 - 32 - 16 - 32 - 4}
-        y={12}
+        y={9}
         anchor={[1, 0]}
         scale={{ x: 30 / 48, y: 24.375 / 39 }}
         image={IMG_URLS.HEART}
       />
       <Text
         x={SCREEN_WIDTH - 8 - 32 - 32 - 32 - 16}
-        y={0}
+        y={8}
         anchor={[1, 0]}
         text={`${life}`}
         style={footerStyle}
