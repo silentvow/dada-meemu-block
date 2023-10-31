@@ -35,10 +35,10 @@ const FilterContainer = withFilters(Container, {
 function handleStageMount (app) {
   const canvas = document.querySelector('canvas')
   if (!canvas) return
-  canvas.style.minWidth = 'min(1440px, 100vw)'
-  canvas.style.minHeight = 'min(1080px, calc(100vw * 3 / 4))'
-  canvas.style.maxWidth = '100vw'
-  canvas.style.maxHeight = 'calc(100vw * 3 / 4)'
+  canvas.style.minWidth = 'min(1440px, 100vw - 32px)'
+  canvas.style.minHeight = 'min(1080px, calc((100vw - 32px) * 3 / 4))'
+  canvas.style.maxWidth = 'calc(100vw - 32px)'
+  canvas.style.maxHeight = 'calc((100vw - 32px) * 3 / 4)'
 }
 
 function Home () {
@@ -136,7 +136,7 @@ function Home () {
                   </FilterContainer>
                 </Stage>)
               : (
-                <div className='w-[min(1440px,100vw)] h-[min(1080px,calc(100vw*0.75))] text-[#423934] font-comic text-[min(144px,10vw)] flex justify-center items-center bg-[url("/img/bg1.png")]'>
+                <div className='w-[min(1440px,calc(100vw-32px))] h-[min(1080px,calc(calc(100vw-32px)*0.75))] text-[#423934] font-comic text-[min(144px,10vw)] flex justify-center items-center bg-[url("/img/bg1.png")]'>
                   <BounceText text='Loading...' />
                 </div>
                 )}
