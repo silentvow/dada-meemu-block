@@ -9,14 +9,14 @@ This is a fan-made, derivative work of a brick-breaking game by React and Pixi.j
 ## Development
 
 ```bash
-$ npm install
-$ npm run dev
+$ pnpm install
+$ pnpm run dev
 ```
 
 ## Build
 
 ```bash
-$ npm run build
+$ pnpm run build
 ```
 
 ## Resource Licenses
@@ -54,3 +54,7 @@ $ npm run build
 [5]: https://www.youtube.com/@relive_meemu4350
 
 <!-- Please don't remove this: Grab your social icons from https://github.com/carlsednaoui/gitsocial -->
+
+## Contributing
+
+If you have any idea, feel free to file issues to me.
