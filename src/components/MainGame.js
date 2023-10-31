@@ -95,6 +95,10 @@ function blockImgUrl (block) {
 }
 
 function MainGame ({ app }) {
+  useEffect(() => {
+    globalThis.__PIXI_APP__ = app
+  }, [app])
+
   const {
     life,
     stage,

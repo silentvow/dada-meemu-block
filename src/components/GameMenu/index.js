@@ -1,6 +1,6 @@
 import { IMG_URLS } from '@/constants/image'
 import { useGame } from '@/game'
-import { Container, Graphics, Sprite } from '@pixi/react'
+import { Container, Graphics, Sprite, useApp } from '@pixi/react'
 import { useEffect, useRef, useState } from 'react'
 import { useShallow } from 'zustand/react/shallow'
 import MenuButton from '../MenuButton'
@@ -35,6 +35,11 @@ function drawMainArea (g) {
 }
 
 function GameMenu () {
+  const app = useApp()
+  useEffect(() => {
+    globalThis.__PIXI_APP__ = app
+  }, [app])
+
   const [unlockRealMode] = useState(true)
   const {
     enterStoryMode,
