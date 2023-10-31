@@ -135,20 +135,22 @@ function Sandbox ({ onEditText }) {
         />
         <Graphics ref={refMask} preventRedraw draw={drawMask} />
       </Container>
-      <Container x={0} y={0}>
-        <Graphics
-          draw={drawTextArea}
-          eventMode='static'
-          onclick={() => { setSandboxText(''); setShowMenu(true) }}
-          ontouchstart={() => { setSandboxText(''); setShowMenu(true) }}
-        />
-        <Text
-          x={textOffsetX}
-          y={textOffsetY}
-          text={sandboxText}
-          style={textStyle}
-        />
-      </Container>
+      {!showMenu && (
+        <Container x={0} y={0}>
+          <Graphics
+            draw={drawTextArea}
+            eventMode='static'
+            onclick={() => { setSandboxText(''); setShowMenu(true) }}
+            ontouchstart={() => { setSandboxText(''); setShowMenu(true) }}
+          />
+          <Text
+            x={textOffsetX}
+            y={textOffsetY}
+            text={sandboxText}
+            style={textStyle}
+          />
+        </Container>
+      )}
       {showMenu && (
         <Container x={0} y={695}>
           <MenuButton x={100} y={30} text='改變背景' onClick={changeBg} />
