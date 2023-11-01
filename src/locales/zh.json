@@ -61,7 +61,11 @@
   },
   "header": {
     "about": "關於遊戲",
-    "changelog": "更新記錄"
+    "buy_me_a_coffee": "請作者喝杯咖啡",
+    "change_language": "設定語言",
+    "change_theme": "設定主題",
+    "changelog": "更新記錄",
+    "view_github": "前往 GitHub"
   },
   "index": {
     "footnote": "如果您在遊玩過程中遇到任何狀況，歡迎在 <github>GitHub</github> 上回報問題或提出建議。"

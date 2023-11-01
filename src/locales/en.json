@@ -61,7 +61,11 @@
   },
   "header": {
     "about": "About",
-    "changelog": "Changelog"
+    "buy_me_a_coffee": "Buy me a coffee",
+    "change_language": "Change language",
+    "change_theme": "Change theme",
+    "changelog": "Changelog",
+    "view_github": "View GitHub"
   },
   "index": {
     "footnote": "If you come across any bugs, issues, or problems while enjoying this game, we would greatly appreciate it if you could report them on <github>GitHub</github>."
