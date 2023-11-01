@@ -47,6 +47,17 @@ const footerStyle = {
   trim: true,
 }
 
+const captionStyle = {
+  fill: '#fff',
+  fontSize: 32,
+  fontFamily: 'Roboto, "Xiaolai Mono SC", sans-serif',
+  stroke: '#000',
+  strokeThickness: 4,
+  letterSpacing: 2,
+  lineHeight: 32 * 1.2,
+  trim: true,
+}
+
 function imgUrl (item) {
   return IMG_URLS[item] || `https://placehold.co/${ITEM_WIDTH}x${ITEM_HEIGHT}/red/fff?text=${item}`
 }
@@ -181,7 +192,12 @@ function MainGame ({ app }) {
         )
       })}
       {state === GAME_STATE.READY && <Text x={640} y={560} anchor={[0.5, 1]} text={`STAGE ${stage + 1}\nREADY`} style={titleStyle} />}
-      {state === GAME_STATE.PAUSED && <Text x={640} y={500} anchor={[0.5, 1]} text='PAUSED' style={titleStyle} />}
+      {state === GAME_STATE.PAUSED && (
+        <>
+          <Text x={640} y={400} anchor={[0.5, 1]} text='PAUSED' style={titleStyle} />
+          <Text x={640} y={540} anchor={[0.5, 1]} text={'再按一次P鍵回到遊戲\n如果遊戲卡住可按D鍵自爆'} style={captionStyle} />
+        </>
+      )}
       {state === GAME_STATE.STAGE_CLEAR && <Text x={640} y={560} anchor={[0.5, 1]} text={'STAGE\nCLEAR'} style={titleStyle} />}
       <Text x={8} y={8} text={`$${displayMoney}`} style={footerStyle} />
       <Sprite
