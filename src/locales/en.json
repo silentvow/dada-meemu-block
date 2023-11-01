@@ -47,7 +47,8 @@
     "2023-10-29-1": "feat: add text control settings",
     "2023-10-29-2": "feat: add bgm",
     "2023-10-30-1": "feat: add sandbox",
-    "2023-10-30-2": "fix: normalize sounds"
+    "2023-10-30-2": "fix: normalize sounds",
+    "2023-11-01-1": "fix: incorrect collision"
   },
   "dialog": {
     "close": "Close",
