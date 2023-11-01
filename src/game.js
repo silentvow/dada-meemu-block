@@ -595,6 +595,33 @@ export const useGame = create(
               height: BLOCK_HEIGHT,
             },
           })
+
+          /* NOTE: remove strange collision */
+          if (balls[i].px < blocks[j].x &&
+            balls[i].py < blocks[j].y &&
+            balls[i].vx <= 0 &&
+            balls[i].vy <= 0) {
+            continue
+          }
+          if (balls[i].px < blocks[j].x &&
+            balls[i].py > blocks[j].y + BLOCK_HEIGHT &&
+            balls[i].vx <= 0 &&
+            balls[i].vy >= 0) {
+            continue
+          }
+          if (balls[i].px > blocks[j].x + BLOCK_WIDTH &&
+            balls[i].py < blocks[j].y &&
+            balls[i].vx >= 0 &&
+            balls[i].vy <= 0) {
+            continue
+          }
+          if (balls[i].px > blocks[j].x + BLOCK_WIDTH &&
+            balls[i].py > blocks[j].y + BLOCK_HEIGHT &&
+            balls[i].vx >= 0 &&
+            balls[i].vy >= 0) {
+            continue
+          }
+
           possibleHitBlocks.push({ blockIdx: j, time, surface })
         }
 
