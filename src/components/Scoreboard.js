@@ -26,6 +26,7 @@ function drawBoard (g) {
 function Scoreboard () {
   const enterMainMenu = useGame(state => state.enterMainMenu)
   const [loading, setLoading] = useState(true)
+  const [loadFailed, setLoadFailed] = useState(false)
   const [records, setRecords] = useState([[], [], [], [], []])
   const [unlockRealMode] = useState(() => { return window.localStorage.getItem(LOCAL_STORAGE_KEY.UNLOCK_REAL_CHALLENGE) })
 
@@ -43,6 +44,9 @@ function Scoreboard () {
         json?.data?.challenge_real || [],
       ])
       setLoading(false)
+    }).catch(() => {
+      setLoading(false)
+      setLoadFailed(true)
     })
   }, [])
 
@@ -50,6 +54,7 @@ function Scoreboard () {
     <Container width={1280} height={960}>
       <Graphics draw={drawBoard} />
       {loading && <Text x={640} y={480} text='讀取中...' anchor={[0.5, 0.5]} style={textStyle} />}
+      {loadFailed && <Text x={640} y={480} text='讀取錯誤，請稍候再試' anchor={[0.5, 0.5]} style={textStyle} />}
       <ScoreCard x={120 + 40} y={20 + 16} title='故事模式' records={records[0]} mode={GAME_MODE.STORY} />
       <ScoreCard x={120 + 40} y={20 + 16 + 375 + 24} title='挑戰模式 (標準難度)' records={records[2]} mode={GAME_MODE.CHALLENGE_DADA} />
       <ScoreCard x={760 - 40} y={20 + 16} title='挑戰模式 (幼妲難度)' records={records[3]} mode={GAME_MODE.CHALLENGE_YODA} />
