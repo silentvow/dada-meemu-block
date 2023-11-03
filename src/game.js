@@ -318,13 +318,14 @@ export const useGame = create(
       } else {
         set(state => { state.bgm = SOUND_KEY.GAME_OVER })
       }
-      const { money, mode, stage } = get()
+      const { money, life, mode, stage } = get()
+      const score = money + life * LIFE_AS_MONEY_VALUE
       const highScore = parseInt(window.localStorage.getItem(HIGH_SCORE_KEYS[mode]) || '0')
-      if (money > highScore) {
-        window.localStorage.setItem(HIGH_SCORE_KEYS[mode], money.toString())
+      if (score > highScore) {
+        window.localStorage.setItem(HIGH_SCORE_KEYS[mode], score.toString())
       }
       set(state => { state.state = GAME_STATE.ENDING; state.stageComplete = complete })
-      sendEvent('game-over', { mode, stage, complete, score: money })
+      sendEvent('game-over', { mode, stage, complete, score })
     },
 
     enterNextStage: () => {
