@@ -69,6 +69,7 @@
     "view_github": "前往 GitHub"
   },
   "index": {
-    "footnote": "如果您在遊玩過程中遇到任何狀況，歡迎在 <github>GitHub</github> 上回報問題或提出建議。"
+    "footnote": "如果您在遊玩過程中遇到任何狀況，歡迎在 <github>GitHub</github> 上回報問題或提出建議。",
+    "small_screen": "此網站在小於 640 像素的螢幕上可能無法正常運作。"
   }
 }

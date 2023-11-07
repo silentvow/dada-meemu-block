@@ -69,6 +69,7 @@
     "view_github": "View GitHub"
   },
   "index": {
-    "footnote": "If you come across any bugs, issues, or problems while enjoying this game, we would greatly appreciate it if you could report them on <github>GitHub</github>."
+    "footnote": "If you come across any bugs, issues, or problems while enjoying this game, we would greatly appreciate it if you could report them on <github>GitHub</github>.",
+    "small_screen": "This website is not worked properly on screen smaller than 640px."
   }
 }

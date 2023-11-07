@@ -1,5 +1,7 @@
-import Header from '@/components/Header'
 import { useTranslations } from 'next-intl'
+import dynamic from 'next/dynamic'
+
+const Header = dynamic(() => import('@/components/Header'), { ssr: false })
 
 function About () {
   const t = useTranslations()
