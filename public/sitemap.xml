@@ -1,0 +1,17 @@
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://dada-meemu-block.vercel.app</loc>
+    <lastmod>2024-01-01T15:02:24.021Z</lastmod>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://dada-meemu-block.vercel.app/about</loc>
+    <lastmod>2024-01-01T15:02:24.021Z</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://dada-meemu-block.vercel.app/changelog</loc>
+    <lastmod>2024-01-01T15:02:24.021Z</lastmod>
+    <priority>0.5</priority>
+  </url>
+</urlset>
