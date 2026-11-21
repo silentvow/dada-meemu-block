@@ -136,10 +136,9 @@ function Ending() {
         style={textStyle}
       />
       <Container x={760} y={695}>
-        {mode === GAME_MODE.STORY && (
+        {mode === GAME_MODE.STORY && !stageComplete ? (
           <MenuButton x={0} y={30} text="重新挑戰" onClick={retryStage} />
-        )}
-        {mode !== GAME_MODE.STORY && (
+        ) : (
           <MenuButton x={0} y={30} text="提交紀錄" onClick={openSubmitModal} />
         )}
         <MenuButton x={0} y={140} text="返回首頁" onClick={enterMainMenu} />
